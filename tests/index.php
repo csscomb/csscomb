@@ -134,8 +134,8 @@ $case[6]['result'] = 'div{margin:0;padding:0;}div p{top:0;font-size:1px;}div p e
 $case[7]['descr'] = 'Отсутствие свойств (пустые каркасы). Вариант 1';
 $case[7]['code'] = 'div{}
 div p {}';
-$case[7]['result'] = 'div{}
-div p {}';
+$case[7]['result'] = 'div{ }
+div p { }';
 
 
 
@@ -261,8 +261,8 @@ $case[14]['code'] = 'div{
 	}';
 $case[14]['result'] = 'div{
 	background: red;
-	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	opacity: 1;
+	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'/i/pic1.png\',sizingMethod=\'crop\');
 	}';
 
@@ -392,7 +392,7 @@ $case[19]['code'] = '/* .b-pager (begin) */
 			}
 /* .b-pager (end) */';
 
-$case[19]['code'] = '/* .b-pager (begin) */
+$case[19]['result'] = '/* .b-pager (begin) */
 	.b-pager{
 		margin:1em 0 2em;
 		font-size:130%;
@@ -413,10 +413,10 @@ $case[20]['code'] = 'h1{
 	padding: 7px; /* Поля вокруг текста */
 	}';
 $case[20]['result'] = 'h1{
-	background: #faf0e6; /* Цвет фона под текстом */
-	border: 2px dashed #800000; /* Рамка вокруг заголовка */
-	color: #a0522d; /* Цвет текста */
-	padding: 7px; /* Поля вокруг текста */
+	padding: 7px /* Поля вокруг текста */;
+	border: 2px dashed #800000 /* Рамка вокруг заголовка */;
+	background: #faf0e6 /* Цвет фона под текстом */;
+	color: #a0522d /* Цвет текста */;
 	}';
 
 
@@ -489,12 +489,12 @@ $case[22]['result'] = '/* test */
 
 	BODY {
 		left:0;
-		font-family: Times, \'Times New Roman\', serif; /* Шрифт с засечками */
+		font-family: Times, \'Times New Roman\', serif /* Шрифт с засечками */;
 	}
 
 	H1, H2, P {
 		top:0;
-		color: #000; /* Черный цвет текста */
+		color: #000 /* Черный цвет текста */;
 	}
 }
 
@@ -502,12 +502,12 @@ $case[22]['result'] = '/* test */
 
 	BODY {
 		top:0;
-		font-family: Times, \'Times New Roman\', serif; /* Шрифт с засечками */
+		font-family: Times, \'Times New Roman\', serif /* Шрифт с засечками */;
 	}
 
 	H1, H2, P {
 		left:0;
-		color: #000; /* Черный цвет текста */
+		color: #000 /* Черный цвет текста */;
 	}
 
 }
@@ -648,6 +648,14 @@ $case[32]['descr'] = 'Ключевые символы. ';
 $case[32]['code'] = ''; */
 
 
+//$case[32]['descr'] = 'Закомментированное свойство на одной строке ';
+//$case[32]['code'] = '';
+
+//$case[32]['descr'] = 'Закомментированное свойство на нескольких строках ';
+//$case[32]['code'] = '';
+
+
+
 
 /**
  *
@@ -687,7 +695,7 @@ foreach($case as $key=>$item){
 
     echo '
 <div id="case'.$key.'">
-    <h2 style="'.(($passed)?'color:green':'color:red').'">'.$key.'. '.$item['descr'].'</h2>
+    <h2 style="'.(($passed)?'color:green':'color:red').'"><a href="#case'.$key.'">'.$key.'.</a> '.$item['descr'].'</h2>
     <table width="100%" style="xdisplay:none;">
         <tr>
             <td style="vertical-align:top;" width="50%"><pre class="css"><code>'.$item['code'].'</code></pre></td>

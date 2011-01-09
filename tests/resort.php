@@ -15,33 +15,35 @@
 require_once '../lib/csscomb.php';
 
 
-$css = '/* ?? */
-@media print {
-    div{
-        text-align:left;
-        padding:0;
-        _padding:0;
-        }
-}
-        /* ?? */
-        #ololo{
-            background:yellow;
-            color:#000;
-            display:block;
-            }
-            /* ?? */
+$css = '/* test */
+@media print { /* Стиль для принтеров */
 
-
-ul{
-    li{
-        a{
-            span{
-                color:red;
-                position:absolute;
-            }
-        }
+    BODY {
+        font-family: Times, \'Times New Roman\', serif; /* Шрифт с засечками */
+        left:0;
     }
-}';
+
+    H1, H2, P {
+        color: #000; /* Черный цвет текста */
+        top:0;
+    }
+}
+
+@media screen { /* Стиль для экранов */
+
+    BODY {
+        font-family: Times, \'Times New Roman\', serif; /* Шрифт с засечками */
+        top:0;
+    }
+
+    H1, H2, P {
+        color: #000; /* Черный цвет текста */
+        left:0;
+    }
+
+}
+
+/* test */';
 
 $c = new csscomb($css);
 ?>

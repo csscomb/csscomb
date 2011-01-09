@@ -12,8 +12,11 @@ class csscomb{
 
     var $sort_order = Array(),
     $code = Array(
-        'original' => null
+        'original' => null, // оригинальный код, без изменений, то, что пришло на вход
+        'edited' => null,   // код, который может меняться в процессе выполнения алгоритма пересортировки
+        'resorted' => null  // конечный, пересортированный CSS-код
     ),
+    $output = true,
 
     $default_sort_order = '
 [
@@ -208,22 +211,42 @@ class csscomb{
 	}
 
 
-    function csscomb($css = ''){
+    function csscomb($css = '', $echo = true){
+        if($echo===0 or $echo===false) $this->output = false;
 
-        $this->code['original'] = $css;
+        $this->code['original'] = $this->code['edited'] = $css;
 
         $this->set_sort_order();    // 1 задаем порядок сортировки
         $this->preprocess();        // 2 препроцессинг
         $this->parse_rules();       // 3,4,5 парсим на части по скобкам
+        $this->postprocess();       // 6 постпроцессинг
 
-//        $this->postprocess();     // 6 постпроцессинг
+        if($this->code['edited']!='' AND $this->output!==false){
+            echo '
+<table width="100%" style="font:1em monospace;">
+    <tr>
+        <td width="50%" style="vertical-align:top;white-space:pre;">'.$this->code['original'].'</td>
+        <td style="vertical-align:top;white-space:pre;">'.$this->code['resorted'].'</td>
+    </tr>
+</table>';
+        }
+
+        if($this->output===false) return $this->code['resorted'];
+
 //        $this->result();          // 7 возвращаем результат
     }
 
 
     function preprocess(){
+        // 1. ; в конце
+
+        $this->code['edited'] = str_replace('{}','{ }', $this->code['edited']); // закрываем сложности парсинга {}
+        $this->code['edited'] = preg_replace('/(.*?[^\s])(\s*?})/','$1;$2', $this->code['edited']); // закрываем сложности с отсутствующей последней ; перед }
+        $this->code['edited'] = preg_replace('@;(\s*/\*.*?[^\*\/]*/)@ism','$1;', $this->code['edited']); // перемещаем построчные комментарии к свойству за ;
+
+//        $this->log('edited', $this->code['edited']);
         /*
-         * 1. ; в конце
+         *
          * 2. комментарии ;*\/ ; *\/
          * 3. datauri
          * 4. экранирование хаков с использованием ключевых символов например voice-family: "\"}\"";
@@ -233,6 +256,20 @@ class csscomb{
 
 
     function parse_rules(){
+        // отделяем все что после последней } если там что-то есть, конечно :)
+        preg_match('@
+
+            (
+                .*[^}]
+                }
+            )
+            (.*)
+
+        @ismx', $this->code['edited'], $matches);
+
+        $code_without_end = $matches[1];
+        $end_of_code = $matches[2];
+
         /**
          * Разбиваем CSS-код на части по { или }
          * Это позволяет поддерживать LESS CSS, @media, @-webkit-keyframes и любые другие конструкции
@@ -244,7 +281,8 @@ class csscomb{
             \s*?
             [}{]
 
-        @ismx', $this->code['original'], $matches);
+        @ismx', $code_without_end, $matches);
+
 
         $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
 
@@ -254,12 +292,8 @@ class csscomb{
         }
 //        $this->log('rules', $rules);
 
-        $test = $this->array_implode($rules);            // 5 склеиваем части
+        $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // 5 склеиваем части
 
-
-
-        echo '<table width="100%" style="font:1em monospace;"><tr><td width="50%" style="vertical-align:top;white-space:pre;">'.$this->code['original'].'</td>';
-        echo '<td style="vertical-align:top;white-space:pre;">'.implode($test).'</td>';
     }
 
 
@@ -269,7 +303,6 @@ class csscomb{
 
             ^
             (.*?)
-
             (
                 \s*?
                 }
@@ -298,10 +331,11 @@ class csscomb{
                     *?
                 )
 
-
                 @ismx', $without_brace, $matches);
 
             $props = $matches[0];
+
+//            $this->log('props', $ma);
 
             $props = $this->resort_properties($props);
             $props = implode($props).$brace;
@@ -315,14 +349,16 @@ class csscomb{
 
     function resort_properties($prop){
         $resorted = $undefined = array();
-        $index = null; // Дефолтное значение индекса порядка для свойства. Если свойство не знакомо, то index так и останется null.
+
 //        $this->log('new', $prop);
         foreach($prop as $k=>$val){
+            $index = null; // Дефолтное значение индекса порядка для свойства. Если свойство не знакомо, то index так и останется null.
             preg_match_all('@\s*?(.*?[^:]:).*@ism', $val, $matches, PREG_SET_ORDER);
             $property = trim($matches[0][1]);
-
             foreach($this->sort_order as $pos=>$key){
-                if(strpos(' '.trim($property), ' '.$key.':')!==false) $index = $pos;
+                if(strpos(' '.trim($property), ' '.$key.':')!==false) {
+                    $index = $pos;
+                }
             }
 
             if($index === null OR strpos($val, 'exp')) $undefined[] = $val;
@@ -342,18 +378,6 @@ class csscomb{
     }
 
 
-    function merge_rules($text){
-        $r = '';
-
-        foreach($text as $item){
-            if(is_array($item)) $this->merge_rules($item);
-            else $r .= $item;
-        }
-
-        return $r;
-    }
-
-
     function array_implode($arrays, &$target = array()){
         foreach ($arrays as $item){
             if (is_array($item)){
@@ -367,7 +391,9 @@ class csscomb{
     }
 
 
-    function postprocess($css = ''){
+    function postprocess(){
+//        $this->code['resorted'] = preg_replace('@(\s*/\*.*?[^\*\/]*/);+@ism',';$1', $this->code['resorted']); // возвращаем на место комментарии
+//        $this->log('postprocess edited',$this->code['edited']);
         /*
          * 1. ; в конце
          * 2. комментарии ;*\/ ; *\/
@@ -376,16 +402,14 @@ class csscomb{
          * 5. expressions
          */
     }
-    function result($css = ''){
 
-    }
 
     function log($before, $after){
         echo '
-        <div class="php"><pre><code class="php">'.$before.'';
+        <div class="php"><pre class="php"><code>'.$before.'';
         echo '<br>';
         echo '<br>';
-        echo ''.var_dump($after).'</div>';
+        echo ''.var_dump($after).'</code></pre></div>';
     }
 
 }
