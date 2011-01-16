@@ -14,7 +14,11 @@ class csscomb{
     $code = Array(
         'original' => null, // оригинальный код, без изменений, то, что пришло на вход
         'edited' => null,   // код, который может меняться в процессе выполнения алгоритма пересортировки
-        'resorted' => null  // конечный, пересортированный CSS-код
+        'resorted' => null,  // конечный, пересортированный CSS-код
+        // TODO: избавиться от resorted
+        'expressions' => null,  // если найдены expression, то эта переменная станет массивом, ячейки которого будут содержать код каждого найденного expression
+        'datauri' => null,  // если найдены data uri, то эта переменная станет массивом...
+        'hacks' => null  // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
     ),
     $output = true,
 
@@ -223,12 +227,31 @@ class csscomb{
 
         if($this->code['edited']!='' AND $this->output!==false){
             echo '
-<table width="100%" style="font:1em monospace;">
+    <style>
+		body{margin:0;}
+		.diff{
+			width:100%;
+			height:400px;
+			overflow:auto;
+			}
+            .diff textarea{
+                width:50%;
+                height:9999px;
+                padding:0;
+                margin:0;
+                border:0;
+                background:#f5f5f5;
+                }
+	</style>
+	<div class="diff">
+	<textarea name="in" id="in" cols="30" rows="10">'.$this->code['original'].'</textarea><textarea name="out" id="out" cols="30" rows="10">'.$this->code['resorted'].'</textarea>
+</div>
+<!--table width="100%" style="font:1em monospace;">
     <tr>
         <td width="50%" style="vertical-align:top;white-space:pre;">'.$this->code['original'].'</td>
         <td style="vertical-align:top;white-space:pre;">'.$this->code['resorted'].'</td>
     </tr>
-</table>';
+</table-->';
         }
 
         if($this->output===false) return $this->code['resorted'];
@@ -238,20 +261,45 @@ class csscomb{
 
 
     function preprocess(){
-        // 1. ; в конце
 
+        // 1. экранирование хаков, которые мешают парсить
+        if(strpos($this->code['edited'], '"\\"}\\""')){ // разбираемся со страшным хаком "\"}\""
+            $i = 0;
+            $this->code['expressions'] = array();
+            while(strpos($this->code['edited'], '"\\"}\\""')):
+                $this->code['hacks'][] = '"\\"}\\""';
+				$this->code['edited'] = str_replace('"\\"}\\""', 'hack'.$i++.'__', $this->code['edited']);
+			endwhile;
+//            $this->log('hacks detected', $this->code['edited']);
+        }
+
+        // 2. expressions
+        if(strpos($this->code['edited'], 'expression')){ // разбираемся с expression если они присутствуют
+			$i = 0;
+			$this->code['expressions'] = array();
+			while(strpos($this->code['edited'], 'expression')):
+				preg_match_all('#(.*)expression\((.*)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем expression
+				$this->code['expressions'][] = $match[0][2]; // собираем значения expression(...)
+				$this->code['edited'] = str_replace('expression('.$match[0][2].')', 'exp'.$i++.'__', $this->code['edited']);
+			endwhile;
+		}
+//        $this->log('expressions', $this->code['expressions']);
+
+        // 3. data uri
+        if(strpos($this->code['edited'], 'data:')){
+            $i = 0;
+			$this->code['datauri'] = array();
+			while(strpos($this->code['edited'], ';base64,')):
+				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+                $this->code['datauri'][] = $match[0][1]; // собираем значения
+                $this->code['edited'] = str_replace($match[0][1], 'datauri'.$i++.'__', $this->code['edited']);
+			endwhile;
+        }
+
+        // 4. ; в конце
         $this->code['edited'] = str_replace('{}','{ }', $this->code['edited']); // закрываем сложности парсинга {}
         $this->code['edited'] = preg_replace('/(.*?[^\s])(\s*?})/','$1;$2', $this->code['edited']); // закрываем сложности с отсутствующей последней ; перед }
         $this->code['edited'] = preg_replace('@;(\s*/\*.*?[^\*\/]*/)@ism','$1;', $this->code['edited']); // перемещаем построчные комментарии к свойству за ;
-
-//        $this->log('edited', $this->code['edited']);
-        /*
-         *
-         * 2. комментарии ;*\/ ; *\/
-         * 3. datauri
-         * 4. экранирование хаков с использованием ключевых символов например voice-family: "\"}\"";
-         * 5. expressions
-         */
     }
 
 
@@ -392,20 +440,35 @@ class csscomb{
 
 
     function postprocess(){
+        // 1. экранирование хаков с использованием ключевых символов например voice-family: "\"}\"";
+//        $this->log('hacks', $this->code['hacks']);
+        if(is_array($this->code['hacks'])){ // если были обнаружены и вырезаны expression
+            foreach($this->code['hacks'] as $key=>$val){
+                if(strpos($this->code['resorted'], 'hack'.$key.'__')) $this->code['resorted'] = str_replace('hack'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
+            }
+		}
+
+        // 2. expressions
+        if(is_array($this->code['expressions'])){ // если были обнаружены и вырезаны expression
+            foreach($this->code['expressions'] as $key=>$val){
+                if(strpos($this->code['resorted'], 'exp'.$key.'__')) $this->code['resorted'] = str_replace('exp'.$key.'__', 'expression('.$val.')', $this->code['resorted']); // заменяем значение expression обратно
+            }
+		}
+
+        // 3. datauri
+        if(is_array($this->code['datauri'])){ // если были обнаружены и вырезаны data uri
+            foreach($this->code['datauri'] as $key=>$val){
+                if(strpos($this->code['resorted'], 'datauri'.$key.'__')) $this->code['resorted'] = str_replace('datauri'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
+            }
+		}
+
 //        $this->code['resorted'] = preg_replace('@(\s*/\*.*?[^\*\/]*/);+@ism',';$1', $this->code['resorted']); // возвращаем на место комментарии
-//        $this->log('postprocess edited',$this->code['edited']);
-        /*
-         * 1. ; в конце
-         * 2. комментарии ;*\/ ; *\/
-         * 3. datauri
-         * 4. экранирование хаков с использованием ключевых символов например voice-family: "\"}\"";
-         * 5. expressions
-         */
     }
 
 
     function log($before, $after){
         echo '
+        <style>pre{word-wrap: break-word;}</style>
         <div class="php"><pre class="php"><code>'.$before.'';
         echo '<br>';
         echo '<br>';

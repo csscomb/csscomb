@@ -1,4 +1,14 @@
 <?
+/*
+Форматирование
+Отсутствие свойств (пустые каркасы)
+Свойства
+Комментарии
+Правила начинающиеся с @
+Ключевые символы
+Примеры реальных css-файлов.
+ */
+
 $case[1]['descr'] = 'Форматирование. Фигурные скобки. Вариант 1';
 $case[1]['code'] = 'div{
 	padding:0;
@@ -422,8 +432,40 @@ $case[20]['result'] = 'h1{
 
 
 
-$case[21]['descr'] = 'Селекторы.';
-$case[21]['code'] = '#id,
+
+$case[21]['descr'] = 'Комментарии. Внутри селектора одна строка целиком';
+$case[21]['code'] = 'h1{
+	background: #faf0e6;
+	/*border: 2px dashed #800000;*/
+	color: #a0522d;
+	padding: 7px;
+	}';
+$case[21]['result'] = 'h1{
+	padding: 7px;
+	/*border: 2px dashed #800000;*/
+	background: #faf0e6;
+	color: #a0522d;
+	}';
+
+
+$case[22]['descr'] = 'Комментарии. Внутри селектора многострочный комментарий';
+$case[22]['code'] = 'h1{
+	background: #faf0e6;
+	/*border: 2px dashed #800000;
+	color: #a0522d;*/
+	padding: 7px;
+	}';
+$case[22]['result'] = 'h1{
+	padding: 7px;
+	background: #faf0e6;
+	/*border: 2px dashed #800000;
+	color: #a0522d;*/
+	}';
+
+
+
+$case[23]['descr'] = 'Селекторы.';
+$case[23]['code'] = '#id,
 .class,
 div,
 h1 + p,
@@ -437,7 +479,7 @@ a[href^="https://"],
 	width:100px;
 }';
 
-$case[21]['result'] = '#id,
+$case[23]['result'] = '#id,
 .class,
 div,
 h1 + p,
@@ -454,8 +496,8 @@ a[href^="https://"],
 
 
 
-$case[22]['descr'] = 'Правила начинающиеся с @. @media';
-$case[22]['code'] = '/* test */
+$case[24]['descr'] = 'Правила начинающиеся с @. @media';
+$case[24]['code'] = '/* test */
 @media print { /* Стиль для принтеров */
 
 	BODY {
@@ -484,7 +526,7 @@ $case[22]['code'] = '/* test */
 }
 
 /* test */';
-$case[22]['result'] = '/* test */
+$case[24]['result'] = '/* test */
 @media print { /* Стиль для принтеров */
 
 	BODY {
@@ -516,8 +558,8 @@ $case[22]['result'] = '/* test */
 
 
 
-$case[23]['descr'] = 'Правила начинающиеся с @. @font-face';
-$case[23]['code'] = '.test{
+$case[25]['descr'] = 'Правила начинающиеся с @. @font-face';
+$case[25]['code'] = '.test{
     left:0;
     top:0;
     position:relative;
@@ -537,7 +579,7 @@ div{
 	margin:0;
 	}';
 
-$case[23]['result'] = '.test{
+$case[25]['result'] = '.test{
     position:relative;
     top:0;
     left:0;
@@ -561,21 +603,24 @@ div{
 //$case[24]['descr'] = 'Правила начинающиеся с @. @page';
 //$case[24]['code'] = '';
 
-$case[25]['descr'] = 'Правила начинающиеся с @. @import';
-$case[25]['code'] = '@import \'reset.css\';
+$case[26]['descr'] = 'Правила начинающиеся с @. @import';
+$case[26]['code'] = '@import \'reset.css\';
 h1 {
 	width:75%;
 	padding:0;
 }';
 
-$case[25]['result'] = '@import \'reset.css\';
+$case[26]['result'] = '@import \'reset.css\';
 h1 {
 	padding:0;
 	width:75%;
 }';
 
-$case[26]['descr'] = 'Правила начинающиеся с @. @-wekit-keyframes';
-$case[26]['code'] = '/********** 404 Page **********/
+
+
+
+$case[27]['descr'] = 'Правила начинающиеся с @. @-wekit-keyframes';
+$case[27]['code'] = '/********** 404 Page **********/
 #earth {
 	width:100%;
 	height:1500px;
@@ -599,7 +644,7 @@ $case[26]['code'] = '/********** 404 Page **********/
 		}
 }';
 
-$case[26]['result'] = '/********** 404 Page **********/
+$case[27]['result'] = '/********** 404 Page **********/
 #earth {
 	position:absolute;
 	z-index:-1;
@@ -623,36 +668,63 @@ $case[26]['result'] = '/********** 404 Page **********/
 		}
 }';
 
+$case[28]['descr'] = 'Ключевые символы. ; data uri';
+$case[28]['code'] = 'div{
+	padding:10px 20px;
+	display:block;
+}
+BODY {
+	background:#402724 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAVCAQAAAAtW0yPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACFJREFUCFtjYfBiYfgFRr9R0V8Whj8w9BeM/sFICPoPJAFgpxRXg6BKBgAAAABJRU5ErkJggg==) repeat-x;
+	color:#241412;
+	padding:0;
+	margin:0;
+	}
+	.test{
+	    color:#fff;
+	    position:relative;
+	    }';
+$case[28]['result'] = 'div{
+	display:block;
+	padding:10px 20px;
+}
+BODY {
+	margin:0;
+	padding:0;
+	background:#402724 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAVCAQAAAAtW0yPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACFJREFUCFtjYfBiYfgFRr9R0V8Whj8w9BeM/sFICPoPJAFgpxRXg6BKBgAAAABJRU5ErkJggg==) repeat-x;
+	color:#241412;
+	}
+	.test{
+	    position:relative;
+	    color:#fff;
+	    }';
 
-//$case[27]['descr'] = 'Ключевые символы. /* */';
-//$case[27]['code'] = '';
+
+//$case[28]['descr'] = 'Ключевые символы. /* */';
+//$case[28]['code'] = '';
 
 
-/*$case[28]['descr'] = 'Ключевые символы. *';
-$case[28]['code'] = '';
-
-
-$case[29]['descr'] = 'Ключевые символы. ;';
-$case[29]['code'] = '';
-
-
-$case[30]['descr'] = 'Ключевые символы. ; data uri';
+/*$case[30]['descr'] = 'Ключевые символы. *';
 $case[30]['code'] = '';
 
 
-$case[31]['descr'] = 'Ключевые символы. :';
+$case[31]['descr'] = 'Ключевые символы. ;';
 $case[31]['code'] = '';
 
 
-$case[32]['descr'] = 'Ключевые символы. ';
-$case[32]['code'] = ''; */
+
+$case[33]['descr'] = 'Ключевые символы. :';
+$case[33]['code'] = '';
 
 
-//$case[32]['descr'] = 'Закомментированное свойство на одной строке ';
-//$case[32]['code'] = '';
+$case[34]['descr'] = 'Ключевые символы. ';
+$case[34]['code'] = ''; */
 
-//$case[32]['descr'] = 'Закомментированное свойство на нескольких строках ';
-//$case[32]['code'] = '';
+
+//$case[35]['descr'] = 'Закомментированное свойство на одной строке ';
+//$case[35]['code'] = '';
+
+//$case[36]['descr'] = 'Закомментированное свойство на нескольких строках ';
+//$case[36]['code'] = '';
 
 
 
@@ -680,6 +752,19 @@ $c = new csscomb();
         hljs.tabReplace = '    ';
         hljs.initHighlightingOnLoad();
     </script>
+    <style>.diff{
+			width:100%;
+			height:200px;
+			overflow:auto;
+			}
+			.diff textarea{
+				width:50%;
+				height:9999px;
+				padding:0;
+				margin:0;
+				border:0;
+				background:#f5f5f5;
+				}</style>
 </head>
 <body><?
 
@@ -696,12 +781,15 @@ foreach($case as $key=>$item){
     echo '
 <div id="case'.$key.'">
     <h2 style="'.(($passed)?'color:green':'color:red').'"><a href="#case'.$key.'">'.$key.'.</a> '.$item['descr'].'</h2>
-    <table width="100%" style="xdisplay:none;">
+    <div class="diff">
+        <textarea name="in" cols="30" rows="10">'.$item['code'].'</textarea><textarea name="out" cols="30" rows="10">'.$result.'</textarea>
+    </div>
+    <!--table width="100%" style="xdisplay:none;">
         <tr>
             <td style="vertical-align:top;" width="50%"><pre class="css"><code>'.$item['code'].'</code></pre></td>
             <td style="vertical-align:top;"><pre class="css"><code>'.$result.'</code></pre></td>
         </tr>
-    </table>
+    </table-->
 </div>';
 
     $test_count++;
