@@ -6,11 +6,20 @@
 Комментарии
 Правила начинающиеся с @
 Ключевые символы
-Примеры реальных css-файлов.
+
+todo: Примеры реальных css-файлов
+
+todo: добавить LESSCSS testcases
+todo: тестирование окружения
+    пересортировка только того, что внутри <style>...</style>
+    несколько style в одном html файле
+    пересортировка небольшого выделенного участка кода вида top:0;position:relative;font-size:10px;
  */
 
-$case[1]['descr'] = 'Форматирование. Фигурные скобки. Вариант 1';
-$case[1]['code'] = 'div{
+$testcases = Array();
+
+$case['descr'] = 'Форматирование. Фигурные скобки. Вариант 1';
+$case['code'] = 'div{
 	padding:0;
 	margin:0;
 	}
@@ -23,7 +32,7 @@ $case[1]['code'] = 'div{
 		    border-bottom:1px solid red;
 			}';
 
-$case[1]['result'] = 'div{
+$case['result'] = 'div{
 	margin:0;
 	padding:0;
 	}
@@ -35,11 +44,11 @@ $case[1]['result'] = 'div{
 		    border-bottom:1px solid red;
 		    font-style:italic;
 			}';
+$testcases[] = $case;
 
 
-
-$case[2]['descr'] = 'Форматирование. Фигурные скобки. Вариант 2';
-$case[2]['code'] = 'div
+$case['descr'] = 'Форматирование. Фигурные скобки. Вариант 2';
+$case['code'] = 'div
 {
 	padding:0;
 	margin:0;
@@ -55,7 +64,7 @@ $case[2]['code'] = 'div
 		    border-bottom:1px solid red;
 		}';
 
-$case[2]['result'] = 'div
+$case['result'] = 'div
 {
 	margin:0;
 	padding:0;
@@ -70,10 +79,11 @@ $case[2]['result'] = 'div
 		    border-bottom:1px solid red;
 		    font-style:italic;
 		}';
+$testcases[] = $case;
 
 
-$case[3]['descr'] = 'Форматирование. Фигурные скобки. Вариант 3';
-$case[3]['code'] = 'div {
+$case['descr'] = 'Форматирование. Фигурные скобки. Вариант 3';
+$case['code'] = 'div {
 	padding:0;
 	margin:0;
 }
@@ -91,7 +101,7 @@ top:0;margin:0;}
 		b{
 top:0;margin:0;}';
 
-$case[3]['result'] = 'div {
+$case['result'] = 'div {
 	margin:0;
 	padding:0;
 }
@@ -108,127 +118,130 @@ $case[3]['result'] = 'div {
 top:0;margin:0;}
 		b{
 top:0;margin:0;}';
+$testcases[] = $case;
 
 
 
 
 
-$case[4]['descr'] = 'Форматирование. Запись в одну строку. Вариант 1';
-$case[4]['code'] = 'div{padding:0;margin:0;}
+$case['descr'] = 'Форматирование. Запись в одну строку. Вариант 1';
+$case['code'] = 'div{padding:0;margin:0;}
 div p{font-size:1px;top:0;}
 div p em{font-style:italic;border-bottom:1px solid red;}';
 
-$case[4]['result'] = 'div{margin:0;padding:0;}
+$case['result'] = 'div{margin:0;padding:0;}
 div p{top:0;font-size:1px;}
 div p em{border-bottom:1px solid red;font-style:italic;}';
+$testcases[] = $case;
 
 
 
 
-
-$case[5]['descr'] = 'Форматирование. Запись в одну строку. Вариант 2';
-$case[5]['code'] = 'div{padding:0;margin:0;}div p{font-size:1px;top:0;}div p em{font-style:italic;border-bottom:1px solid red;}';
-$case[5]['result'] = 'div{margin:0;padding:0;}div p{top:0;font-size:1px;}div p em{border-bottom:1px solid red;font-style:italic;}';
-
-
-
-
-$case[6]['descr'] = 'Форматирование. Запись в одну строку. Вариант 3';
-$case[6]['code'] = 'div{padding:0;margin:0}div p{font-size:1px;top:0}div p em{font-style:italic;border-bottom:1px solid red}';
-$case[6]['result'] = 'div{margin:0;padding:0;}div p{top:0;font-size:1px;}div p em{border-bottom:1px solid red;font-style:italic;}';
+$case['descr'] = 'Форматирование. Запись в одну строку. Вариант 2';
+$case['code'] = 'div{padding:0;margin:0;}div p{font-size:1px;top:0;}div p em{font-style:italic;border-bottom:1px solid red;}';
+$case['result'] = 'div{margin:0;padding:0;}div p{top:0;font-size:1px;}div p em{border-bottom:1px solid red;font-style:italic;}';
+$testcases[] = $case;
 
 
 
+$case['descr'] = 'Форматирование. Запись в одну строку. Вариант 3';
+$case['code'] = 'div{padding:0;margin:0}div p{font-size:1px;top:0}div p em{font-style:italic;border-bottom:1px solid red}';
+$case['result'] = 'div{margin:0;padding:0;}div p{top:0;font-size:1px;}div p em{border-bottom:1px solid red;font-style:italic;}';
+$testcases[] = $case;
 
 
-$case[7]['descr'] = 'Отсутствие свойств (пустые каркасы). Вариант 1';
-$case[7]['code'] = 'div{}
+
+
+$case['descr'] = 'Отсутствие свойств (пустые каркасы). Вариант 1';
+$case['code'] = 'div{}
 div p {}';
-$case[7]['result'] = 'div{ }
+$case['result'] = 'div{ }
 div p { }';
+$testcases[] = $case;
 
 
-
-$case[8]['descr'] = 'Отсутствие свойств (пустые каркасы). Вариант 2';
-$case[8]['code'] = 'div {
+$case['descr'] = 'Отсутствие свойств (пустые каркасы). Вариант 2';
+$case['code'] = 'div {
 	}
 	div p {
 		}
 		div p em {
 			}';
 
-$case[8]['result'] = 'div {
+$case['result'] = 'div {
 	}
 	div p {
 		}
 		div p em {
 			}';
+$testcases[] = $case;
 
 
 
-$case[9]['descr'] = 'Свойства. Одинаковые свойства c разным значением.';
-$case[9]['code'] = 'div{
+$case['descr'] = 'Свойства. Одинаковые свойства c разным значением.';
+$case['code'] = 'div{
     color:red;
     color:green;
 	}';
-$case[9]['result'] = 'div{
+$case['result'] = 'div{
     color:red;
     color:green;
 	}';
+$testcases[] = $case;
 
 
 
 
-$case[10]['descr'] = 'Свойства. Одинаковые свойства с одинаковым значением.';
-$case[10]['code'] = 'div{
+$case['descr'] = 'Свойства. Одинаковые свойства с одинаковым значением.';
+$case['code'] = 'div{
 	color:#fff;
 	padding:0;
 	color:#fff;
 	}';
 
-$case[10]['result'] = 'div{
+$case['result'] = 'div{
 	padding:0;
 	color:#fff;
 	color:#fff;
 	}';
+$testcases[] = $case;
 
 
 
-
-$case[11]['descr'] = 'Свойства. Неизвестные свойства.';
-$case[11]['code'] = 'div{
+$case['descr'] = 'Свойства. Неизвестные свойства.';
+$case['code'] = 'div{
 	color:#fff;
 	myProperty:1;
 	padding:0;
 	unknown:true;
 	}';
-$case[11]['result'] = 'div{
+$case['result'] = 'div{
 	padding:0;
 	color:#fff;
 	myProperty:1;
 	unknown:true;
 	}';
+$testcases[] = $case;
 
 
-
-$case[12]['descr'] = 'Свойства. Хаки.';
-$case[12]['code'] = 'div{
+$case['descr'] = 'Свойства. Хаки.';
+$case['code'] = 'div{
 	color: red;
 	*color: green;
 	_color: yellow;
 	co\lor: black;
 	}';
-$case[12]['result'] = 'div{
+$case['result'] = 'div{
 	color: red;
 	*color: green;
 	_color: yellow;
 	co\lor: black;
 	}';
+$testcases[] = $case;
 
 
-
-$case[13]['descr'] = 'Свойства. expression.';
-$case[13]['code'] = '#header{
+$case['descr'] = 'Свойства. expression.';
+$case['code'] = '#header{
 	zoom:1;
 	zoom:expression(
 		runtimeStyle.zoom = 1,
@@ -244,7 +257,7 @@ $case[13]['code'] = '#header{
 		);
 	}';
 
-$case[13]['result'] = '#header{
+$case['result'] = '#header{
 	zoom:1;
 	padding-bottom:10px;
 	height:100px;
@@ -259,27 +272,27 @@ $case[13]['result'] = '#header{
 		this.parentNode.style.offsetHeight;
 		);
 	}';
+$testcases[] = $case;
 
 
-
-$case[14]['descr'] = 'Свойства. filter.';
-$case[14]['code'] = 'div{
+$case['descr'] = 'Свойства. filter.';
+$case['code'] = 'div{
 	background: red;
 	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	opacity: 1;
 	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'/i/pic1.png\',sizingMethod=\'crop\');
 	}';
-$case[14]['result'] = 'div{
+$case['result'] = 'div{
 	background: red;
 	opacity: 1;
 	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'/i/pic1.png\',sizingMethod=\'crop\');
 	}';
+$testcases[] = $case;
 
 
-
-$case[15]['descr'] = 'Свойства. Запись значения одного свойства на нескольких строках.';
-$case[15]['code'] = 'aside{
+$case['descr'] = 'Свойства. Запись значения одного свойства на нескольких строках.';
+$case['code'] = 'aside{
 	background: url(a.png) top left no-repeat,
 				url(b.png) center / 100% 100% no-repeat,
 				url(c.png) white;
@@ -293,7 +306,7 @@ $case[15]['code'] = 'aside{
 	position:absolute;
 	}';
 
-$case[15]['result'] = 'aside{
+$case['result'] = 'aside{
 	position:absolute;
 
 	top:0;
@@ -306,13 +319,13 @@ $case[15]['result'] = 'aside{
 		0 -1px 1px rgba(0,0,0,0.4),
 		0 0 5px rgba(255,255,255,0.7);
 	}';
+$testcases[] = $case;
 
 
 
 
-
-$case[16]['descr'] = 'Свойства. Хак с фигурной скобкой "}"';
-$case[16]['code'] = '.wrapper{
+$case['descr'] = 'Свойства. Хак с фигурной скобкой "}"';
+$case['code'] = '.wrapper{
     position: relative;
     min-height: 100%;
     height: 100%;
@@ -323,7 +336,7 @@ $case[16]['code'] = '.wrapper{
     	height: auto;
 		}';
 
-$case[16]['result'] = '.wrapper{
+$case['result'] = '.wrapper{
     position: relative;
     height: 100%;
     min-height: 100%;
@@ -333,14 +346,14 @@ $case[16]['result'] = '.wrapper{
 	html>body .wrapper{
     	height: auto;
 		}';
+$testcases[] = $case;
 
 
 
 
 
-
-$case[17]['descr'] = 'Комментарии. Вне @media';
-$case[17]['code'] = '/* for screen */
+$case['descr'] = 'Комментарии. Вне @media';
+$case['code'] = '/* for screen */
 @media screen{
     body{
         font-size:12px;
@@ -358,7 +371,7 @@ $case[17]['code'] = '/* for screen */
 
 /* end of file */';
 
-$case[17]['result'] = '/* for screen */
+$case['result'] = '/* for screen */
 @media screen{
     body{
         position:relative;
@@ -375,23 +388,27 @@ $case[17]['result'] = '/* for screen */
 	}
 
 /* end of file */';
+$testcases[] = $case;
 
 
-$case[18]['descr'] = 'Комментарии. Вне селектора. Вариант 1';
-$case[18]['code'] = '/* .b-pager (begin) */
+
+$case['descr'] = 'Комментарии. Вне селектора. Вариант 1';
+$case['code'] = '/* .b-pager (begin) */
 .b-pager{font-size:130%;margin:1em 0 2em;}
 .b-pager__title{font-weight:bold;padding-right:.65em;}
 /* .b-pager (end) */';
 
-$case[18]['result'] = '/* .b-pager (begin) */
+$case['result'] = '/* .b-pager (begin) */
 .b-pager{margin:1em 0 2em;font-size:130%;}
 .b-pager__title{padding-right:.65em;font-weight:bold;}
 /* .b-pager (end) */';
+$testcases[] = $case;
 
 
 
-$case[19]['descr'] = 'Комментарии. Вне селектора. Вариант 2';
-$case[19]['code'] = '/* .b-pager (begin) */
+
+$case['descr'] = 'Комментарии. Вне селектора. Вариант 2';
+$case['code'] = '/* .b-pager (begin) */
 	.b-pager{
 		font-size:130%;
 		margin:1em 0 2em;
@@ -402,7 +419,7 @@ $case[19]['code'] = '/* .b-pager (begin) */
 			}
 /* .b-pager (end) */';
 
-$case[19]['result'] = '/* .b-pager (begin) */
+$case['result'] = '/* .b-pager (begin) */
 	.b-pager{
 		margin:1em 0 2em;
 		font-size:130%;
@@ -412,60 +429,106 @@ $case[19]['result'] = '/* .b-pager (begin) */
 			font-weight:bold;
 			}
 /* .b-pager (end) */';
+$testcases[] = $case;
 
 
 
-$case[20]['descr'] = 'Комментарии. Внутри селектора.';
-$case[20]['code'] = 'h1{
+$case['descr'] = 'Комментарии. Внутри селектора.';
+$case['code'] = 'h1{
 	background: #faf0e6; /* Цвет фона под текстом */
 	border: 2px dashed #800000; /* Рамка вокруг заголовка */
 	color: #a0522d; /* Цвет текста */
 	padding: 7px; /* Поля вокруг текста */
 	}';
-$case[20]['result'] = 'h1{
+$case['result'] = 'h1{
 	padding: 7px /* Поля вокруг текста */;
 	border: 2px dashed #800000 /* Рамка вокруг заголовка */;
 	background: #faf0e6 /* Цвет фона под текстом */;
 	color: #a0522d /* Цвет текста */;
 	}';
+$testcases[] = $case;
 
 
 
 
+$case['descr'] = 'Комментарии. Внутри селектора сразу после открывающей фигурной скобки.';
+$case['code'] = '.test { /* тестовый комментарий */
+	padding:0;
+	position:relative;
+	background:url(picture.jpg);
+	}';
+$case['result'] = '.test { /* тестовый комментарий */
+	position:relative;
+	padding:0;
+	background:url(picture.jpg);
+	}';
+$testcases[] = $case;
 
-$case[21]['descr'] = 'Комментарии. Внутри селектора одна строка целиком';
-$case[21]['code'] = 'h1{
+
+
+$case['descr'] = 'Комментарии. Внутри селектора одна строка целиком';
+$case['code'] = 'h1{
 	background: #faf0e6;
 	/*border: 2px dashed #800000;*/
 	color: #a0522d;
 	padding: 7px;
 	}';
-$case[21]['result'] = 'h1{
+$case['result'] = 'h1{
 	padding: 7px;
 	/*border: 2px dashed #800000;*/
 	background: #faf0e6;
 	color: #a0522d;
 	}';
+$testcases[] = $case;
 
 
-$case[22]['descr'] = 'Комментарии. Внутри селектора многострочный комментарий';
-$case[22]['code'] = 'h1{
+
+$case['descr'] = 'Комментарии. Внутри селектора многострочный комментарий';
+$case['code'] = 'h1{
 	background: #faf0e6;
 	/*border: 2px dashed #800000;
 	color: #a0522d;*/
 	padding: 7px;
 	}';
-$case[22]['result'] = 'h1{
+$case['result'] = 'h1{
 	padding: 7px;
 	background: #faf0e6;
 	/*border: 2px dashed #800000;
 	color: #a0522d;*/
 	}';
+$testcases[] = $case;
 
 
 
-$case[23]['descr'] = 'Селекторы.';
-$case[23]['code'] = '#id,
+
+$case['descr'] = 'Комментарии. Хитрый случай с хаком для IE';
+$case['code'] = '.ie50 {
+    color:#123;
+    display/**/: none;
+    width:100px;
+}
+.ie55 {
+    margin-top:-10px;
+    position:relative;
+    display/**/: block;
+}';
+$case['result'] = '.ie50 {
+    width:100px;
+    color:#123;
+    display/**/: none;
+}
+.ie55 {
+    position:relative;
+    margin-top:-10px;
+    display/**/: block;
+}';
+$testcases[] = $case;
+
+
+
+
+$case['descr'] = 'Селекторы.';
+$case['code'] = '#id,
 .class,
 div,
 h1 + p,
@@ -479,7 +542,7 @@ a[href^="https://"],
 	width:100px;
 }';
 
-$case[23]['result'] = '#id,
+$case['result'] = '#id,
 .class,
 div,
 h1 + p,
@@ -492,12 +555,14 @@ a[href^="https://"],
 	width:100px;
 	border:1px solid red;
 }';
+$testcases[] = $case;
 
 
 
 
-$case[24]['descr'] = 'Правила начинающиеся с @. @media';
-$case[24]['code'] = '/* test */
+
+$case['descr'] = 'Правила начинающиеся с @. @media';
+$case['code'] = '/* test */
 @media print { /* Стиль для принтеров */
 
 	BODY {
@@ -526,7 +591,7 @@ $case[24]['code'] = '/* test */
 }
 
 /* test */';
-$case[24]['result'] = '/* test */
+$case['result'] = '/* test */
 @media print { /* Стиль для принтеров */
 
 	BODY {
@@ -555,11 +620,13 @@ $case[24]['result'] = '/* test */
 }
 
 /* test */';
+$testcases[] = $case;
 
 
 
-$case[25]['descr'] = 'Правила начинающиеся с @. @font-face';
-$case[25]['code'] = '.test{
+
+$case['descr'] = 'Правила начинающиеся с @. @font-face';
+$case['code'] = '.test{
     left:0;
     top:0;
     position:relative;
@@ -579,7 +646,7 @@ div{
 	margin:0;
 	}';
 
-$case[25]['result'] = '.test{
+$case['result'] = '.test{
     position:relative;
     top:0;
     left:0;
@@ -598,29 +665,30 @@ div{
 	margin:0;
 	padding:0;
 	}';
+$testcases[] = $case;
 
 
 //$case[24]['descr'] = 'Правила начинающиеся с @. @page';
 //$case[24]['code'] = '';
 
-$case[26]['descr'] = 'Правила начинающиеся с @. @import';
-$case[26]['code'] = '@import \'reset.css\';
+$case['descr'] = 'Правила начинающиеся с @. @import';
+$case['code'] = '@import \'reset.css\';
 h1 {
 	width:75%;
 	padding:0;
 }';
 
-$case[26]['result'] = '@import \'reset.css\';
+$case['result'] = '@import \'reset.css\';
 h1 {
 	padding:0;
 	width:75%;
 }';
+$testcases[] = $case;
 
 
 
-
-$case[27]['descr'] = 'Правила начинающиеся с @. @-wekit-keyframes';
-$case[27]['code'] = '/********** 404 Page **********/
+$case['descr'] = 'Правила начинающиеся с @. @-wekit-keyframes';
+$case['code'] = '/********** 404 Page **********/
 #earth {
 	width:100%;
 	height:1500px;
@@ -644,7 +712,7 @@ $case[27]['code'] = '/********** 404 Page **********/
 		}
 }';
 
-$case[27]['result'] = '/********** 404 Page **********/
+$case['result'] = '/********** 404 Page **********/
 #earth {
 	position:absolute;
 	z-index:-1;
@@ -667,9 +735,12 @@ $case[27]['result'] = '/********** 404 Page **********/
 		-webkit-transform: rotate(360deg);
 		}
 }';
+$testcases[] = $case;
 
-$case[28]['descr'] = 'Ключевые символы. ; data uri';
-$case[28]['code'] = 'div{
+
+
+$case['descr'] = 'Ключевые символы. ; data uri';
+$case['code'] = 'div{
 	padding:10px 20px;
 	display:block;
 }
@@ -683,7 +754,7 @@ BODY {
 	    color:#fff;
 	    position:relative;
 	    }';
-$case[28]['result'] = 'div{
+$case['result'] = 'div{
 	display:block;
 	padding:10px 20px;
 }
@@ -697,46 +768,17 @@ BODY {
 	    position:relative;
 	    color:#fff;
 	    }';
+$testcases[] = $case;
 
 
-//$case[28]['descr'] = 'Ключевые символы. /* */';
-//$case[28]['code'] = '';
-
-
-/*$case[30]['descr'] = 'Ключевые символы. *';
-$case[30]['code'] = '';
-
-
+/*
 $case[31]['descr'] = 'Ключевые символы. ;';
 $case[31]['code'] = '';
 
-
-
 $case[33]['descr'] = 'Ключевые символы. :';
 $case[33]['code'] = '';
+*/
 
-
-$case[34]['descr'] = 'Ключевые символы. ';
-$case[34]['code'] = ''; */
-
-
-//$case[35]['descr'] = 'Закомментированное свойство на одной строке ';
-//$case[35]['code'] = '';
-
-//$case[36]['descr'] = 'Закомментированное свойство на нескольких строках ';
-//$case[36]['code'] = '';
-
-
-
-
-/**
- *
- *  тестирование окружения
- * 	пересортировка только того, что внутри <style>...</style>
- *  пересортировка небольшого выделенного участка кода вида top:0;position:relative;font-size:10px;
- *
-*
- */
 
 require_once'../lib/csscomb.php';
 $c = new csscomb();
@@ -770,23 +812,24 @@ $c = new csscomb();
 
 $test_count = 0;
 $errors = 0;
-foreach($case as $key=>$item){
-    $result = $c->csscomb($case[$key]['code'], false);
+foreach($testcases as $key=>$case){
+    $key = $key+1;
+    $result = $c->csscomb($case['code'], false);
 
-    if($result===$case[$key]['result']) $passed = true; else {
+    if($result===$case['result']) $passed = true; else {
         $passed = false;
         $errors++;
     }
 
     echo '
 <div id="case'.$key.'">
-    <h2 style="'.(($passed)?'color:green':'color:red').'"><a href="#case'.$key.'">'.$key.'.</a> '.$item['descr'].'</h2>
+    <h2 style="'.(($passed)?'color:green':'color:red').'"><a href="#case'.$key.'">'.$key.'.</a> '.$case['descr'].'</h2>
     <div class="diff">
-        <textarea name="in" cols="30" rows="10">'.$item['code'].'</textarea><textarea name="out" cols="30" rows="10">'.$result.'</textarea>
+        <textarea name="in" cols="30" rows="10">'.$case['code'].'</textarea><textarea name="out" cols="30" rows="10">'.$result.'</textarea>
     </div>
     <!--table width="100%" style="xdisplay:none;">
         <tr>
-            <td style="vertical-align:top;" width="50%"><pre class="css"><code>'.$item['code'].'</code></pre></td>
+            <td style="vertical-align:top;" width="50%"><pre class="css"><code>'.$case['code'].'</code></pre></td>
             <td style="vertical-align:top;"><pre class="css"><code>'.$result.'</code></pre></td>
         </tr>
     </table-->
@@ -795,6 +838,6 @@ foreach($case as $key=>$item){
     $test_count++;
 }
 
-echo '<hr><p> Ошибок: '.$errors.', всего тестов: '.($test_count+1).'.</p>';
+echo '<hr><p><span style="color:red;">Ошибок: '.$errors.'</span>. <span style="color:green;">Всего пройдено тестов: '.(sizeof($testcases)).'</span>.</p>';
 
 ?>
