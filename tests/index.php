@@ -3216,6 +3216,7 @@ $c = new csscomb();
 				margin:0;
 				border:0;
 				background:#f5f5f5;
+                /*color: #dacd35;*/
 				}
     </style>
 </head>
@@ -3223,18 +3224,23 @@ $c = new csscomb();
 
 $test_count = 0;
 $errors = 0;
+$warnings = 0;
 foreach($testcases as $key=>$case){
     $key = $key+1;
     $result = $c->csscomb($case['code'], false);
 
-    if($result===$case['result']) $passed = true; else {
-        $passed = false;
-        $errors++;
+    if($result===$case['result']) $passed = 'green'; else {
+        $passed = 'red';
+
+        if(strlen($result)!=strlen($case['result'])) $errors++; else {
+            $warnings++;
+            $passed = '#dacd35';
+        }
     }
 
     echo '
 <div id="case'.$key.'">
-    <h2 style="'.(($passed)?'color:green':'color:red').'"><a href="#case'.$key.'">'.$key.'.</a> '.$case['descr'].'</h2>
+    <h2 style="color:'.$passed.'"><a href="#case'.$key.'">'.$key.'.</a> '.$case['descr'].'</h2>
     <div class="diff">
         <textarea name="in" cols="30" rows="10">'.$case['code'].'</textarea><textarea name="out" cols="30" rows="10">'.$result.'</textarea>
     </div>
@@ -3249,6 +3255,12 @@ foreach($testcases as $key=>$case){
     $test_count++;
 }
 
-echo '<hr><p><span style="color:red;">Ошибок: '.$errors.'</span>. <span style="color:green;">Всего пройдено тестов: '.(sizeof($testcases)).'</span>.</p>';
+echo '<hr>
+<ul>
+    <li style="color:red;">Ошибок: '.$errors.' (код сломался или пересортировался с нарушениями)</li>
+    <li style="color:#dacd35;">Предупреждений: '.$warnings.' (код непересортировался или частично непересортировался и при этом сохранил свою целостность)</li>
+    <li style="color:green;">Успешно пересортировано: '.(sizeof($testcases) - $warnings -$errors).' (достигнут ожидаемый результат)</li>
+    <li>Всего пройдено тестов: '.(sizeof($testcases)).'</li>
+</ul>';
 
 ?>
