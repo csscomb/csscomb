@@ -546,6 +546,22 @@ $case['result'] = '.article BLOCKQUOTE P:before {
 $testcases[] = $case;
 
 
+$case['descr'] = 'Комментарии. Все закоментировано и есть перенос строки';
+$case['code'] = '.badges {
+  /*margin: 0 10px 10px 10px;
+  padding: 10px;*/
+}';
+$case['result'] = '.badges {
+  /*margin: 0 10px 10px 10px;
+  padding: 10px;*/
+}';
+$testcases[] = $case;
+
+
+$case['descr'] = 'Комментарии. Все закоментировано и нет переноса строки';
+$case['code'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
+$case['result'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
+$testcases[] = $case;
 
 
 
@@ -1018,6 +1034,8 @@ $case['result'] = 'p {
 $testcases[] = $case;
 
 
+
+
 $case['descr'] = 'LESS CSS. Comments 2';
 $case['code'] = 'p {
     @var: red; /* One hell of a comment */
@@ -1028,6 +1046,304 @@ $case['result'] = 'p {
     @var: white; // Get in line!
     }';
 $testcases[] = $case;
+
+
+
+$case['descr'] = 'LESS CSS. LESS vs pseudo-classes';
+$case['code'] = 'a{
+    color:red;
+    a:hover {
+        text-decoration:underline;
+    }
+}';
+$case['result'] = 'a{
+    color:red;
+    a:hover{
+        text-decoration:underline;
+    }
+}';
+$testcases[] = $case;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ *************************************************
+ *                   SASS                        *
+ *      http://sass-lang.com/tutorial.html       *
+ *************************************************
+ */
+
+
+$case['descr'] = 'SASS. Nesting';
+$case['code'] = '#navbar {
+    height: 23px;
+    width: 80%;
+    top:0;
+    ul {
+        list-style-type: none;
+        position:relative;
+        }
+    li {
+        padding:0 10px;
+        float: left;
+        a {
+            font-weight: bold;
+            background-color:#333;
+            }
+        }
+    }';
+$case['result'] = '#navbar {
+    top:0;
+    width: 80%;
+    height: 23px;
+
+    ul {
+        position:relative;
+        list-style-type: none;
+        }
+    li {
+        float: left;
+        padding:0 10px;
+        a {
+            background-color:#333;
+            font-weight: bold;
+            }
+        }
+    }';
+$testcases[] = $case;
+
+
+
+
+
+$case['descr'] = 'SASS. Nesting';
+$case['code'] = '.fakeshadow {
+  border: {
+    style: solid;
+    left: {
+      width: 4px;
+      color: #888;
+    }
+    right: {
+      width: 2px;
+      color: #ccc;
+    }
+  }';
+$case['result'] = '.fakeshadow {
+  border: {
+    style: solid;
+    left: {
+      width: 4px;
+      color: #888;
+    }
+    right: {
+      width: 2px;
+      color: #ccc;
+    }
+  }';
+$testcases[] = $case;
+
+
+
+
+
+
+$case['descr'] = 'SASS. Nesting Parent References';
+$case['code'] = 'a {
+    color: #ce4dd6;
+    position: relative;
+    &:hover {
+        color: #ffb3ff;
+        position: relative;
+        }
+    &:visited {
+        color: #c458cb;
+        position: relative;
+        }
+    }';
+$case['result'] = 'a {
+    position: relative;
+    color: #ce4dd6;
+    &:hover {
+        position: relative;
+        color: #ffb3ff;
+        }
+    &:visited {
+        position: relative;
+        color: #c458cb;
+        }
+    }';
+$testcases[] = $case;
+
+
+
+
+
+$case['descr'] = 'SASS. Variables';
+$case['code'] = '$main-color: #ce4dd6;
+$style: solid;
+
+#navbar {
+    border-bottom: {
+        color: $main-color;
+        style: $style;
+        }
+    }
+
+a {
+    color: $main-color;
+    &:hover {
+        border-bottom: $style 1px;
+        }
+    }';
+$case['result'] = '$main-color: #ce4dd6;
+$style: solid;
+
+#navbar {
+    border-bottom: {
+        color: $main-color;
+        style: $style;
+        }
+    }
+
+a {
+    color: $main-color;
+    &:hover {
+        border-bottom: $style 1px;
+        }
+    }';
+$testcases[] = $case;
+
+
+
+
+
+
+$case['descr'] = 'SASS. Operations and Functions';
+$case['code'] = '#navbar {
+    $navbar-width: 800px;
+    $items: 5;
+    $navbar-color: #ce4dd6;
+
+    border-bottom: 2px solid $navbar-color;
+    width: $navbar-width;
+
+    li {
+        width: $navbar-width/$items - 10px;
+        float: left;
+
+        background-color: lighten($navbar-color, 20%);
+        &:hover {
+            background-color: lighten($navbar-color, 10%);
+            position: relative;
+            }
+        }
+    }';
+$case['result'] = '#navbar {
+    $navbar-width: 800px;
+    $items: 5;
+    $navbar-color: #ce4dd6;
+
+    width: $navbar-width;
+    border-bottom: 2px solid $navbar-color;
+
+    li {
+        float: left;
+        width: $navbar-width/$items - 10px;
+
+        background-color: lighten($navbar-color, 20%);
+        &:hover {
+            position: relative;
+            background-color: lighten($navbar-color, 10%);
+            }
+        }
+    }';
+$testcases[] = $case;
+
+
+
+
+
+
+$case['descr'] = 'SASS. Mixins';
+$case['code'] = '@mixin rounded-top {
+    $side: top;
+    $radius: 10px;
+
+    -webkit-border-#{$side}-radius: $radius;
+    -moz-border-radius-#{$side}: $radius;
+    border-#{$side}-radius: $radius;
+    }
+
+#navbar li {
+    @include rounded-top;
+    }
+
+#footer {
+    @include rounded-top;
+    }';
+$case['result'] = '@mixin rounded-top {
+    $side: top;
+    $radius: 10px;
+
+    -webkit-border-#{$side}-radius: $radius;
+    -moz-border-radius-#{$side}: $radius;
+    border-#{$side}-radius: $radius;
+    }
+
+#navbar li {
+    @include rounded-top;
+    }
+
+#footer {
+    @include rounded-top;
+    }';
+$testcases[] = $case;
+
+
+
+
+
+
+$case['descr'] = 'SASS. @import';
+$case['code'] = '@mixin rounded($side, $radius: 10px) {
+    -webkit-border-#{$side}-radius: $radius;
+    -moz-border-radius-#{$side}: $radius;
+    border-#{$side}-radius: $radius;
+    }
+
+@import "rounded";
+
+#navbar li {@include rounded(top);}
+#footer {@include rounded(top, 5px);}
+#sidebar {@include rounded(left, 8px);}';
+$case['result'] = '@mixin rounded($side, $radius: 10px) {
+    -webkit-border-#{$side}-radius: $radius;
+    -moz-border-radius-#{$side}: $radius;
+    border-#{$side}-radius: $radius;
+    }
+
+@import "rounded";
+
+#navbar li {@include rounded(top);}
+#footer {@include rounded(top, 5px);}
+#sidebar {@include rounded(left, 8px);}';
+$testcases[] = $case;
+
+
 
 
 
