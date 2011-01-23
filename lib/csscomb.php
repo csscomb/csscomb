@@ -22,6 +22,14 @@ class csscomb{
     ),
     $output = true,
 
+    /*
+     * css-file - только CSS-код
+     * style-attribute - найден атрибут style="..."
+     * properties - не найдено фигурных скобок, зато присутствуют точки с запятой и двоеточия.
+     *
+     */
+    $mode = 'css',
+
     $default_sort_order = '
 [
 	"position",
@@ -215,53 +223,43 @@ class csscomb{
 	}
 
 
+
+    function set_mode(){
+        if(strpos($this->code['original'], '{')){ // если есть фигурные скобки
+                $this->mode = 'css-file';
+        }
+        else { // если нет фигурных скобок
+            if(strpos($this->code['original'], "style='") OR strpos($this->code['original'], 'style="')){ // если есть атрибут
+                $this->mode = 'style-attribute';
+            }
+            // если есть двоеточия и точки с запятой то это набор свойств
+            else if(strpos($this->code['original'], ':') AND strpos($this->code['original'], ';')){
+                $this->mode = 'properties';
+            }
+        }
+    }
+
+
     function csscomb($css = '', $echo = true){
         if($echo===0 or $echo===false) $this->output = false;
 
         $this->code['original'] = $this->code['edited'] = $css;
 
+        $this->set_mode();
         $this->set_sort_order();    // 1 задаем порядок сортировки
+
         $this->preprocess();        // 2 препроцессинг
         $this->parse_rules();       // 3,4,5 парсим на части по скобкам
         $this->postprocess();       // 6 постпроцессинг
 
-        if($this->code['edited']!='' AND $this->output!==false){
-            echo '
-    <style>
-		body{margin:0;}
-		.diff{
-			width:100%;
-			height:400px;
-			overflow:auto;
-			}
-            .diff textarea{
-                width:50%;
-                height:9999px;
-                padding:0;
-                margin:0;
-                border:0;
-                background:#f5f5f5;
-                }
-	</style>
-	<div class="diff">
-	<textarea name="in" id="in" cols="30" rows="10">'.$this->code['original'].'</textarea><textarea name="out" id="out" cols="30" rows="10">'.$this->code['resorted'].'</textarea>
-</div>
-<!--table width="100%" style="font:1em monospace;">
-    <tr>
-        <td width="50%" style="vertical-align:top;white-space:pre;">'.$this->code['original'].'</td>
-        <td style="vertical-align:top;white-space:pre;">'.$this->code['resorted'].'</td>
-    </tr>
-</table-->';
-        }
-
-        if($this->output===false) return $this->code['resorted'];
+//        return $this->mode.' '.$this->end_of_process();
+        return $this->end_of_process();
 
 //        $this->result();          // 7 возвращаем результат
     }
 
 
     function preprocess(){
-
         // 1. экранирование хаков, которые мешают парсить
         if(strpos($this->code['edited'], '"\\"}\\""')){ // разбираемся со страшным хаком "\"}\""
             $i = 0;
@@ -304,92 +302,124 @@ class csscomb{
 
 
     function parse_rules(){
-        // отделяем все что после последней } если там что-то есть, конечно :)
-        preg_match('@
+        if($this->mode == 'css-file'){
+            // отделяем все что после последней } если там что-то есть, конечно :)
+            preg_match('@
 
-            (
-                .*[^}]
-                }
-            )
-            (.*)
+                (
+                    .*[^}]
+                    }
+                )
+                (.*)
 
-        @ismx', $this->code['edited'], $matches);
+            @ismx', $this->code['edited'], $matches);
 
-        $code_without_end = $matches[1];
-        $end_of_code = $matches[2];
+            $code_without_end = $matches[1];
+            $end_of_code = $matches[2];
 
-        /**
-         * Разбиваем CSS-код на части по { или }
-         * Это позволяет поддерживать LESS CSS, @media, @-webkit-keyframes и любые другие конструкции
-         * использующие вложенные фигурные скобки
-         */
-        preg_match_all('@
+            /**
+             * Разбиваем CSS-код на части по { или }
+             * Это позволяет поддерживать LESS CSS, @media, @-webkit-keyframes и любые другие конструкции
+             * использующие вложенные фигурные скобки
+             */
+            preg_match_all('@
 
-            .*?[^}{]  # находим код между соседними скобками {|}
-            \s*?
-            [}{]
+                .*?[^}{]  # находим код между соседними скобками {|}
+                \s*?
+                [}{]
 
-        @ismx', $code_without_end, $matches);
+            @ismx', $code_without_end, $matches);
 
 
-        $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
+            $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
 
-//        $this->log('rules', $rules);
-        foreach($rules as $key=>$val){
-            $rules[$key] = $this->parse_properties($val);  // 4 парсим и сортируем каждую часть
+    //        $this->log('rules', $rules);
+            foreach($rules as $key=>$val){
+                $rules[$key] = $this->parse_properties($val);  // 4 парсим и сортируем каждую часть
+            }
+    //        $this->log('rules', $rules);
+
+            $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // 5 склеиваем части
         }
-//        $this->log('rules', $rules);
 
-        $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // 5 склеиваем части
-
+        if($this->mode == 'properties'){
+            $rules[0] = $this->parse_properties($this->code['edited']);
+            $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // склеиваем части
+        }
     }
 
 
     function parse_properties($css = ''){
-        // отделяем фигурную скобку
-        preg_match('@
+        if($this->mode == 'css-file'){
+            // отделяем фигурную скобку
+            preg_match('@
 
-            ^
-            (.*?)
-            (
-                \s*?
-                }
-            )
-
-        @ismx', $css, $first);
-
-//        $this->log($css, $first);
-
-        if(sizeof($first)>0){ // если есть и свойства и скобка
-            $without_brace = $first[1];
-            $brace = $first[2];
-
-            preg_match_all('@
-
-                \s*
+                ^
+                (.*?)
                 (
-                    .[^:]*          # все что угодно, но не :
-                    :
-                    .[^;]*          # все что угодно, но не ;
-                    ;
-                    (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
-                        \s*
-                        /\* .* \*/
-                    )
-                    *?
+                    \s*?
+                    }
                 )
 
-                @ismx', $without_brace, $matches);
+            @ismx', $css, $first);
+
+//           $this->log($css, $first);
+
+            if(sizeof($first)>0){ // если есть и свойства и скобка
+                $without_brace = $first[1];
+                $brace = $first[2];
+
+                preg_match_all('@
+
+                    \s*
+                    (
+                        .[^:]*          # все что угодно, но не :
+                        :
+                        .[^;]*          # все что угодно, но не ;
+                        ;
+                        (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
+                            \s*
+                            /\* .* \*/
+                        )
+                        *?
+                    )
+
+                    @ismx', $without_brace, $matches);
+
+                $props = $matches[0];
+
+    //            $this->log('props', $ma);
+
+                $props = $this->resort_properties($props);
+                $props = implode($props).$brace;
+
+            }
+            else $props = $css;
+        }
+
+        if($this->mode == 'properties'){
+            preg_match_all('@
+
+                    \s*
+                    (
+                        .[^:]*          # все что угодно, но не :
+                        :
+                        .[^;]*          # все что угодно, но не ;
+                        ;
+                        (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
+                            \s*
+                            /\* .* \*/
+                        )
+                        *?
+                    )
+
+                    @ismx', $css, $matches);
 
             $props = $matches[0];
 
-//            $this->log('props', $ma);
-
             $props = $this->resort_properties($props);
-            $props = implode($props).$brace;
-
+            $props = implode($props);
         }
-        else $props = $css;
 
         return $props;
     }
@@ -463,6 +493,41 @@ class csscomb{
 		}
 
 //        $this->code['resorted'] = preg_replace('@(\s*/\*.*?[^\*\/]*/);+@ism',';$1', $this->code['resorted']); // возвращаем на место комментарии
+    }
+
+
+
+    function end_of_process(){
+        if($this->code['edited']!='' AND $this->output!==false){
+            echo '
+    <style>
+		body{margin:0;}
+		.diff{
+			width:100%;
+			height:400px;
+			overflow:auto;
+			}
+            .diff textarea{
+                width:50%;
+                height:9999px;
+                padding:0;
+                margin:0;
+                border:0;
+                background:#f5f5f5;
+                }
+	</style>
+	<div class="diff">
+	<textarea name="in" id="in" cols="30" rows="10">'.$this->code['original'].'</textarea><textarea name="out" id="out" cols="30" rows="10">'.$this->code['resorted'].'</textarea>
+</div>
+<!--table width="100%" style="font:1em monospace;">
+    <tr>
+        <td width="50%" style="vertical-align:top;white-space:pre;">'.$this->code['original'].'</td>
+        <td style="vertical-align:top;white-space:pre;">'.$this->code['resorted'].'</td>
+    </tr>
+</table-->';
+        }
+
+        if($this->output===false) return $this->code['resorted'];
     }
 
 

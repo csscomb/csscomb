@@ -451,16 +451,84 @@ $testcases[] = $case;
 
 
 $case['descr'] = 'Комментарии. Внутри селектора сразу после открывающей фигурной скобки.';
-$case['code'] = '.test { /* тестовый комментарий */
-	padding:0;
+$case['code'] = '.test1 {
+	width:100px;
+	height:100px;
 	position:relative;
-	background:url(picture.jpg);
-	}';
-$case['result'] = '.test { /* тестовый комментарий */
+	}
+
+.test2 { /* тестовый комментарий */
+	width:100px;
+	height:100px;
 	position:relative;
-	padding:0;
-	background:url(picture.jpg);
+	}
+
+.test3 {
+	width:100px;
+	height:100px;
+	position:relative;
 	}';
+$case['result'] = '.test1 {
+	position:relative;
+	width:100px;
+	height:100px;
+	}
+
+.test2 { /* тестовый комментарий */
+	position:relative;
+	width:100px;
+	height:100px;
+	}
+
+.test3 {
+	position:relative;
+	width:100px;
+	height:100px;
+	}';
+$testcases[] = $case;
+
+
+$case['descr'] = 'Комментарии. После селектора, а скобка { на следующей строке.';
+$case['code'] = '.test1
+{
+	width:100px;
+	height:100px;
+	position:relative;
+}
+
+.test2 /* тестовый комментарий */
+{
+	width:100px;
+	height:100px;
+	position:relative;
+}
+
+.test3
+{
+	width:100px;
+	height:100px;
+	position:relative;
+}';
+$case['result'] = '.test1
+{
+	position:relative;
+	width:100px;
+	height:100px;
+}
+
+.test2 /* тестовый комментарий */
+{
+	position:relative;
+	width:100px;
+	height:100px;
+}
+
+.test3
+{
+	position:relative;
+	width:100px;
+	height:100px;
+}';
 $testcases[] = $case;
 
 
@@ -483,13 +551,13 @@ $testcases[] = $case;
 
 
 $case['descr'] = 'Комментарии. Внутри селектора многострочный комментарий';
-$case['code'] = 'h1{
+$case['code'] = 'h1 {
 	background: #faf0e6;
 	/*border: 2px dashed #800000;
 	color: #a0522d;*/
 	padding: 7px;
 	}';
-$case['result'] = 'h1{
+$case['result'] = 'h1 {
 	padding: 7px;
 	background: #faf0e6;
 	/*border: 2px dashed #800000;
