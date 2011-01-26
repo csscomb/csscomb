@@ -352,6 +352,7 @@ class csscomb{
     function parse_properties($css = ''){
         if($this->mode == 'css-file'){
             // отделяем фигурную скобку
+            $matches = null;
             preg_match('@
 
                 ^
@@ -361,14 +362,41 @@ class csscomb{
                     }
                 )
 
-            @ismx', $css, $first);
+            @ismx', $css, $matches);
 
-//           $this->log($css, $first);
+//           $this->log($css, $matches);
 
-            if(sizeof($first)>0){ // если есть и свойства и скобка
-                $without_brace = $first[1];
-                $brace = $first[2];
+            if(sizeof($matches)>0){ // если есть и свойства и скобка
+                $properties = $matches[1];
+                $brace = $matches[2];
 
+                /* отделяем первый комментарий, который находится на той же строке где и была скобка */
+                $matches = null;
+                $first_spaces = $first_comment = '';
+                preg_match('@
+
+                    ^
+                    (.*?)
+                    (\s*?)
+                    (/\* .* \*/)
+                    (.*)
+                    $
+
+                    @ismx', $properties, $matches);
+
+                if(
+                    count($matches)==5 and              // все распарсилось как надо
+                    strlen($matches[1]) === 0 and       // комментарий действительно идет первым
+                    strpos($matches[2], "\n") !== 0     // перед комментарием нет переноса строки, следовательно предпологаем, что он относится к скобке с селектором
+                ){
+                    $first_spaces = $matches[2];
+                    $first_comment = $matches[3];
+                    $properties = $matches[4];
+                }
+
+                //                die();
+
+                $matches = null;
                 preg_match_all('@
 
                     \s*
@@ -384,14 +412,14 @@ class csscomb{
                         *?
                     )
 
-                    @ismx', $without_brace, $matches);
+                    @ismx', $properties, $matches);
 
                 $props = $matches[0];
 
-    //            $this->log('props', $ma);
+                //            $this->log('props', $ma);
 
                 $props = $this->resort_properties($props);
-                $props = implode($props).$brace;
+                $props = $first_spaces.$first_comment.implode($props).$brace;
 
             }
             else $props = $css;
