@@ -1120,7 +1120,7 @@ $testcases[] = $case;
 $case['descr'] = 'LESS CSS. LESS vs pseudo-classes';
 $case['code'] = 'a{
     color:red;
-    a:hover {
+    a:hover{
         text-decoration:underline;
     }
 }';
