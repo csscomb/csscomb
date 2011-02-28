@@ -341,6 +341,34 @@ class csscomb{
             $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // 5 склеиваем части
         }
 
+
+        if($this->mode == 'style-attribute'){
+            $this->code['resorted'] = $this->code['edited'];
+
+            preg_match_all('@
+
+                .*?[^"\']
+
+                style=
+                ["\']
+                (.*?)
+                ["\']
+
+
+            @ismx', $this->code['edited'], $matches);
+
+//            $this->log('$matches[1]', $matches[1]);
+            $properties = $matches[1];
+
+            foreach($properties as $props){
+                $r = $this->parse_properties($props);
+                $this->code['resorted'] = str_replace($props, $r, $this->code['resorted']);
+            }
+
+        }
+
+
+
         if($this->mode == 'properties'){
             $rules[0] = $this->parse_properties($this->code['edited']);
             $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // склеиваем части
@@ -424,7 +452,7 @@ class csscomb{
             else $props = $css;
         }
 
-        if($this->mode == 'properties'){
+        if($this->mode == 'properties' OR $this->mode == 'style-attribute'){
             preg_match_all('@
 
                     \s*

@@ -15,35 +15,8 @@
 require_once '../lib/csscomb.php';
 
 
-$css = "#bundle {
-    .button {
-        display: block;
-        border: 1px solid black;
-        background-color: grey;
-        :hover {
-            background-color: white;
-            }
-        }
-    .tab {padding:0;margin:0;}
-    .citation {font-size:10px;color:#000;}
-    }
-
-#header a {
-    color: orange;
-    #bundle > .button;
-    }
-
-#defaults {
-    @width: 960px;
-    @color: black;
-    }
-
-.article {color: #294366;}
-
-.comment {
-    width: #defaults[@width];
-    color: .article['color'];
-    }";
+$css = '<p style="padding-left:0;padding-top:0;margin-right:0;margin-top:0;">бла-бла-бла</p>
+<p style="padding-left:1px;padding-top:2px;margin-right:3px;margin-top:4px;">бла-бла-бла</p>';
 
 $c = new csscomb($css, true);
 ?>
