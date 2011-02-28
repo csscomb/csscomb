@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Пересортировка</title>
+    <title>Cортировка</title>
     <script src="http://yandex.st/highlightjs/5.16/highlight.min.js"></script>
     <link rel="stylesheet" href="http://yandex.st/highlightjs/5.16/styles/default.min.css">
     <script>

@@ -20,7 +20,7 @@ class csscomb{
         'datauri' => null,  // если найдены data uri, то эта переменная станет массивом...
         'hacks' => null  // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
     ),
-    $output = true,
+    $output = true, //TODO: дефолтный output должен быть задизейблен
 
     /*
      * css-file - только CSS-код
@@ -211,8 +211,8 @@ class csscomb{
 ]';
 
 
-    function set_sort_order($json_array = ''){
-		if($json_array!=''){
+    function set_sort_order($json_array = null){
+		if($json_array!=null){
 			$custom_sort_order = json_decode($json_array);
 			if(is_array($custom_sort_order) AND count($custom_sort_order)>0){
 				$this->sort_order = $custom_sort_order;
@@ -240,13 +240,13 @@ class csscomb{
     }
 
 
-    function csscomb($css = '', $echo = true){
+    function csscomb($css = '', $echo = false, $custom_sort_order = null){
         if($echo===0 or $echo===false) $this->output = false;
 
         $this->code['original'] = $this->code['edited'] = $css;
 
         $this->set_mode();
-        $this->set_sort_order();    // 1 задаем порядок сортировки
+        $this->set_sort_order($custom_sort_order);    // 1 задаем порядок сортировки
 
         $this->preprocess();        // 2 препроцессинг
         $this->parse_rules();       // 3,4,5 парсим на части по скобкам
@@ -461,13 +461,31 @@ class csscomb{
             $index = null; // Дефолтное значение индекса порядка для свойства. Если свойство не знакомо, то index так и останется null.
             preg_match_all('@\s*?(.*?[^:]:).*@ism', $val, $matches, PREG_SET_ORDER);
             $property = trim($matches[0][1]);
-            foreach($this->sort_order as $pos=>$key){
-                if(strpos(' '.trim($property), ' '.$key.':')!==false) {
-                    $index = $pos;
+
+            if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
+
+                foreach($this->sort_order as $pos=>$key){ // для каждой группы свойств
+                    foreach($this->sort_order[$pos] as $p=>$k){ // для каждого свойства
+                        if(strpos(' '.trim($property),' '.$k.':')!==false){
+                            $through_number = $this->get_through_number($k); // определяем "сквозной" порядковый номер
+                            if($through_number!==false) $index = $through_number;
+                        }
+                    }
                 }
+
+            }
+            else{
+                foreach($this->sort_order as $pos=>$key){
+                    if(strpos(' '.trim($property), ' '.$key.':')!==false){
+                        $index = $pos;
+                    }
+                }
+
             }
 
-            if($index === null OR strpos($val, 'exp')) $undefined[] = $val;
+            if($index === null OR strpos($val, 'exp')){
+                $undefined[] = $val;
+            }
             else{
                 /*
                    Добавляет к уже существующей записи с определенном порядковым номером еще одну запись с таким же порядковым номером
@@ -478,6 +496,15 @@ class csscomb{
             }
         }
         ksort($resorted);
+
+        if(is_array($this->sort_order[0]) AND count($resorted)>0){ // Если свойства разделены на группы
+            $resorted = $this->separate_property_group($resorted);
+        }
+
+        if(is_array($this->sort_order[0]) AND count($undefined)>0){
+            $undefined[0] = "\n".$undefined[0];
+        }
+
         $resorted = array_merge($resorted, $undefined); // добавляем в конец нераспознанное
 
         return $resorted;
@@ -567,5 +594,48 @@ class csscomb{
         echo '<br>';
         echo ''.var_dump($after).'</code></pre></div>';
     }
+
+
+
+    /**
+	 * Возвращает сквозной прядковый номер элемента двумерного массива так, как если бы этот массив был одномерным
+	 * @param  {string}
+	 * @return {bool|int}
+	 */
+	private function get_through_number($value){
+		$i = 0;
+		foreach($this->sort_order as $property_group){
+			foreach($property_group as $key=>$val){
+				if($val==$value) return $i;
+				else $i++;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Разделяет свойства на группы пустой строкой
+	 * Внимание: вызывать только когда есть разделение на группы, иначе вернет входной массив без изменений
+	 * @param  {array}
+	 * @return {array}
+	 */
+	private function separate_property_group($properties){
+		if(is_array($this->sort_order[0])){ // Если в настройках нет разбиения на группы, то выходим входной массив без изменений
+			foreach($properties as $key=>$property){
+				$array = explode(':', $property);
+				$prop_name[$key] = trim($array[0]);
+			}
+			foreach($this->sort_order as $group_num=>$property_group){ // Перебираем группы свойств
+				$intersect = array_intersect($prop_name, $property_group);
+				if(count($intersect)>0){
+					$num = array_keys($intersect);
+					$last_key = null;
+					foreach($num as $n)	$last_key = $n;
+					if($properties[$last_key] != end($properties)) $properties[$last_key] = $properties[$last_key]."\n";
+				}
+			}
+		}
+		return $properties;
+	}
 
 }
