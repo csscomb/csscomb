@@ -3247,7 +3247,7 @@ $testcases[] = $case;
 
 
 /* Порядок сортировки */
-        $case['descr'] = 'Кастомный порядок сортировки. Тест 1';
+$case['descr'] = 'Кастомный порядок сортировки. Тест 1';
 $case['code'] = 'div{
     outline:1px solid red;
     position:absolute;

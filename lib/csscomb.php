@@ -20,7 +20,6 @@ class csscomb{
         'datauri' => null,  // если найдены data uri, то эта переменная станет массивом...
         'hacks' => null  // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
     ),
-    $output = true, //TODO: дефолтный output должен быть задизейблен
 
     /*
      * css-file - только CSS-код
@@ -402,7 +401,7 @@ class csscomb{
                     \s*
                     (
                         .[^:]*          # все что угодно, но не :
-                        :
+                        [:>]
                         .[^;]*          # все что угодно, но не ;
                         ;
                         (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
@@ -416,7 +415,7 @@ class csscomb{
 
                 $props = $matches[0];
 
-                //            $this->log('props', $ma);
+//              $this->log('props', $ma);
 
                 $props = $this->resort_properties($props);
                 $props = $first_spaces.$first_comment.implode($props).$brace;
