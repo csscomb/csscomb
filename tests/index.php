@@ -1177,7 +1177,6 @@ $case['result'] = '#navbar {
     top:0;
     width: 80%;
     height: 23px;
-
     ul {
         position:relative;
         list-style-type: none;
