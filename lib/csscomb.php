@@ -329,6 +329,8 @@ class csscomb{
 
             @ismx', $code_without_end, $matches);
 
+//            $this->log('$matches', $matches);
+
 
             $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
 
@@ -393,8 +395,13 @@ class csscomb{
 
 //           $this->log($css, $matches);
 
-            if(sizeof($matches)>0){ // если есть и свойства и скобка
+            if(sizeof($matches)>0){ // если есть и свойства и скобка и хотя бы одно :
                 $properties = $matches[1];
+
+                if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
+                    $properties = str_replace("\n\n", "\n", $properties);
+                }
+
                 $brace = $matches[2];
 
                 /* отделяем первый комментарий, который находится на той же строке где и была скобка */
