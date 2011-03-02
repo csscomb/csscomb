@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Online sorting</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="js/jquery-1.5.min.js"></script>
+</head>
+<body>
+<div class="page-wrap">
+	<header class="page-header">
+		<div class="logo"><a href="index.html">CSScomb</a></div>
+		<nav role="navigation">
+			<ul>
+				<li><a href="sort-result.html">Online sorting</a></li>
+				<li><b>About</b></li>
+				<li><a href="tests.html">Tests</a></li>
+				<li><a href="">Downloads</a></li>
+			</ul>
+		</nav>
+	</header>
+	<hgroup>
+		<h1>About</h1>
+		<div class="clear"></div>
+	</hgroup>
+
+	<div class="page">
+		<h2>Как работает CSScomb?</h2>
+		<p>Алгоритм парсера построен так, чтобы максимально повторять действия веб-технолога работающего с CSS-кодом.
+		   Для пересортировки обычно перемещают строки относительно друг друга учитывая комметарии в коде, многострочные записи значений свойств, хаки и все,
+		   что может встретиться в реальном файле. Автор постарался воспроизвести такие действия в алгоритме CSScomb.
+		   Это означает, что парсер по своей природе «думает» как человек редактирующий текст, а не как слепой робот разбирающий CSS по косточкам.</p>
+
+		<h2>Что умеет CSScomb?</h2>
+		<ul>
+			<li>CSS свойства в&nbsp;рамках селекторов сортируются в&nbsp;соответствии с&nbsp;настройками. По&nbsp;умолчанию используется порядок из Zen coding'а.</li>
+			<li>Сохраняется исходное форматирование таблицы стилей.</li>
+			<li>Комментарии <em>внутри</em> фигурных скобок у&nbsp;селекторов и <em>вне</em> фигурных скобок у&nbsp;селекторов бережно сохраняются.</li>
+			<li>Переносятся вниз незнакомые свойства в том порядке, в&nbsp;котором они встречаются в&nbsp;рамках селектора. Например: <code>he\ight:&nbsp;100%</code> и&nbsp;подобные будут рассмотрены как&nbsp;незнакомые.</li>
+			<li>Успешно парсится <code>@media&nbsp;...&nbsp;{...}</code> и любые другие конструкции с <code>@</code>.</li>
+			<li>Успешно парсятся <code>expressions</code> и&nbsp;далее переносятся в&nbsp;конец свойств в&nbsp;порядке, в&nbsp;котором они встретились в&nbsp;рамках свойств одного селектора.</li>
+		</ul>
+
+		<h2>Как настраивать порядок сортировки?</h2>
+		<p>Для настройки порядка сортировки CSS-свойств используется JSON-массив. По умолчанию по</p>
+
+		<h2>Как настраивать разделение на группы?</h2>
+		<p>Порядок сортировки у меня хранится в JSON массиве. Этот массив нужно сделать двумерным и тогда свойства будут группироваться в соответствии с каждой группой в массиве.</p>
+
+		<ol>
+			<li>В онлайн-версии это можно сделать на странице настроек: http://miripiruni.org/css-reorder/preferences.php</li>
+
+			<li>
+				<span>В плагинах нужно расковырять файлик <code>csscomb.php</code></span>
+				<ul>
+					<li>В TextMate: <code>/Applications/TextMate.app/Contents/SharedSupport/Bundles/CSS.tmbundle/Support/lib/csscomb.php</code></li>
+					<li>В Coda: <code>/Users/%YOUR_USER_NAME%/Library/Application Support/Coda/Plug-ins/CSScomb.codaplugin/Contents/Resources/csscomb.php</code></li>
+				</ul>
+			</li>
+		</ol>
+
+		<h2>Как часто обновляется CSScomb?</h2>
+		<p>Новая версия расчески выходит 1-го числа каждого месяца по мере необходимости. Это сделано для личного удобства автора, так как проект некоммерческий.</p>
+
+		<h2>Как помочь проекту?</h2>
+		<p>Сделать плагин (если такового нет) к вашему любимому редактору.</p>
+
+		<h2>Планы</h2>
+		<p>Совершенствование алгоритма и доработки по тест-кейсам, которые падают.</p>
+		<p>Внедрение CSScomb в популярные редакторы кода.</p>
+
+		<h2>Что почитать про CSS?</h2>
+		<p>Достоевского.</p>
+	</div>
+	<footer class="page-footer">
+		<p>
+			<span>© 2009–2011, CSScomb v. 2.0</span>
+			<a id="bug-report" href="">Bug report</a>
+			<a href="">Follow me</a>
+			<a href="">По-русски</a>
+		</p>
+	</footer>
+</div>
+</body>
+</html>

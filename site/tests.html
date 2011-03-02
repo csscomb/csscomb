@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Online sorting</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+	<link rel="stylesheet" title="Default" href="highlight/styles/default.css">
+    <script type="text/javascript" src="js/jquery-1.5.min.js"></script>
+    <script type="text/javascript" src="highlight/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+	<style>
+		.tests-summary{
+			border-bottom:1px solid #e9e9e9;
+			margin:0 -10px 20px;
+			padding:0 10px 0;
+			}
+			.tests-summary table{
+				margin-bottom:5px;
+				}
+				.tests-summary table th{
+					text-align:left;
+					}
+				.tests-summary table td,
+				.tests-summary table th{
+					padding:0 10px 4px 0;
+					}
+				.tests-summary table .comment{
+					font-style:italic;
+					color:#999;
+					font-size:.9em;
+					padding-left:10px;
+					}
+				.tests-summary table .count{
+					text-align:right;
+					}
+					.tests-summary table .count span{
+						display:block;
+						padding:1px 5px;
+						}
+				.tests-summary table tfoot {
+					font-weight:bold;
+					}
+
+		.test{
+			}
+			.test-title{
+				font-weight:bold;
+				cursor:pointer;
+				}
+				.test-title a{
+					font-size:.75em;
+					color:gray;
+					margin-left:10px;
+					}
+
+			.success,
+			.error,
+			.warning{
+				display:inline-block;
+				padding:1px 5px;
+				color:white;
+				border-radius:2px;
+				}
+
+			.success{
+				background:green;
+				}
+			.error{
+				background:red;
+				}
+			.warning{
+				background: #ffc000;
+				}
+			.test .code{
+				display:none;
+				margin-bottom:30px;
+				}
+	</style>
+</head>
+<body class="tests">
+<div class="page-wrap">
+	<header class="page-header">
+		<div class="logo"><a href="index.html">CSScomb</a></div>
+		<nav>
+			<ul>
+				<li><a href="sort-result.html">Online sorting</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><b>Tests</b></li>
+				<li><a href="">Downloads</a></li>
+			</ul>
+		</nav>
+	</header>
+	<hgroup>
+		<h1>Tests</h1>
+		<div class="clear"></div>
+	</hgroup>
+
+	<div class="page">
+		<div class="tests-summary">
+			<!--<h2>Результаты тестов</h2>-->
+			<table>
+				<tfoot>
+					<tr>
+						<th>Всего тестов:</th>
+						<td class="count"><span>58</span></td>
+						<td></td>
+					</tr>
+				</tfoot>
+				<tr>
+					<th>Ошибок:</th>
+					<td class="count"><span class="error">0</span></td>
+					<td class="comment">код поломался или пересортировался с нарушениями</td>
+				</tr>
+				<tr>
+					<th>Предупреждений:</th>
+					<td class="count"><span class="warning">8</span></td>
+					<td class="comment">код не пересортировался или частично не пересортировался, но при этом сохранил свою целостность</td>
+				</tr>
+				<tr>
+					<th>Успешно:</th>
+					<td class="count"><span class="success">40</span></td>
+					<td class="comment">получен ожидаемый код с указанным порядком сортировки</td>
+				</tr>
+			</table>
+		</div>
+		<h2>Тесты сгруппированные по категориям</h2>
+		<ol>
+			<li><a href="">Форматирование</a></li>
+			<li><a href="">Свойства и их отсутствие</a></li>
+			<li><a href="">Комментарии</a></li>
+			<li><a href="">Селекторы</a></li>
+			<li><a href="">Правила начинающиеся с @</a></li>
+			<li><a href="">Ключевые символы</a></li>
+			<li><a href="">LESS CSS</a></li>
+			<li><a href="">SASS</a></li>
+			<li><a href="">Примеры реальных файлов</a></li>
+			<li><a href="">Тестрование окружения</a></li>
+			<li><a href="">Разделение свойств на группы</a></li>
+			<li><a href="">Порядок сортировки</a></li>
+		</ol>
+
+		<h3>Форматирование</h3>
+
+		<div class="test" id="test123">
+			<h4 class="test-title">
+				<span class="success">Фигурные скобки. Вариант 1</span>
+				<a href="#test123">permalink</a>
+			</h4>
+			<div class="code">
+				<table>
+					<tbody>
+						<tr>
+							<td class="code-line-numbers"><div><span>1.</span><span>2.</span><span>3.</span><span>4.</span><span>5.</span><span>6.</span><span>7.</span><span>8.</span><span>9.</span><span>10.</span><span>11.</span><span>12.</span><span>13.</span><span>14.</span><span>15.</span><span>16.</span><span>17.</span><span>18.</span><span>19.</span><span>20.</span><span>21.</span><span>22.</span><span>23.</span></div></td>
+							<td class="code-original">
+								<pre id="code-original" class="css"><code class="css">body,
+	html <span class="rules">{
+	  <span class="rule"><span class="keyword">font</span>:<span class="value"> Tahoma, Arial, san-serif</span>;</span>
+	  <span class="rule"><span class="keyword">background</span>:<span class="value"> <span class="function">url(<span class="params"><span class="string">'hatch.png'</span></span>)</span></span>;</span>
+	}</span>
+
+	<span class="at_rule">@<span class="keyword">import</span> <span class="function">url(<span class="params"><span class="string">'print.css'</span></span>)</span></span>;
+
+	<span class="at_rule">@<span class="keyword">media</span> screen and (-webkit-min-device-pixel-ratio: <span class="number">0</span>) </span>{
+	  <span class="at_rule">@<span class="keyword">page</span> <span class="pseudo">:left</span> </span>{
+		body<span class="pseudo">:first-of-type</span> pre<span class="pseudo">::after</span> <span class="rules">{
+		  <span class="rule"><span class="keyword">content</span>:<span class="value"> <span class="string">'highlight: '</span> <span class="function">attr(<span class="params">class</span>)</span></span>;</span>
+		}</span>
+	}
+
+	<span class="id">#content</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">width</span>:<span class="value"> <span class="comment">/* wide enough */</span> <span class="number">100</span>% <span class="comment">/* 400px */</span></span>;</span>
+	  <span class="rule"><span class="keyword">height</span>:<span class="value"> <span class="number">100</span>%
+	</span>}</span></span>
+
+	p<span class="attr_selector">[lang=ru]</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">color</span>:<span class="value"> <span class="hexcolor">#F0F0F0</span></span>;</span> <span class="rule"><span class="keyword">background</span>:<span class="value"> white <span class="important">!important</span></span>;</span>
+	}</span></code></pre>
+							</td>
+							<td class="code-line-numbers"><div><span>1.</span><span>2.</span><span>3.</span><span>4.</span><span>5.</span><span>6.</span><span>7.</span><span>8.</span><span>9.</span><span>10.</span><span>11.</span><span>12.</span><span>13.</span><span>14.</span><span>15.</span><span>16.</span><span>17.</span><span>18.</span><span>19.</span><span>20.</span><span>21.</span><span>22.</span><span>23.</span></div></td>
+							<td class="code-resorted">
+								<pre id="code-resorted" class="css"><code class="css">body,
+	html <span class="rules">{
+	  <span class="rule"><span class="keyword">font</span>:<span class="value"> Tahoma, Arial, san-serif</span>;</span>
+	  <span class="rule"><span class="keyword">background</span>:<span class="value"> <span class="function">url(<span class="params"><span class="string">'hatch.png'</span></span>)</span></span>;</span>
+	}</span>
+
+	<span class="at_rule">@<span class="keyword">import</span> <span class="function">url(<span class="params"><span class="string">'print.css'</span></span>)</span></span>;
+
+	<span class="at_rule">@<span class="keyword">media</span> screen and (-webkit-min-device-pixel-ratio: <span class="number">0</span>) </span>{
+	  <span class="at_rule">@<span class="keyword">page</span> <span class="pseudo">:left</span> </span>{
+		body<span class="pseudo">:first-of-type</span> pre<span class="pseudo">::after</span> <span class="rules">{
+		  <span class="rule"><span class="keyword">content</span>:<span class="value"> <span class="string">'highlight: '</span> <span class="function">attr(<span class="params">class</span>)</span></span>;</span>
+		}</span>
+	}
+
+	<span class="id">#content</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">width</span>:<span class="value"> <span class="comment">/* wide enough */</span> <span class="number">100</span>% <span class="comment">/* 400px */</span></span>;</span>
+	  <span class="rule"><span class="keyword">height</span>:<span class="value"> <span class="number">100</span>%
+	</span>}</span></span>
+
+	p<span class="attr_selector">[lang=ru]</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">color</span>:<span class="value"> <span class="hexcolor">#F0F0F0</span></span>;</span> <span class="rule"><span class="keyword">background</span>:<span class="value"> white <span class="important">!important</span></span>;</span>
+	}</span></code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+
+		<div class="test" id="test124">
+			<h4 class="test-title">
+				<span class="warning">Фигурные скобки. Вариант 2</span>
+				<a href="#test123">permalink</a>
+			</h4>
+			<div class="code">
+				<table>
+					<tbody>
+						<tr>
+							<td class="code-line-numbers"><div><span>1.</span><span>2.</span><span>3.</span><span>4.</span><span>5.</span><span>6.</span><span>7.</span><span>8.</span><span>9.</span><span>10.</span><span>11.</span><span>12.</span><span>13.</span><span>14.</span><span>15.</span><span>16.</span><span>17.</span><span>18.</span><span>19.</span><span>20.</span><span>21.</span><span>22.</span><span>23.</span></div></td>
+							<td class="code-original">
+								<pre id="code-original" class="css"><code class="css">body,
+	html <span class="rules">{
+	  <span class="rule"><span class="keyword">font</span>:<span class="value"> Tahoma, Arial, san-serif</span>;</span>
+	  <span class="rule"><span class="keyword">background</span>:<span class="value"> <span class="function">url(<span class="params"><span class="string">'hatch.png'</span></span>)</span></span>;</span>
+	}</span>
+
+	<span class="at_rule">@<span class="keyword">import</span> <span class="function">url(<span class="params"><span class="string">'print.css'</span></span>)</span></span>;
+
+	<span class="at_rule">@<span class="keyword">media</span> screen and (-webkit-min-device-pixel-ratio: <span class="number">0</span>) </span>{
+	  <span class="at_rule">@<span class="keyword">page</span> <span class="pseudo">:left</span> </span>{
+		body<span class="pseudo">:first-of-type</span> pre<span class="pseudo">::after</span> <span class="rules">{
+		  <span class="rule"><span class="keyword">content</span>:<span class="value"> <span class="string">'highlight: '</span> <span class="function">attr(<span class="params">class</span>)</span></span>;</span>
+		}</span>
+	}
+
+	<span class="id">#content</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">width</span>:<span class="value"> <span class="comment">/* wide enough */</span> <span class="number">100</span>% <span class="comment">/* 400px */</span></span>;</span>
+	  <span class="rule"><span class="keyword">height</span>:<span class="value"> <span class="number">100</span>%
+	</span>}</span></span>
+
+	p<span class="attr_selector">[lang=ru]</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">color</span>:<span class="value"> <span class="hexcolor">#F0F0F0</span></span>;</span> <span class="rule"><span class="keyword">background</span>:<span class="value"> white <span class="important">!important</span></span>;</span>
+	}</span></code></pre>
+							</td>
+							<td class="code-line-numbers"><div><span>1.</span><span>2.</span><span>3.</span><span>4.</span><span>5.</span><span>6.</span><span>7.</span><span>8.</span><span>9.</span><span>10.</span><span>11.</span><span>12.</span><span>13.</span><span>14.</span><span>15.</span><span>16.</span><span>17.</span><span>18.</span><span>19.</span><span>20.</span><span>21.</span><span>22.</span><span>23.</span></div></td>
+							<td class="code-resorted">
+								<pre id="code-resorted" class="css"><code class="css">body,
+	html <span class="rules">{
+	  <span class="rule"><span class="keyword">font</span>:<span class="value"> Tahoma, Arial, san-serif</span>;</span>
+	  <span class="rule"><span class="keyword">background</span>:<span class="value"> <span class="function">url(<span class="params"><span class="string">'hatch.png'</span></span>)</span></span>;</span>
+	}</span>
+
+	<span class="at_rule">@<span class="keyword">import</span> <span class="function">url(<span class="params"><span class="string">'print.css'</span></span>)</span></span>;
+
+	<span class="at_rule">@<span class="keyword">media</span> screen and (-webkit-min-device-pixel-ratio: <span class="number">0</span>) </span>{
+	  <span class="at_rule">@<span class="keyword">page</span> <span class="pseudo">:left</span> </span>{
+		body<span class="pseudo">:first-of-type</span> pre<span class="pseudo">::after</span> <span class="rules">{
+		  <span class="rule"><span class="keyword">content</span>:<span class="value"> <span class="string">'highlight: '</span> <span class="function">attr(<span class="params">class</span>)</span></span>;</span>
+		}</span>
+	}
+
+	<span class="id">#content</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">width</span>:<span class="value"> <span class="comment">/* wide enough */</span> <span class="number">100</span>% <span class="comment">/* 400px */</span></span>;</span>
+	  <span class="rule"><span class="keyword">height</span>:<span class="value"> <span class="number">100</span>%
+	</span>}</span></span>
+
+	p<span class="attr_selector">[lang=ru]</span> <span class="rules">{
+	  <span class="rule"><span class="keyword">color</span>:<span class="value"> <span class="hexcolor">#F0F0F0</span></span>;</span> <span class="rule"><span class="keyword">background</span>:<span class="value"> white <span class="important">!important</span></span>;</span>
+	}</span></code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+
+	<script>
+		$('.test-title').click(function(){
+			$('.code').toggle();
+		});
+	</script>
+
+	<footer class="page-footer">
+		<p>
+			<span>© 2009–2011, CSScomb v. 2.0</span>
+			<a id="bug-report" href="">Bug report</a>
+			<a href="">Follow me</a>
+			<a href="">По-русски</a>
+		</p>
+	</footer>
+</div>
+</body>
+</html>
