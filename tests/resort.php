@@ -190,24 +190,16 @@ $case['order'] = '[
 ]';
 
 $css = 'div{
-    position:absolute;
-    top:0;
-    left:0;
+    /* border-width: 1px 1px 1px 0; */
+    /* border-color: #93875d #dfd199 #fff6d5; */
 
-    margin:0;
-    padding:0;
-    border:0;
+    color: #7a7254;
 
-    font-size:12px;
+    background: #F5E39E;
+    background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5E39E), color-stop(42%,#FFEFB2), color-stop(75%,#FFF3C8), color-stop(100%,#FFF5CF));
 
-    background:
-        url(pic1.png) top left no-repeat,
-        url(pic2.png) top right no-repeat;
-    color:red;
-
-    text-shadow:
-		0 -1px 1px rgba(0,0,0,0.4),
-		0 0 5px rgba(255,255,255,0.7);
+    /* Объясняю как работает: раз-два-три и готово! */
     }';
 
 $c = new csscomb($css, true, $case['order']);

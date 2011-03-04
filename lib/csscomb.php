@@ -297,6 +297,19 @@ class csscomb{
         $this->code['edited'] = str_replace('{}','{ }', $this->code['edited']); // закрываем сложности парсинга {}
         $this->code['edited'] = preg_replace('/(.*?[^\s])(\s*?})/','$1;$2', $this->code['edited']); // закрываем сложности с отсутствующей последней ; перед }
         $this->code['edited'] = preg_replace('@;(\s*/\*.*?[^\*\/]*/)@ism','$1;', $this->code['edited']); // перемещаем построчные комментарии к свойству за ;
+
+        if(preg_match_all('#
+            (\s*)
+            /\*
+            (.*?[^:])
+            :
+            (.*?[^\*/])
+            ;
+            \s*?
+            \*/
+            #ismx', $this->code['edited'], $matches)){
+            $this->log('$matches',$matches);
+        }
     }
 
 
@@ -450,7 +463,7 @@ class csscomb{
 
                 $props = $matches[0];
 
-//              $this->log('props', $ma);
+//              $this->log('props', $props);
 
                 $props = $this->resort_properties($props);
                 $props = $first_spaces.$first_comment.implode($props).$brace;
