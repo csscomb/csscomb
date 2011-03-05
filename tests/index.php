@@ -608,6 +608,72 @@ $testcases[] = $case;
 
 
 
+
+
+$case['descr'] = 'Комментарии. Вне селектора + вне медиа. Вариант 2';
+$case['code'] = '/* comment 1 */
+@media screen {
+    /* .b-pager (begin) */
+	.b-pager{
+		font-size:130%;
+		margin:1em 0 2em;
+		}
+		.b-pager__title{
+			font-weight:bold;
+			padding-right:.65em;
+			}
+/* .b-pager (end) */
+}
+
+/* comment 2 */
+
+@media print {
+/* .b-pager (begin) */
+	.b-pager{
+		font-size:130%;
+		margin:1em 0 2em;
+		}
+		.b-pager__title{
+			font-weight:bold;
+			padding-right:.65em;
+			}
+/* .b-pager (end) */
+}
+/* eof */';
+
+$case['result'] = '/* comment 1 */
+@media screen {
+    /* .b-pager (begin) */
+	.b-pager{
+		margin:1em 0 2em;
+		font-size:130%;
+		}
+		.b-pager__title{
+			padding-right:.65em;
+			font-weight:bold;
+			}
+/* .b-pager (end) */
+}
+
+/* comment 2 */
+
+@media print {
+/* .b-pager (begin) */
+	.b-pager{
+		margin:1em 0 2em;
+		font-size:130%;
+		}
+		.b-pager__title{
+			padding-right:.65em;
+			font-weight:bold;
+			}
+/* .b-pager (end) */
+}
+/* eof */';
+$testcases[] = $case;
+
+
+
 $case['descr'] = 'Комментарии. Внутри селектора.';
 $case['code'] = 'h1{
 	background: #faf0e6; /* Цвет фона под текстом */

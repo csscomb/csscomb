@@ -197,6 +197,11 @@ $css = 'div{
 
     background: #F5E39E;
     background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
+    /*
+    Старый код
+    background: #F5E39E;
+    background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
+    */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5E39E), color-stop(42%,#FFEFB2), color-stop(75%,#FFF3C8), color-stop(100%,#FFF5CF));
 
     /* Объясняю как работает: раз-два-три и готово! */
