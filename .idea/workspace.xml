@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3126c8a-6a68-408e-ac6f-7d51fbf62006" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/csscomb.php" afterPath="$PROJECT_DIR$/lib/csscomb.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/site/about.html" afterPath="$PROJECT_DIR$/site/about.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/site/index.html" afterPath="$PROJECT_DIR$/site/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/index.php" afterPath="$PROJECT_DIR$/tests/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/resort.php" afterPath="$PROJECT_DIR$/tests/resort.php" />
     </list>
     <ignored path="csscomb.iws" />
@@ -70,19 +72,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="csscomb.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="csscomb.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/csscomb.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="301" column="17" selection-start="8560" selection-end="8560" vertical-scroll-proportion="0.0">
+            <state line="585" column="68" selection-start="18046" selection-end="18046" vertical-scroll-proportion="0.3455696">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="resort.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="858" column="9" selection-start="15927" selection-end="15927" vertical-scroll-proportion="-29.809525">
+              <folding>
+                <marker date="1299943647000" expanded="true" signature="83409:83724" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="83416:83685" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="83479:83677" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="83492:83552" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="83575:83665" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="83692:83717" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="83768:84083" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="83775:84044" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="83838:84036" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="83851:83911" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="83934:84024" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="84051:84076" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84246:84767" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84253:84522" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84316:84514" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84329:84389" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="84412:84502" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="84529:84760" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84558:84752" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84569:84629" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="84650:84740" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="84811:85332" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84818:85087" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84881:85079" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="84894:84954" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="84977:85067" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="85094:85325" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="85123:85317" placeholder="..." />
+                <marker date="1299943647000" expanded="true" signature="85134:85194" placeholder="{...}" />
+                <marker date="1299943647000" expanded="true" signature="85215:85305" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resort.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/resort.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="201" column="51" selection-start="4370" selection-end="4370" vertical-scroll-proportion="0.8309493">
+            <state line="225" column="8" selection-start="4783" selection-end="4783" vertical-scroll-proportion="-24.857143">
               <folding />
             </state>
           </provider>
@@ -102,9 +144,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/site/index.html" />
-        <option value="$PROJECT_DIR$/site/about.html" />
-        <option value="$PROJECT_DIR$/site/index.php" />
         <option value="$PROJECT_DIR$/site/download.php" />
         <option value="$PROJECT_DIR$/site/tests.php" />
         <option value="$PROJECT_DIR$/site/about.php" />
@@ -116,8 +155,11 @@
         <option value="$USER_HOME$/Desktop/c 2/style.css" />
         <option value="$USER_HOME$/Desktop/c 2/index.html" />
         <option value="$USER_HOME$/Desktop/c 2/tests.html" />
-        <option value="$PROJECT_DIR$/lib/csscomb.php" />
+        <option value="$PROJECT_DIR$/site/about.html" />
+        <option value="$PROJECT_DIR$/site/index.html" />
         <option value="$PROJECT_DIR$/tests/resort.php" />
+        <option value="$PROJECT_DIR$/tests/index.php" />
+        <option value="$PROJECT_DIR$/lib/csscomb.php" />
       </list>
     </option>
   </component>
@@ -154,8 +196,8 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Favorites" />
       <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -185,20 +227,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="csscomb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="csscomb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -484,11 +512,6 @@
         <state line="50" column="98" selection-start="1693" selection-end="1693" vertical-scroll-proportion="0.8452536" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3316" column="51" selection-start="81687" selection-end="81687" vertical-scroll-proportion="0.35110533" />
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/c 2/tests.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="29" selection-start="1333" selection-end="1333" vertical-scroll-proportion="0.16514954" />
@@ -506,19 +529,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/site/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="36" column="35" selection-start="1125" selection-end="1134" vertical-scroll-proportion="-22.285715" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/csscomb.php">
+    <entry file="file://$PROJECT_DIR$/site/about.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="301" column="17" selection-start="8560" selection-end="8560" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="42" column="45" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.5240572" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/resort.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="51" selection-start="4370" selection-end="4370" vertical-scroll-proportion="0.8309493">
+        <state line="225" column="8" selection-start="4783" selection-end="4783" vertical-scroll-proportion="-24.857143">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="858" column="9" selection-start="15927" selection-end="15927" vertical-scroll-proportion="-29.809525">
+          <folding>
+            <marker date="1299943647000" expanded="true" signature="83409:83724" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="83416:83685" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="83479:83677" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="83492:83552" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="83575:83665" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="83692:83717" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="83768:84083" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="83775:84044" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="83838:84036" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="83851:83911" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="83934:84024" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="84051:84076" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84246:84767" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84253:84522" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84316:84514" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84329:84389" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="84412:84502" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="84529:84760" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84558:84752" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84569:84629" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="84650:84740" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="84811:85332" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84818:85087" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84881:85079" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="84894:84954" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="84977:85067" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="85094:85325" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="85123:85317" placeholder="..." />
+            <marker date="1299943647000" expanded="true" signature="85134:85194" placeholder="{...}" />
+            <marker date="1299943647000" expanded="true" signature="85215:85305" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/csscomb.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="585" column="68" selection-start="18046" selection-end="18046" vertical-scroll-proportion="0.3455696">
           <folding />
         </state>
       </provider>

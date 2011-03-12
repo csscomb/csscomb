@@ -784,7 +784,7 @@ $case['code'] = 'h1{
 	}';
 $case['result'] = 'h1{
 	padding: 7px;
-	/*border: 2px dashed #800000;*/
+	/* border: 2px dashed #800000; */
 	background: #faf0e6;
 	color: #a0522d;
 	}';
@@ -801,10 +801,62 @@ $case['code'] = 'h1 {
 	}';
 $case['result'] = 'h1 {
 	padding: 7px;
+	/* border: 2px dashed #800000; */
 	background: #faf0e6;
-	/*border: 2px dashed #800000;
-	color: #a0522d;*/
+	/* color: #a0522d; */
 	}';
+$testcases[] = $case;
+
+
+
+
+
+
+$case['descr'] = 'Комментарии. Комбинация многострочных и однострочных комментариев.';
+$case['code'] = 'div{
+    /* раз, два, три */
+    position:absolute;
+    left:1px;
+    /*
+    z-index:1;
+    margin-top:10px;
+    */
+    /* top:1px; */
+    padding:0;
+    /*font-size:12px;*/
+    }
+
+    .test1{
+        /*border-width: 1px 1px 1px 0;*/
+        /*border-color: #93875d #dfd199 #fff6d5;*/
+
+        color: #7a7254;
+
+        background: #F5E39E;
+        background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5E39E), color-stop(42%,#FFEFB2), color-stop(75%,#FFF3C8), color-stop(100%,#FFF5CF));
+        }';
+$case['result'] = 'div{
+    /* раз, два, три */
+    position:absolute;
+    /* top:1px; */
+    left:1px;
+    /* z-index:1; */
+    /* margin-top:10px; */
+    padding:0;
+    /* font-size:12px; */
+    }
+
+    .test1{
+        /* border-color: #93875d #dfd199 #fff6d5; */
+        /* border-width: 1px 1px 1px 0; */
+
+        background: #F5E39E;
+        background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5E39E), color-stop(42%,#FFEFB2), color-stop(75%,#FFF3C8), color-stop(100%,#FFF5CF));
+
+        color: #7a7254;
+        }';
 $testcases[] = $case;
 
 
@@ -862,15 +914,15 @@ $case['code'] = '.badges {
   padding: 10px;*/
 }';
 $case['result'] = '.badges {
-  /*margin: 0 10px 10px 10px;
-  padding: 10px;*/
+  /* margin: 0 10px 10px 10px; */
+  /* padding: 10px; */
 }';
 $testcases[] = $case;
 
 
 $case['descr'] = 'Комментарии. Все закоментировано и нет переноса строки';
 $case['code'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
-$case['result'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
+$case['result'] = '.badges {/* margin: 0 10px 10px 10px; *//* padding: 10px; */}';
 $testcases[] = $case;
 
 
@@ -3627,10 +3679,16 @@ foreach($testcases as $key=>$case){
     $key = $key+1;
     $result = $c->csscomb($case['code'], false, $case['order']);
 
-    if($result===$case['result']) $passed = 'green'; else {
+    if($result===$case['result']) {
+        $passed = 'green';
+    }
+    else {
         $passed = 'red';
 
-        if(strlen($result)!=strlen($case['result'])) $errors++; else {
+        if(strlen($result)!=strlen($case['result'])) {
+            $errors++;
+        }
+        else {
             $warnings++;
             $passed = '#dacd35';
         }

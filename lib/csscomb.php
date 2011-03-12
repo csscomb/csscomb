@@ -300,54 +300,74 @@ class csscomb{
 
 
         // 5. Комментарии
-        if(preg_match_all('#
+        if(preg_match_all('@
             (
             \s*
             /\*
             .*?[^\*/]
             \*/
             )
-            #ismx', $this->code['edited'], $test)){
+            @ismx', $this->code['edited'], $test)){
 
             // 1. Текстовый комментарий несодержащий свойств: всё, где нет ни :, ни ;, ни {|}, но есть какие-то буквы/цифры
             // Ничего не делаем.
 
             // 2. Одно свойство: есть : и ; но после ; ничего нет кроме \s.
             // заменяем на commented_border: 1ps solid red;
+
+            // 3. // Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
+            //$this->log('test', $test);
             if(preg_match_all('#
                 (\s*)
                 /\*
-                (.+?[^:])
-                :
-                (.+?[^;])
-                ;
-                \s*?
+                (.*?[^\*/])
                 \*/
                 #ismx', $this->code['edited'], $comments)){
 
-                $this->code['edited'] = preg_replace(
-                    '#
+                $new_comments = Array();
+                $old_comments = $comments[0];
+//                $this->log('old comments', $old_comments);
+//                $this->log('$comments', $comments);
+
+                foreach($comments[2] as $key=>$comment){
+                    if( // если комментарий содержит ; и :
+                        strpos($comment, ':') !== FALSE AND
+                        strpos($comment, ';') !== FALSE
+
+                    ){
+                        preg_match_all('#
                         (\s*)
-                        /\*
-                        (.*?[^:])
-                        :
-                        (.*?[^\*/])
-                        ;
-                        (\s*?)
-                        \*/
-                        #ismx',
-                    '$1commented_$2:$3;$4',
-                    $this->code['edited']
-                );
-                $this->log('2. Одно свойство: есть : и ; но после ; ничего нет кроме \s.', $comments);
-                $this->log('2. Одно свойство: есть : и ; но после ; ничего нет кроме \s.', $this->code['edited']);
+                        (
+                            .+?[^;]
+                            ;
+                        )
+                        #ismx', $comment, $properties);
+
+//                        $this->log('properties', $properties[2]);
+
+                        $new_comment = '';
+                        foreach($properties[2] as $property){
+                            $new_comment .= $comments[1][$key]."commented__".$property;
+                        }
+                        $new_comments[] = $new_comment;
+//                        $this->log('new co', $new_comment);
+                    }
+                    else{ // если нет : или ;, то считаем что это текстовый комментарий и копируем его в том виде, в каком он был.
+                        $new_comments[] = $comments[0][$key];
+                    }
+
+
+                }
+//                $this->log('new co', $new_comments);
+
+                foreach($old_comments as $key => $old_comment){
+                    $this->code['edited'] = str_replace($old_comments[$key], $new_comments[$key], $this->code['edited']);
+                }
+
+//                $this->log('$this->code[edited]', $this->code['edited']);
             }
 
-            // 3. Несколько свойств: повторяющийся паттерн *:*; \s*?
-            // приводим к виду пункта 3 и вперед.
-
             // 4. Текст и свойства вперемешку
-            // приводим к виду пункта 3 и вперед.
 
             // 5. Пустой комментарий: если сделать трим то ничего не останется
             // Ничего не делаем.
@@ -561,7 +581,11 @@ class csscomb{
 
                 foreach($this->sort_order as $pos=>$key){ // для каждой группы свойств
                     foreach($this->sort_order[$pos] as $p=>$k){ // для каждого свойства
-                        if(strpos(' '.trim($property),' '.$k.':')!==false){
+                        if(
+                            strpos(' '.trim($property),' '.$k.':')!==FALSE OR
+                            strpos(' '.trim($property),' commented__'.$k.':')!==FALSE
+
+                        ){
                             $through_number = $this->get_through_number($k); // определяем "сквозной" порядковый номер
                             if($through_number!==false) $index = $through_number;
                         }
@@ -571,7 +595,10 @@ class csscomb{
             }
             else{
                 foreach($this->sort_order as $pos=>$key){
-                    if(strpos(' '.trim($property), ' '.$key.':')!==false){
+                    if(
+                        strpos(' '.trim($property), ' '.$key.':')!==FALSE OR
+                        strpos(' '.trim($property), ' commented__'.$key.':')!==FALSE
+                    ){
                         $index = $pos;
                     }
                 }
@@ -643,6 +670,21 @@ class csscomb{
 		}
 
 //        $this->code['resorted'] = preg_replace('@(\s*/\*.*?[^\*\/]*/);+@ism',';$1', $this->code['resorted']); // возвращаем на место комментарии
+
+        // 4. Удаляем искусственно созданные 'commented__'
+        while(strpos($this->code['resorted'], 'commented__') !== FALSE){
+            $this->code['resorted'] = preg_replace(
+                '#
+                    commented__
+                    (.*?[^:]
+                    :
+                    .*?[^;]
+                    ;)
+                    #ismx',
+                '/* $1 */',
+                $this->code['resorted']
+            );
+        }
     }
 
 

@@ -207,7 +207,33 @@ $css = 'div{
     /* Объясняю как работает: раз-два-три и готово! */
     }';
 
-$c = new csscomb($css, true, $case['order']);
+
+$css = 'div{
+    /* раз, два, три */
+    position:absolute;
+    left:1px;
+    /*
+    z-index:1;
+    margin-top:10px;
+    */
+    /* top:1px; */
+    padding:0;
+    /*font-size:12px;*/
+    }
+
+    .test1{
+        /*border-width: 1px 1px 1px 0;*/
+        /*border-color: #93875d #dfd199 #fff6d5;*/
+
+        color: #7a7254;
+
+        background: #F5E39E;
+        background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5E39E), color-stop(42%,#FFEFB2), color-stop(75%,#FFF3C8), color-stop(100%,#FFF5CF));
+        }';
+
+//$c = new csscomb($css, true, $case['order']);
+$c = new csscomb($css, true);
 ?>
 </body>
 </html>
