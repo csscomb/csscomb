@@ -281,7 +281,10 @@ table + h2{
 			padding:0 0 10px;
 			}
 
-
+        .code-line-numbers div{
+            background:#f5f5f5;
+            padding-right:5px;
+            }
         .code-line-numbers span{
             display:block;
             padding-left:10px;
