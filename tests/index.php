@@ -997,12 +997,12 @@ $case['result'] = '/* test */
 
 	BODY {
 		left:0;
-		font-family: Times, \'Times New Roman\', serif /* Шрифт с засечками */;
+		font-family: Times, \'Times New Roman\', serif; /* Шрифт с засечками */
 	}
 
 	H1, H2, P {
 		top:0;
-		color: #000 /* Черный цвет текста */;
+		color: #000; /* Черный цвет текста */
 	}
 }
 
@@ -1010,12 +1010,12 @@ $case['result'] = '/* test */
 
 	BODY {
 		top:0;
-		font-family: Times, \'Times New Roman\', serif /* Шрифт с засечками */;
+		font-family: Times, \'Times New Roman\', serif; /* Шрифт с засечками */
 	}
 
 	H1, H2, P {
 		left:0;
-		color: #000 /* Черный цвет текста */;
+		color: #000; /* Черный цвет текста */
 	}
 
 }
