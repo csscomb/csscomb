@@ -1,0 +1,430 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+p,
+ul,
+ol,
+dl,
+table,
+h2,
+h3,
+h4,
+h5,
+h6{
+    margin-bottom:1em;
+    }
+
+
+a,
+.pseudo-link{
+	color:green;
+	}
+a:hover,
+.pseudo-link:hover{
+	color:#00b800;
+	cursor:pointer;
+	cursor:hand;
+	}
+
+
+abbr{
+	border-bottom:1px dotted silver;
+	cursor:help;
+	}
+
+
+body{
+    padding:10px;
+    background:#ccc;
+    color:#594A42;
+    font:14px/1.333 Arial,sans-serif;
+    }
+
+    .page-wrap{
+        max-width:960px;
+        margin: 0 auto;
+        }
+        .page{
+            clear:both;
+            padding:10px;
+            background:#fff;
+			border-bottom-left-radius:6px;
+			border-bottom-right-radius:6px;
+            }
+			.page p,
+			.page ul,
+			.page ol{
+				margin-left:30px;
+				}
+			.page ul{
+				list-style:disc;
+				}
+			.page ol{
+				list-style:decimal;
+				}
+            .page-header{
+                float:left;
+                width:100%;
+				margin-bottom:10px;
+				}
+
+.clear{
+    clear:both;
+    }
+
+.nowrap{
+    white-space:nowrap;
+    }
+
+.logo{
+    float:left;
+	margin-left:10px;
+	margin-top:12px;
+	font-size:1.2em;
+	font-weight:bold;
+    }
+	.logo a,
+	.logo b{
+		/*color:#594A42;*/
+		color:#666;
+		text-decoration:none;
+		text-shadow:0 1px 1px #fff;
+		}
+nav{
+    float:right;
+    }
+    nav ul li{
+        float:left;
+        margin-left:20px;
+        }
+        nav ul li a,
+        nav ul li b{
+            display:block;
+			margin:4px 0;
+            padding:6px 10px;
+			border-radius:4px;
+            color:#666;
+			text-shadow:0 1px 1px #eee;
+            }
+		nav ul li b{
+			/*color: #a1612a;*/
+			background:#c57733;
+			background:-moz-linear-gradient(0% 100% 90deg, #c57733, #a1612a);
+			background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#c57733), to(#a1612a));
+			/*background:rgba(197,119,51,.9);*/
+			text-decoration:none;
+			color:#eee;
+			text-shadow:0 1px 1px #666;
+			}
+		nav ul li a:hover{
+			color:#000;
+			}
+
+
+
+/*.about{*/
+    /*width:50%;*/
+    /*float:left;*/
+    /*}*/
+
+hgroup{
+    clear:both;
+    font: 2em Arial,sans-serif;
+    margin-top:10px;
+    padding:10px;
+	border-bottom:1px solid #e9e9e9;
+    background:rgba(255,255,255,.75);
+	color:#594A42;
+	text-shadow:0 1px 1px #fff;
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+    }
+	hgroup h1{
+		float:left;
+		}
+	hgroup p{
+		float:right;
+		margin:8px 0 8px;
+		font-size:13px;
+		font-weight:normal;
+		color:#777;
+		}
+		hgroup p span{
+			border-bottom:1px dotted;
+			}
+
+h2{
+    clear:both;
+    font:bold 1em Arial, sans-serif;
+    margin-bottom:.75em;
+    }
+
+p + h2,
+ul + h2,
+ol + h2,
+dl + h2,
+table + h2{
+    margin-top:2em;
+    }
+
+.about ul li{
+    display:block;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+    }
+
+
+		.code{
+            width:100%;
+            float:left;
+            height:350px;
+            overflow:auto;
+            border:1px solid silver;
+            }
+            .code table{
+                margin-bottom:0;
+                width:100%;
+				height: 100%;
+                }
+				.code table td{
+					vertical-align:top;
+					height:100%;
+					}
+				.code textarea{
+					width:100%;
+					height:100%;
+					border:0;
+					/*overflow:hidden;*/
+					resize:none;
+					}
+
+            .h-code-original,
+            .h-code-resorted{
+                width:50%;
+                padding-left:10px;
+                }
+
+
+        .code-actions,
+        .code-view-mode{
+            clear:both;
+            padding:0 0 10px;
+            }
+            .code-actions a,
+            .code-view-mode a{
+                    text-decoration:none;
+                    border-bottom:1px dotted;
+                    }
+
+        .code-actions{
+            padding-top:10px;
+            }
+
+		.code-view-mode{
+			float:left;
+			}
+        	.code-view-mode a{
+	            margin-right:20px;
+    	        }
+			.code-view-mode a.selected{
+				border-bottom:none;
+				color:silver;
+				cursor:default;
+				}
+
+		.settings-link{
+			float:right;
+			padding:0 0 10px;
+			}
+
+        .code-line-numbers div{
+            background:#f5f5f5;
+            padding-right:5px;
+            }
+        .code-line-numbers span{
+            display:block;
+            padding-left:10px;
+            text-align:right;
+            font:12px/20px Consolas, monospace;
+            color:#B3A9A7;
+            }
+
+
+        /* Code Block */
+		pre{
+			clear:both;
+            padding:0 3px;
+			}
+        PRE,
+		textarea {
+            color:#533D3A;
+            white-space:normal;
+            }
+		textarea{
+			padding:0;
+			outline:0;
+			}
+            PRE CODE {
+                padding:0;
+                display:block;
+                white-space:pre-wrap;
+                }
+
+		#resort-button{
+			margin-right:20px;
+			font-weight:bold;
+			}
+		#copy-result-button[disabled]{
+			color:silver!important;
+			border:0;
+			cursor:default;
+			}
+
+pre,
+code,
+textarea{
+	font:12px/20px Consolas, monospace;
+	}
+
+
+
+.page-footer{
+	padding:5px 10px 80px;
+    color:#777;
+	font-size:.8em;
+    }
+			.page-footer,
+			.page-footer a{
+				color:gray;
+				}
+			.page-footer a,
+			.page-footer span{
+				display:inline-block;
+				margin-right:10px;
+				padding:10px 5px;
+				}
+			.page-footer span{
+				padding-left:0;
+				}
+			.page-footer a:hover{
+				color:green;
+				}
+		#bug-report:hover{
+			color:red;
+		}
+
+
+.button{
+	background: #eee;
+	background: -moz-linear-gradient(0% 100% 90deg, #ccc, #eee);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ccc));
+	border: 1px solid #ccc;
+	border-bottom: 1px solid #bbb;
+
+	-moz-border-radius:50px;
+	-webkit-border-radius:50px;
+	border-radius:50px;
+
+	color: #594A42;
+	line-height:1;
+	padding:8px 25px;
+	text-align: center;
+	text-shadow: 0 1px 0 #fff;
+	font-weight:bold;
+	/*width:135px;*/
+	text-transform:uppercase;
+    }
+
+.button:hover{
+	background: #ddd;
+	background: -moz-linear-gradient(0% 100% 90deg, #bbb, #ddd);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#bbb));
+	border: 1px solid #bbb;
+	border-bottom: 1px solid #999;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #ddd;
+    }
+
+.button:active{
+	border: 1px solid #aaa;
+	border-bottom: 1px solid #888;
+	-moz-box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
+	-webkit-box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
+	box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
+    }
+
+.code-actions .disabled,
+.code-actions .disabled:hover,
+.code-actions .disabled:active{
+    background:#eee;
+    background: -moz-linear-gradient(0% 100% 90deg, #ccc, #eee);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ccc));
+    color:#999;
+    border: 1px solid #ccc;
+	border-bottom: 1px solid #bbb;
+    cursor:default;
+    text-shadow: 0 1px 0 #fff;
+    }
+
+
+
+.index .page ul li{
+	margin:1em 0;
+	}
+
+.index .page .about-block strong{
+	display:block;
+	}
+.index .page .about-block span{
+	display:block;
+	font-size:.85em;
+	color:#999;
+	margin-top:2px;
+	}
