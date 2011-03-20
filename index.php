@@ -1,7 +1,7 @@
 <?
 $index = true;
 $title['en'] = $h1['en'] = 'Greatest tools bundle for sorting <span class="nowrap">CSS properties</span> in specific order';
-$title['ru'] = $h1['ru'] = 'CSScomb — утилита для сортировки CSS-свойств в нужном порядке';
+$title['ru'] = $h1['ru'] = 'Инструмент для сортировки CSS-свойств в нужном порядке';
 
 
 require_once'common/header.php';
