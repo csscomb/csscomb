@@ -1,6 +1,6 @@
 <?
 $index = true;
-$title['en'] = $h1['en'] = 'Greatest tools bundle for sorting <span class="nowrap">CSS properties</span> in specific order';
+$title['en'] = $h1['en'] = 'Greatest tools bundle for sorting CSS properties in specific order';
 $title['ru'] = $h1['ru'] = 'Инструмент для сортировки CSS-свойств в нужном порядке';
 
 
@@ -14,10 +14,10 @@ require_once'common/header.php';
                     <h2><?=$loc['versions']?></h2>
 					<ul>
 						<li><a href="/online/">CSScomb Online</a></li>
-						<li><a href="">CSScomb for Textmate</a></li>
-						<li><a href="">CSScomb for Coda</a></li>
-						<li><a href="">CSScomb for IntelliJ IDEA or WebStorm</a></li>
-                        <li>Помоги CSScomb, подружи его с другими редакторами кода.</li>
+						<li><a href="">CSScomb <?=$loc['for']?> Textmate</a></li>
+						<li><a href="">CSScomb <?=$loc['for']?> Coda</a></li>
+						<li><a href="">CSScomb <?=$loc['for']?> IntelliJ IDEA/WebStorm</a></li>
+                        <li><?=$loc['help-us']?></li>
 					</ul>
                 </td>
                 <td style="width:30px;border-left:2px dotted #e5e5e5;">&nbsp;</td>
@@ -25,32 +25,32 @@ require_once'common/header.php';
 					<h2><?=$loc['feature']?></h2>
 					<ul class="about-block">
 						<li>
-							<strong>Cортировка CSS-свойств</strong>
-							<span>Порядок свойств в помощь профессионалу</span>
-						</li>
-						<li>
-							<strong>Настройки порядка CSS-свойств</strong>
-							<span>Используйте тот порядок, к которому вы привыкли</span>
+							<strong><?=$loc['index1']?></strong>
+							<span><?=$loc['index11']?></span>
 						</li>
                         <li>
-							<strong>Парсинг CSS в тегах <code>&lt;style></code>, аттрибутах <code>style="..."</code></strong>
-							<span>CSScomb найдет CSS-код среди других языков и отсортирует его</span>
+							<strong><?=$loc['index2']?></strong>
+							<span><?=$loc['index22']?></span>
 						</li>
                         <li>
-							<strong>Форматирование таблицы стилей сохраняется</strong>
-							<span>Работайте как с однострочным так и многострочным CSS</span>
+							<strong><?=$loc['index3']?></strong>
+							<span><?=$loc['index33']?></span>
 						</li>
-						<li>
-							<strong>Разделение CSS-свойств на группы</strong>
-							<span>Разделяйте группы пустой строкой, если хотите</span>
+                        <li>
+							<strong><?=$loc['index4']?></strong>
+							<span><?=$loc['index44']?></span>
 						</li>
-						<li>
-							<strong>Полная поддержка CSS2/CSS2.1/CSS3</strong>
-							<span>CSScomb готов к самому продвинутому CSS-коду</span>
+                        <li>
+							<strong><?=$loc['index5']?></strong>
+							<span><?=$loc['index55']?></span>
 						</li>
-						<li>
-							<strong>Базовая поддержка <abbr title="The dynamic stylesheet language http://lesscss.org/">LESS</abbr>/<abbr title="Syntactically Awesome Stylesheets http://sass-lang.com/">SASS</abbr></strong>
-							<span>Вложенные блоки, вычисления, переменные и т.д.</span>
+                        <li>
+							<strong><?=$loc['index6']?></strong>
+							<span><?=$loc['index66']?></span>
+						</li>
+                        <li>
+							<strong><?=$loc['index7']?></strong>
+							<span><?=$loc['index77']?></span>
 						</li>
 					</ul>
 				</td>

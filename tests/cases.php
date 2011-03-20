@@ -182,6 +182,7 @@ $case_groups = $group =  Array();
 
 $group['group-id'] = 'formatting';
 $group['group-name'] = 'Форматирование';
+$group['group-name-en'] = 'Formatting';
 
 
 $case['descr'] = 'Фигурные скобки. Вариант 1';
@@ -340,6 +341,7 @@ $group = Array();
 
 $group['group-id'] = 'properties';
 $group['group-name'] = 'Свойства';
+$group['group-name-en'] = 'Properties';
 
 
 $case['descr'] = 'Отсутствие свойств: пустые каркасы. Вариант 1';
@@ -572,6 +574,7 @@ $group = Array();
 
 $group['group-id'] = 'comments';
 $group['group-name'] = 'Комментарии';
+$group['group-name-en'] = 'Comments';
 
 
 
@@ -1016,6 +1019,7 @@ $group = Array();
 
 $group['group-id'] = 'selectors';
 $group['group-name'] = 'Селекторы';
+$group['group-name-en'] = 'Selectors';
 
 
 $case['descr'] = 'CSS3-селекторы';
@@ -1063,6 +1067,7 @@ $group = Array();
 
 $group['group-id'] = 'at-rules';
 $group['group-name'] = 'Правила начинающиеся с @';
+$group['group-name-en'] = 'Rules beginning with @';
 
 
 $case['descr'] = '@media';
@@ -1261,6 +1266,7 @@ $group = Array();
 
 $group['group-id'] = 'key-symbols';
 $group['group-name'] = 'Ключевые символы';
+$group['group-name-en'] = 'Key symbols';
 
 
 $case['descr'] = 'Точка с запятой в data uri';
@@ -1312,6 +1318,7 @@ $group = Array();
 
 $group['group-id'] = 'less';
 $group['group-name'] = 'LESS';
+$group['group-name-en'] = 'LESS';
 
 
 
@@ -1596,6 +1603,7 @@ $group = Array();
 
 $group['group-id'] = 'sass';
 $group['group-name'] = 'SASS';
+$group['group-name-en'] = 'SASS';
 
 
 
@@ -1891,6 +1899,7 @@ $group = Array();
 
 $group['group-id'] = 'real-files';
 $group['group-name'] = 'Примеры файлов';
+$group['group-name-en'] = 'Real files';
 
 
 
@@ -3565,6 +3574,7 @@ $group = Array();
 
 $group['group-id'] = 'envirement';
 $group['group-name'] = 'Окружение';
+$group['group-name-en'] = 'Envirement';
 
 
 
@@ -3742,6 +3752,7 @@ $group = Array();
 
 $group['group-id'] = 'sort-order';
 $group['group-name'] = 'Порядок сортировки';
+$group['group-name-en'] = 'Sort order';
 
 
 

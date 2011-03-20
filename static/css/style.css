@@ -1,6 +1,6 @@
 /* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
+    v2.0 | 20110126
+    License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
@@ -305,7 +305,7 @@ table + h2{
         PRE,
 		textarea {
             color:#533D3A;
-            white-space:normal;
+            /*white-space:normal;*/ /* bug of formatting */
             }
 		textarea{
 			padding:0;
@@ -340,22 +340,22 @@ textarea{
     color:#777;
 	font-size:.8em;
     }
-			.page-footer,
-			.page-footer a{
-				color:gray;
-				}
-			.page-footer a,
-			.page-footer span{
-				display:inline-block;
-				margin-right:10px;
-				padding:10px 5px;
-				}
-			.page-footer span{
-				padding-left:0;
-				}
-			.page-footer a:hover{
-				color:green;
-				}
+    .page-footer,
+    .page-footer a{
+        color:gray;
+        }
+    .page-footer a,
+    .page-footer span{
+        display:inline-block;
+        margin-right:10px;
+        padding:10px 5px;
+        }
+    .page-footer span{
+        padding-left:0;
+        }
+    .page-footer a:hover{
+        color:green;
+        }
 		#bug-report:hover{
 			color:red;
 		}
