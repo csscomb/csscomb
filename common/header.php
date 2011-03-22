@@ -8,6 +8,8 @@ require_once 'lang.php';
     <title><?=$title[$lang]?$title[$lang]:'CSScomb'?></title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
     <script type="text/javascript" src="/static/js/jquery-1.5.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.shortcuts.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.textarea.js"></script>
     <link type="text/css" rel="stylesheet" href="../static/css/tests.css">
 	<link rel="stylesheet" title="Default" href="../static/highlight/styles/default.css">
 </head>

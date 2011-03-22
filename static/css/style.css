@@ -326,6 +326,10 @@ table + h2{
 			border:0;
 			cursor:default;
 			}
+        kbd{
+            font-size:10px;
+            padding-right:40px;
+            }
 
 pre,
 code,

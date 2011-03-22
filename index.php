@@ -6,11 +6,11 @@ $title['ru'] = $h1['ru'] = 'Инструмент для сортировки CSS
 
 require_once'common/header.php';
 ?>
-        <div style="width:445px;margin:50px auto;"><img src="static/i/csscomb.png" alt="CSScomb"></div>
+        <div style="width:445px;margin:50px auto;"><img width="445" height="453" src="static/i/csscomb.png" alt="CSScomb"></div>
 
 		<table style="width:100%;margin:5px 0 40px;">
 			<tr>
-                <td style="width:50%">
+                <td style="width:50%;padding-left:10px;">
                     <h2><?=$loc['versions']?></h2>
 					<ul>
 						<li><a href="/online/">CSScomb Online</a></li>

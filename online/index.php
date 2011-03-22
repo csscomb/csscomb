@@ -25,7 +25,7 @@ require_once'../common/header.php';
 			</table>
 		</div>
 		<div class="code-actions">
-			<button id="resort-button" class="button"><?=$loc['resort']?></button>
+			<button id="resort-button" class="button"><?=$loc['resort']?></button> <kbd>Ctrl + Enter</kbd>
 			<a id="copy-result-button" class="pseudo-link" href=""><?=$loc['copy-result-code']?></a>
 		</div>
 		<div class="clear"></div>

@@ -44,7 +44,7 @@ function drawLineNumbers(length, target){
 function drawDiff(){
     var ln = document.getElementsByClassName('code-line-numbers');
     for(var i = 0; i < ln.length; i++){
-        drawLineNumbers(app.countLines(codeOriginal), ln[i]);
+        drawLineNumbers(app.countLines(codeResorted), ln[i]);
     }
 
     var code = document.createElement("code");
@@ -134,6 +134,12 @@ $('#mode-edit').addClass('selected');
 
 $('#resort-button').click(function(){
 
+    doResort();
+
+});
+
+
+function doResort(){
     var code = $('#textarea').val();
 
     $.post("/gate/gate.php", {code:code},
@@ -147,6 +153,55 @@ $('#resort-button').click(function(){
                 clear();
                 drawDiff();
             }
-        }, "text");
+        }, "text"
+    );
+}
 
+
+/**
+ * s settings
+ * ctrl+enter / r
+ * c copy
+ * d diff
+ * e edit
+ * l clear
+ * u url
+ * f file
+ * b bug report
+ *
+ */
+
+$.Shortcuts.add({
+    type: 'down',
+    mask: 'Ctrl+R,Ctrl+Enter',
+    enableInInput: true,
+    handler: function(){
+        doResort();
+    }
+});
+
+$.Shortcuts.add({
+    type: 'down',
+    mask: 'Ctrl+E',
+    enableInInput: true,
+    handler: function(){
+        drawEdit();
+    }
+});
+
+$.Shortcuts.add({
+    type: 'down',
+    mask: 'Ctrl+D',
+    enableInInput: true,
+    handler: function(){
+        drawDiff();
+    }
+});
+
+$.Shortcuts.start();
+
+
+
+jQuery(document).ready(function(){
+     $("textarea").tabby();
 });
