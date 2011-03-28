@@ -2264,6 +2264,38 @@ ul.legend li div.example {
                 background-position:-480px 0;
             }';
 
+
+
+
+$css = '/* test comment 1 */
+.one{
+    padding:0;
+    margin:0;
+    }
+
+/* test comment 2 */ /**/
+.two{
+    padding:0;
+    margin:0;
+    }
+
+div{
+    left:10px;
+    top:10px;
+    }
+
+/* test comment 3 */
+.one{
+    padding:0;
+    margin:0;
+    }
+
+/* test comment 4 */ /**/
+.two{
+    padding:0;
+    margin:0;
+    }';
+
 //$c = new csscomb($css, true, $case['order']);
 $c = new csscomb($css, true);
 ?>

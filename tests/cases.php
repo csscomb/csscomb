@@ -665,6 +665,70 @@ $group['cases'][] = $case;
 
 
 
+$case['descr'] = 'Вне селектора. /* comment */ /**/';
+$case['descr-en'] = 'Comments: /* comment */ /**/';
+$case['link'] = 'comments-double';
+$case['code'] = '/* test comment 1 */
+.one{
+    padding:0;
+    margin:0;
+    }
+
+/* test comment 2 */ /**/
+.two{
+    padding:0;
+    margin:0;
+    }
+
+div{
+    left:10px;
+    top:10px;
+    }
+
+/* test comment 3 */
+.one{
+    padding:0;
+    margin:0;
+    }
+
+/* test comment 4 */ /**/
+.two{
+    padding:0;
+    margin:0;
+    }';
+
+$case['result'] = '/* test comment 1 */
+.one{
+    margin:0;
+    padding:0;
+    }
+
+/* test comment 2 */ /**/
+.two{
+    margin:0;
+    padding:0;
+    }
+
+div{
+    top:10px;
+    left:10px;
+    }
+
+/* test comment 3 */
+.one{
+    margin:0;
+    padding:0;
+    }
+
+/* test comment 4 */ /**/
+.two{
+    margin:0;
+    padding:0;
+    }';
+$group['cases'][] = $case;
+
+
+
 
 
 $case['descr'] = 'Вне селектора + вне медиа';
