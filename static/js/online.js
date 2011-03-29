@@ -198,14 +198,6 @@ $.Shortcuts.add({
     }
 });
 
-$.Shortcuts.start();
-
-jQuery(document).ready(function(){
-     $('#textarea').tabby();
-});
-
-
-
 $.Shortcuts.add({
     type: 'down',
     mask: 'Ctrl+S',
@@ -215,9 +207,30 @@ $.Shortcuts.add({
     }
 });
 
+$.Shortcuts.add({
+    type: 'down',
+    mask: 'Esc',
+    enableInInput: true,
+    handler: function(){
+        if($('.settings-bar').css('right') != '-400px'){ toggleSettingsBar(); }
+        if($('#shortcutsSheet').css('display') == 'block') $('#shortcutsSheet').hide();
+    }
+});
+
+$.Shortcuts.start();
+
+jQuery(document).ready(function(){
+     $('#textarea').tabby();
+});
+
+
+
+
+
 $('.settings-link a, .settings-bar .hide').click(function(){toggleSettingsBar();});
 $('#textarea').focus(function(){
     if($('.settings-bar').css('right') != '-400px'){ toggleSettingsBar(); }
+//    if($('#shortcutsSheet').css('display') == 'block') $('#shortcutsSheet').hide();
 });
 
 function toggleSettingsBar(){
@@ -233,6 +246,10 @@ function toggleSettingsBar(){
 $('.settings-link a').hover(function(){
     $('.settings-bar').toggleClass('settings-bar__hovered');
 });
-$('.settings-link a').onmouseout(function(){
-    $('.settings-bar').toggleClass('settings-bar__hovered');
+
+
+jQuery(document).ready(function(){
+    $('#toggleShortcutsSheet').click(function(){
+        $('#shortcutsSheet').css('display','block');
+    });
 });

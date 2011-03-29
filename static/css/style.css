@@ -354,6 +354,9 @@ textarea{
         margin-right:10px;
         padding:10px 5px;
         }
+    .page-footer a{
+        text-decoration:underline;
+        }
     .page-footer span{
         padding-left:0;
         }
@@ -486,6 +489,9 @@ textarea{
     .settings-bar .hide:hover{
         color:green;
         }
+        .settings-bar .hide kbd{
+            margin-left: 10px;
+            }
 
     .settings-bar .preset{
         border-bottom:1px dotted;
@@ -496,9 +502,86 @@ textarea{
             color:green;
             }
 
+
 .brace{
     display: none;
     color:#ddd;
     padding-right:5px;
     font:24px Consolas, monospace;
     }
+
+
+
+.popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    margin-left:-200px;
+    margin-top:-200px;
+    width:360px;
+    /*height:380px;*/
+    /*border:1px solid silver;*/
+
+    -webkit-border-radius:6px;
+    -khtml-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
+    /*background:#fff;*/
+    /*padding:10px 20px;*/
+    }
+    .popup-header{
+        position:relative;
+        top:1px;
+        padding:12px 10px 10px;
+        background:rgba(0,0,0,.5);
+        color:#594A42;
+        text-shadow:0 1px 1px #fff;
+        border-top-left-radius:6px;
+        border-top-right-radius:6px;
+
+        color:#eee;
+        text-shadow:0 0 0 #000;
+        }
+        .popup-title{
+            font:bold 18px/1 Arial, sans-serif;
+            margin:0;
+            /*float:left;*/
+            }
+        .popup-close{
+            font-size:10px;
+            position:absolute;
+            right:-29px;
+            top:17px;
+            /*float:right;*/
+            }
+    .popup-content{
+        position:relative;
+        z-index:20;
+        clear:both;
+        padding:10px;
+        background:#fff;
+        border-bottom-left-radius:6px;
+        border-bottom-right-radius:6px;
+        border:1px solid #ccc;
+        }
+    .popup-header,
+    .popup-content{
+        -webkit-box-shadow:0 2px 5px 0 #d5d5d5;
+        -moz-box-shadow:0 2px 5px 0 #d5d5d5;
+	    box-shadow:0 2px 5px 0 #d5d5d5;
+        }
+
+
+#shortcutsSheet{
+    display:none;
+    }
+    #shortcutsSheet table{
+        width:100%;
+        }
+        #shortcutsSheet th{
+            width:50%;
+            text-align:left;
+            padding-right:20px;
+            padding-bottom:5px;
+            font-size:.8em;
+            }

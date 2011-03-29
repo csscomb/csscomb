@@ -30,7 +30,7 @@ require_once'../common/header.php';
 		</div>
 		<div class="clear"></div>
         <div class="settings-bar">
-            <span class="hide"><i>&rarr;</i> <span>Скрыть</span></span>
+            <span class="hide"><i>&rarr;</i> <span>Скрыть</span> <kbd>Esc</kbd></span>
             <h2>Настройки порядка сортировки</h2>
             <p>
                 <span>Пресеты сортировок:</span>
@@ -195,6 +195,36 @@ page-break-inside
 page-break-after
 orphans
 widows</textarea>
+        </div>
+        <div class="popup" id="shortcutsSheet">
+            <hgroup class="popup-header">
+                <span class="popup-close">Закрыть <kbd>(Esc)</kbd></span>
+                <h2 class="popup-title">Сочетания клавиш</h2>
+            </hgroup>
+            <div class="popup-content">
+                <table>
+                <tr>
+                    <th>Сортировать</th>
+                    <td><kbd>Ctrl+R, Ctrl + Enter</kbd></td>
+                </tr>
+                <tr>
+                    <th>Режим редактирования</th>
+                    <td><kbd>Ctrl + E</kbd></td>
+                </tr>
+                <tr>
+                    <th>Режим сравнения</th>
+                    <td><kbd>Ctrl + D</kbd></td>
+                </tr>
+                <tr>
+                    <th>Показать/скрыть настройки</th>
+                    <td><kbd>Ctrl + S</kbd></td>
+                </tr>
+                <tr>
+                    <th>Закрыть настройки/попап</th>
+                    <td><kbd>Esc</kbd></td>
+                </tr>
+                </table>
+            </div>
         </div>
         <script type="text/javascript" src="../static/js/online.js"></script>
         <script type="text/javascript" src="../static/highlight/highlight.pack.js"></script>
