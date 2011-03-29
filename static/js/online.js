@@ -200,8 +200,39 @@ $.Shortcuts.add({
 
 $.Shortcuts.start();
 
-
-
 jQuery(document).ready(function(){
-     $("textarea").tabby();
+     $('#textarea').tabby();
+});
+
+
+
+$.Shortcuts.add({
+    type: 'down',
+    mask: 'Ctrl+S',
+    enableInInput: true,
+    handler: function(){
+        toggleSettingsBar();
+    }
+});
+
+$('.settings-link a, .settings-bar .hide').click(function(){toggleSettingsBar();});
+$('#textarea').focus(function(){
+    if($('.settings-bar').css('right') != '-400px'){ toggleSettingsBar(); }
+});
+
+function toggleSettingsBar(){
+    var bar = $('.settings-bar');
+    if(bar.css('right') == '0px'){
+        bar.animate({right:'-400px'}, 300);
+    }
+    else{
+        bar.animate({right:'0px'}, 300);
+    }
+}
+
+$('.settings-link a').hover(function(){
+    $('.settings-bar').toggleClass('settings-bar__hovered');
+});
+$('.settings-link a').onmouseout(function(){
+    $('.settings-bar').toggleClass('settings-bar__hovered');
 });

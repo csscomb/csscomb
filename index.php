@@ -11,7 +11,7 @@ require_once'common/header.php';
 		<table style="width:100%;margin:5px 0 40px;">
 			<tr>
                 <td style="width:50%;padding-left:10px;">
-                    <h2><?=$loc['versions']?></h2>
+                    <h2><span class="brace">#</span><?=$loc['versions']?> <span class="brace">{</span></h2>
 					<ul>
 						<li><a href="/online/">CSScomb Online</a></li>
 						<li><a href="">CSScomb <?=$loc['for']?> Textmate</a></li>
@@ -19,10 +19,11 @@ require_once'common/header.php';
 						<li><a href="">CSScomb <?=$loc['for']?> IntelliJ IDEA/WebStorm</a></li>
                         <li><?=$loc['help-us']?></li>
 					</ul>
+                    <span class="brace brace-close">}</span>
                 </td>
                 <td style="width:30px;border-left:2px dotted #e5e5e5;">&nbsp;</td>
                 <td style="vertical-align:top;">
-					<h2><?=$loc['feature']?></h2>
+					<h2><span class="brace">#</span><?=$loc['feature']?> <span class="brace">{</span></h2>
 					<ul class="about-block">
 						<li>
 							<strong><?=$loc['index1']?></strong>
@@ -53,6 +54,7 @@ require_once'common/header.php';
 							<span><?=$loc['index77']?></span>
 						</li>
 					</ul>
+                    <span class="brace brace-close">}</span>
 				</td>
 			</tr>
 		</table>
@@ -60,7 +62,7 @@ require_once'common/header.php';
 		<table style="width:100%;margin-bottom:10px;">
 			<tr>
 				<td style="width:31%;vertical-align:top;padding-right:10px;padding-left:10px;">
-					<h2><?=$loc['updates']?></h2>
+					<h2><span class="brace">#</span><?=$loc['updates']?> <span class="brace">{</span></h2>
 					<ul>
 						<li>
 							<time style="display:block;">28 feb</time>
@@ -75,9 +77,10 @@ require_once'common/header.php';
 							<span>Add some bla-bla-bla</span>
 						</li>
 					</ul>
+                    <span class="brace brace-close">}</span>
 				</td>
-                <td style="width:35%;vertical-align:top;border-left:2px dotted #e5e5e5;padding-left:20px;padding-right:20px;">
-					<h2><?=$loc['review']?></h2>
+                <td style="width:35%;vertical-align:top;xborder-left:2px dotted #e5e5e5;padding-left:20px;padding-right:20px;">
+					<h2><span class="brace">#</span><?=$loc['review']?> <span class="brace">{</span></h2>
 					<table style="width:100%;">
 						<tr>
 							<td style="vertical-align:middle;width:32px;">
@@ -93,10 +96,12 @@ require_once'common/header.php';
 							</td>
 						</tr>
 					</table>
+                    <span class="brace brace-close">}</span>
 				</td>
-                <td style="width:33%;vertical-align:top;border-left:2px dotted #e5e5e5;padding-left:20px;padding-right:10px;">
-                    <h2><?=$loc['presentation']?></h2>
+                <td style="width:33%;vertical-align:top;xborder-left:2px dotted #e5e5e5;padding-left:20px;padding-right:10px;">
+                    <h2><span class="brace">#</span><?=$loc['presentation']?> <span class="brace">{</span></h2>
                     <iframe src="http://player.vimeo.com/video/17494685?title=0&amp;portrait=0" width="310" height="174" frameborder="0"></iframe>
+                    <span class="brace brace-close">}</span>
                 </td>
 			</tr>
 		</table>

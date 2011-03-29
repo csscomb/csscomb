@@ -1,7 +1,7 @@
 <?
 $title['en'] = $h1['en'] = 'Tests';
 $title['ru'] = $h1['ru'] = 'Тесты';
-
+$module = 'tests';
 require_once'../common/header.php';
 
         require_once 'cases.php';

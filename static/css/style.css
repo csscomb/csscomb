@@ -214,7 +214,7 @@ table + h2{
     margin-top:2em;
     }
 
-.about ul li{
+.index .about ul li{
     display:block;
     padding:10px 0;
     border-bottom:1px solid #eee;
@@ -305,7 +305,7 @@ table + h2{
         PRE,
 		textarea {
             color:#533D3A;
-            /*white-space:normal;*/ /* bug of formatting */
+            white-space:pre-wrap; /* bug of formatting: do not set in normal! */
             }
 		textarea{
 			padding:0;
@@ -432,3 +432,73 @@ textarea{
 	color:#999;
 	margin-top:2px;
 	}
+
+
+
+.online .page-wrap{
+    max-width:1600px;
+    }
+.settings-bar{
+    position:fixed;
+    background:#fff;
+    top:0;
+    bottom:0;
+    right:-400px;
+    margin-left:0;
+    width:380px;
+    padding:10px;
+
+    -moz-box-shadow:0 0 5px 2px #aaa;
+	-webkit-box-shadow:0 0 5px 2px #aaa;
+	box-shadow:0 0 5px 2px #aaa;
+
+    -webkit-transition: right 0.2s linear;
+    -moz-transition: right 0.2s linear;
+    -o-transition: right 0.2s linear;
+    transition: right 0.2s linear;
+    }
+    .settings-bar__hovered{
+        right:-390px;
+        }
+    .settings-bar p{
+        margin-left:0;
+        font-size:.8em;
+        }
+    .settings-bar button{
+        margin-bottom:10px;
+        }
+    .settings-bar textarea{
+        width:98%;
+        height:600px;
+        padding:0 3px;
+        resize:vertical;
+        }
+    .settings-bar .hide,
+    .settings-bar .hide:hover{
+        display:block;
+        cursor:pointer;
+        margin-bottom:10px;
+        }
+    .settings-bar .hide span{
+        color:green;
+        border-bottom:1px solid;
+        }
+    .settings-bar .hide:hover{
+        color:green;
+        }
+
+    .settings-bar .preset{
+        border-bottom:1px dotted;
+        margin-left:10px;
+        }
+        .settings-bar .preset:hover{
+            cursor:pointer;
+            color:green;
+            }
+
+.brace{
+    display: none;
+    color:#ddd;
+    padding-right:5px;
+    font:24px Consolas, monospace;
+    }

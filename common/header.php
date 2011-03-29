@@ -13,7 +13,7 @@ require_once 'lang.php';
     <link type="text/css" rel="stylesheet" href="../static/css/tests.css">
 	<link rel="stylesheet" title="Default" href="../static/highlight/styles/default.css">
 </head>
-<body class="<?=$index?'index':''?>">
+<body class="<?=$index?'index':$module?>">
 <div class="page-wrap">
 	<header class="page-header">
 		<div class="logo"><?=$index?'<b>CSScomb</b>':'<a href="/">CSScomb</a>'?></div>

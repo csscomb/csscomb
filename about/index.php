@@ -1,7 +1,7 @@
 <?
 $title['en'] = $h1['en'] = 'About';
 $title['ru'] = $h1['ru'] = 'О проекте';
-
+$module = 'about';
 require_once'../common/header.php';
 
 if($lang=='ru'){
