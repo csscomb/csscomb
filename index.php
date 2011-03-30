@@ -76,7 +76,7 @@ require_once'common/header.php';
                                     echo '
                                 <li>
                                     <span>'.$t->text.'</span>
-                                    <time style="color:gray;margin-top:3px;display:block;font-size:10px;">'.$date.'</time>
+                                    <time style="color:gray;margin-top:3px;display:block;font-size:10px;"><a target="_blank" href="http://twitter.com/csscomb/statuses/'.$t->id_str.'">'.$date.'</a></time>
                                 </li>';
 
                                 $i++;
