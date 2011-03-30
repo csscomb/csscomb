@@ -5,9 +5,12 @@ $title['ru'] = $h1['ru'] = 'Инструмент для сортировки CSS
 
 
 require_once'common/header.php';
+//$ts = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=3"));
+//echo '<pre>';
+//var_dump($ts);
+//echo '</pre>';
 ?>
         <div style="width:445px;margin:50px auto;"><img width="445" height="453" src="static/i/csscomb.png" alt="CSScomb"></div>
-
 		<table style="width:100%;margin:5px 0 40px;">
 			<tr>
                 <td style="width:50%;padding-left:10px;">
@@ -63,19 +66,26 @@ require_once'common/header.php';
 			<tr>
 				<td style="width:31%;vertical-align:top;padding-right:10px;padding-left:10px;">
 					<h2><span class="brace">#</span><?=$loc['updates']?> <span class="brace">{</span></h2>
-					<ul>
-						<li>
-							<time style="display:block;">28 feb</time>
-							<span>Add full LESS/SASS support</span>
-						</li>
-						<li>
-							<time style="display:block;">9 feb</time>
-							<span>Again add some blah-blah-blah</span>
-						</li>
-						<li>
-							<time style="display:block;">1 feb</time>
-							<span>Add some bla-bla-bla</span>
-						</li>
+                    <ul>
+                    <?
+                        $ts = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=10"));
+                        $i = 0;
+                        foreach($ts as $t){
+                            if($t->in_reply_to_user_id === NULL){
+                                $date = preg_replace('/(\w{3})\s(\w{3})\s(\d*)\s(\d\d(:\d\d){2})\s\+(?:\d{4})\s(\d{4})/','$3 $2 $6',$t->created_at);
+                                    echo '
+                                <li>
+                                    <span>'.$t->text.'</span>
+                                    <time style="color:gray;margin-top:3px;display:block;font-size:10px;">'.$date.'</time>
+                                </li>';
+
+                                $i++;
+                                if($i>=3){
+                                    break;
+                                }
+                            }
+                        }
+                    ?>
 					</ul>
                     <span class="brace brace-close">}</span>
 				</td>
