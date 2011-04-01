@@ -66,7 +66,7 @@ require_once'common/header.php';
 			<tr>
 				<td style="width:31%;vertical-align:top;padding-right:10px;padding-left:10px;">
 					<h2><span class="brace">#</span><?=$loc['updates']?> <span class="brace">{</span></h2>
-                    <ul>
+                    <ul style="list-style:none;margin-left:0;">
                     <?
                         $ts = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=10"));
                         $i = 0;
@@ -74,13 +74,13 @@ require_once'common/header.php';
                             if($t->in_reply_to_user_id === NULL){
                                 $date = preg_replace('/(\w{3})\s(\w{3})\s(\d*)\s(\d\d(:\d\d){2})\s\+(?:\d{4})\s(\d{4})/','$3 $2 $6',$t->created_at);
                                     echo '
-                                <li>
-                                    <span>'.$t->text.'</span>
+                                <li style="margin-left:0;">
                                     <time style="color:gray;margin-top:3px;display:block;font-size:10px;"><a target="_blank" href="http://twitter.com/csscomb/statuses/'.$t->id_str.'">'.$date.'</a></time>
+                                    <span>'.$t->text.'</span>
                                 </li>';
 
                                 $i++;
-                                if($i>=3){
+                                if($i>=2){
                                     break;
                                 }
                             }

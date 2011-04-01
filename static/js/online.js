@@ -141,11 +141,14 @@ $('#resort-button').click(function(){
 
 function doResort(){
     var code = $('#textarea').val();
+    if(code == '') {
+        code = ' ';
+    }
 
     $.post("/gate/gate.php", {code:code},
         function(data){
             codeResorted = data;
-            codeOriginal = code;
+
             var e = $('#mode-diff');
             if(!e.hasClass('selected')){
                 e.addClass('selected');

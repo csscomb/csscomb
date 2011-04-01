@@ -203,26 +203,26 @@ widows</textarea>
             </hgroup>
             <div class="popup-content">
                 <table>
-                <tr>
-                    <th>Сортировать</th>
-                    <td><kbd>Ctrl+R, Ctrl + Enter</kbd></td>
-                </tr>
-                <tr>
-                    <th>Режим редактирования</th>
-                    <td><kbd>Ctrl + E</kbd></td>
-                </tr>
-                <tr>
-                    <th>Режим сравнения</th>
-                    <td><kbd>Ctrl + D</kbd></td>
-                </tr>
-                <tr>
-                    <th>Показать/скрыть настройки</th>
-                    <td><kbd>Ctrl + S</kbd></td>
-                </tr>
-                <tr>
-                    <th>Закрыть настройки/попап</th>
-                    <td><kbd>Esc</kbd></td>
-                </tr>
+                    <tr>
+                        <th>Сортировать</th>
+                        <td><kbd>Ctrl+R, Ctrl + Enter</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Режим редактирования</th>
+                        <td><kbd>Ctrl + E</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Режим сравнения</th>
+                        <td><kbd>Ctrl + D</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Показать/скрыть настройки</th>
+                        <td><kbd>Ctrl + S</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Закрыть настройки/попап</th>
+                        <td><kbd>Esc</kbd></td>
+                    </tr>
                 </table>
             </div>
         </div>

@@ -83,7 +83,11 @@ require_once'../common/header.php';
                                     </td>
                                 </tr>
                             </table>
-                        </div>
+                        </div>';
+                if($case['order'] != '') $tests_list .= '
+                            <textarea cols="80" rows="10">'.$case['order'].'</textarea>';
+
+                $tests_list .= '
                     </div>';
 
                 $test_count++;

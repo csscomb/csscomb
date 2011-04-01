@@ -310,6 +310,7 @@ table + h2{
 		textarea{
 			padding:0;
 			outline:0;
+            resize:vertical;
 			}
             PRE CODE {
                 padding:0;
