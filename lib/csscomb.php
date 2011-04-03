@@ -287,7 +287,8 @@ class csscomb{
             $i = 0;
 			$this->code['datauri'] = array();
 			while(strpos($this->code['edited'], ';base64,')):
-				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+//				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+				preg_match_all('#(url\(data:.[^\)]*\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
                 $this->code['datauri'][] = $match[0][1]; // собираем значения
                 $this->code['edited'] = str_replace($match[0][1], 'datauri'.$i++.'__', $this->code['edited']);
 			endwhile;

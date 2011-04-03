@@ -1,5 +1,4 @@
-var codeOriginal = '',
-    codeResorted = '';
+var codeOriginal = codeResorted = '';
 
 var app = {
 
@@ -16,8 +15,7 @@ var app = {
 
     },
 
-    /* Функция считает сколько строк в тексте text */
-    countLines: function(text){
+    countLines: function(text){ /* считает сколько строк в тексте text */
         var matches = text.match(/\n/g);
         if(matches==null) matches = '';
         return matches.length + 1;
@@ -30,7 +28,7 @@ var app = {
 
 
 
-// Функция рисует в нужном месте (target) номера строк
+// рисует в нужном месте (target) номера строк
 function drawLineNumbers(length, target){
     var n = document.createElement("div"); // создает контейнер-сборщик, чтобы дергать DOM только один раз для его вставки
     for(var i = 1; i <= length; i++){
@@ -41,19 +39,46 @@ function drawLineNumbers(length, target){
     target.appendChild(n);
 }
 
-function drawDiff(){
-    var ln = document.getElementsByClassName('code-line-numbers');
-    for(var i = 0; i < ln.length; i++){
-        drawLineNumbers(app.countLines(codeResorted), ln[i]);
+
+
+function clear(){
+    app.container.codeOriginal.innerHTML = app.container.codeResorted.innerHTML = '';
+
+    if(document.getElementById('textarea')){
+        $('textarea').remove();
     }
+
+    var ln = document.getElementsByClassName('code-line-numbers-original')[0];
+	ln.innerHTML = '';
+	var ln = document.getElementsByClassName('code-line-numbers-resorted')[0];
+	ln.innerHTML = '';
+}
+
+
+function drawDiff(){
+	clear();
+
+    var ln = document.getElementsByClassName('code-line-numbers-original')[0];
+	drawLineNumbers(app.countLines(codeOriginal), ln);
+
+	var ln = document.getElementsByClassName('code-line-numbers-resorted')[0];
+	drawLineNumbers(app.countLines(codeResorted), ln);
+
+	var w = 0.5 * (document.getElementsByClassName('code')[0].offsetWidth) - 100;
 
     var code = document.createElement("code");
     code.innerHTML = codeOriginal;
     app.container.codeOriginal.appendChild(code);
+    app.container.codeOriginal.setAttribute('style','width:'+w+'px;');
 
     var code = document.createElement("code");
     code.innerHTML = codeResorted;
     app.container.codeResorted.appendChild(code);
+    app.container.codeResorted.setAttribute('style','width:'+w+'px;');
+
+//	console.log(document.getElementsByClassName('code')[0].offsetWidth);
+//	console.log(document.getElementsByClassName('code-line-numbers-original')[0].childNodes[0].childNodes[0].offsetWidth);
+//	console.log(document.getElementsByClassName('code-line-numbers-resorted')[0].childNodes[0].childNodes[0].offsetWidth);
 
     app.container.codeResorted.parentNode.removeAttribute('style');
 
@@ -62,6 +87,7 @@ function drawDiff(){
 }
 
 function drawEdit(){
+	clear();
     var textarea = document.createElement("textarea");
     textarea.id = 'textarea';
     textarea.className = 'allow_tab_key';
@@ -74,21 +100,7 @@ function drawEdit(){
     app.container.copyResultButton.setAttribute('disabled','disabled');
     app.container.resortButton.removeClass('disabled');
 }
-//	drawEdit();
 
-function clear(){
-    app.container.codeOriginal.innerHTML = app.container.codeResorted.innerHTML = '';
-
-    if(document.getElementById('textarea')){
-        $('textarea').remove();
-    }
-
-    var ln = document.getElementsByClassName('code-line-numbers');
-    for(var i = 0; i < ln.length; i++){
-        ln[i].innerHTML = '';
-    }
-}
-//	clear();
 
 // режим редактирования
 $('#mode-edit').click(function(){
@@ -96,7 +108,6 @@ $('#mode-edit').click(function(){
     if(!e.hasClass('selected')){
         e.addClass('selected');
         $('#mode-diff').removeClass();
-        clear();
         drawEdit();
     }
     return false;
@@ -108,7 +119,6 @@ $('#mode-diff').click(function(){
     if(!e.hasClass('selected')){
         e.addClass('selected');
         $('#mode-edit').removeClass();
-        clear();
         drawDiff();
     }
     return false;
@@ -133,17 +143,16 @@ $('#mode-edit').addClass('selected');
 
 
 $('#resort-button').click(function(){
-
     doResort();
-
 });
 
 
 function doResort(){
     var code = $('#textarea').val();
-    if(code == '') {
-        code = ' ';
-    }
+	if(code == ''){
+		code = ' ';
+	}
+	codeOriginal = code;
 
     $.post("/gate/gate.php", {code:code},
         function(data){
@@ -153,7 +162,6 @@ function doResort(){
             if(!e.hasClass('selected')){
                 e.addClass('selected');
                 $('#mode-edit').removeClass();
-                clear();
                 drawDiff();
             }
         }, "text"
