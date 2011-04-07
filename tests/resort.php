@@ -2296,6 +2296,8 @@ div{
     margin:0;
     }';
 
+$css = '/* expression */';
+
 //$c = new csscomb($css, true, $case['order']);
 $c = new csscomb($css, true);
 ?>

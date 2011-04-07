@@ -34,13 +34,17 @@ require_once'../common/header.php';
             <h2>Настройки порядка сортировки</h2>
             <p>
                 <span>Пресеты сортировок:</span>
-                <span class="preset">by Zen Coding</span>
-                <span class="preset">by Яндекс</span>
-                <span class="preset">По-своему</span>
+                <span id="zen-sort-order" class="preset">by Zen Coding</span>
+                <span id="ya-sort-order" class="preset">by Яндекс</span>
+                <span id="user-sort-order" class="preset">По-своему</span>
             </p>
             <p>Если хотите, разделите свойства на группы пустой строкой, тогда результат сортировки будет отформатирован так же.</p>
-            <div><button type="submit">Сохранить</button></div>
-            <textarea name="settings" id="settings-textarea" cols="30" rows="10">position
+            <div>
+                <button id="save-sort-order" type="submit">Сохранить</button>
+                <span id="settings-status"></span>
+            </div>
+            <textarea name="settings" id="settings-textarea" cols="30" rows="10"></textarea>
+            <!--textarea name="settings" id="settings-textarea" cols="30" rows="10">position
 top
 right
 bottom
@@ -194,7 +198,7 @@ page-break-before
 page-break-inside
 page-break-after
 orphans
-widows</textarea>
+widows</textarea-->
         </div>
         <div class="popup" id="shortcutsSheet">
             <hgroup class="popup-header">

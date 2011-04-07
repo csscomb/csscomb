@@ -46,7 +46,6 @@ function drawDiff(){
     for(var i = 0; i < ln.length; i++){
         drawLineNumbers(app.countLines(codeResorted), ln[i]);
     }
-
     var code = document.createElement("code");
     code.innerHTML = codeOriginal;
     app.container.codeOriginal.appendChild(code);
@@ -80,7 +79,7 @@ function clear(){
     app.container.codeOriginal.innerHTML = app.container.codeResorted.innerHTML = '';
 
     if(document.getElementById('textarea')){
-        $('textarea').remove();
+        $('#textarea').remove();
     }
 
     var ln = document.getElementsByClassName('code-line-numbers');
@@ -104,13 +103,7 @@ $('#mode-edit').click(function(){
 
 // режим сравнения
 $('#mode-diff').click(function(){
-    var e = $('#mode-diff');
-    if(!e.hasClass('selected')){
-        e.addClass('selected');
-        $('#mode-edit').removeClass();
-        clear();
-        drawDiff();
-    }
+    doResort();
     return false;
 });
 
@@ -140,14 +133,28 @@ $('#resort-button').click(function(){
 
 
 function doResort(){
-    var code = $('#textarea').val();
-    if(code == '') {
+    var order = '';
+    if(getCookie('csscomb-order')!==undefined){
+//        var customSortOrder = '["' + getCookie('csscomb-order').replace(/\%0A/g,'","') + ']';
+        var c = getCookie('csscomb-order');
+        var lines = c.split(/\%0A/);
+        for (var i = 0; i < lines.length; i++){
+            lines[i] = '"' + lines[i] + '"';
+        }
+        var customSortOrder = '[' + lines.join(',') + ']';
+        order = decode(customSortOrder);
+    }
+    //alert(order);
+
+    var code = codeOriginal = $('#textarea').val();
+    if(code == ''){
         code = ' ';
     }
 
-    $.post("/gate/gate.php", {code:code},
+    $.post("/gate/gate.php", {code:code,order:order},
         function(data){
             codeResorted = data;
+            //alert(codeResorted);
 
             var e = $('#mode-diff');
             if(!e.hasClass('selected')){
@@ -255,4 +262,92 @@ jQuery(document).ready(function(){
     $('#toggleShortcutsSheet').click(function(){
         $('#shortcutsSheet').css('display','block');
     });
+});
+
+
+/* Cookies */
+function getCookie(c_name){
+    var i,x,y,ARRcookies = document.cookie.split(";");
+    for (i = 0; i < ARRcookies.length; i++){
+        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+        x = x.replace(/^\s+|\s+$/g, "");
+        if (x == c_name){
+            return y;
+        }
+    }
+}
+
+function setCookie(c_name, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+    document.cookie = c_name + "=" + c_value;
+}
+
+function checkCookie(){
+    var username = getCookie("username");
+    if (username != null && username != ""){
+        alert("Welcome again " + username);
+    }
+    else{
+        username = prompt("Please enter your name:", "");
+        if (username != null && username != ""){
+            setCookie("username", username, 365);
+        }
+    }
+}
+
+function decode(str){
+    return str
+            .replace(/\%0A/g,"\n")
+            .replace(/\%27/g,"'")
+            .replace(/\%22/g,'"')
+            .replace(/\%7B/g,'{')
+            .replace(/\%7D/g,'}')
+            .replace(/\%20/g,' ')
+            .replace(/\%5B/g,'[')
+            .replace(/\%5D/g,']')
+            .replace(/\%2C/g,',')
+            .replace(/\%3A/g,':')
+            .replace(/\%28/g,'(')
+            .replace(/\%29/g,')')
+            .replace(/\%09/g,'  ')
+            .replace(/\%5C/g,'\\');
+}
+
+jQuery(document).ready(function(){
+    /*if(getCookie('csscomb-order')===undefined){
+        // zen, ya, user
+        setCookie('csscomb-order', 'zen', 365);
+    }
+    else{
+        setCookie('csscomb-order', 'zen', 365);
+
+    } */
+
+    var currentSortOrder = getCookie('csscomb-order');
+    currentSortOrder = decode(currentSortOrder);
+    //%0A
+    $('#settings-textarea').val(currentSortOrder);
+
+    $('#zen-sort-order').click(function(){
+        $('#settings-textarea').val('zen');
+    });
+
+    $('#ya-sort-order').click(function(){
+        $('#settings-textarea').val('ya');
+    });
+
+    $('#user-sort-order').click(function(){
+        $('#settings-textarea').val('user');
+    });
+
+    $('#save-sort-order').click(function(){
+        var value = $('#settings-textarea').val();
+        setCookie('csscomb-order', value, 365);
+        $('#settings-status').html('<span>Настройки успешно сохранены. <span onclick="$(\'#settings-status\').html(\'\');">[Я в курсе.]</span></span>')
+    });
+
+
 });

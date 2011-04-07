@@ -27,7 +27,8 @@ class csscomb{
      * properties - не найдено фигурных скобок, зато присутствуют точки с запятой и двоеточия.
      *
      */
-    $mode = 'css',
+    $mode = 'properties',
+
 
     $default_sort_order = '
 [
@@ -207,16 +208,194 @@ class csscomb{
 	"page-break-after",
 	"orphans",
 	"widows"
+]',
+
+    $yandex_sort_order = '[
+[
+    "font",
+    "font-family",
+    "font-size",
+    "font-weight",
+    "font-style",
+    "font-variant",
+    "font-size-adjust",
+    "font-effect",
+    "font-emphasize",
+    "font-emphasize-position",
+    "font-emphasize-style",
+    "font-smooth",
+    "font-stretch"
+],
+[
+    "position",
+    "z-index",
+    "top",
+    "right",
+    "bottom",
+    "left"
+],
+[
+    "display",
+    "visibility",
+    "float",
+    "clear",
+    "overflow",
+    "overflow-x",
+    "overflow-y",
+    "overflow-style",
+    "clip",
+    "zoom"
+],
+[
+    "-moz-box-sizing",
+    "-webkit-box-sizing",
+    "box-sizing",
+    "width",
+    "min-width",
+    "max-width",
+    "height",
+    "min-height",
+    "max-height",
+    "margin",
+    "margin-top",
+    "margin-right",
+    "margin-bottom",
+    "margin-left",
+    "padding",
+    "padding-top",
+    "padding-right",
+    "padding-bottom",
+    "padding-left"
+],
+[
+    "table-layout",
+    "empty-cells",
+    "caption-side",
+    "border-spacing",
+    "border-collapse",
+    "list-style",
+    "list-style-position",
+    "list-style-type",
+    "list-style-image"
+],
+[
+    "content",
+    "quotes",
+    "counter-reset",
+    "counter-increment",
+    "cursor",
+    "text-align",
+    "vertical-align",
+    "line-height",
+    "white-space",
+    "white-space-collapse",
+    "text-decoration",
+    "text-indent",
+    "text-transform",
+    "text-align-last",
+    "text-emphasis",
+    "text-height",
+    "text-justify",
+    "text-outline",
+    "text-replace",
+    "text-wrap",
+    "letter-spacing",
+    "word-spacing",
+    "word-break",
+    "word-wrap"
+],
+[
+    "opacity",
+    "color",
+    "border",
+    "-moz-border-radius",
+    "-webkit-border-radius",
+    "border-radius",
+    "border-break",
+    "border-color",
+    "-webkit-border-image",
+    "-moz-border-image",
+    "-khtml-border-radius",
+    "border-image",
+    "border-top-image",
+    "border-right-image",
+    "border-bottom-image",
+    "border-left-image",
+    "border-corner-image",
+    "border-top-left-image",
+    "border-top-right-image",
+    "border-bottom-right-image",
+    "border-bottom-left-image",
+    "border-fit",
+    "border-length",
+    "border-style",
+    "border-width",
+    "border-top",
+    "border-top-width",
+    "border-top-style",
+    "border-top-color",
+    "border-right",
+    "border-right-width",
+    "border-right-style",
+    "border-right-color",
+    "border-bottom",
+    "border-bottom-width",
+    "border-bottom-style",
+    "border-bottom-color",
+    "border-left",
+    "border-left-width",
+    "border-left-style",
+    "border-left-color",
+    "border-top-right-radius",
+    "border-top-left-radius",
+    "border-bottom-right-radius",
+    "border-bottom-left-radius",
+    "outline",
+    "outline-offset",
+    "outline-width",
+    "outline-style",
+    "outline-color",
+    "background",
+    "background-color",
+    "background-image",
+    "background-repeat",
+    "background-attachment",
+    "background-position",
+    "background-position-x",
+    "background-position-y",
+    "background-break",
+    "background-clip",
+    "background-origin",
+    "background-size",
+    "-webkit-box-shadow",
+    "-moz-box-shadow",
+    "box-shadow",
+    "text-shadow",
+    "transitions",
+    "resize",
+    "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader",
+    "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
+    "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha"
+],
+[
+    "page-break-before",
+    "page-break-inside",
+    "page-break-after",
+    "orphans",
+    "widows"
+]
 ]';
 
 
     function set_sort_order($json_array = null){
-		if($json_array!=null){
+		if($json_array != null){
 			$custom_sort_order = json_decode($json_array);
 			if(is_array($custom_sort_order) AND count($custom_sort_order)>0){
 				$this->sort_order = $custom_sort_order;
 			}
-			else $this->sort_order = json_decode($this->default_sort_order);
+			else {
+                $this->sort_order = json_decode($this->default_sort_order);
+            }
 		}
 		else $this->sort_order = json_decode($this->default_sort_order);
 	}
@@ -262,7 +441,7 @@ class csscomb{
         // 1. экранирование хаков, которые мешают парсить
         if(strpos($this->code['edited'], '"\\"}\\""')){ // разбираемся со страшным хаком "\"}\""
             $i = 0;
-            $this->code['expressions'] = array();
+            $this->code['hacks'] = array();
             while(strpos($this->code['edited'], '"\\"}\\""')):
                 $this->code['hacks'][] = '"\\"}\\""';
 				$this->code['edited'] = str_replace('"\\"}\\""', 'hack'.$i++.'__', $this->code['edited']);
@@ -271,10 +450,10 @@ class csscomb{
         }
 
         // 2. expressions
-        if(strpos($this->code['edited'], 'expression')){ // разбираемся с expression если они присутствуют
+        if(strpos($this->code['edited'], 'expression(')){ // разбираемся с expression если они присутствуют
 			$i = 0;
 			$this->code['expressions'] = array();
-			while(strpos($this->code['edited'], 'expression')):
+			while(strpos($this->code['edited'], 'expression(')):
 				preg_match_all('#(.*)expression\((.*)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем expression
 				$this->code['expressions'][] = $match[0][2]; // собираем значения expression(...)
 				$this->code['edited'] = str_replace('expression('.$match[0][2].')', 'exp'.$i++.'__', $this->code['edited']);
@@ -317,7 +496,7 @@ class csscomb{
             // заменяем на commented_border: 1ps solid red;
 
             // 3. // Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
-            //$this->log('test', $test);
+//            $this->log('test', $test);
             if(preg_match_all('#
                 (\s*)
                 /\*
@@ -384,7 +563,10 @@ class csscomb{
 
 
     function parse_rules(){
+//        die($this->mode);
+
         if($this->mode == 'css-file'){
+
             // отделяем все что после последней } если там что-то есть, конечно :)
             preg_match('@
 
@@ -428,6 +610,7 @@ class csscomb{
 
 
         if($this->mode == 'style-attribute'){
+
             $this->code['resorted'] = $this->code['edited'];
 
             preg_match_all('@
@@ -455,6 +638,7 @@ class csscomb{
 
 
         if($this->mode == 'properties'){
+//            die($this->code['edited']);
             $rules[0] = $this->parse_properties($this->code['edited']);
             $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // склеиваем части
         }
@@ -476,7 +660,7 @@ class csscomb{
 
             @ismx', $css, $matches);
 
-//           $this->log($css, $matches);
+//          $this->log($css, $matches);
 
             if(sizeof($matches)>0){ // если есть и свойства и скобка и хотя бы одно :
                 $properties = $matches[1];
@@ -559,11 +743,15 @@ class csscomb{
                     )
 
                     @ismx', $css, $matches);
-
             $props = $matches[0];
-
-            $props = $this->resort_properties($props);
-            $props = implode($props);
+//            $this->log('new', sizeof($props));
+            if(sizeof($props)>0){ // если есть и свойства и скобка и хотя бы одно :
+                $props = $this->resort_properties($props);
+                $props = implode($props);
+            }
+            else{
+                $props = $css;
+            }
         }
 
         return $props;
@@ -651,7 +839,7 @@ class csscomb{
     function postprocess(){
         // 1. экранирование хаков с использованием ключевых символов например voice-family: "\"}\"";
 //        $this->log('hacks', $this->code['hacks']);
-        if(is_array($this->code['hacks'])){ // если были обнаружены и вырезаны expression
+        if(is_array($this->code['hacks'])){ // если были обнаружены и вырезаны хаки
             foreach($this->code['hacks'] as $key=>$val){
                 if(strpos($this->code['resorted'], 'hack'.$key.'__')) $this->code['resorted'] = str_replace('hack'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
             }

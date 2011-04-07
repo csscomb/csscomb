@@ -5,7 +5,14 @@ if($_POST['code'] and $_POST['code'] != ''){
 
     $c = new csscomb();
 
-    echo $c->csscomb($_POST['code'], false);
+    if($_POST['order'] and $_POST['order'] != ''){
+        $order = stripslashes($_POST['order']);
+        echo $c->csscomb($_POST['code'], false, $order);
+    }
+    else{
+        echo $c->csscomb($_POST['code'], false);
+    }
+
 
 }
 else{
