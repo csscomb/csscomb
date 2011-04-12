@@ -418,6 +418,36 @@ class csscomb{
     }
 
 
+    function get_sort_order($order_name = null){
+        $order = '';
+        if($order_name !== null){
+            if($order_name == 'zen'){
+                $this->set_sort_order($this->default_sort_order);
+                foreach($this->sort_order as $k=>$prop){
+                    $order .= $prop."
+";
+                }
+            }
+
+            if($order_name == 'yandex'){
+                $this->set_sort_order($this->yandex_sort_order);
+                foreach($this->sort_order as $group){
+                    foreach($group as $prop){
+                        $order .= $prop."
+";
+                    }
+                    $order .= "
+";
+                }
+                $order = trim($order);
+            }
+        }
+        return $order;
+
+    }
+
+
+
     function csscomb($css = '', $echo = false, $custom_sort_order = null){
         if($echo===0 or $echo===false) $this->output = false;
 
@@ -466,7 +496,8 @@ class csscomb{
             $i = 0;
 			$this->code['datauri'] = array();
 			while(strpos($this->code['edited'], ';base64,')):
-				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+//				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+				preg_match_all('#(url\(data:.[^\)]*\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
                 $this->code['datauri'][] = $match[0][1]; // собираем значения
                 $this->code['edited'] = str_replace($match[0][1], 'datauri'.$i++.'__', $this->code['edited']);
 			endwhile;

@@ -2267,34 +2267,26 @@ ul.legend li div.example {
 
 
 
-$css = '/* test comment 1 */
-.one{
-    padding:0;
-    margin:0;
-    }
-
-/* test comment 2 */ /**/
-.two{
-    padding:0;
-    margin:0;
-    }
-
-div{
-    left:10px;
-    top:10px;
-    }
-
-/* test comment 3 */
-.one{
-    padding:0;
-    margin:0;
-    }
-
-/* test comment 4 */ /**/
-.two{
-    padding:0;
-    margin:0;
-    }';
+$css = 'div{
+	padding:10px 20px;
+	display:block;
+}
+BODY {
+	background:#cce7f5 url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiNGRkYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48cmVjdCBmaWxsPSIjY2NlN2Y1IiByeD0iMjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=);
+	color:#241412;
+	padding:0;
+	margin:0;
+	}
+	.test{
+	    color:#fff;
+	    position:relative;
+	    }
+div {
+	background:#cce7f5 url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiNGRkYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48cmVjdCBmaWxsPSIjY2NlN2Y1IiByeD0iMjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=);
+	color:#241412;
+	padding:0;
+	margin:0;
+	}';
 
 $css = '/* expression */';
 

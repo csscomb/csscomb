@@ -1,7 +1,7 @@
 <?php
-if($_POST['code'] and $_POST['code'] != ''){
+require_once'../lib/csscomb.php';
 
-    require_once'../lib/csscomb.php';
+if($_POST['code'] and $_POST['code'] != ''){
 
     $c = new csscomb();
 
@@ -15,6 +15,8 @@ if($_POST['code'] and $_POST['code'] != ''){
 
 
 }
-else{
-    echo 'Error 1';
+
+if($_POST['get_order'] and $_POST['get_order'] != ''){
+    $c = new csscomb();
+    echo $c->get_sort_order($_POST['get_order']);
 }

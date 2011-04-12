@@ -13,11 +13,11 @@ require_once'../common/header.php';
 		<div class="code">
 			<table>
 				<tr>
-					<td class="code-line-numbers"></td>
+					<td class="code-line-numbers-original"></td>
 					<td class="h-code-original">
 						<pre class="code-original css"></pre>
 					</td>
-					<td class="code-line-numbers"></td>
+					<td class="code-line-numbers-resorted"></td>
 					<td class="h-code-resorted">
 						<pre class="code-resorted css"></pre>
 					</td>

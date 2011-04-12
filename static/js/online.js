@@ -317,19 +317,25 @@ function decode(str){
 }
 
 jQuery(document).ready(function(){
-    /*if(getCookie('csscomb-order')===undefined){
-        // zen, ya, user
-        setCookie('csscomb-order', 'zen', 365);
+    if(getCookie('csscomb-order')===undefined){
+
+        var get_order = 'zen';
+        $.post("/gate/gate.php", {get_order: get_order},
+            function(data){
+                var data = data;
+//                alert(data);
+                // zen, ya, user
+                setCookie('csscomb-order', data, 365);
+                $('#settings-textarea').val(data);
+            }, "text"
+        );
     }
     else{
-        setCookie('csscomb-order', 'zen', 365);
+        var currentSortOrder = getCookie('csscomb-order');
+        currentSortOrder = decode(currentSortOrder);
+        $('#settings-textarea').val(currentSortOrder);
+    }
 
-    } */
-
-    var currentSortOrder = getCookie('csscomb-order');
-    currentSortOrder = decode(currentSortOrder);
-    //%0A
-    $('#settings-textarea').val(currentSortOrder);
 
     $('#zen-sort-order').click(function(){
         $('#settings-textarea').val('zen');

@@ -1367,6 +1367,52 @@ BODY {
 $group['cases'][] = $case;
 
 
+$case['descr'] = 'data uri с charset';
+$case['descr-en'] = '; in data uri with charset';
+$case['link'] = 'key-symbols-data-uri-with-charset';
+$case['code'] = 'div{
+	padding:10px 20px;
+	display:block;
+}
+BODY {
+	background:#cce7f5 url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiNGRkYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48cmVjdCBmaWxsPSIjY2NlN2Y1IiByeD0iMjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=);
+	color:#241412;
+	padding:0;
+	margin:0;
+	}
+	.test{
+	    color:#fff;
+	    position:relative;
+	    }
+div {
+	background:#cce7f5 url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiNGRkYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48cmVjdCBmaWxsPSIjY2NlN2Y1IiByeD0iMjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=);
+	color:#241412;
+	padding:0;
+	margin:0;
+	}';
+$case['result'] = 'div{
+	display:block;
+	padding:10px 20px;
+}
+BODY {
+	margin:0;
+	padding:0;
+	background:#cce7f5 url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiNGRkYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48cmVjdCBmaWxsPSIjY2NlN2Y1IiByeD0iMjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=);
+	color:#241412;
+	}
+	.test{
+	    position:relative;
+	    color:#fff;
+	    }
+div {
+	margin:0;
+	padding:0;
+	background:#cce7f5 url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiNGRkYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48cmVjdCBmaWxsPSIjY2NlN2Y1IiByeD0iMjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=);
+	color:#241412;
+	}';
+$group['cases'][] = $case;
+
+
 
 
 
