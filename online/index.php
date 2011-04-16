@@ -220,6 +220,10 @@ widows</textarea-->
                         <td><kbd>Ctrl + D</kbd></td>
                     </tr>
                     <tr>
+                        <th>Скопировать результат</th>
+                        <td><kbd>Ctrl + C</kbd></td>
+                    </tr>
+                    <tr>
                         <th>Показать/скрыть настройки</th>
                         <td><kbd>Ctrl + S</kbd></td>
                     </tr>
@@ -230,8 +234,16 @@ widows</textarea-->
                 </table>
             </div>
         </div>
+        <div class="popup" id="copyResultPopup">
+            <hgroup class="popup-header">
+                <span class="popup-close">Закрыть <kbd>(Esc)</kbd></span>
+                <h2 class="popup-title">Скопировать результат</h2>
+            </hgroup>
+            <div class="popup-content">
+                <textarea id="copy-result-textarea" cols="30" rows="10">dfblfdkjbk</textarea>
+            </div>
+        </div>
         <script type="text/javascript" src="../static/js/online.js"></script>
         <script type="text/javascript" src="../static/highlight/highlight.pack.js"></script>
         <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-        <!--<script type="text/javascript" src="../static/js/allow_tab_key.js"></script>-->
 <?require_once'../common/footer.php'?>

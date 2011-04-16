@@ -115,17 +115,6 @@ $('#mode-diff').click(function(){
 
 
 
-// кнопка копирования отсортированного кода
-$('#copy-result-button').click(function(){
-    var e = $('#copy-result-button');
-    if(e.attr('disabled') != 'disabled'){
-        alert('1');
-    }
-
-    return false;
-});
-
-
 //drawDiff();
 drawEdit();
 $('#mode-edit').addClass('selected');
@@ -229,13 +218,29 @@ $.Shortcuts.add({
     }
 });
 
+
+$.Shortcuts.add({
+    type: 'down',
+    mask: 'Ctrl+C',
+    enableInInput: true,
+    handler: function(){
+        var e = $('#copy-result-button');
+        if(e.attr('disabled') != 'disabled'){
+            $('#copyResultPopup').css('display','block');
+            $('#copyResultPopup #copy-result-textarea').val(codeResorted).select();
+        }
+        return false;
+    }
+});
+
 $.Shortcuts.add({
     type: 'down',
     mask: 'Esc',
     enableInInput: true,
     handler: function(){
         if($('.settings-bar').css('right') != '-400px'){ toggleSettingsBar(); }
-        if($('#shortcutsSheet').css('display') == 'block') $('#shortcutsSheet').hide();
+        if($('#shortcutsSheet').css('display') == 'block'){ $('#shortcutsSheet').hide(); }
+        if($('#copyResultPopup').css('display') == 'block'){ $('#copyResultPopup').hide(); }
     }
 });
 
@@ -329,6 +334,7 @@ function decode(str){
 }
 
 jQuery(document).ready(function(){
+
     if(getCookie('csscomb-order')===undefined){
 
         var get_order = 'zen';
@@ -367,5 +373,22 @@ jQuery(document).ready(function(){
         $('#settings-status').html('<span>Настройки успешно сохранены. <span onclick="$(\'#settings-status\').html(\'\');">[Я в курсе.]</span></span>')
     });
 
+
+
+    // скопировать результат
+    $('#copy-result-button').click(function(){
+        var e = $('#copy-result-button');
+        if(e.attr('disabled') != 'disabled'){
+            $('#copyResultPopup').css('display','block');
+            $('#copyResultPopup #copy-result-textarea').val(codeResorted).select();
+        }
+        return false;
+    });
+
+    // кнопка копирования отсортированного кода
+    $('.popup-close').click(function(){
+        this.parentNode.parentNode.style.display = 'none';
+        return false;
+    });
 
 });

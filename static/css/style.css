@@ -560,6 +560,7 @@ textarea{
             right:-29px;
             top:17px;
             /*float:right;*/
+            cursor:pointer;
             }
     .popup-content{
         position:relative;
@@ -579,7 +580,7 @@ textarea{
         }
 
 
-#shortcutsSheet{
+.popup{
     display:none;
     }
     #shortcutsSheet table{
@@ -592,3 +593,11 @@ textarea{
             padding-bottom:5px;
             font-size:.8em;
             }
+
+
+#copy-result-textarea{
+    width:336px;
+    resize:none;
+    border:1px solid silver;
+    padding:1px;
+    }
