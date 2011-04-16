@@ -68,33 +68,40 @@ require_once'../common/header.php';
                 }
 
                 $tests_list .= '</span>
-                            <a href="#'.$case['link'].'"><img src="../static/i/anchor.gif"></a>
+                            <a href="#'.$case['link'].'"><img src="/static/i/anchor.gif"></a>
                         </h4>
-                        <div class="code">
-                            <table>
-                                <tr>
-                                    <td class="code-line-numbers"></td>
-                                    <td class="code-original">
+                        <div class="test-content">
+                            <div class="code">
+                                <table>
+                                    <tr>
+                                        <td class="code-line-numbers"></td>
+                                        <td class="code-original">
                                             <pre class="css"><code>'.htmlentities($case['code']).'</code></pre>
-                                    </td>
-                                    <td class="code-line-numbers"></td>
-                                    <td class="code-resorted">
-                                        <pre class="css"><code>'.htmlentities($result).'</code></pre>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>';
+                                        </td>
+                                        <td class="code-line-numbers"></td>
+                                        <td class="code-resorted">
+                                            <pre class="css"><code>'.htmlentities($result).'</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>';
+
+                // порядок сортировки
                 if($case['order'] != '') $tests_list .= '
+                            <p>Порядок сортировки:</p>
                             <textarea cols="80" rows="10">'.$case['order'].'</textarea>';
 
                 $tests_list .= '
+                        </div>
                     </div>';
 
                 $test_count++;
             }
         }
         ?>
-
+        <div class="tests-descr">
+            <p style="margin-left:0;margin-bottom:20px;">Ниже приведены результаты тестов CSScomb. Кликнув на название каждого теста можно посмотреть исходный и результирующий CSS-код. Тесты пополняются. Текущий набор получился в результате наблюдений за CSS-кодом, который приходилось сортировать.</p>
+        </div>
         <div class="tests-summary">
             <table>
                 <tfoot>

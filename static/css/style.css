@@ -453,7 +453,7 @@ textarea{
     top:0;
     bottom:0;
     right:-400px;
-    right:0;
+    /*right:0;*/
     margin-left:0;
     width:380px;
     padding:10px;

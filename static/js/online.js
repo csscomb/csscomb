@@ -42,9 +42,14 @@ function drawLineNumbers(length, target){
 }
 
 function drawDiff(){
-    var ln = document.getElementsByClassName('code-line-numbers');
-    for(var i = 0; i < ln.length; i++){
-        drawLineNumbers(app.countLines(codeResorted), ln[i]);
+    var lnr = document.getElementsByClassName('code-line-numbers-resorted');
+    for(var i = 0; i < lnr.length; i++){
+        drawLineNumbers(app.countLines(codeResorted), lnr[i]);
+    }
+
+    var lno = document.getElementsByClassName('code-line-numbers-original');
+    for(var i = 0; i < lno.length; i++){
+        drawLineNumbers(app.countLines(codeOriginal), lno[i]);
     }
     var code = document.createElement("code");
     code.innerHTML = codeOriginal;
@@ -82,10 +87,11 @@ function clear(){
         $('#textarea').remove();
     }
 
-    var ln = document.getElementsByClassName('code-line-numbers');
-    for(var i = 0; i < ln.length; i++){
-        ln[i].innerHTML = '';
-    }
+    var lno = document.getElementsByClassName('code-line-numbers-original')[0];
+    lno.innerHTML = '';
+    var lnr = document.getElementsByClassName('code-line-numbers-resorted')[0];
+    lnr.innerHTML = '';
+
 }
 //	clear();
 
@@ -195,7 +201,13 @@ $.Shortcuts.add({
     mask: 'Ctrl+E',
     enableInInput: true,
     handler: function(){
-        drawEdit();
+        var e = $('#mode-edit');
+        if(!e.hasClass('selected')){
+            e.addClass('selected');
+            $('#mode-diff').removeClass();
+            clear();
+            drawEdit();
+        }
     }
 });
 
