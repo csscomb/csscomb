@@ -32,12 +32,12 @@ require_once'../common/header.php';
         <div class="settings-bar">
             <span class="hide"><i>&rarr;</i> <span>Скрыть</span> <kbd>Esc</kbd></span>
             <h2>Настройки порядка сортировки</h2>
-            <p>
+            <!--p>
                 <span>Пресеты сортировок:</span>
                 <span id="zen-sort-order" class="preset">by Zen Coding</span>
                 <span id="ya-sort-order" class="preset">by Яндекс</span>
                 <span id="user-sort-order" class="preset">По-своему</span>
-            </p>
+            </p-->
             <p>Если хотите, разделите свойства на группы пустой строкой, тогда результат сортировки будет отформатирован так же.</p>
             <div>
                 <button id="save-sort-order" type="submit">Сохранить</button>

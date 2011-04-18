@@ -12,7 +12,7 @@ require_once'../common/header.php';
         $case_groups_nav = $tests_list = '';
 
         // Строим навигацию по группам
-        $case_groups_nav .= '<div style="float:left;"><h2>'.$loc['tests-category'].'</h2><ol>';
+        $case_groups_nav .= '<div class="groups-nav"><h2>'.$loc['tests-category'].'</h2><ol>';
         foreach($case_groups as $group_key=>$group){
             $case_groups_nav .= '<li><a href="#'.$group["group-id"].'">';
             if($lang=='en'){
@@ -100,7 +100,7 @@ require_once'../common/header.php';
         }
         ?>
         <div class="tests-descr">
-            <p style="margin-left:0;margin-bottom:20px;">Ниже приведены результаты тестов CSScomb. Кликнув на название каждого теста можно посмотреть исходный и результирующий CSS-код. Тесты пополняются. Текущий набор получился в результате наблюдений за CSS-кодом, который приходилось сортировать.</p>
+            <p>Ниже приведены результаты тестов CSScomb. Кликнув на название каждого теста можно посмотреть исходный и результирующий CSS-код. Тесты пополняются. Текущий набор получился в результате наблюдений за CSS-кодом, который приходилось сортировать.</p>
         </div>
         <div class="tests-summary">
             <table>
