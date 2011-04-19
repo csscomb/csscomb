@@ -88,7 +88,7 @@ require_once'../common/header.php';
 
                 // порядок сортировки
                 if($case['order'] != '') $tests_list .= '
-                            <p>Порядок сортировки:</p>
+                            <p>'.$loc['sort-order'].'</p>
                             <textarea cols="80" rows="10">'.$case['order'].'</textarea>';
 
                 $tests_list .= '
@@ -100,7 +100,7 @@ require_once'../common/header.php';
         }
         ?>
         <div class="tests-descr">
-            <p>Ниже приведены результаты тестов CSScomb. Кликнув на название каждого теста можно посмотреть исходный и результирующий CSS-код. Тесты пополняются. Текущий набор получился в результате наблюдений за CSS-кодом, который приходилось сортировать.</p>
+            <p><?=$loc['tests-intro']?></p>
         </div>
         <div class="tests-summary">
             <table>

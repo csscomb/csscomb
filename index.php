@@ -86,8 +86,7 @@ require_once'common/header.php';
 
         <div class="reviews">
             <h2><?=$loc['review']?></h2>
-            <div><em>Dan Cederholm presents real CSS3 for real websites. Cogent, concise, comprehensible. Look no further. Dan Cederholm presents real CSS3 for real websites. Cogent, concise, comprehensible. Look no further.</em></div>
-            <cite>— Dmitriy Medved, medved.com</cite>
+            <?=$loc['review-content']?>
         </div>
 
 

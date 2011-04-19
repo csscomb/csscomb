@@ -60,8 +60,12 @@ in the real file. CSScomb reproduces these actions for you. This means that the 
 </ul>
 
 <h2>How to adjust the order of sorting?</h2>
-<p>In the web interface, settings can be defined by a simple list: a line for each property, in the required order. If desired, it\'s possible to divide properties into groups by adding an empty line. In that case the result of formatting will be the same.</p>
-<p>For adjusting plugins use one-dimensional and two-dimensional JSON arrays. In case of two-dimensional arrays the properties will be divided into groups with an empty line. In plugins you should pick open file <code>csscomb.php</code></p>
+<p>In the web interface, settings can be defined by a simple list: a line for each property, in the required order.
+If desired, it\'s possible to divide properties into groups by adding an empty line. In that case the result of
+formatting will be the same.</p>
+<p>For adjusting plugins use one-dimensional and two-dimensional JSON arrays. In case of two-dimensional arrays
+the properties will be divided into groups with an empty line. In plugins you should pick open file
+<code>csscomb.php</code></p>
 <ul>
     <li>At TextMate: <code>/Applications/TextMate.app/Contents/SharedSupport/Bundles/CSS.tmbundle/Support/lib/csscomb.php</code></li>
     <li>At Coda: <code>/Users/%YOUR_USER_NAME%/Library/Application Support/Coda/Plug-ins/CSScomb.codaplugin/Contents/Resources/csscomb.php</code></li>

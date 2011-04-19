@@ -370,7 +370,7 @@ jQuery(document).ready(function(){
     $('#save-sort-order').click(function(){
         var value = $('#settings-textarea').val();
         setCookie('csscomb-order', value, 365);
-        $('#settings-status').html('<span>Настройки успешно сохранены. <span onclick="$(\'#settings-status\').html(\'\');">[Я в курсе.]</span></span>')
+//        $('#settings-status').html('<span>Настройки успешно сохранены. <span onclick="$(\'#settings-status\').html(\'\');">[Я в курсе.]</span></span>')
     });
 
 

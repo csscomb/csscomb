@@ -1,14 +1,14 @@
-		$('.test-title span').click(function(){
-			var c = this.parentNode.parentNode.getElementsByClassName('test-content')[0];
-			var t = this.getElementsByClassName('toggle')[0];
-            if(c.getAttribute('style')){
-                c.removeAttribute('style');
-                t.innerHTML = '+';
-            }else{
-                c.setAttribute('style','display:block;');
-                t.innerHTML = '&minus;';
-            }
-		});
+$('.test-title span').click(function(){
+    var c = this.parentNode.parentNode.getElementsByClassName('test-content')[0];
+    var t = this.getElementsByClassName('toggle')[0];
+    if(c.getAttribute('style')){
+        c.removeAttribute('style');
+        t.innerHTML = '+';
+    }else{
+        c.setAttribute('style','display:block;');
+        t.innerHTML = '&minus;';
+    }
+});
 
 
 function showAllTests(){

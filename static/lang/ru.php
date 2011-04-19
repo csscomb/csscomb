@@ -5,6 +5,10 @@ $nav['tests'] = 'Тесты';
 $nav['downloads'] = 'Скачать';
 
 $loc['settings'] = 'Настроить';
+$loc['settings-title'] = 'Настройки порядка сортировки';
+$loc['settings-hide'] = '<i>&rarr;</i> <span>Скрыть</span> <kbd>Esc</kbd>';
+$loc['settings-comment'] = 'Если хотите, разделите свойства на группы пустой строкой, тогда результат сортировки будет отформатирован так же.';
+$loc['settings-save'] = 'Сохранить';
 $loc['resort'] = 'Сортировать';
 $loc['copy-result-code'] = 'Скопировать результат';
 $loc['edit-mode'] = 'Редактировать';
@@ -14,7 +18,13 @@ $loc['versions'] = 'Версии';
 $loc['feature'] = 'Возможности';
 $loc['updates'] = 'Обновления';
 $loc['review'] = 'Отзывы';
-$loc['presentation'] = 'Презентация';
+$loc['review-content'] = '<div>
+    <em>Хотите оставить отзыв о CSScomb? Напишите на mail@csscomb.ru свои впечатления от использования и не забудьте
+    указать свое имя и сайт. Все отзывы будут опубликованы на сайте.</em>
+</div>
+    <cite>Вячеслав Олиянчук, csscomb.ru</cite>';
+
+$loc['presentation'] = 'Видео';
 
 $loc['tests-category'] = 'Категории тестов';
 $loc['all-tests'] = 'Всего тестов';
@@ -31,6 +41,8 @@ $loc['errors-only'] = 'Только ошибки';
 $loc['warnings-only'] = 'Только предупреждения';
 $loc['success-only'] = 'Только успешно пройденные';
 $loc['tests'] = 'Тесты';
+$loc['tests-intro'] = 'Ниже приведены результаты тестов CSScomb. Кликнув на название каждого теста можно посмотреть исходный и результирующий CSS-код. Тесты пополняются. Текущий набор получился в результате наблюдений за CSS-кодом, который приходилось сортировать.';
+$loc['sort-order'] = 'Порядок сортировки:';
 
 $loc['index1'] = 'Cортировка CSS-свойств';
 $loc['index11'] = 'Порядок свойств в помощь профессионалу';
@@ -48,3 +60,37 @@ $loc['index7'] = 'Базовая поддержка <abbr title="The dynamic sty
 $loc['index77'] = 'Вложенные блоки, вычисления, переменные и т.д.';
 $loc['help-us'] = 'Помоги CSScomb, подружи его с другими редакторами кода.';
 $loc['for'] = 'для';
+
+$loc['close'] = 'Закрыть <kbd>(Esc)</kbd>';
+$loc['copy-result'] = 'Скопировать результат';
+$loc['shortcuts'] = 'Сочетания клавиш';
+$loc['shortcuts-content'] = '<table>
+                    <tr>
+                        <th>Сортировать</th>
+                        <td><kbd>Ctrl+R, Ctrl + Enter</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Режим редактирования</th>
+                        <td><kbd>Ctrl + E</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Режим сравнения</th>
+                        <td><kbd>Ctrl + D</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Скопировать результат</th>
+                        <td><kbd>Ctrl + C</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Показать/скрыть настройки</th>
+                        <td><kbd>Ctrl + S</kbd></td>
+                    </tr>
+                    <tr>
+                        <th>Закрыть настройки/попап</th>
+                        <td><kbd>Esc</kbd></td>
+                    </tr>
+                </table>';
+
+
+
+
