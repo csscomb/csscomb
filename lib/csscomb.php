@@ -1,7 +1,7 @@
 <?php
 /**
  * CSScomb
- * @version: 1.71
+ * @version: 2.0
  * @author: Viacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.ru/
  * @Date: 05.01.11
@@ -403,10 +403,11 @@ class csscomb{
 
 
     function set_mode(){
+        //todo: а если и тег <style> и несколько style="..." в HTML?
         if(strpos($this->code['original'], '{')){ // если есть фигурные скобки
                 $this->mode = 'css-file';
         }
-        else { // если нет фигурных скобок
+        else{ // если нет фигурных скобок
             if(strpos($this->code['original'], "style='") OR strpos($this->code['original'], 'style="')){ // если есть атрибут
                 $this->mode = 'style-attribute';
             }
@@ -669,9 +670,10 @@ class csscomb{
 
 
         if($this->mode == 'properties'){
-//            die($this->code['edited']);
-            $rules[0] = $this->parse_properties($this->code['edited']);
-            $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // склеиваем части
+			preg_match('@\s*?.*?[^;\s];(\s)@ismx', $this->code['edited'], $matches);
+            $this->code['edited'] = $matches[1].$this->code['edited'];
+            $rules[0] = trim($this->parse_properties($this->code['edited']));
+            $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;
         }
     }
 
