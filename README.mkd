@@ -9,10 +9,10 @@ http://twitter.com/csscomb/
 Download
 --------
 
-http:://github.com/miripiruni/CSScomb/downloads
+http://github.com/miripiruni/CSScomb/downloads
 
 TextMate plugin
 
 Coda Plugin
 
-WebStorm/IntelliJ IDEA plugin§
+WebStorm/IntelliJ IDEA plugin
