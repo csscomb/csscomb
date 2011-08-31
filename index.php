@@ -18,9 +18,9 @@ require_once'common/header.php';
             <h2><?=$loc['versions']?></h2>
             <ul>
                 <li><a href="/online/">CSScomb Online</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb%202.0%20for%20TextMate.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb%202.0%20for%20Coda.zip">CSScomb <?=$loc['for']?> Coda</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb%202.0%20for%20WebStorm%20or%20IntelliJIDEA.zip">CSScomb <?=$loc['for']?> IntelliJ IDEA/WebStorm</a></li>
+                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.05.tmbundle.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
+                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.05.codaplugin.zip">CSScomb <?=$loc['for']?> Coda</a></li>
+                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.05_for_WebStorm_or_IntelliJIDEA.zip">CSScomb <?=$loc['for']?> IntelliJ IDEA/WebStorm</a></li>
                 <li><?=$loc['help-us']?></li>
             </ul>
         </div>
