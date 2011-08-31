@@ -18,7 +18,7 @@ require_once'common/header.php';
             <h2><?=$loc['versions']?></h2>
             <ul>
                 <li><a href="/online/">CSScomb Online</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.05.tmbundle.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
+                    <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.05.tmbundle.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
                 <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.05.codaplugin.zip">CSScomb <?=$loc['for']?> Coda</a></li>
                 <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.05_for_WebStorm_or_IntelliJIDEA.zip">CSScomb <?=$loc['for']?> IntelliJ IDEA/WebStorm</a></li>
                 <li><?=$loc['help-us']?></li>
@@ -92,7 +92,7 @@ require_once'common/header.php';
 
         <div class="video">
             <h2><?=$loc['presentation']?></h2>
-            <iframe src="http://player.vimeo.com/video/17494685?title=0&amp;portrait=0" width="310" height="174" frameborder="0"></iframe>
+            <iframe src="http://player.vimeo.com/video/22799313?title=0&amp;byline=0&amp;portrait=0" width="640" height="360" style="width:310px;height:174px;" frameborder="0"></iframe>
         </div>
 
         <div class="clear"></div>
