@@ -1079,7 +1079,7 @@ $case['result'] = '.article BLOCKQUOTE P:before {
 $group['cases'][] = $case;
 
 
-$case['descr'] = 'Все закоментировано и есть перенос строки';
+$case['descr'] = 'Внутри фигурных скобок селектора: все закоментировано и есть перенос строки';
 $case['descr-en'] = 'Comments: All commented out and there is a line break';
 $case['link'] = 'comments-all-commented-out-and-there-is-a-line-break';
 $case['code'] = '.badges {
@@ -1093,13 +1093,77 @@ $case['result'] = '.badges {
 $group['cases'][] = $case;
 
 
-$case['descr'] = 'Все закоментировано и нет переноса строки';
+$case['descr'] = 'Внутри фигурных скобок селектора: все закоментировано и нет переноса строки';
 $case['descr-en'] = 'Comments: All commented out and no a line break';
 $case['link'] = 'comments-all-commented-out-and-no-a-line-break';
 $case['code'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
 $case['result'] = '.badges {/* margin: 0 10px 10px 10px; *//* padding: 10px; */}';
 $group['cases'][] = $case;
 
+
+
+
+
+$case['descr'] = 'Все закоментировано построчно';
+$case['descr-en'] = 'Commented all by lines';
+$case['link'] = 'comments-all-by-lines';
+$case['code'] = '/* test comment 3 */
+.one{
+    padding:0;
+    margin:0;
+    }
+
+/* test comment 4 */ /**/
+.two{
+    padding:0;
+    margin:0;
+    }
+
+/*.about{*/
+   /*width:50%;*/
+   /*float:left;*/
+   /*}*/
+
+/* Multi stars comment **/
+.class1 {
+top: 1px;
+}
+
+/* Simple comment */
+.class2 {
+top: 1px;
+}';
+$case['result'] = '/* test comment 3 */
+.one{
+    margin:0;
+    padding:0;
+    }
+
+/* test comment 4 */ /**/
+.two{
+    margin:0;
+    padding:0;
+    }
+
+/*.about{*/
+   /* float:left; */
+   /* width:50%; */
+   /*;}*/
+
+/* Multi stars comment **/
+.class1 {
+top: 1px;
+}
+
+/* Simple comment */
+.class2 {
+top: 1px;
+}';
+$group['cases'][] = $case;
+/*.about{*/
+   /*width:50%;*/
+   /*float:left;*/
+   /*}*/
 
 
 

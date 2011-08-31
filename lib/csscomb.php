@@ -18,7 +18,8 @@ class csscomb{
         // TODO: избавиться от resorted
         'expressions' => null,  // если найдены expression, то эта переменная станет массивом, ячейки которого будут содержать код каждого найденного expression
         'datauri' => null,  // если найдены data uri, то эта переменная станет массивом...
-        'hacks' => null  // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
+        'hacks' => null,  // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
+        'braces' => null // если найдены комментарии содержащие { или } мешающие парсить, то эта переменная станет массивом.
     ),
 
     /*
@@ -620,7 +621,7 @@ class csscomb{
                 $new_comments = Array();
                 $old_comments = $comments[0];
 //                $this->log('old comments', $old_comments);
-//               $this->log('$comments', $comments);
+//                $this->log('$comments', $comments);
 
                 foreach($comments[2] as $key=>$comment){
                     if( // если комментарий содержит ; и :
@@ -657,7 +658,7 @@ class csscomb{
                     $this->code['edited'] = str_replace($old_comments[$key], $new_comments[$key], $this->code['edited']);
                 }
 
-//                $this->log('$this->code[edited]', $this->code['edited']);
+//               $this->log('$this->code[edited]', $this->code['edited']);
             }
 
             // 4. Текст и свойства вперемешку
@@ -665,17 +666,46 @@ class csscomb{
             // 5. Пустой комментарий: если сделать трим то ничего не останется
             // Ничего не делаем.
 
-            // 6. Обрывки закомментированных деклараций: присутствует сначала } а потом возможно и {, но не наоборот.
-            // Ничего не делаем. Пока.
+            // 6. Обрывки закомментированных деклараций: присутствует { или }
+            if(preg_match_all('#
+                    \s*?
+                    /\*
+                    (
+                        .*?[^\*/]
+                    )*?
+                    \*+/
+                #ismx', $this->code['edited'], $comments)){
+                //$this->log('$comments', $comments[0]);
 
+                $new_comments = Array();
+                $old_comments = $comments[0];
 
+                foreach($comments[0] as $key=>$comment){
+                    if(strpos($comment, '}') !== FALSE OR strpos($comment, '{') !== FALSE){
+                        $new_comment = '';
+                        if(strpos($comment, '}') !== FALSE){ $new_comment .= '}'; }
+                        $new_comment .= "brace__".$key;
+                        if(strpos($comment, '{') !== FALSE){ $new_comment .= '{'; }
+                        $new_comments[$key] = $new_comment;
+                        $this->code['braces'][$key] = $comment;
+                    }
+                }
+               //$this->log('new co', $new_comments);
+
+                foreach($new_comments as $key => $new_comment){
+                    if(strlen($new_comment) > 0){
+                        $this->code['edited'] = str_replace($old_comments[$key], $new_comment, $this->code['edited']);
+                    }
+                }
+            }
             //$this->log('comments', $comments);
+            //$this->log('comments', $this->code['edited']);
         }
     }
 
 
     function parse_rules(){
-//        die($this->mode);
+//       die($this->mode);
 
         if($this->mode == 'css-file'){
 
@@ -989,6 +1019,19 @@ class csscomb{
                 $this->code['resorted']
             );
         }
+
+        // 5. Удаляем искусственно созданные 'brace__'
+        if(is_array($this->code['braces'])){ // если были обнаружены и вырезаны хаки
+            foreach($this->code['braces'] as $key => $val){
+                if(strpos($this->code['resorted'], 'brace__'.$key.'{') !== FALSE) {
+                    $this->code['resorted'] = str_replace('brace__'.$key.'{', $val, $this->code['resorted']);
+                }
+                if(strpos($this->code['resorted'], '}brace__'.$key) !== FALSE) {
+                    $this->code['resorted'] = str_replace('}brace__'.$key, $val, $this->code['resorted']);
+                }
+            }
+        }
+
     }
 
 

@@ -189,13 +189,30 @@ $case['order'] = '[
 ]
 ]';
 
-$css = '/* Multi stars comment **/
-class1 {
+$css = '/* test comment 3 */
+.one{
+    padding:0;
+    margin:0;
+    }
+
+/* test comment 4 */ /**/
+.two{
+    padding:0;
+    margin:0;
+    }
+
+/*.about{*/
+   /*width:50%;*/
+   /*float:left;*/
+   /*}*/
+
+/* Multi stars comment **/
+.class1 {
 top: 1px;
 }
 
 /* Simple comment */
-class2 {
+.class2 {
 top: 1px;
 }';
 
