@@ -8,12 +8,14 @@
 	<string>#!/usr/bin/env php
 &lt;?php
 /**
- * Project homepage: http://csscomb.ru
+ * CSScomb 2.05
+ * http://CSScomb.com
+ * http://twitter.com/CSScomb
  */
 require($_ENV['TM_BUNDLE_SUPPORT'] . '/lib/csscomb.php'); 
 $input = file_get_contents('php://stdin');
-$csscomb = new CSScomb();
-echo $csscomb-&gt;do_resort($input);
+$c = new csscomb();
+echo $c-&gt;csscomb($input);
 ?&gt;</string>
 	<key>input</key>
 	<string>document</string>

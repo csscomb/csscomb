@@ -1123,19 +1123,3 @@ class csscomb{
 	}
 
 }
-
-if (substr($argv[1],strlen($argv[1])-4,strlen($argv[1]))!=".css") {
-    foreach (DirFilesR($argv[1],'.css') as $k ) {
-        $input = file_get_contents($k);
-        $c = new csscomb();
-        $input = $c->csscomb($input);
-        file_put_contents($k, $input);
-    }
-}
-else {
-    $input = file_get_contents($argv[1]);
-    $csscomb = new csscomb();
-    $input = $c->csscomb($input);
-    file_put_contents($argv[1], $input);
-}
-
