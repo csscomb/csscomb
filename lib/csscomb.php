@@ -613,14 +613,14 @@ class csscomb{
                 (\s*)
                 /\*
                 (.*?[^\*/])
-                \*/
+                \*+/
                 (\s/\*\*/)?
                 #ismx', $this->code['edited'], $comments)){
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
 //                $this->log('old comments', $old_comments);
-//                $this->log('$comments', $comments);
+//               $this->log('$comments', $comments);
 
                 foreach($comments[2] as $key=>$comment){
                     if( // если комментарий содержит ; и :
@@ -636,7 +636,7 @@ class csscomb{
                         )
                         #ismx', $comment, $properties);
 
-//                        $this->log('properties', $properties[2]);
+//                       $this->log('properties', $properties[2]);
 
                         $new_comment = '';
                         foreach($properties[2] as $property){

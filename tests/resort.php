@@ -189,35 +189,15 @@ $case['order'] = '[
 ]
 ]';
 
-$css = '/* comment 1 */
-@media screen {
-    /* .b-pager (begin) */
-	.b-pager{
-		font-size:130%;
-		margin:1em 0 2em;
-		}
-		.b-pager__title{
-			font-weight:bold;
-			padding-right:.65em;
-			}
-/* .b-pager (end) */
+$css = '/* Multi stars comment **/
+class1 {
+top: 1px;
 }
 
-/* comment 2 */
-
-@media print {
-/* .b-pager (begin) */
-	.b-pager{
-		font-size:130%;
-		margin:1em 0 2em;
-		}
-		.b-pager__title{
-			font-weight:bold;
-			padding-right:.65em;
-			}
-/* .b-pager (end) */
-}
-/* eof */';
+/* Simple comment */
+class2 {
+top: 1px;
+}';
 
 //$c = new csscomb($css, true, $case['order']);
 $c = new csscomb($css, true);

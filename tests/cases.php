@@ -730,6 +730,38 @@ $group['cases'][] = $case;
 
 
 
+$case['descr'] = 'Вне селектора. /* comment **/';
+$case['descr-en'] = 'Comments: /* comment **/';
+$case['link'] = 'comments-double-asterisk';
+$case['code'] = '/* Multi stars comment **/
+.class1 {
+top: 1px;
+}
+
+/* Simple comment */
+.class2 {
+top: 1px;
+}';
+
+$case['result'] = '/* Multi stars comment **/
+.class1 {
+top: 1px;
+}
+
+/* Simple comment */
+.class2 {
+top: 1px;
+}';
+$group['cases'][] = $case;
+
+
+
+
+
+
+
+
+
 
 $case['descr'] = 'Вне селектора + вне медиа';
 $case['descr-en'] = 'Comments: out of media & selector.';
