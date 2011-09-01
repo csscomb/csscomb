@@ -1124,18 +1124,66 @@ class csscomb{
 
 }
 
-if (substr($argv[1],strlen($argv[1])-4,strlen($argv[1]))!=".css") {
-    foreach (DirFilesR($argv[1],'.css') as $k ) {
+
+
+
+
+
+
+function getExtension($filename){
+    return substr(strrchr($fileName, '.'), 1);
+}
+
+function DirFilesR($dir,$types=''){
+    $files = Array();
+    if($handle = opendir($dir)){
+
+        while (false !== ($file = readdir($handle))){
+            if ($file != "." && $file != ".."){
+                if(is_dir($dir."/".$file)){
+                    $files = array_merge($files,DirFilesR($dir."/".$file,$types));
+                }
+                else{
+                    $pos = strrpos($file,".");
+                    $ext = substr($file,$pos,strlen($file)-$pos);
+
+                    if($types){
+                        // Если указаны расширения
+                        // то смотрим расширение текущего файла
+                        // и сверяем с требуемыми
+                        if(in_array($ext,explode(';',$types))){
+                            $files[] = $dir."/".$file;
+                        }
+                    }
+                    else{
+                        // А если не указаны,
+                        // то добавляем без проверок
+                        $files[] = $dir."/".$file;
+                    }
+                }
+            }
+        }
+        closedir($handle);
+    }
+
+    return $files;
+}
+
+if(substr($argv[1],strlen($argv[1])-4,strlen($argv[1]))!=".css"){
+
+    foreach (DirFilesR($argv[1],'.css') as $k ){
         $input = file_get_contents($k);
-        $c = new csscomb();
-        $input = $c->csscomb($input);
+        $csscomb = new csscomb();
+        $input = $csscomb->csscomb($input);
         file_put_contents($k, $input);
     }
+
 }
-else {
+else{
     $input = file_get_contents($argv[1]);
     $csscomb = new csscomb();
-    $input = $c->csscomb($input);
+    $input = $csscomb->csscomb($input);
     file_put_contents($argv[1], $input);
 }
+
 
