@@ -25,6 +25,8 @@ echo $c-&gt;csscomb($input);
 	<string>CSScomb</string>
 	<key>output</key>
 	<string>replaceDocument</string>
+	<key>scope</key>
+	<string>source.css</string>
 	<key>uuid</key>
 	<string>E164412F-60DF-43B0-8813-BF4069214149</string>
 </dict>
