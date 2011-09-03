@@ -15,4 +15,4 @@ TextMate plugin
 
 Coda Plugin
 
-WebStorm/IntelliJ IDEA plugin
+IntelliJIDEA/WebStorm/PyCharm plugin

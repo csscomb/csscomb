@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>How to install CSScomb for IntelliJ IDEA or WebStorm</title>
+</head>
+<body>
+    <h1>How to install CSScomb for IntelliJ IDEA or WebStorm</h1>
+
+    <h2>Required</h2>
+    <ol>
+        <li>PHP</li>
+        <li>CSScomb for IntelliJIDEA/WebStorm</li>
+        <li>IntelliJIDEA or WebStorm</li>
+    </ol>
+
+    <h2>Install</h2>
+    <ol>
+        <li>
+            <span>Open Preferences &rarr; External Tools</span>
+            <div><img src="screenshot/external-tools.png" alt=""></div>
+            <span>Click <strong>Add</strong></span>
+        </li>
+        <li>
+            <div><img src="screenshot/add-tool.png" alt=""></div>
+            <ul>
+                <li>Name: CSScomb</li>
+                <li>Description: CSS normalizer</li>
+                <li>Program: php</li>
+                <li>Parameters: /path/to/csscomb.php $FilePath$</li>
+            </ul>
+        </li>
+    </ol>
+</body>
+</html>

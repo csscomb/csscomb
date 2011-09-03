@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env php
+&lt;?php
+/**
+ * CSScomb 2.05
+ * http://CSScomb.com
+ * http://twitter.com/CSScomb
+ */
+require($_ENV['TM_BUNDLE_SUPPORT'] . '/lib/csscomb.php'); 
+$input = file_get_contents('php://stdin');
+$c = new csscomb();
+echo $c-&gt;csscomb($input);
+?&gt;</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string></string>
+	<key>name</key>
+	<string>CSScomb</string>
+	<key>output</key>
+	<string>replaceDocument</string>
+	<key>uuid</key>
+	<string>E164412F-60DF-43B0-8813-BF4069214149</string>
+</dict>
+</plist>
