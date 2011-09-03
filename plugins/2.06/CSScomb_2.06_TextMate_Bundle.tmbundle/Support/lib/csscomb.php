@@ -1,11 +1,11 @@
 <?php
 /**
  * CSScomb
- * @version: 2.05
- * @author: Viacheslav Oliyanchuk (miripiruni)
- * @web: http://csscomb.ru/
- * @Date: 01.09.11
- * @Time: 02:45
+ * @version: 2.06
+ * @author: Vyacheslav Oliyanchuk (miripiruni)
+ * @web: http://csscomb.com/
+ * @Date: 03.09.11
+ * @Time: 19:50
  */
  
 class csscomb{
@@ -469,17 +469,17 @@ class csscomb{
 
 
     function set_sort_order($json_array = null){
-		if($json_array != null){
-			$custom_sort_order = json_decode($json_array);
-			if(is_array($custom_sort_order) AND count($custom_sort_order)>0){
-				$this->sort_order = $custom_sort_order;
-			}
-			else {
+        if($json_array != null){
+            $custom_sort_order = json_decode($json_array);
+            if(is_array($custom_sort_order) AND count($custom_sort_order)>0){
+                $this->sort_order = $custom_sort_order;
+            }
+            else {
                 $this->sort_order = json_decode($this->default_sort_order);
             }
-		}
-		else $this->sort_order = json_decode($this->default_sort_order);
-	}
+        }
+        else $this->sort_order = json_decode($this->default_sort_order);
+    }
 
 
 
@@ -574,12 +574,12 @@ class csscomb{
 //        $this->log('expressions', $this->code['expressions']);
 
         // 3. data uri
-        if(strpos($this->code['edited'], 'data:')){
+        if(strpos($this->code['edited'], ';base64,')){
             $i = 0;
 			$this->code['datauri'] = array();
 			while(strpos($this->code['edited'], ';base64,')):
 //				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
-				preg_match_all('#(url\(data:.[^\)]*\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+				preg_match_all('#(url\(["\']?data:.[^\)]*["\']?\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
                 $this->code['datauri'][] = $match[0][1]; // собираем значения
                 $this->code['edited'] = str_replace($match[0][1], 'datauri'.$i++.'__', $this->code['edited']);
 			endwhile;
@@ -737,12 +737,12 @@ class csscomb{
 
             @ismx', $code_without_end, $matches);
 
-//            $this->log('$matches', $matches[0]);
+            //$this->log('$matches', $matches[0]);
 
 
             $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
 
-    //        $this->log('rules', $rules);
+            //$this->log('rules', $rules);
             foreach($rules as $key=>$val){
                 $rules[$key] = $this->parse_properties($val);  // 4 парсим и сортируем каждую часть
             }
@@ -798,22 +798,42 @@ class csscomb{
                 ^
                 (.*?)
                 (
+                    #(\s*/\*.*\*/;)*?
                     \s*?
                     }
                 )
 
             @ismx', $css, $matches);
 
-//          $this->log($css, $matches);
+          //$this->log($css, $matches);
 
-            if(sizeof($matches)>0){ // если есть и свойства и скобка и хотя бы одно :
+            $all = null;
+            preg_match_all('@
+                ^
+                (
+                    \s*
+                    /\*.*\*/
+                )
+                ;
+                (
+                    \s*
+                    }
+                )
+            @ismx', $css, $all);
+
+            if($all[0][0] == $css){ // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
+                $all[0][0] = '';
+                return $all[1][0].$all[2][0];
+            }
+
+            if(sizeof($matches)>0 and strlen($matches[1]) > 0){ // если есть и свойства и скобка и хотя бы одно :
                 $properties = $matches[1];
+                $brace = $matches[2];
+                //$this->log($css, $brace);
 
                 if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
                     $properties = str_replace("\n\n", "\n", $properties);
                 }
-
-                $brace = $matches[2];
 
                 /* отделяем первый комментарий, который находится на той же строке где и была скобка */
                 $matches = null;
@@ -852,16 +872,18 @@ class csscomb{
                         ;
                         (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
                             \s*
-                            /\* .* \*/
+                            /\*
+                            .*?[^\*/]
+                            \*/
                         )
-                        *?
+                        ?
                     )
 
                     @ismx', $properties, $matches);
 
                 $props = $matches[0];
 
-//              $this->log('props', $props);
+              //$this->log('props', $props);
 
                 $props = $this->resort_properties($props);
                 $props = $first_spaces.$first_comment.implode($props).$brace;
