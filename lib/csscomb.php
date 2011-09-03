@@ -5,7 +5,7 @@
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  * @Date: 03.09.11
- * @Time: 18:18
+ * @Time: 19:50
  */
  
 class csscomb{
@@ -737,12 +737,12 @@ class csscomb{
 
             @ismx', $code_without_end, $matches);
 
-//            $this->log('$matches', $matches[0]);
+            //$this->log('$matches', $matches[0]);
 
 
             $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
 
-    //        $this->log('rules', $rules);
+            //$this->log('rules', $rules);
             foreach($rules as $key=>$val){
                 $rules[$key] = $this->parse_properties($val);  // 4 парсим и сортируем каждую часть
             }
@@ -798,6 +798,7 @@ class csscomb{
                 ^
                 (.*?)
                 (
+                    #(\s*/\*.*\*/;)*?
                     \s*?
                     }
                 )
@@ -806,14 +807,33 @@ class csscomb{
 
           //$this->log($css, $matches);
 
-            if(sizeof($matches)>0){ // если есть и свойства и скобка и хотя бы одно :
+            $all = null;
+            preg_match_all('@
+                ^
+                (
+                    \s*
+                    /\*.*\*/
+                )
+                ;
+                (
+                    \s*
+                    }
+                )
+            @ismx', $css, $all);
+
+            if($all[0][0] == $css){ // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
+                $all[0][0] = '';
+                return $all[1][0].$all[2][0];
+            }
+
+            if(sizeof($matches)>0 and strlen($matches[1]) > 0){ // если есть и свойства и скобка и хотя бы одно :
                 $properties = $matches[1];
+                $brace = $matches[2];
+                //$this->log($css, $brace);
 
                 if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
                     $properties = str_replace("\n\n", "\n", $properties);
                 }
-
-                $brace = $matches[2];
 
                 /* отделяем первый комментарий, который находится на той же строке где и была скобка */
                 $matches = null;

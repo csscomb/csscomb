@@ -189,12 +189,35 @@ $case['order'] = '[
 ]
 ]';
 
-$css = 'h1{
-	background: #faf0e6; /* bg color */
-	border: 2px dashed #800000; /* comment number 2 */
-	color: #a0522d; /* text color */
-	padding: 7px; /* last line comment */
-	}';
+$css = '/* comment 1 */
+@media screen {
+    /* .b-pager (begin) */
+	.b-pager{
+		font-size:130%;
+		margin:1em 0 2em;
+		}
+		.b-pager__title{
+			font-weight:bold;
+			padding-right:.65em;
+			}
+/* .b-pager (end) */
+}
+
+/* comment 2 */
+
+@media print {
+/* .b-pager (begin) */
+	.b-pager{
+		font-size:130%;
+		margin:1em 0 2em;
+		}
+		.b-pager__title{
+			font-weight:bold;
+			padding-right:.65em;
+			}
+/* .b-pager (end) */
+}
+/* eof */';
 
 //$c = new csscomb($css, true, $case['order']);
 $c = new csscomb($css, true);
