@@ -189,32 +189,12 @@ $case['order'] = '[
 ]
 ]';
 
-$css = '/* test comment 3 */
-.one{
-    padding:0;
-    margin:0;
-    }
-
-/* test comment 4 */ /**/
-.two{
-    padding:0;
-    margin:0;
-    }
-
-/*.about{*/
-   /*width:50%;*/
-   /*float:left;*/
-   /*}*/
-
-/* Multi stars comment **/
-.class1 {
-top: 1px;
-}
-
-/* Simple comment */
-.class2 {
-top: 1px;
-}';
+$css = 'h1{
+	background: #faf0e6; /* bg color */
+	border: 2px dashed #800000; /* comment number 2 */
+	color: #a0522d; /* text color */
+	padding: 7px; /* last line comment */
+	}';
 
 //$c = new csscomb($css, true, $case['order']);
 $c = new csscomb($css, true);

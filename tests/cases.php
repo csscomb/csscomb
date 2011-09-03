@@ -465,9 +465,9 @@ $case['code'] = '#header{
 	}';
 
 $case['result'] = '#header{
-	zoom:1;
 	padding-bottom:10px;
 	height:100px;
+	zoom:1;
 	zoom:expression(
 		runtimeStyle.zoom = 1,
 		i = createElement(\'div\'),
@@ -833,16 +833,16 @@ $case['descr'] = 'Внутри селектора';
 $case['descr-en'] = 'Comments: in selector';
 $case['link'] = 'comments-in-selector';
 $case['code'] = 'h1{
-	background: #faf0e6; /* Цвет фона под текстом */
-	border: 2px dashed #800000; /* Рамка вокруг заголовка */
-	color: #a0522d; /* Цвет текста */
-	padding: 7px; /* Поля вокруг текста */
+	background: #faf0e6; /* bg color */
+	border: 2px dashed #800000; /* comment number 2 */
+	color: #a0522d; /* text color */
+	padding: 7px; /* last line comment */
 	}';
 $case['result'] = 'h1{
-	padding: 7px /* Поля вокруг текста */;
-	border: 2px dashed #800000 /* Рамка вокруг заголовка */;
-	background: #faf0e6 /* Цвет фона под текстом */;
-	color: #a0522d /* Цвет текста */;
+	padding: 7px; /* last line comment */
+	border: 2px dashed #800000; /* comment number 2 */
+	background: #faf0e6; /* bg color */
+	color: #a0522d; /* text color */
 	}';
 $group['cases'][] = $case;
 

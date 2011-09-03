@@ -1,11 +1,11 @@
 <?php
 /**
  * CSScomb
- * @version: 2.05
- * @author: Viacheslav Oliyanchuk (miripiruni)
- * @web: http://csscomb.ru/
- * @Date: 01.09.11
- * @Time: 02:45
+ * @version: 2.06
+ * @author: Vyacheslav Oliyanchuk (miripiruni)
+ * @web: http://csscomb.com/
+ * @Date: 03.09.11
+ * @Time: 18:18
  */
  
 class csscomb{
@@ -469,17 +469,17 @@ class csscomb{
 
 
     function set_sort_order($json_array = null){
-		if($json_array != null){
-			$custom_sort_order = json_decode($json_array);
-			if(is_array($custom_sort_order) AND count($custom_sort_order)>0){
-				$this->sort_order = $custom_sort_order;
-			}
-			else {
+        if($json_array != null){
+            $custom_sort_order = json_decode($json_array);
+            if(is_array($custom_sort_order) AND count($custom_sort_order)>0){
+                $this->sort_order = $custom_sort_order;
+            }
+            else {
                 $this->sort_order = json_decode($this->default_sort_order);
             }
-		}
-		else $this->sort_order = json_decode($this->default_sort_order);
-	}
+        }
+        else $this->sort_order = json_decode($this->default_sort_order);
+    }
 
 
 
@@ -574,12 +574,12 @@ class csscomb{
 //        $this->log('expressions', $this->code['expressions']);
 
         // 3. data uri
-        if(strpos($this->code['edited'], 'data:')){
+        if(strpos($this->code['edited'], ';base64,')){
             $i = 0;
 			$this->code['datauri'] = array();
 			while(strpos($this->code['edited'], ';base64,')):
 //				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
-				preg_match_all('#(url\(data:.[^\)]*\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+				preg_match_all('#(url\(["\']?data:.[^\)]*["\']?\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
                 $this->code['datauri'][] = $match[0][1]; // собираем значения
                 $this->code['edited'] = str_replace($match[0][1], 'datauri'.$i++.'__', $this->code['edited']);
 			endwhile;
@@ -804,7 +804,7 @@ class csscomb{
 
             @ismx', $css, $matches);
 
-//          $this->log($css, $matches);
+          //$this->log($css, $matches);
 
             if(sizeof($matches)>0){ // если есть и свойства и скобка и хотя бы одно :
                 $properties = $matches[1];
@@ -852,16 +852,18 @@ class csscomb{
                         ;
                         (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
                             \s*
-                            /\* .* \*/
+                            /\*
+                            .*?[^\*/]
+                            \*/
                         )
-                        *?
+                        ?
                     )
 
                     @ismx', $properties, $matches);
 
                 $props = $matches[0];
 
-//              $this->log('props', $props);
+              //$this->log('props', $props);
 
                 $props = $this->resort_properties($props);
                 $props = $first_spaces.$first_comment.implode($props).$brace;
