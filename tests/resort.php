@@ -189,37 +189,26 @@ $case['order'] = '[
 ]
 ]';
 
-$css = '/* comment 1 */
-@media screen {
-    /* .b-pager (begin) */
-	.b-pager{
-		font-size:130%;
-		margin:1em 0 2em;
-		}
-		.b-pager__title{
-			font-weight:bold;
-			padding-right:.65em;
-			}
-/* .b-pager (end) */
+$css = '.b-form-button_height_19 .b-form-button__left
+{
+   width: 5px;
+   margin-right: -5px; /* FF2 *//**/
 }
 
-/* comment 2 */
-
-@media print {
-/* .b-pager (begin) */
-	.b-pager{
-		font-size:130%;
-		margin:1em 0 2em;
-		}
-		.b-pager__title{
-			font-weight:bold;
-			padding-right:.65em;
-			}
-/* .b-pager (end) */
+.b-form-button_height_19 .b-form-button__left
+{
+   width: 5px;
+   margin-right: -5px; /* FF2 */ /**/
 }
-/* eof */';
 
-//$c = new csscomb($css, true, $case['order']);
+.b-form-button_height_19 .b-form-button__content
+{
+   font: 11px/21px Verdana, Arial, sans-serif;
+
+   margin: 0 5px; /* margin-left для FF2 *//**/
+   padding: 0 9px;
+}';
+
 $c = new csscomb($css, true);
 ?>
 </body>

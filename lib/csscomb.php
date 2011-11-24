@@ -615,13 +615,13 @@ class csscomb{
                 /\*
                 (.*?[^\*/])
                 \*+/
-                (\s/\*\*/)?
+                (\ {0,1}/\*\*/)?
                 #ismx', $this->code['edited'], $comments)){
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
 //                $this->log('old comments', $old_comments);
-//                $this->log('$comments', $comments);
+                //$this->log('$comments', $comments);
 
                 foreach($comments[2] as $key=>$comment){
                     if( // если комментарий содержит ; и :
@@ -658,7 +658,7 @@ class csscomb{
                     $this->code['edited'] = str_replace($old_comments[$key], $new_comments[$key], $this->code['edited']);
                 }
 
-//               $this->log('$this->code[edited]', $this->code['edited']);
+               //$this->log('$this->code[edited]', $this->code['edited']);
             }
 
             // 4. Текст и свойства вперемешку
@@ -877,13 +877,16 @@ class csscomb{
                             \*/
                         )
                         ?
+                        (\s{0,1}/\*\*/)?
+
                     )
 
                     @ismx', $properties, $matches);
 
                 $props = $matches[0];
 
-              //$this->log('props', $props);
+                //$this->log('1', $properties);
+                //$this->log('1', $props);
 
                 $props = $this->resort_properties($props);
                 $props = $first_spaces.$first_comment.implode($props).$brace;

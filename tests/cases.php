@@ -848,6 +848,50 @@ $group['cases'][] = $case;
 
 
 
+$case['descr'] = 'Внутри селектора двойные комментарии /* text *//**/';
+$case['descr-en'] = 'Comments: in selector double comments /* text *//**/';
+$case['link'] = 'comments-in-selector-double';
+$case['code'] = '.b-form-button_height_19 .b-form-button__left
+{
+   width: 5px;
+   margin-right: -5px; /* FF2 *//**/
+}
+
+.b-form-button_height_19 .b-form-button__left
+{
+   width: 5px;
+   margin-right: -5px; /* FF2 */ /**/
+}
+
+.b-form-button_height_19 .b-form-button__content
+{
+   font: 11px/21px Verdana, Arial, sans-serif;
+   margin: 0 5px; /* margin-left for FF2 *//**/
+   padding: 0 9px;
+}';
+$case['result'] = '.b-form-button_height_19 .b-form-button__left
+{
+   margin-right: -5px; /* FF2 *//**/
+   width: 5px;
+}
+
+.b-form-button_height_19 .b-form-button__left
+{
+   margin-right: -5px; /* FF2 */ /**/
+   width: 5px;
+}
+
+.b-form-button_height_19 .b-form-button__content
+{
+   margin: 0 5px; /* margin-left for FF2 *//**/
+   padding: 0 9px;
+   font: 11px/21px Verdana, Arial, sans-serif;
+}';
+$group['cases'][] = $case;
+
+
+
+
 
 $case['descr'] = 'Внутри селектора сразу после открывающей фигурной скобки';
 $case['descr-en'] = 'Comments: Inside the selector immediately after the opening brace';
