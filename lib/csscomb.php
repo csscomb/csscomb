@@ -24,6 +24,8 @@ class csscomb{
     ),
 
     /*
+     * В переменной $mode лежит режим работы с CSS-кодом.
+     * Возможны следующие значения:
      * css-file - только CSS-код
      * style-attribute - найден атрибут style="..."
      * properties - не найдено фигурных скобок, зато присутствуют точки с запятой и двоеточия.
@@ -597,7 +599,42 @@ class csscomb{
 ]
 ]';
 
+    /**
+     * Функция конструктор
+     * @param css {string}
+     * @param echo {boolean}
+     * @custon_sort_order {string|JSON}
+     *
+     * @TODO: https://github.com/miripiruni/CSScomb/issues/21
+     *
+     */
+    function csscomb($css = '', $echo = false, $custom_sort_order = null){
+        if($echo===0 or $echo===false){
+            $this->output = false;
+        }
 
+        $this->code['original'] = $this->code['edited'] = $css;
+
+        $this->set_mode();
+        $this->set_sort_order($custom_sort_order); // 1 задаем порядок сортировки
+
+        $this->preprocess();        // 2 препроцессинг
+        $this->parse_rules();       // 3,4,5 парсим на части по скобкам
+        $this->postprocess();       // 6 постпроцессинг
+
+        return $this->end_of_process();
+    }
+
+
+
+
+
+    /**
+     * Функция сетит $this->sort_order
+     *
+     * @param json_array {string/JSON}
+     *
+     */
     function set_sort_order($json_array = null){
         if($json_array != null){
             $custom_sort_order = json_decode($json_array);
@@ -634,8 +671,13 @@ class csscomb{
 
 
 
+    /**
+     * Функция сетит $this->mode
+     *
+     * @TODO: а если и тег <style> и несколько style="..." в HTML?
+     *        https://github.com/miripiruni/CSScomb/issues/9
+     */
     function set_mode(){
-        //todo: а если и тег <style> и несколько style="..." в HTML?
         if(strpos($this->code['original'], '{')){ // если есть фигурные скобки
                 $this->mode = 'css-file';
         }
@@ -651,6 +693,9 @@ class csscomb{
     }
 
 
+    /**
+     * @TODO: почему нигде не используется? Убрать?
+     */
     function get_sort_order($order_name = null){
         $order = '';
         if($order_name !== null){
@@ -681,23 +726,6 @@ class csscomb{
 
 
 
-    function csscomb($css = '', $echo = false, $custom_sort_order = null){
-        if($echo===0 or $echo===false) $this->output = false;
-
-        $this->code['original'] = $this->code['edited'] = $css;
-
-        $this->set_mode();
-        $this->set_sort_order($custom_sort_order);    // 1 задаем порядок сортировки
-
-        $this->preprocess();        // 2 препроцессинг
-        $this->parse_rules();       // 3,4,5 парсим на части по скобкам
-        $this->postprocess();       // 6 постпроцессинг
-
-//        return $this->mode.' '.$this->end_of_process();
-        return $this->end_of_process();
-
-//        $this->result();          // 7 возвращаем результат
-    }
 
 
     function preprocess(){
@@ -707,39 +735,35 @@ class csscomb{
             $this->code['hacks'] = array();
             while(strpos($this->code['edited'], '"\\"}\\""')):
                 $this->code['hacks'][] = '"\\"}\\""';
-				$this->code['edited'] = str_replace('"\\"}\\""', 'hack'.$i++.'__', $this->code['edited']);
-			endwhile;
-//            $this->log('hacks detected', $this->code['edited']);
+                $this->code['edited'] = str_replace('"\\"}\\""', 'hack'.$i++.'__', $this->code['edited']);
+            endwhile;
         }
 
         // 2. expressions
         if(strpos($this->code['edited'], 'expression(')){ // разбираемся с expression если они присутствуют
-			$i = 0;
-			$this->code['expressions'] = array();
-			while(strpos($this->code['edited'], 'expression(')):
-				preg_match_all('#(.*)expression\((.*)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем expression
-				$this->code['expressions'][] = $match[0][2]; // собираем значения expression(...)
-				$this->code['edited'] = str_replace('expression('.$match[0][2].')', 'exp'.$i++.'__', $this->code['edited']);
-			endwhile;
-		}
-//        $this->log('expressions', $this->code['expressions']);
+            $i = 0;
+            $this->code['expressions'] = array();
+            while(strpos($this->code['edited'], 'expression(')):
+                preg_match_all('#(.*)expression\((.*)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем expression
+                $this->code['expressions'][] = $match[0][2]; // собираем значения expression(...)
+                $this->code['edited'] = str_replace('expression('.$match[0][2].')', 'exp'.$i++.'__', $this->code['edited']);
+            endwhile;
+        }
 
         // 3. data uri
         if(strpos($this->code['edited'], ';base64,')){
             $i = 0;
-			$this->code['datauri'] = array();
-			while(strpos($this->code['edited'], ';base64,')):
-//				preg_match_all('#(;base64,[A-Z0-9\+\/\=]*)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
-				preg_match_all('#(url\(["\']?data:.[^\)]*["\']?\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+            $this->code['datauri'] = array();
+            while(strpos($this->code['edited'], ';base64,')):
+                preg_match_all('#(url\(["\']?data:.[^\)]*["\']?\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
                 $this->code['datauri'][] = $match[0][1]; // собираем значения
                 $this->code['edited'] = str_replace($match[0][1], 'datauri'.$i++.'__', $this->code['edited']);
-			endwhile;
+            endwhile;
         }
 
-        // 4. ; в конце
+        // 4. Всякое разное...
         $this->code['edited'] = str_replace('{}','{ }', $this->code['edited']); // закрываем сложности парсинга {}
         $this->code['edited'] = preg_replace('/(.*?[^\s])(\s*?})/','$1;$2', $this->code['edited']); // закрываем сложности с отсутствующей последней ; перед }
-//        $this->code['edited'] = preg_replace('@;(\s*/\*.*?[^\*\/]*/)@ism','$1;', $this->code['edited']); // перемещаем построчные комментарии к свойству за ;
 
 
         // 5. Комментарии
@@ -754,13 +778,12 @@ class csscomb{
             @ismx', $this->code['edited'], $test)){
 
             // 1. Текстовый комментарий не содержащий свойств: всё, где нет ни :, ни ;, ни {|}, но есть какие-то буквы/цифры
-            // Ничего не делаем.
+                // Ничего не делаем.
 
             // 2. Одно свойство: есть : и ; но после ; ничего нет кроме \s.
-            // заменяем на commented_border: 1ps solid red;
+                // заменяем на commented__border: 1px solid red;
 
-            // 3. // Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
-//            $this->log('test', $test);
+            // 3. Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
             if(preg_match_all('#
                 (\s*)
                 /\*
@@ -771,8 +794,6 @@ class csscomb{
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
-//                $this->log('old comments', $old_comments);
-                //$this->log('$comments', $comments);
 
                 foreach($comments[2] as $key=>$comment){
                     if( // если комментарий содержит ; и :
@@ -788,14 +809,11 @@ class csscomb{
                         )
                         #ismx', $comment, $properties);
 
-//                       $this->log('properties', $properties[2]);
-
                         $new_comment = '';
                         foreach($properties[2] as $property){
                             $new_comment .= $comments[1][$key]."commented__".$property;
                         }
                         $new_comments[] = $new_comment;
-//                        $this->log('new co', $new_comment);
                     }
                     else{ // если нет : или ;, то считаем что это текстовый комментарий и копируем его в том виде, в каком он был.
                         $new_comments[] = $comments[0][$key];
@@ -803,19 +821,16 @@ class csscomb{
 
 
                 }
-//                $this->log('new co', $new_comments);
 
                 foreach($old_comments as $key => $old_comment){
                     $this->code['edited'] = str_replace($old_comments[$key], $new_comments[$key], $this->code['edited']);
                 }
-
-               //$this->log('$this->code[edited]', $this->code['edited']);
             }
 
             // 4. Текст и свойства вперемешку
 
             // 5. Пустой комментарий: если сделать трим то ничего не останется
-            // Ничего не делаем.
+                // Ничего не делаем.
 
             // 6. Обрывки закомментированных деклараций: присутствует { или }
             if(preg_match_all('#
@@ -826,7 +841,6 @@ class csscomb{
                     )*?
                     \*+/
                 #ismx', $this->code['edited'], $comments)){
-                //$this->log('$comments', $comments[0]);
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
@@ -841,7 +855,6 @@ class csscomb{
                         $this->code['braces'][$key] = $comment;
                     }
                 }
-               //$this->log('new co', $new_comments);
 
                 foreach($new_comments as $key => $new_comment){
                     if(strlen($new_comment) > 0){
@@ -849,8 +862,6 @@ class csscomb{
                     }
                 }
             }
-            //$this->log('comments', $comments);
-            //$this->log('comments', $this->code['edited']);
         }
 
         // 7. Entities
@@ -871,12 +882,16 @@ class csscomb{
     }
 
 
+    /**
+     * Зависит от $this->mode
+     * Из $this->code['edited'] получает массив разбитый по }
+     *
+     */
     function parse_rules(){
-//       die($this->mode);
 
         if($this->mode == 'css-file'){
 
-            // отделяем все что после последней } если там что-то есть, конечно :)
+            // отделяем все, что после последней } если там что-то есть, конечно :)
             preg_match('@
 
                 (
@@ -904,16 +919,12 @@ class csscomb{
 
             @ismx', $code_without_end, $matches);
 
-            //$this->log('$matches', $matches[0]);
-
-
             $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
 
-            //$this->log('rules', $rules);
+            //TODO: вынести вызов parse_prop в csscomb(), сделать чтобы parse_rules возвращала результат своей работы в виде $rules
             foreach($rules as $key=>$val){
                 $rules[$key] = $this->parse_properties($val);  // 4 парсим и сортируем каждую часть
             }
-    //        $this->log('rules', $rules);
 
             $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // 5 склеиваем части
         }
@@ -935,9 +946,9 @@ class csscomb{
 
             @ismx', $this->code['edited'], $matches);
 
-//            $this->log('$matches[1]', $matches[1]);
             $properties = $matches[1];
 
+            //TODO: вынести вызов parse_prop в csscomb(), сделать чтобы parse_rules возвращала результат своей работы в виде $rules
             foreach($properties as $props){
                 $r = $this->parse_properties($props);
                 $this->code['resorted'] = str_replace($props, $r, $this->code['resorted']);
@@ -950,12 +961,20 @@ class csscomb{
         if($this->mode == 'properties'){
 			preg_match('@\s*?.*?[^;\s];(\s)@ismx', $this->code['edited'], $matches);
             $this->code['edited'] = $matches[1].$this->code['edited'];
+            //TODO: Не использовать parse_prop здесь, а делать вызов в csscomb. Пусть функции общаются между собой через csscomb
             $rules[0] = trim($this->parse_properties($this->code['edited']));
             $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;
         }
     }
 
 
+    /**
+     * Сильно зависит от $this->mode
+     *
+     * парсит CSS-декларации из строки
+     * @param css {string}
+     *
+     */
     function parse_properties($css = ''){
         if($this->mode == 'css-file'){
             // отделяем фигурную скобку
@@ -971,8 +990,6 @@ class csscomb{
                 )
 
             @ismx', $css, $matches);
-
-          //$this->log($css, $matches);
 
             $all = null;
             preg_match_all('@
@@ -996,13 +1013,12 @@ class csscomb{
             if(sizeof($matches)>0 and strlen($matches[1]) > 0){ // если есть и свойства и скобка и хотя бы одно :
                 $properties = $matches[1];
                 $brace = $matches[2];
-                //$this->log($css, $brace);
 
                 if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
                     $properties = str_replace("\n\n", "\n", $properties);
                 }
 
-                /* отделяем первый комментарий, который находится на той же строке где и была скобка */
+                /* отделяем первый комментарий, который находится на той же строке, где и была скобка */
                 $matches = null;
                 $first_spaces = $first_comment = '';
                 preg_match('@
@@ -1026,16 +1042,14 @@ class csscomb{
                     $properties = $matches[4];
                 }
 
-                //                die();
-
                 $matches = null;
                 preg_match_all('@
 
                     \s*
                     (
-                        .[^:]*          # все что угодно, но не :
+                        .[^:]*
                         [:>]
-                        .[^;]*          # все что угодно, но не ;
+                        .[^;]*
                         ;
                         (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
                             \s*
@@ -1051,9 +1065,6 @@ class csscomb{
                     @ismx', $properties, $matches);
 
                 $props = $matches[0];
-
-                //$this->log('1', $properties);
-                //$this->log('1', $props);
 
                 $props = $this->resort_properties($props);
                 $props = $first_spaces.$first_comment.implode($props).$brace;
@@ -1079,8 +1090,9 @@ class csscomb{
                     )
 
                     @ismx', $css, $matches);
+
             $props = $matches[0];
-//            $this->log('new', sizeof($props));
+
             if(sizeof($props)>0){ // если есть и свойства и скобка и хотя бы одно :
                 $props = $this->resort_properties($props);
                 $props = implode($props);
@@ -1094,10 +1106,13 @@ class csscomb{
     }
 
 
+    /**
+     * Функция выполняет сортировку свойств
+     *
+     */
     function resort_properties($prop){
         $resorted = $undefined = array();
 
-//        $this->log('new', $prop);
         foreach($prop as $k=>$val){
             $index = null; // Дефолтное значение индекса порядка для свойства. Если свойство не знакомо, то index так и останется null.
             preg_match_all('@\s*?(.*?[^:]:).*@ism', $val, $matches, PREG_SET_ORDER);
@@ -1108,6 +1123,10 @@ class csscomb{
                 foreach($this->sort_order as $pos=>$key){ // для каждой группы свойств
                     foreach($this->sort_order[$pos] as $p=>$k){ // для каждого свойства
                         if(
+                            /**
+                             * Пробел в начале добавляется специально, чтобы избежать совпадений по вхождению
+                             * одной строки в другую. Например: top не должно совпадать с border-top
+                             */
                             strpos(' '.trim($property),' '.$k.':')!==FALSE OR
                             strpos(' '.trim($property),' commented__'.$k.':')!==FALSE
 
@@ -1122,6 +1141,7 @@ class csscomb{
             else{
                 foreach($this->sort_order as $pos=>$key){
                     if(
+                        // пробел в начале добавляется специально.
                         strpos(' '.trim($property), ' '.$key.':')!==FALSE OR
                         strpos(' '.trim($property), ' commented__'.$key.':')!==FALSE
                     ){
@@ -1159,6 +1179,9 @@ class csscomb{
     }
 
 
+    /**
+     * Склеивает многомерный массив в строку
+     */
     function array_implode($arrays, &$target = array()){
         foreach ($arrays as $item){
             if (is_array($item)){
@@ -1172,30 +1195,30 @@ class csscomb{
     }
 
 
+    /**
+     * Постпроцесс, убираем все подстановки и возвращаем на место всё, что мешало сортировке
+     */
     function postprocess(){
         // 1. экранирование хаков с использованием ключевых символов например voice-family: "\"}\"";
-//        $this->log('hacks', $this->code['hacks']);
         if(is_array($this->code['hacks'])){ // если были обнаружены и вырезаны хаки
             foreach($this->code['hacks'] as $key=>$val){
                 if(strpos($this->code['resorted'], 'hack'.$key.'__')) $this->code['resorted'] = str_replace('hack'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
             }
-		}
+        }
 
         // 2. expressions
         if(is_array($this->code['expressions'])){ // если были обнаружены и вырезаны expression
             foreach($this->code['expressions'] as $key=>$val){
                 if(strpos($this->code['resorted'], 'exp'.$key.'__')) $this->code['resorted'] = str_replace('exp'.$key.'__', 'expression('.$val.')', $this->code['resorted']); // заменяем значение expression обратно
             }
-		}
+        }
 
         // 3. datauri
         if(is_array($this->code['datauri'])){ // если были обнаружены и вырезаны data uri
             foreach($this->code['datauri'] as $key=>$val){
                 if(strpos($this->code['resorted'], 'datauri'.$key.'__')) $this->code['resorted'] = str_replace('datauri'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
             }
-		}
-
-//        $this->code['resorted'] = preg_replace('@(\s*/\*.*?[^\*\/]*/);+@ism',';$1', $this->code['resorted']); // возвращаем на место комментарии
+        }
 
         // 4. Удаляем искусственно созданные 'commented__'
         while(strpos($this->code['resorted'], 'commented__') !== FALSE){
@@ -1240,32 +1263,25 @@ class csscomb{
 
     function end_of_process(){
         if($this->code['edited']!='' AND $this->output!==false){
-            echo '
-    <style>
-		body{margin:0;}
-		.diff{
-			width:100%;
-			height:400px;
-			overflow:auto;
-			}
-            .diff textarea{
-                width:50%;
-                height:9999px;
-                padding:0;
-                margin:0;
-                border:0;
-                background:#f5f5f5;
-                }
-	</style>
-	<div class="diff">
-	<textarea name="in" id="in" cols="30" rows="10">'.$this->code['original'].'</textarea><textarea name="out" id="out" cols="30" rows="10">'.$this->code['resorted'].'</textarea>
-</div>
-<!--table width="100%" style="font:1em monospace;">
-    <tr>
-        <td width="50%" style="vertical-align:top;white-space:pre;">'.$this->code['original'].'</td>
-        <td style="vertical-align:top;white-space:pre;">'.$this->code['resorted'].'</td>
-    </tr>
-</table-->';
+            echo '<style>
+    body{margin:0;}
+    .diff{
+        width:100%;
+        height:400px;
+        overflow:auto;
+        }
+        .diff textarea{
+            width:50%;
+            height:9999px;
+            padding:0;
+            margin:0;
+            border:0;
+            background:#f5f5f5;
+            }
+</style>
+<div class="diff">
+<textarea name="in" id="in" cols="30" rows="10">'.$this->code['original'].'</textarea><textarea name="out" id="out" cols="30" rows="10">'.$this->code['resorted'].'</textarea>
+</div>';
         }
 
         if($this->output===false) return $this->code['resorted'];
@@ -1284,44 +1300,44 @@ class csscomb{
 
 
     /**
-	 * Возвращает сквозной прядковый номер элемента двумерного массива так, как если бы этот массив был одномерным
-	 * @param  {string}
-	 * @return {bool|int}
-	 */
-	private function get_through_number($value){
-		$i = 0;
-		foreach($this->sort_order as $property_group){
-			foreach($property_group as $key=>$val){
-				if($val==$value) return $i;
-				else $i++;
-			}
-		}
-		return false;
-	}
+     * Возвращает сквозной прядковый номер элемента двумерного массива так, как если бы этот массив был одномерным
+     * @param  {string}
+     * @return {bool|int}
+     */
+    private function get_through_number($value){
+        $i = 0;
+        foreach($this->sort_order as $property_group){
+            foreach($property_group as $key=>$val){
+                if($val==$value) return $i;
+                else $i++;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * Разделяет свойства на группы пустой строкой
-	 * Внимание: вызывать только когда есть разделение на группы, иначе вернет входной массив без изменений
-	 * @param  {array}
-	 * @return {array}
-	 */
-	private function separate_property_group($properties){
-		if(is_array($this->sort_order[0])){ // Если в настройках нет разбиения на группы, то выходим входной массив без изменений
-			foreach($properties as $key=>$property){
-				$array = explode(':', $property);
-				$prop_name[$key] = trim($array[0]);
-			}
-			foreach($this->sort_order as $group_num=>$property_group){ // Перебираем группы свойств
-				$intersect = array_intersect($prop_name, $property_group);
-				if(count($intersect)>0){
-					$num = array_keys($intersect);
-					$last_key = null;
-					foreach($num as $n)	$last_key = $n;
-					if($properties[$last_key] != end($properties)) $properties[$last_key] = $properties[$last_key]."\n";
-				}
-			}
-		}
-		return $properties;
-	}
+    /**
+     * Разделяет свойства на группы пустой строкой
+     * Внимание: вызывать только когда есть разделение на группы, иначе вернет входной массив без изменений
+     * @param  {array}
+     * @return {array}
+     */
+    private function separate_property_group($properties){
+        if(is_array($this->sort_order[0])){ // Если в настройках нет разбиения на группы, то выходим входной массив без изменений
+            foreach($properties as $key=>$property){
+                $array = explode(':', $property);
+                $prop_name[$key] = trim($array[0]);
+            }
+            foreach($this->sort_order as $group_num=>$property_group){ // Перебираем группы свойств
+                $intersect = array_intersect($prop_name, $property_group);
+                if(count($intersect)>0){
+                    $num = array_keys($intersect);
+                    $last_key = null;
+                    foreach($num as $n)	$last_key = $n;
+                    if($properties[$last_key] != end($properties)) $properties[$last_key] = $properties[$last_key]."\n";
+                }
+            }
+        }
+        return $properties;
+    }
 
 }
