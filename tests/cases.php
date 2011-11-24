@@ -1554,6 +1554,20 @@ $group['cases'][] = $case;
 
 
 
+$case['descr'] = 'HTML entities';
+$case['descr-en'] = 'HTML entities';
+$case['link'] = 'html-entities';
+$case['code'] = 'div{
+    content: "&darr;";
+    }';
+$case['result'] = 'div{
+    content: "&darr;";
+    }';
+$group['cases'][] = $case;
+
+
+
+
 
 
 

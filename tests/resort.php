@@ -189,25 +189,9 @@ $case['order'] = '[
 ]
 ]';
 
-$css = '.b-form-button_height_19 .b-form-button__left
-{
-   width: 5px;
-   margin-right: -5px; /* FF2 *//**/
-}
-
-.b-form-button_height_19 .b-form-button__left
-{
-   width: 5px;
-   margin-right: -5px; /* FF2 */ /**/
-}
-
-.b-form-button_height_19 .b-form-button__content
-{
-   font: 11px/21px Verdana, Arial, sans-serif;
-
-   margin: 0 5px; /* margin-left для FF2 *//**/
-   padding: 0 9px;
-}';
+$css = 'div{
+    content: "&darr;";
+    }';
 
 $c = new csscomb($css, true);
 ?>

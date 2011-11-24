@@ -19,7 +19,8 @@ class csscomb{
         'expressions' => null,  // если найдены expression, то эта переменная станет массивом, ячейки которого будут содержать код каждого найденного expression
         'datauri' => null,  // если найдены data uri, то эта переменная станет массивом...
         'hacks' => null,  // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
-        'braces' => null // если найдены комментарии содержащие { или } мешающие парсить, то эта переменная станет массивом.
+        'braces' => null, // если найдены комментарии содержащие { или } мешающие парсить, то эта переменная станет массивом.
+        'entities' => null // если найдены entities мешающие парсить, то эта переменная станет массивом.
     ),
 
     /*
@@ -701,6 +702,22 @@ class csscomb{
             //$this->log('comments', $comments);
             //$this->log('comments', $this->code['edited']);
         }
+
+        // 7. Entities
+        if(preg_match_all('#
+            \&
+            .*?[^;]
+            \;
+            #ismx', $this->code['edited'], $entities)){
+
+            $this->code['entities'] = array();
+
+            foreach($entities[0] as $key => $val){
+                $this->code['entities'][$key] = $val;
+                $this->code['edited'] = str_replace($val, 'entity__'.$key, $this->code['edited']);
+            }
+
+        }
     }
 
 
@@ -1053,6 +1070,16 @@ class csscomb{
                 }
                 if(strpos($this->code['resorted'], '}brace__'.$key) !== FALSE) {
                     $this->code['resorted'] = str_replace('}brace__'.$key, $val, $this->code['resorted']);
+                }
+            }
+        }
+
+
+        // 7. Entities
+        if(is_array($this->code['entities'])){ // если были обнаружены и вырезаны entities
+            foreach($this->code['entities'] as $key => $val){
+                if(strpos($this->code['resorted'], 'entity__'.$key) !== FALSE) {
+                    $this->code['resorted'] = str_replace('entity__'.$key, $val, $this->code['resorted']);
                 }
             }
         }
