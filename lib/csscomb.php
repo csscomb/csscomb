@@ -1,11 +1,11 @@
 <?php
 /**
  * CSScomb
- * @version: 2.06
+ * @version: 2.08
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
- * @Date: 03.09.11
- * @Time: 19:50
+ * @Date: 25.10.11
+ * @Time: 02:50
  */
  
 class csscomb{
