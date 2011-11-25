@@ -1,0 +1,149 @@
+.tests-descr p{
+    margin-bottom:20px;
+    margin-left:0;
+    }
+
+.tests-summary{
+    margin:0 -10px 20px;
+    padding:10px 10px 0;
+    border-top:1px solid #e9e9e9;
+    border-bottom:1px solid #e9e9e9;
+    }
+    .tests-summary table{
+        margin-bottom:5px;
+        }
+        .tests-summary table th{
+            text-align:left;
+            }
+        .tests-summary table td,
+        .tests-summary table th{
+            padding:0 10px 4px 0;
+            }
+        .tests-summary table .comment{
+            padding-left:10px;
+            color:#999;
+            font-style:italic;
+            font-size:.9em;
+            }
+        .tests-summary table .count{
+            text-align:right;
+            }
+            .tests-summary table .count span{
+                display:block;
+                padding:1px 5px;
+                }
+        .tests-summary table tfoot {
+            font-weight:bold;
+            }
+
+.test{
+    padding:0 15px 0 20px;
+    }
+    .test-title span{
+        font-weight:bold;
+        cursor:pointer;
+        }
+        .test-title a{
+            position:relative;
+            top:3px;
+            margin-left:5px;
+            color:gray;
+            font-size:.75em;
+            }
+        .test-title span:hover i{
+            color:#e5e5e5;
+            }
+
+    .success .test-title span,
+    .error .test-title span,
+    .warning .test-title span,
+    .tests-summary .success,
+    .tests-summary .error,
+    .tests-summary .warning{
+        display:inline-block;
+        padding:1px 5px;
+        border-radius:2px;
+        color:white;
+        }
+
+    .success .test-title span,
+    .tests-summary .success{
+        background:green;
+        }
+    .error .test-title span,
+    .tests-summary .error{
+        background:red;
+        }
+    .warning .test-title span,
+    .tests-summary .warning{
+        background: #ffc000;
+        }
+    .test .test-content{
+        display:none;
+        margin-bottom:30px;
+        }
+        .test-content p{
+            margin:0;
+            }
+        .test-content textarea{
+            width:100%;
+            border: 1px solid silver;
+            }
+        .test-content .code{
+            margin-bottom:1em;
+            }
+
+
+
+.filter-for-tests{
+    float:right;
+    width:270px;
+    }
+.filter-for-tests,
+.filter-for-tests span{
+    color:#777;
+    }
+.filter-for-tests span{
+    cursor:pointer;
+    }
+    .filter-for-tests span{
+        border-bottom:1px dotted;
+        text-decoration:none;
+        line-height:1.5em;
+        font-size:0.85em;
+        }
+    .filter-for-tests span:active{
+        color:red;
+        }
+    .filter-for-tests span:hover{
+        color:#00b800;
+        }
+    .filter-for-tests .current,
+    .filter-for-tests .current:hover{
+        border-bottom:0;
+        color:#000;
+        cursor:default;
+        }
+
+
+h2{
+    font-size:1.5em;
+    }
+
+h3{
+    margin-top:2.25em;
+    font-size:1.25em;
+    }
+
+h2 + h3{
+    margin-top:1em;
+    }
+
+.test-list{
+    margin-top:2em;
+    }
+
+
+.groups-nav{
+    float:left;
+    }
