@@ -56,3 +56,7 @@ $('#show-all-tests').click(function(){
 });
 
 $('#show-all-tests').addClass('current');
+
+if(window.location.hash != ''){
+    $(window.location.hash + ' .test-content').css('display','block');
+}
