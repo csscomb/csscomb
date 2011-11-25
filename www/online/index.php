@@ -11,7 +11,7 @@ require_once'../common/header.php';
 		</div>
 		<div class="settings-link"><a href="#"><?=$loc['settings']?></a></div>
 		<div class="code">
-			<table>
+			<table class="edit-mode">
 				<tr>
 					<td class="code-line-numbers-original"></td>
 					<td class="h-code-original">

@@ -297,6 +297,11 @@ table + h2{
 			padding:0 0 10px;
 			}
 
+        .edit-mode .code-line-numbers-original,
+        .edit-mode .code-line-numbers-resorted {
+            display:none;
+            }
+
 		.code-line-numbers-original div,
 		.code-line-numbers-resorted div{
 			padding-right:5px;

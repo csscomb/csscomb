@@ -101,6 +101,7 @@ $('#mode-edit').click(function(){
     if(!e.hasClass('selected')){
         e.addClass('selected');
         $('#mode-diff').removeClass();
+        $('.code table').attr('class','edit-mode');
         clear();
         drawEdit();
     }
@@ -109,6 +110,7 @@ $('#mode-edit').click(function(){
 
 // режим сравнения
 $('#mode-diff').click(function(){
+    $('.code table').attr('class','diff-mode');
     doResort();
     return false;
 });
