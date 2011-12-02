@@ -46,7 +46,7 @@ else{
     echo '
 <h2>How does CSScomb work?</h2>
 <p>The algorithm of CSScomb simulates web-technologist\'s actions upon working with CSS-code to the limit. Usually to re-order code you move
-lines over each other considering comments in the code, multilines records of property values, khaki and everything that could be found
+lines over each other considering comments in the code, multilines records of property values, hacks and everything that could be found
 in the real file. CSScomb reproduces these actions for you. This means that the parser "thinks" as a person editing the text, not as a blind robot parsing CSS.</p>
 
 <h2>What can CSScomb do?</h2>
