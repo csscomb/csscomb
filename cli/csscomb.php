@@ -2,13 +2,14 @@
 <?php
 /**
  * CSScomb
- * @version: 2.08
+ * @version: 2.09
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
- * @Date: 25.10.11
- * @Time: 02:50
+ * @Date: 03.12.11
+ * @Time: 15:21
  */
  
+error_reporting(E_ALL);
 class csscomb{
 
     var $sort_order = Array(),
@@ -614,16 +615,20 @@ class csscomb{
             $this->output = false;
         }
 
-        $this->code['original'] = $this->code['edited'] = $css;
+        if($css != ''){
 
-        $this->set_mode();
-        $this->set_sort_order($custom_sort_order); // 1 задаем порядок сортировки
+            $this->code['original'] = $css;
+            $this->code['edited'] = $css;
 
-        $this->preprocess();        // 2 препроцессинг
-        $this->parse_rules();       // 3,4,5 парсим на части по скобкам
-        $this->postprocess();       // 6 постпроцессинг
+            $this->set_mode();
+            $this->set_sort_order($custom_sort_order); // 1 задаем порядок сортировки
 
-        return $this->end_of_process();
+            $this->preprocess();        // 2 препроцессинг
+            $this->parse_rules();       // 3,4,5 парсим на части по скобкам
+            $this->postprocess();       // 6 постпроцессинг
+
+            return $this->end_of_process();
+        }
     }
 
 
@@ -1006,7 +1011,7 @@ class csscomb{
                 )
             @ismx', $css, $all);
 
-            if($all[0][0] == $css){ // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
+            if(count($all[0]) > 0 and $all[0][0] != null and $all[0][0] == $css){ // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
                 $all[0][0] = '';
                 return $all[1][0].$all[2][0];
             }
