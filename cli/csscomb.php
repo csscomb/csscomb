@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+error_reporting(E_ALL);
 /**
  * CSScomb
  * @version: 2.09
@@ -9,7 +10,6 @@
  * @Time: 15:21
  */
  
-error_reporting(E_ALL);
 class csscomb{
 
     var $sort_order = Array(),
@@ -1367,23 +1367,23 @@ class tool {
  * print man
  */
 function man(){
+/*-s, --sort-order    specify file with custom sort order. File must contain JSON data. For detail information run '<?php echo $this->argv[0]; ?> --help-sort-order'*/
 ?>
 
-CSSComb 2.08                Command line tool for resort CSS code.
+CSSComb 2.09                Command line tool for resort CSS code.
 
 SYNOPSIS
-    $ php <?php echo $this->argv[0]; ?> -s <file with JSON array> -i <path to input css file> -o <path to result css file>
+    $ php <?php echo $this->argv[0]; ?> -i <path to input css file> -o <path to result css file>
 
 DESCRIPTION
     options:
-    -s, --sort-order    specify file with custom sort order. File must contain JSON data. For detail information run '<?php echo $this->argv[0]; ?> --help-sort-order'
     -i, --input         input file that needs to be sorted
     -o, --output        sort result file. If filename does not exist, the file is created. Otherwise, the existing file is overwritten.
 
     --help, -help, -h, -? or no options will print this man.
 
 EXAMPLE
-    <?php echo $this->argv[0]; ?> -s my-custom-sort-order.json -i css/style.css -o css/style-resorted.css
+    <?php echo $this->argv[0]; ?> -i css/style.css -o css/style-resorted.css
 
 SEE ALSO
     http://csscomb.com/
