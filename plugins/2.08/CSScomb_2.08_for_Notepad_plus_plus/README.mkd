@@ -3,7 +3,9 @@
 ## Требуется установить
 
 1. PHP-интерпретатор версии 5.3.6 или выше
+
 Скачать с официального сайта [php.net](http://windows.php.net/download/)
+
 Добавить путь до папки куда вы установили PHP. Для этого надо кликнуть правой кнопкой мыши вызвать
 контекстное меню на иконке Мой компьютер. Выбрать пукт Свойства. Во вкладке Advanced кликнуть на кнопку
 Environment Variables. И в поле System Variables убедится, что в переменной Path присутствует путь до PHP.
@@ -14,7 +16,8 @@ Environment Variables. И в поле System Variables убедится, что 
 
 ## Установка CSScomb для Notepad++
 
-1. Скачиваем последнюю версию [CSScomb для Notepad++](https://github.com/miripiruni/CSScomb/blob/master/www/plugins/2.08/CSScomb_2.08_for_Notepad_plus_plus/csscomb.php) и сохраняем его у себя на жестком диске.
+1. Скачиваем последнюю версию [CSScomb для Notepad++](https://github.com/miripiruni/CSScomb/blob/master/plugins/2.08/CSScomb_2.08_for_Notepad_plus_plus/csscomb.php) и сохраняем его у себя на жестком диске.
+
 2. Открываем Notepad++ и нажимаем F6 (плагины–>NppExec–>Execute) и пишем
 
 ```
@@ -36,5 +39,7 @@ Environment Variables. И в поле System Variables убедится, что 
 ## Обратная связь
 
 http://csscomb.com/
+
 http://twitter.com/csscomb
+
 http://github.com/miripiruni/CSScomb/
