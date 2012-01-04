@@ -27,7 +27,7 @@
 
 1. Скачиваем последнюю версию [CSScomb для Notepad++](https://github.com/miripiruni/CSScomb/blob/master/plugins/2.08/CSScomb_2.08_for_Notepad_plus_plus/csscomb.php) и сохраняем его у себя на жестком диске.
 
-2. Открываем Notepad++ и нажимаем F6 (плагины–>NppExec–>Execute) и пишем
+2. Открываем Notepad++ и выбираем в меню: Плагины → NppExec → Execute. Пишем:
 
 ```
     npp_console off
@@ -35,11 +35,11 @@
     NPP_SENDMSG NPPM_RELOADFILE 0 "$(FULL_CURRENT_PATH)"
 ```
 
-   где E:\...\csscomb.php — это абсолютный путь к файлу csscomb.php.
+   где ```E:\...\csscomb.php``` — это абсолютный путь к файлу csscomb.php.
 
-   нажимаем кнопку save и сохраняем, например, с именем CSScomb.
+   нажимаем кнопку Save и сохраняем с именем CSScomb.
 
-3. Заходим в настройки NppExec (Плагины –> NppExec –> Advanced Options), выбираем в «Associated script» наш сохраненный скрипт CSScomb, нажимаем «Add/Modify», чекаем галку «Place to the Macros menu». Теперь в меню «Macros» появился CSScomb.
+3. Заходим в настройки NppExec (Плагины → NppExec → Advanced Options), выбираем в Associated script наш сохраненный скрипт CSScomb, нажимаем Add/Modify, чекаем галку Place to the Macros menu. Теперь в меню Macros появился CSScomb.
 
 ## Благодарности
 
