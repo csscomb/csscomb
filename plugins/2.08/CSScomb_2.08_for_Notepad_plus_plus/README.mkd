@@ -7,8 +7,17 @@
 Скачать с официального сайта [php.net](http://windows.php.net/download/)
 
 Добавить путь до папки куда вы установили PHP. Для этого надо кликнуть правой кнопкой мыши вызвать
-контекстное меню на иконке Мой компьютер. Выбрать пукт Свойства. Во вкладке Advanced кликнуть на кнопку
-Environment Variables. И в поле System Variables убедится, что в переменной Path присутствует путь до PHP.
+контекстное меню на иконке Мой компьютер. Выбрать пукт Свойства.
+
+![Properties](https://github.com/miripiruni/CSScomb/blob/master/plugins/2.08/CSScomb_2.08_for_Notepad_plus_plus/csscomb-for-notepad-1.jpg "Properties")
+
+Во вкладке Advanced кликнуть на кнопку Environment Variables.
+
+![Environment Variables](https://github.com/miripiruni/CSScomb/blob/master/plugins/2.08/CSScomb_2.08_for_Notepad_plus_plus/csscomb-for-notepad-2.jpg "Environment Variables")
+
+И в поле System Variables убедится, что в переменной Path присутствует путь до PHP.
+
+![Path](https://github.com/miripiruni/CSScomb/blob/master/plugins/2.08/CSScomb_2.08_for_Notepad_plus_plus/csscomb-for-notepad-3.jpg "Path")
 
 2. Плагин [NppExec](http://sourceforge.net/projects/npp-plugins/files/NppExec/) для Notepad++
 
