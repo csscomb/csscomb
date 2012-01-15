@@ -480,6 +480,8 @@ class csscomb{
     "hyphens"
 ],
 [
+	"-khtml-opacity",
+	"-moz-opacity",
     "opacity",
     "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
     "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha",
