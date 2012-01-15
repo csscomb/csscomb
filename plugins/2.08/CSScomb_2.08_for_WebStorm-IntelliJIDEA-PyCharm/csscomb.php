@@ -480,6 +480,8 @@ class csscomb{
     "hyphens"
 ],
 [
+	"-khtml-opacity",
+	"-moz-opacity",
     "opacity",
     "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
     "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha",
@@ -888,7 +890,8 @@ class csscomb{
      *
      */
     function parse_rules(){
-
+        $end_of_code = '';
+        
         if($this->mode == 'css-file'){
 
             // отделяем все, что после последней } если там что-то есть, конечно :)
@@ -960,7 +963,7 @@ class csscomb{
 
         if($this->mode == 'properties'){
 			preg_match('@\s*?.*?[^;\s];(\s)@ismx', $this->code['edited'], $matches);
-            $this->code['edited'] = $matches[1].$this->code['edited'];
+            $this->code['edited'] = (empty($matches[1]) ? '' : $matches[1]).$this->code['edited'];
             //TODO: Не использовать parse_prop здесь, а делать вызов в csscomb. Пусть функции общаются между собой через csscomb
             $rules[0] = trim($this->parse_properties($this->code['edited']));
             $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;
@@ -1005,7 +1008,7 @@ class csscomb{
                 )
             @ismx', $css, $all);
 
-            if($all[0][0] == $css){ // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
+            if(isset($all[0][0]) && $all[0][0] == $css){ // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
                 $all[0][0] = '';
                 return $all[1][0].$all[2][0];
             }
@@ -1345,14 +1348,13 @@ class csscomb{
 
 
 /* Обертка для вызова CSScomb из WebStorm/IntelliJ IDEA */
-$csscomb = new csscomb();
-if(substr($argv[1], strlen($argv[1])-4, strlen($argv[1])) != '.css'){
-    foreach(DirFilesR($argv[1],'.css') as $k){
-        $input = $csscomb->csscomb(file_get_contents($k), false, 'yandex');
-        file_put_contents($k, $input);
-    }
-}
-else{
-    $input = $csscomb->csscomb(file_get_contents($argv[1]), false, 'yandex');
-    file_put_contents($argv[1], $input);
-}
+$csscomb  = new csscomb();
+
+if (is_dir($argv[1]))
+    foreach (glob("{$argv[1]}/*.css") as $path)
+        $cssfiles[] = $path;
+
+foreach (isset($cssfiles) ? $cssfiles : array($argv[1]) as $path)
+    file_put_contents($path, $csscomb->csscomb(
+            file_get_contents($path), false, 'yandex')
+    );
