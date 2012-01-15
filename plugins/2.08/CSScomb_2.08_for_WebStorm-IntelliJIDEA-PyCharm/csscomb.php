@@ -1345,14 +1345,13 @@ class csscomb{
 
 
 /* Обертка для вызова CSScomb из WebStorm/IntelliJ IDEA */
-$csscomb = new csscomb();
-if(substr($argv[1], strlen($argv[1])-4, strlen($argv[1])) != '.css'){
-    foreach(DirFilesR($argv[1],'.css') as $k){
-        $input = $csscomb->csscomb(file_get_contents($k), false, 'yandex');
-        file_put_contents($k, $input);
-    }
-}
-else{
-    $input = $csscomb->csscomb(file_get_contents($argv[1]), false, 'yandex');
-    file_put_contents($argv[1], $input);
-}
+$csscomb  = new csscomb();
+
+if (is_dir($argv[1]))
+    foreach (glob("{$argv[1]}/*.css") as $path)
+        $cssfiles[] = $path;
+
+foreach (isset($cssfiles) ? $cssfiles : array($argv[1]) as $path)
+    file_put_contents($path, $csscomb->csscomb(
+            file_get_contents($path), false, 'yandex')
+    );
