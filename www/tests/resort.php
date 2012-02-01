@@ -14,15 +14,25 @@
 <?
 require_once '../lib/csscomb.php';
 
-$css = 'div{
-    content: "&darr;";
-    font-size:13px;
-    width:150px;
-    color:red;
-    background:silver;
-    top:0;
+$css = '.test{
+    test-align:right;
+    
+    padding:0;
+    
+    position:absolute;
+    
+    width:100px;
+
+    font-size:11px;
+
+    opacity:0.5;
+
     }';
-$c = new csscomb($css, true);
+
+//$css = '.test{
+    //content: \'&#160\';
+//}';
+$c = new csscomb($css, true, 'yandex');
 ?>
 </body>
 </html>

@@ -89,7 +89,7 @@ require_once'../common/header.php';
                 // порядок сортировки
                 if($case['order'] != '') $tests_list .= '
                             <p>'.$loc['sort-order'].'</p>
-                            <textarea cols="80" rows="10">'.$case['order'].'</textarea>';
+                            <textarea cols="80" rows="10">'.$c->yandex_sort_order.'</textarea>';
 
                 $tests_list .= '
                         </div>

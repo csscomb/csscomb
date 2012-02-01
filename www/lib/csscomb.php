@@ -872,6 +872,7 @@ class csscomb{
         // 7. Entities
         if(preg_match_all('#
             \&
+            \#?
             .*?[^;]
             \;
             #ismx', $this->code['edited'], $entities)){
@@ -1020,7 +1021,17 @@ class csscomb{
                 $brace = $matches[2];
 
                 if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
-                    $properties = str_replace("\n\n", "\n", $properties);
+                    /**
+                     * Если CSS-свойства уже были разделены на группы пустой 
+                     * строкой, то нужно поудалять это разделение, чтобы сделать 
+                     * новое.
+                     */
+                    $properties = preg_replace('/
+                        \n
+                        \ *?
+                        \n
+                        /ismx', "\n", $properties);
+
                 }
 
                 /* отделяем первый комментарий, который находится на той же строке, где и была скобка */
@@ -1234,7 +1245,7 @@ class csscomb{
                     :
                     .*?[^;]
                     ;)
-                    #ismx',
+                #ismx',
                 '/* $1 */',
                 $this->code['resorted']
             );
