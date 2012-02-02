@@ -53,6 +53,8 @@ class csscomb{
 	"overflow-y",
 	"overflow-style",
 	"clip",
+	"-webkit-box-sizing",
+	"-moz-box-sizing",
 	"box-sizing",
 	"margin",
 	"margin-top",
@@ -615,7 +617,7 @@ class csscomb{
             $this->output = false;
         }
 
-        if($css != ''){
+        if(is_string($css) and trim($css) != ''){
 
             $this->code['original'] = $css;
             $this->code['edited'] = $css;
@@ -873,6 +875,7 @@ class csscomb{
         // 7. Entities
         if(preg_match_all('#
             \&
+            \#?
             .*?[^;]
             \;
             #ismx', $this->code['edited'], $entities)){
@@ -1021,7 +1024,16 @@ class csscomb{
                 $brace = $matches[2];
 
                 if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
-                    $properties = str_replace("\n\n", "\n", $properties);
+                    /**
+                     * Если CSS-свойства уже были разделены на группы пустой
+                     * строкой, то нужно поудалять это разделение, чтобы сделать
+                     * новое.
+                     */
+                    $properties = preg_replace('/
+                        \n
+                        \ *?
+                        \n
+                        /ismx', "\n", $properties);
                 }
 
                 /* отделяем первый комментарий, который находится на той же строке, где и была скобка */
@@ -1367,23 +1379,26 @@ class tool {
  * print man
  */
 function man(){
-/*-s, --sort-order    specify file with custom sort order. File must contain JSON data. For detail information run '<?php echo $this->argv[0]; ?> --help-sort-order'*/
 ?>
 
 CSSComb 2.09                Command line tool for resort CSS code.
 
 SYNOPSIS
-    $ php <?php echo $this->argv[0]; ?> -i <path to input css file> -o <path to result css file>
+    $ php <?php echo $this->argv[0]; ?> -s <file with JSON array> -i <path to input css file> -o <path to result css file>
 
 DESCRIPTION
     options:
-    -i, --input         input file that needs to be sorted
-    -o, --output        sort result file. If filename does not exist, the file is created. Otherwise, the existing file is overwritten.
+    -s, --sort-order    specify file with custom sort order. File must contain JSON data. For detail information run '<?php echo $this->argv[0]; ?> --help-sort-order'
+    -i, --input         must be directory name or file that needs to be sorted
+    -o, --output        sort result file. Use output when input is not a directory name, otherwise output param ignored. If output filename does not exist, the file is created. Otherwise, the existing file is overwritten.
 
     --help, -help, -h, -? or no options will print this man.
 
 EXAMPLE
-    <?php echo $this->argv[0]; ?> -i css/style.css -o css/style-resorted.css
+    <?php echo $this->argv[0]; ?> -s my-custom-sort-order.json -i css/style.css -o css/style-resorted.css
+
+EXAMPLE 2
+    <?php echo $this->argv[0]; ?> -i some_directory_name
 
 SEE ALSO
     http://csscomb.com/
@@ -1426,21 +1441,31 @@ function init($argc, $argv){
 function tool($argc, $argv){
     $this->init($argc, $argv);
 
-    if($this->argc == 1 || in_array($this->argv[1], array('--help', '-help', '-h', '-?'))) { $this->man(); }
+    if($this->argc == 1 || in_array($this->argv[1], array('--help', '-help', '-h', '-?'))) {
+        $this->man();
+    }
     else {
 
         if($this->in != null) {
 
-            $css = file_get_contents($this->in);
-            //echo "content of ".$this->in."\n\n";
-            //var_dump($css);
+            $c = new csscomb('', false, 'yandex');
 
-            $c = new csscomb();
-            $result = $c->csscomb($css);
+            if(is_dir($this->in)) {
+                $files = $this->getArrayOfCssFilenames($this->in);
 
-            if($this->out != null) {
+                foreach($files as $file) {
+                    echo "Sorting ".$file."...\n";
+                    $result = $c->csscomb(file_get_contents($file));
+                    file_put_contents($file, $result);
+                }
+            }
+            elseif($this->out != null){
+                echo "Sorting ".$this->in."...\n";
+                $result = $c->csscomb(file_get_contents($this->in));
                 file_put_contents($this->out, $result);
             }
+            echo "Done.\n";
+
 
         } else {
             echo "No input file\n";
@@ -1449,6 +1474,39 @@ function tool($argc, $argv){
     }
 }
 
+/**
+ * Возвращает массив с путями до CSS-файлов
+ * @param: $dir директория, где искать
+ * @param: $extensions массив с расширениями файлов, в которых CSS-код.
+ */
+function getArrayOfCssFilenames($dir, $extensions = Array('.css','.sass','.less','.scss')) {
+    $files = Array();
+
+    if($handle = opendir($dir)) {
+      while(false !== ($filename = readdir($handle))) {
+        if($filename != '.' && $filename != '..') {
+          if(is_dir($dir.'/'.$filename)) {
+              $files = array_merge($files, $this->getArrayOfCssFilenames($dir.'/'.$filename, $extensions));
+          }
+          else {
+              $pos = strrpos($filename, '.');
+              $ext = substr($filename, $pos, strlen($filename) - $pos);
+
+              if($extensions) {
+                  if(in_array($ext, $extensions)) {
+                      $files[] = $dir.'/'.$filename;
+                  }
+              }
+              else {
+                  $files[] = $dir.'/'.$filename;
+              }
+          }
+        }
+      }
+      closedir($handle);
+    }
+    return $files;
+}
 
 
 
