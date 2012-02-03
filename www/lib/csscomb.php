@@ -657,20 +657,20 @@ class csscomb{
 
         if($json_array === 'yandex'){
             $this->sort_order = json_decode($this->yandex_sort_order);
-            switch(json_last_error()){
-                case JSON_ERROR_DEPTH:
-                    echo 'JSON parse error: Достигнута максимальная глубина стека';
-                break;
-                case JSON_ERROR_STATE_MISMATCH:
-                    echo 'JSON parse error: Некорректные разряды или не совпадение режимов';
-                break;
-                case JSON_ERROR_CTRL_CHAR:
-                    echo 'JSON parse error: Некорректный управляющий символ';
-                break;
-                case JSON_ERROR_SYNTAX:
-                    echo 'JSON parse error: Синтаксическая ошибка, не корректный JSON';
-                break;
-            }
+            //switch(json_last_error()){
+                //case JSON_ERROR_DEPTH:
+                    //echo 'JSON parse error: Достигнута максимальная глубина стека';
+                //break;
+                //case JSON_ERROR_STATE_MISMATCH:
+                    //echo 'JSON parse error: Некорректные разряды или не совпадение режимов';
+                //break;
+                //case JSON_ERROR_CTRL_CHAR:
+                    //echo 'JSON parse error: Некорректный управляющий символ';
+                //break;
+                //case JSON_ERROR_SYNTAX:
+                    //echo 'JSON parse error: Синтаксическая ошибка, не корректный JSON';
+                //break;
+            //}
         }
     }
 
