@@ -47,7 +47,7 @@ buildIntellijPlugin:
 	cp $(PATH_TO_CORE) $(PATH_TO_INTELLIJ_PLUGIN)/csscomb.php
 	sed '1d' < $(PATH_TO_INTELLIJ_PLUGIN)/call.php >> $(PATH_TO_INTELLIJ_PLUGIN)/csscomb.php
 
-buildWww:
+buildWww: useCscomb
 	java -jar yuicompressor-2.4.7.jar www/static/css/style.css > www/static/_css/style.css
 	java -jar yuicompressor-2.4.7.jar www/static/css/tests.css > www/static/_css/tests.css
 	java -jar yuicompressor-2.4.7.jar www/static/js/online.js > www/static/_js/online.js
@@ -57,3 +57,6 @@ buildWww:
 	
 	cat www/static/_css/style.css www/static/_css/tests.css > www/static/_css/csscomb.css
 	cat www/static/_js/jquery.shortcuts.min.js www/static/_js/jquery.textarea.js > www/static/_js/csscomb.js
+
+useCsscomb:
+	php cli/csscomb.php -i www/static/css

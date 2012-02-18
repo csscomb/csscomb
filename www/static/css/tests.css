@@ -109,8 +109,8 @@
     .filter-for-tests span{
         border-bottom:1px dotted;
         text-decoration:none;
-        line-height:1.5em;
         font-size:0.85em;
+        line-height:1.5em;
         }
     .filter-for-tests span:active{
         color:red;

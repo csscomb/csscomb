@@ -171,8 +171,8 @@ hgroup{
 	margin-top:10px;
 	padding:10px 20px;
 	border-bottom:1px solid #e9e9e9;
-	border-top-left-radius:6px;
 	border-top-right-radius:6px;
+	border-top-left-radius:6px;
 	background:rgba(255,255,255,.75);
 	color:#594A42;
 	text-shadow:0 1px 1px #fff;
@@ -325,10 +325,10 @@ table + h2{
 		PRE,
 		textarea{
 			color:#533D3A;
-			word-wrap:break-word;	  /* IE 5.5-7 */
 			white-space:-moz-pre-wrap; /* Firefox 1.0-2.0 */
 			/* white-space:pre-wrap; *//* current browsers, bug of formatting: do not set in normal! */
 			white-space:pre-wrap;
+			word-wrap:break-word;	  /* IE 5.5-7 */
 			}
 		textarea{
 			padding:0;
@@ -415,8 +415,8 @@ textarea,
 	text-align:center;
 	text-transform:uppercase;
 	text-shadow:0 1px 0 #fff;
-	line-height:1;
 	font-weight:bold;
+	line-height:1;
 	}
 
 .button:hover{
@@ -430,11 +430,11 @@ textarea,
 	}
 
 .button:active{
+	border:1px solid #aaa;
+	border-bottom:1px solid #888;
 	-webkit-box-shadow:inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
 	-moz-box-shadow:inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
 	box-shadow:inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
-	border:1px solid #aaa;
-	border-bottom:1px solid #888;
 	}
 
 .code-actions .disabled,
@@ -522,13 +522,13 @@ textarea,
 	top:0;
 	right:-400px;
 	bottom:0;
-	-webkit-box-shadow:0 0 5px 2px #aaa;
-	-moz-box-shadow:0 0 5px 2px #aaa;
-	box-shadow:0 0 5px 2px #aaa;
 	margin-left:0;
 	padding:10px;
 	width:380px;
 	background:#fff;
+	-webkit-box-shadow:0 0 5px 2px #aaa;
+	-moz-box-shadow:0 0 5px 2px #aaa;
+	box-shadow:0 0 5px 2px #aaa;
 	-webkit-transition:right 0.2s linear;
 	-moz-transition:right 0.2s linear;
 	-o-transition:right 0.2s linear;
@@ -595,8 +595,8 @@ textarea,
 		position:relative;
 		top:1px;
 		padding:12px 10px 10px;
-		border-top-left-radius:6px;
 		border-top-right-radius:6px;
+		border-top-left-radius:6px;
 		background:rgba(0,0,0,.5);
 		color:#594A42;
 		color:#eee;
