@@ -19,9 +19,8 @@ updateVersion:
 buildCli:
 	#
 	# Build CLI:
-	cat cli/cli.php | sed '1d' > cli/temp
-	cat $(PATH_TO_CORE) cli/temp > cli/csscomb.php
-	rm cli/temp
+	cp $(PATH_TO_CORE) cli/csscomb.php
+	sed '1d' < cli/cli.php >> cli/csscomb.php
 
 copyCore:
 	#
@@ -39,9 +38,8 @@ buildPlugins: buildNotepadPlugin buildIntellijPlugin
 buildNotepadPlugin:
 	#
 	# Notepad++:
-	cat $(PATH_TO_NOTEPAD_P_P_PLUGIN)/call.php | sed '1d' > $(PATH_TO_NOTEPAD_P_P_PLUGIN)/temp
-	cat $(PATH_TO_CORE) $(PATH_TO_NOTEPAD_P_P_PLUGIN)/temp > $(PATH_TO_NOTEPAD_P_P_PLUGIN)/csscomb.php
-	rm $(PATH_TO_NOTEPAD_P_P_PLUGIN)/temp
+	cp $(PATH_TO_CORE) $(PATH_TO_NOTEPAD_P_P_PLUGIN)/csscomb.php
+	sed '1d' < $(PATH_TO_NOTEPAD_P_P_PLUGIN)/call.php >> $(PATH_TO_NOTEPAD_P_P_PLUGIN)/csscomb.php
 
 buildIntellijPlugin:
 	#
