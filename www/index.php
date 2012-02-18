@@ -18,10 +18,10 @@ require_once'common/header.php';
             <h2><?=$loc['versions']?></h2>
             <ul>
                 <li><a href="/online/">CSScomb Online</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.06_TextMate_Bundle.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.06_Coda_Plugin.zip">CSScomb <?=$loc['for']?> Coda</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/CSScomb_2.08_for_WebStorm-IntelliJIDEA-PyCharm.zip">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
-                <li><a href="https://github.com/miripiruni/CSScomb/tree/master/plugins/2.08/CSScomb_2.08_for_Notepad_plus_plus">CSScomb <?=$loc['for']?> Notepad++</a></li>
+                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> Textmate</a></li>
+                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> Coda</a></li>
+                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
+                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> Notepad++</a></li>
                 <li><a href="https://github.com/miripiruni/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
                 <li><?=$loc['help-us']?></li>
             </ul>
