@@ -1,4 +1,5 @@
-MAJOR_VERSION = 3
+MAJOR_VERSION = 2
+MINOR_VERSION = 10
 BUILD_TIMESTAMP = $(shell basename `date "+%y%m%d%H%M"`)
 
 PATH_TO_CORE = lib/csscomb.php
@@ -13,7 +14,7 @@ buildAll: updateVersion buildCli copyCore buildPlugins buildWww
 updateVersion:
 	#
 	# Update version:
-	sed -i '' 's/[0-9].[0-9]\{10\}/$(MAJOR_VERSION).$(BUILD_TIMESTAMP)/' $(PATH_TO_CORE) cli/cli.php $(PATH_TO_CODA_PLUGIN)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
+	sed -i '' 's/[0-9].[0-9]\{2\} (build [0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) cli/cli.php $(PATH_TO_CODA_PLUGIN)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
 
 buildCli:
 	#
@@ -29,6 +30,11 @@ copyCore:
 	cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/lib/csscomb.php
 
 buildPlugins: buildNotepadPlugin buildIntellijPlugin
+	mkdir -p build
+	tar -c -z $(PATH_TO_CODA_PLUGIN) > build/csscomb-for-coda-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
+	tar -c -z $(PATH_TO_TEXTMATE_PLUGIN) > build/csscomb-for-textmate-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
+	tar -c -z $(PATH_TO_NOTEPAD_P_P_PLUGIN) > build/csscomb-for-notepad_plus_plus-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
+	tar -c -z $(PATH_TO_INTELLIJ_PLUGIN) > build/csscomb-for-webstorm_pycharm_idea-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
 
 buildNotepadPlugin:
 	#
