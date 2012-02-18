@@ -1,18 +1,42 @@
-# CSScomb
+# Tool for sorting CSS properties in specific order
 
-Greatest tool for sorting CSS properties in specific order
+Sorting CSS properties
+The order of properties in the help of professionals
 
-http://csscomb.ru/
+Setting the order of CSS properties
+Use the order to which you are accustomed to
 
-http://twitter.com/csscomb/
+Parsing CSS in the tags <style>, style="..." attribute
+CSScomb find a CSS-code to other languages ​​and will sort it
+
+Formatting style sheets does not change
+Work as a singleline and multiline CSS
+
+Separation of CSS properties for the group
+Separate groups of empty string if you want
+
+Full support CSS2/CSS2.1/CSS3
+CSScomb ready for the advanced CSS-code
+
+The algorithm of CSScomb simulates web-technologist's actions upon working with CSS-code to the limit. Usually to re-order code you move lines over each other considering comments in the code, multilines records of property values, hacks and everything that could be found in the real file. CSScomb reproduces these actions for you. This means that the parser "thinks" as a person editing the text, not as a blind robot parsing CSS.
+
+http://csscomb.com/
+
 
 Download
 --------
 
 http://github.com/miripiruni/CSScomb/downloads
 
-TextMate plugin
+ * TextMate plugin
+ * Coda Plugin
+ * IntelliJIDEA
+ * WebStorm
+ * PyCharm plugin
+ * Notepad ++
+ * Vim
 
-Coda Plugin
 
-IntelliJIDEA/WebStorm/PyCharm plugin
+Twitter
+-------
+http://twitter.com/csscomb/
