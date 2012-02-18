@@ -18,10 +18,10 @@ require_once'common/header.php';
             <h2><?=$loc['versions']?></h2>
             <ul>
                 <li><a href="/online/">CSScomb Online</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> Textmate</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> Coda</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
-                <li><a href="https://github.com/downloads/miripiruni/CSScomb/">CSScomb <?=$loc['for']?> Notepad++</a></li>
+                <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Textmate</a></li>
+                <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Coda</a></li>
+                <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
+                <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Notepad++</a></li>
                 <li><a href="https://github.com/miripiruni/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
                 <li><?=$loc['help-us']?></li>
             </ul>
