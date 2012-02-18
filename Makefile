@@ -8,7 +8,7 @@ PATH_TO_TEXTMATE_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.tmbundle
 PATH_TO_NOTEPAD_P_P_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.notepad_plus_plus
 PATH_TO_INTELLIJ_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.webstorm_pycharm_idea
 
-buildAll: updateVersion buildCli copyCore buildPlugins
+buildAll: updateVersion buildCli copyCore buildPlugins buildWww
 
 updateVersion:
 	#
@@ -43,3 +43,14 @@ buildIntellijPlugin:
 	cat $(PATH_TO_INTELLIJ_PLUGIN)/call.php | sed '1d' > $(PATH_TO_INTELLIJ_PLUGIN)/temp
 	cat $(PATH_TO_CORE) $(PATH_TO_INTELLIJ_PLUGIN)/temp > $(PATH_TO_INTELLIJ_PLUGIN)/csscomb.php
 	rm $(PATH_TO_INTELLIJ_PLUGIN)/temp
+
+buildWww:
+	java -jar yuicompressor-2.4.7.jar www/static/css/style.css > www/static/_css/style.css
+	java -jar yuicompressor-2.4.7.jar www/static/css/tests.css > www/static/_css/tests.css
+	java -jar yuicompressor-2.4.7.jar www/static/js/online.js > www/static/_js/online.js
+	java -jar yuicompressor-2.4.7.jar www/static/js/tests.js > www/static/_js/tests.js
+	java -jar yuicompressor-2.4.7.jar www/static/js/jquery.textarea.js > www/static/_js/jquery.textarea.js
+	java -jar yuicompressor-2.4.7.jar www/static/js/jquery.freeze.js > www/static/_js/jquery.freeze.js
+	
+	cat www/static/_css/style.css www/static/_css/tests.css > www/static/_css/csscomb.css
+	cat www/static/_js/jquery.shortcuts.min.js www/static/_js/jquery.textarea.js > www/static/_js/csscomb.js
