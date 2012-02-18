@@ -1,0 +1,113 @@
+# CSScomb для Notepad++
+
+## Требуется установить
+
+1. Плагин [NppExec](http://sourceforge.net/projects/npp-plugins/files/NppExec/) для Notepad++
+
+2. PHP-интерпретатор версии 5.3.6 или выше
+
+Скачать с официального сайта [php.net](http://windows.php.net/download/)
+
+Добавить путь до папки куда вы установили PHP в переменную окружения Path. Для этого надо кликнуть правой кнопкой мыши вызвать
+контекстное меню на иконке Мой компьютер. Выбрать пукт Свойства.
+
+![Properties](https://github.com/miripiruni/CSScomb/raw/master/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-1.jpg "Properties")
+
+Во вкладке Advanced кликнуть на кнопку Environment Variables.
+
+![Environment Variables](https://github.com/miripiruni/CSScomb/raw/master/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-2.jpg "Environment Variables")
+
+И в поле System Variables убедится, что в переменной Path присутствует путь до PHP.
+
+![Path](https://github.com/miripiruni/CSScomb/raw/master/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-3.jpg "Path")
+
+После наличия PHP-интерпретатора и плагина NppExec можно переходить к установке CSScomb.
+
+## Установка CSScomb для Notepad++
+
+* Скачиваем последнюю версию [CSScomb для Notepad++](https://github.com/miripiruni/CSScomb/blob/master/plugins/csscomb.notepad_plus_plus/csscomb.php) и сохраняем его у себя на жестком диске.
+
+* Открываем Notepad++ и выбираем в меню: Плагины → NppExec → Execute. Пишем:
+
+    ```
+    npp_console off
+    php E:\...\csscomb.php "$(FULL_CURRENT_PATH)"
+    NPP_SENDMSG NPPM_RELOADFILE 0 "$(FULL_CURRENT_PATH)"
+    ```
+
+   где ```E:\...\csscomb.php``` — это абсолютный путь к файлу csscomb.php.
+
+   нажимаем кнопку Save и сохраняем с именем CSScomb.
+
+* Заходим в настройки NppExec (Плагины → NppExec → Advanced Options), выбираем в Associated script наш сохраненный скрипт CSScomb, нажимаем Add/Modify, чекаем галку Place to the Macros menu. Теперь в меню Macros появился CSScomb.
+
+## Благодарности
+
+Спасибо [Никите Хатимцову](https://twitter.com/#!/nikitammf) за инициативу в интеграции CSScomb для Notepad++.
+
+## Обратная связь
+
+http://csscomb.com/
+
+http://twitter.com/csscomb
+
+http://github.com/miripiruni/CSScomb/
+
+
+
+
+
+
+# CSScomb for Notepad++
+
+## Required
+
+1. [NppExec plugin](http://sourceforge.net/projects/npp-plugins/files/NppExec/) for Notepad++
+
+2. PHP 5.3.6 or high
+
+Download from [php.net](http://windows.php.net/download/)
+
+Make sure that the path to the PHP is in an environment variable. To do this, open the context menu on icon "My Computer" and choose "Properties"
+
+![Properties](https://github.com/miripiruni/CSScomb/raw/master/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-1.jpg "Properties")
+
+In Advanced tab click to "Environment Variables" button.
+
+![Environment Variables](https://github.com/miripiruni/CSScomb/raw/master/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-2.jpg "Environment Variables")
+
+In field "System Variables" you need to make sure that in Path variable is present path to PHP.
+
+![Path](https://github.com/miripiruni/CSScomb/raw/master/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-3.jpg "Path")
+
+
+## How To Install CSScomb for Notepad++
+
+* Download last version of [CSScomb for Notepad++](https://github.com/miripiruni/CSScomb/blob/master/plugins/csscomb.notepad_plus_plus/csscomb.php)
+
+* Open Notepad++ and choose in menu: Plugins → NppExec → Execute. And type:
+
+    ```
+    npp_console off
+    php E:\...\csscomb.php "$(FULL_CURRENT_PATH)"
+    NPP_SENDMSG NPPM_RELOADFILE 0 "$(FULL_CURRENT_PATH)"
+    ```
+
+   where ```E:\...\csscomb.php``` —  absolute path to csscomb.php.
+
+   then press Save button and type name "CSScomb".
+
+* Go to Plugins → NppExec → Advanced Options, choose in "Associated script" our CSScomb script, click "Add/Modify", check "Place to the Macros menu". Now CSScomb item has in Macros menu.
+
+## Acknowledgments
+
+Thanks to [Nikita Khatimtsov](https://twitter.com/#!/nikitammf) for taking initiative in the integration CSScomb for Notepad++.
+
+## Feedback
+
+http://csscomb.com/
+
+http://twitter.com/csscomb
+
+http://github.com/miripiruni/CSScomb/
+
