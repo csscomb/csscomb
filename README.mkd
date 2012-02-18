@@ -34,7 +34,7 @@ http://github.com/miripiruni/CSScomb/downloads
  * WebStorm
  * PyCharm plugin
  * Notepad ++
- * Vim
+ * Vim (https://github.com/miripiruni/CSScomb-for-Vim)
 
 
 Twitter
