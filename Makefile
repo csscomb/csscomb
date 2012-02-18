@@ -44,9 +44,8 @@ buildNotepadPlugin:
 buildIntellijPlugin:
 	#
 	# IntelliJ IDEA / PyStorm / WebStorm:
-	cat $(PATH_TO_INTELLIJ_PLUGIN)/call.php | sed '1d' > $(PATH_TO_INTELLIJ_PLUGIN)/temp
-	cat $(PATH_TO_CORE) $(PATH_TO_INTELLIJ_PLUGIN)/temp > $(PATH_TO_INTELLIJ_PLUGIN)/csscomb.php
-	rm $(PATH_TO_INTELLIJ_PLUGIN)/temp
+	cp $(PATH_TO_CORE) $(PATH_TO_INTELLIJ_PLUGIN)/csscomb.php
+	sed '1d' < $(PATH_TO_INTELLIJ_PLUGIN)/call.php >> $(PATH_TO_INTELLIJ_PLUGIN)/csscomb.php
 
 buildWww:
 	java -jar yuicompressor-2.4.7.jar www/static/css/style.css > www/static/_css/style.css
