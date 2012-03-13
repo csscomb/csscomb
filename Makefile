@@ -28,12 +28,12 @@ copyCore:
 	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/lib/csscomb.php
 
 buildPlugins: buildNotepadPlugin buildIntellijPlugin
-	@echo 'Making archives for plugins...'
+	@echo 'Making plugin archives...'
 	@mkdir -p build
-	@tar -c -z $(PATH_TO_CODA_PLUGIN) > build/csscomb-for-coda-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
-	@tar -c -z $(PATH_TO_TEXTMATE_PLUGIN) > build/csscomb-for-textmate-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
-	@tar -c -z $(PATH_TO_NOTEPAD_P_P_PLUGIN) > build/csscomb-for-notepad_plus_plus-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
-	@tar -c -z $(PATH_TO_INTELLIJ_PLUGIN) > build/csscomb-for-webstorm_pycharm_idea-$(MAJOR_VERSION)-$(MINOR_VERSION).tar
+	@zip -9 -y -r -q build/csscomb-for-coda-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_CODA_PLUGIN)
+	@zip -9 -y -r -q build/csscomb-for-textmate-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_TEXTMATE_PLUGIN)
+	@zip -9 -y -r -q build/csscomb-for-notepad_plus_plus-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_NOTEPAD_P_P_PLUGIN)
+	@zip -9 -y -r -q build/csscomb-for-webstorm_pycharm_idea-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_INTELLIJ_PLUGIN)
 
 buildNotepadPlugin:
 	@echo 'Building plugin for Notepad++...'
