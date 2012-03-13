@@ -150,5 +150,8 @@ require_once'../common/header.php';
         </div>
         <script type="text/javascript" src="../static/highlight/highlight.pack.js"></script>
         <script type="text/javascript" src="../static/_js/tests.js"></script>
-        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+        <script type="text/javascript">
+            hljs.tabReplace = '    ';
+            hljs.initHighlightingOnLoad();
+        </script>
 <?require_once'../common/footer.php'?>
