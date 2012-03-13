@@ -767,7 +767,7 @@ $case['code'] = '.test1
 	position:relative;
 }
 
-.test2 /* тестовый комментарий */
+.test2 /* test comment */
 {
 	width:100px;
 	height:100px;
@@ -787,7 +787,7 @@ $case['result'] = '.test1
 	height:100px;
 }
 
-.test2 /* тестовый комментарий */
+.test2 /* test comment */
 {
 	position:relative;
 	width:100px;
@@ -941,8 +941,8 @@ $case['result'] = '.article BLOCKQUOTE P:before {
     margin:-47px 0 0 -36px;
     color:#C6BFBE;
     content:\'\201E\'; /* &bdquo; */
-    line-height:1;
     font-size:70px;
+    line-height:1;
     }';
 $group['cases'][] = $case;
 
