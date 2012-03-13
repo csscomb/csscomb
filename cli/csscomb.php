@@ -1,7 +1,7 @@
 <?php
 /**
  * CSScomb
- * @version: 2.10 (build 1202271821)
+ * @version: 2.10 (build 004ab3f-1203131750)
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  */
@@ -873,7 +873,7 @@ class csscomb{
         if(preg_match_all('#
             \&
             \#?
-            .*?[^;]
+            [\d\w]*?[^;]
             \;
             #ismx', $this->code['edited'], $entities)){
 
@@ -1375,7 +1375,7 @@ class tool {
 function man(){
 ?>
 
-CSSComb 2.10 (build 1202271821)                Command line tool for resort CSS code.
+CSSComb 2.10 (build 004ab3f-1203131750)                Command line tool for resort CSS code.
 
 SYNOPSIS
     $ php <?php echo $this->argv[0]; ?> -s <file with JSON array> -i <path to input css file> -o <path to result css file>

@@ -1,6 +1,7 @@
 MAJOR_VERSION = 2
 MINOR_VERSION = 10
 BUILD_TIMESTAMP = $(shell basename `date "+%y%m%d%H%M"`)
+LAST_COMMIT_HASH = $(shell git log -1 --pretty=format:"%h")
 
 PATH_TO_CORE = lib/csscomb.php
 PATH_TO_PLUGINS = plugins
@@ -14,7 +15,7 @@ buildAll: updateVersion buildCli copyCore buildPlugins buildWww
 
 updateVersion:
 	@echo 'Updating version...'
-	@sed -i '' 's/[0-9].[0-9]\{2\} (build [0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) cli/cli.php $(PATH_TO_CODA_PLUGIN)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
+	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) cli/cli.php $(PATH_TO_CODA_PLUGIN)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
 
 buildCli:
 	@echo 'Building CLI...'

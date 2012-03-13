@@ -14,20 +14,14 @@
 <?
 require_once '../lib/csscomb.php';
 
-$css = '.test{
-    test-align:right;
-    
-    padding:0;
-    
-    position:absolute;
-    
-    width:100px;
-
-    font-size:11px;
-
-    opacity:0.5;
-
-    }';
+$css = '
+    /* Direction nav styles (e.g. Next & Prev) */
+    .nivo-directionNav a {
+        position:absolute;
+        top:45%;
+        z-index:9;
+        cursor:pointer;
+        }';
 
 //$css = '.test{
     //content: \'&#160\';
