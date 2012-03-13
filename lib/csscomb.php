@@ -1,7 +1,7 @@
 <?php
 /**
  * CSScomb
- * @version: 2.10 (build 1202191448)
+ * @version: 2.10 (build 1202271821)
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  */
@@ -873,7 +873,7 @@ class csscomb{
         if(preg_match_all('#
             \&
             \#?
-            .*?[^;]
+            [\d\w]*?[^;]
             \;
             #ismx', $this->code['edited'], $entities)){
 
