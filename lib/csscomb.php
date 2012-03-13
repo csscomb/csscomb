@@ -1027,9 +1027,9 @@ class csscomb{
                      * новое.
                      */
                     $properties = preg_replace('/
-                        \n
+                        \r?\n
                         \ *?
-                        \n
+                        \r?\n
                         /ismx', "\n", $properties);
 
                 }
