@@ -2,71 +2,69 @@ var codeOriginal = '',
     codeResorted = '';
 
 var app = {
-
     container: {
         codeOriginal: document.getElementsByClassName('code-original')[0],
-
         codeResorted: document.getElementsByClassName('code-resorted')[0],
-
-        resortButton: $('#resort-button'),
-
-        copyResultButton: document.getElementById('copy-result-button'),
-
-        modeSelector: document.getElementById('mode-selector')
-
+        resortButton: document.getElementById('resort-button'),
+        modeSelector: document.getElementById('mode-selector'),
+        copyResultButton: document.getElementById('copy-result-button')
     },
 
-    /* Функция считает сколько строк в тексте text */
-    countLines: function(text){
+    // Функция считает сколько строк в тексте text
+    countLines: function (text) {
         var matches = text.match(/\n/g);
-        if(matches==null) matches = '';
-        return matches.length + 1;
+        if (!matches) {
+            matches = '';
+        }
+        return (matches.length + 1);
     }
-
-
-
-}
-
-
-
+};
 
 // Функция рисует в нужном месте (target) номера строк
-function drawLineNumbers(length, target){
-    var n = document.createElement("div"); // создает контейнер-сборщик, чтобы дергать DOM только один раз для его вставки
-    for(var i = 1; i <= length; i++){
-        var span = document.createElement("span");
+function drawLineNumbers(length, target) {
+    var c = document.createElement("div"),
+        i,
+        span;
+
+    for (i = 1; i <= length; i++) {
+        span = document.createElement("span");
         span.innerHTML = i + '.';
-        n.appendChild(span);
+        c.appendChild(span);
     }
-    target.appendChild(n);
+
+    target.appendChild(c);
 }
 
-function drawDiff(){
-    var lnr = document.getElementsByClassName('code-line-numbers-resorted');
-    for(var i = 0; i < lnr.length; i++){
+function drawDiff() {
+    var lnr, i, lno, k, code;
+
+    lnr = document.getElementsByClassName('code-line-numbers-resorted');
+    for (i = 0; i < lnr.length; i++) {
         drawLineNumbers(app.countLines(codeResorted), lnr[i]);
     }
 
-    var lno = document.getElementsByClassName('code-line-numbers-original');
-    for(var i = 0; i < lno.length; i++){
-        drawLineNumbers(app.countLines(codeOriginal), lno[i]);
+    lno = document.getElementsByClassName('code-line-numbers-original');
+    for (k = 0; k < lno.length; k++) {
+        drawLineNumbers(app.countLines(codeOriginal), lno[k]);
     }
-    var code = document.createElement("code");
+    code = document.createElement("code");
     code.innerHTML = codeOriginal;
     app.container.codeOriginal.appendChild(code);
 
-    var code = document.createElement("code");
+    code = document.createElement("code");
     code.innerHTML = codeResorted;
     app.container.codeResorted.appendChild(code);
 
     app.container.codeResorted.parentNode.removeAttribute('style');
 
-    app.container.resortButton.addClass('disabled');
+    $(app.container.resortButton).addClass('disabled');
+    app.container.resortButton.setAttribute('disabled','disabled');
     app.container.copyResultButton.removeAttribute('disabled');
 }
 
-function drawEdit(){
+function drawEdit() {
     var textarea = document.createElement("textarea");
+
     textarea.id = 'textarea';
     textarea.className = 'allow_tab_key';
     textarea.innerHTML = codeOriginal;
@@ -76,14 +74,14 @@ function drawEdit(){
     app.container.codeResorted.parentNode.setAttribute('style','display:none;');
 
     app.container.copyResultButton.setAttribute('disabled','disabled');
-    app.container.resortButton.removeClass('disabled');
+    app.container.resortButton.removeAttribute('disabled');
+    $(app.container.resortButton).removeClass('disabled');
 }
-//	drawEdit();
 
-function clear(){
+function clear() {
     app.container.codeOriginal.innerHTML = app.container.codeResorted.innerHTML = '';
 
-    if(document.getElementById('textarea')){
+    if (document.getElementById('textarea')) {
         $('#textarea').remove();
     }
 
@@ -93,74 +91,82 @@ function clear(){
     lnr.innerHTML = '';
 
 }
-//	clear();
 
-// режим редактирования
-$('#mode-edit').click(function(){
+// Режим редактирования
+$('#mode-edit').click(function() {
     var e = $('#mode-edit');
-    if(!e.hasClass('selected')){
+
+    if (!e.hasClass('selected')) {
         e.addClass('selected');
         $('#mode-diff').removeClass();
         $('.code table').attr('class','edit-mode');
         clear();
         drawEdit();
     }
+
     return false;
 });
 
-// режим сравнения
-$('#mode-diff').click(function(){
+// Режим сравнения
+$('#mode-diff').click(function() {
     $('.code table').attr('class','diff-mode');
     doResort();
     return false;
 });
 
-
-
-//drawDiff();
 drawEdit();
 $('#mode-edit').addClass('selected');
 
-
-$('#resort-button').click(function(){
-
+$(app.container.resortButton).click(function() {
     doResort();
-
 });
 
 
-function doResort(){
-    var order = '';
-    if(getCookie('csscomb-order')!==undefined){
-//        var customSortOrder = '["' + getCookie('csscomb-order').replace(/\%0A/g,'","') + ']';
-        var c = getCookie('csscomb-order');
-        var lines = c.split(/\%0A/);
-        for (var i = 0; i < lines.length; i++){
+function doResort() {
+    var order = '',
+        code = $('#textarea').val();
+
+    if (getCookie('csscomb-order')) {
+        var c = getCookie('csscomb-order'),
+            lines = c.split(/\%0A/),
+            i,
+            customSortOrder;
+
+        for (i = 0; i < lines.length; i++) {
             lines[i] = '"' + lines[i] + '"';
         }
-        var customSortOrder = '[' + lines.join(',') + ']';
+
+        customSortOrder = '[' + lines.join(',') + ']';
         order = decode(customSortOrder);
     }
-    //alert(order);
 
-    var code = codeOriginal = $('#textarea').val();
-    if(code == ''){
+    codeOriginal = code;
+    if (!code) {
         code = ' ';
     }
 
-    $.post("/gate/gate.php", {code:code,order:order},
-        function(data){
-            codeResorted = data;
-            //alert(codeResorted);
+    $.post(
+        "/gate/gate.php",
 
+        {
+            code  : code,
+            order : order
+        },
+
+        function (data) {
             var e = $('#mode-diff');
-            if(!e.hasClass('selected')){
+
+            codeResorted = data;
+
+            if (!e.hasClass('selected')) {
                 e.addClass('selected');
                 $('#mode-edit').removeClass();
                 clear();
                 drawDiff();
             }
-        }, "text"
+        },
+
+        "text"
     );
 }
 
@@ -182,7 +188,7 @@ $.Shortcuts.add({
     type: 'down',
     mask: 'Ctrl+R,Ctrl+Enter',
     enableInInput: true,
-    handler: function(){
+    handler: function () {
         doResort();
     }
 });
@@ -191,9 +197,9 @@ $.Shortcuts.add({
     type: 'down',
     mask: 'Ctrl+E',
     enableInInput: true,
-    handler: function(){
+    handler: function () {
         var e = $('#mode-edit');
-        if(!e.hasClass('selected')){
+        if (!e.hasClass('selected')) {
             e.addClass('selected');
             $('#mode-diff').removeClass();
             clear();
@@ -206,7 +212,7 @@ $.Shortcuts.add({
     type: 'down',
     mask: 'Ctrl+D',
     enableInInput: true,
-    handler: function(){
+    handler: function () {
         drawDiff();
     }
 });
@@ -215,19 +221,18 @@ $.Shortcuts.add({
     type: 'down',
     mask: 'Ctrl+S',
     enableInInput: true,
-    handler: function(){
+    handler: function () {
         toggleSettingsBar();
     }
 });
-
 
 $.Shortcuts.add({
     type: 'down',
     mask: 'Ctrl+C',
     enableInInput: true,
-    handler: function(){
+    handler: function () {
         var e = $('#copy-result-button');
-        if(e.attr('disabled') != 'disabled'){
+        if (e.attr('disabled') != 'disabled') {
             $('#copyResultPopup').css('display','block');
             $('#copyResultPopup #copy-result-textarea').val(codeResorted).select();
         }
@@ -239,85 +244,72 @@ $.Shortcuts.add({
     type: 'down',
     mask: 'Esc',
     enableInInput: true,
-    handler: function(){
-        if($('.settings-bar').css('right') != '-400px'){ toggleSettingsBar(); }
-        if($('#shortcutsSheet').css('display') == 'block'){ $('#shortcutsSheet').hide(); }
-        if($('#copyResultPopup').css('display') == 'block'){ $('#copyResultPopup').hide(); }
+    handler: function () {
+        if ($('.settings-bar').css('right') != '-400px') { toggleSettingsBar(); }
+        if ($('#shortcutsSheet').css('display') == 'block') { $('#shortcutsSheet').hide(); }
+        if ($('#copyResultPopup').css('display') == 'block') { $('#copyResultPopup').hide(); }
     }
 });
 
 $.Shortcuts.start();
 
-jQuery(document).ready(function(){
+jQuery(document).ready(function () {
      $('#textarea').tabby();
 });
 
 
-
-
-
-$('.settings-link a, .settings-bar .hide').click(function(){toggleSettingsBar();});
-$('#textarea').focus(function(){
-    if($('.settings-bar').css('right') != '-400px'){ toggleSettingsBar(); }
-//    if($('#shortcutsSheet').css('display') == 'block') $('#shortcutsSheet').hide();
+$('.settings-link a, .settings-bar .hide').click(function () {
+    toggleSettingsBar();
 });
 
-function toggleSettingsBar(){
+$('#textarea').focus(function () {
+    if ($('.settings-bar').css('right') != '-400px') { toggleSettingsBar(); }
+});
+
+function toggleSettingsBar() {
     var bar = $('.settings-bar');
-    if(bar.css('right') == '0px'){
+
+    if (bar.css('right') == '0px') {
         bar.animate({right:'-400px'}, 300);
-    }
-    else{
+    } else {
         bar.animate({right:'0px'}, 300);
     }
 }
 
-$('.settings-link a').hover(function(){
+$('.settings-link a').hover(function () {
     $('.settings-bar').toggleClass('settings-bar__hovered');
 });
 
-
-jQuery(document).ready(function(){
-    $('#toggleShortcutsSheet').click(function(){
+jQuery(document).ready(function () {
+    $('#toggleShortcutsSheet').click(function () {
         $('#shortcutsSheet').css('display','block');
     });
 });
 
 
 /* Cookies */
-function getCookie(c_name){
-    var i,x,y,ARRcookies = document.cookie.split(";");
-    for (i = 0; i < ARRcookies.length; i++){
+function getCookie(c_name) {
+    var i, x, y,
+        ARRcookies = document.cookie.split(";");
+
+    for (i = 0; i < ARRcookies.length; i++) {
         x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
         y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
         x = x.replace(/^\s+|\s+$/g, "");
-        if (x == c_name){
+        if (x == c_name) {
             return y;
         }
     }
 }
 
-function setCookie(c_name, value, exdays){
+function setCookie(c_name, value, exdays) {
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + exdays);
-    var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+    var c_value = escape(value) + ((exdays === null) ? "" : "; expires=" + exdate.toUTCString());
     document.cookie = c_name + "=" + c_value;
 }
 
-function checkCookie(){
-    var username = getCookie("username");
-    if (username != null && username != ""){
-        alert("Welcome again " + username);
-    }
-    else{
-        username = prompt("Please enter your name:", "");
-        if (username != null && username != ""){
-            setCookie("username", username, 365);
-        }
-    }
-}
-
-function decode(str){
+function decode(str) {
     return str
             .replace(/\%0A/g,"\n")
             .replace(/\%27/g,"'")
@@ -335,52 +327,49 @@ function decode(str){
             .replace(/\%5C/g,'\\');
 }
 
-jQuery(document).ready(function(){
-
-    if(getCookie('csscomb-order')===undefined){
-
+jQuery(document).ready(function () {
+    if (!getCookie('csscomb-order')) {
         var get_order = 'zen';
-        $.post("/gate/gate.php", {get_order: get_order},
-            function(data){
-                var data = data;
-//                alert(data);
-                // zen, ya, user
+
+        $.post(
+            "/gate/gate.php",
+            {get_order: get_order},
+            function (data) {
                 setCookie('csscomb-order', data, 365);
                 $('#settings-textarea').val(data);
-            }, "text"
+            },
+            "text"
         );
-    }
-    else{
+    } else {
         var currentSortOrder = getCookie('csscomb-order');
+
         currentSortOrder = decode(currentSortOrder);
         $('#settings-textarea').val(currentSortOrder);
     }
 
-
-    $('#zen-sort-order').click(function(){
+    $('#zen-sort-order').click(function () {
         $('#settings-textarea').val('zen');
     });
 
-    $('#ya-sort-order').click(function(){
+    $('#ya-sort-order').click(function () {
         $('#settings-textarea').val('ya');
     });
 
-    $('#user-sort-order').click(function(){
+    $('#user-sort-order').click(function () {
         $('#settings-textarea').val('user');
     });
 
-    $('#save-sort-order').click(function(){
+    $('#save-sort-order').click(function () {
         var value = $('#settings-textarea').val();
+
         setCookie('csscomb-order', value, 365);
-//        $('#settings-status').html('<span>Настройки успешно сохранены. <span onclick="$(\'#settings-status\').html(\'\');">[Я в курсе.]</span></span>')
     });
 
-
-
     // скопировать результат
-    $('#copy-result-button').click(function(){
+    $('#copy-result-button').click(function () {
         var e = $('#copy-result-button');
-        if(e.attr('disabled') != 'disabled'){
+
+        if (e.attr('disabled') != 'disabled') {
             $('#copyResultPopup').css('display','block');
             $('#copyResultPopup #copy-result-textarea').val(codeResorted).select();
         }
@@ -388,9 +377,8 @@ jQuery(document).ready(function(){
     });
 
     // кнопка копирования отсортированного кода
-    $('.popup-close').click(function(){
+    $('.popup-close').click(function () {
         this.parentNode.parentNode.style.display = 'none';
         return false;
     });
-
 });
