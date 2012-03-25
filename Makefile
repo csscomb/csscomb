@@ -5,7 +5,8 @@ LAST_COMMIT_HASH = $(shell git log -1 --pretty=format:"%h")
 
 PATH_TO_CORE = lib/csscomb.php
 PATH_TO_PLUGINS = plugins
-PATH_TO_CODA_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.codaplugin/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68
+PATH_TO_CODA_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.codaplugin
+PATH_TO_CODA_PLUGIN_CORE = $(PATH_TO_CODA_PLUGIN)/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68
 PATH_TO_TEXTMATE_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.tmbundle
 PATH_TO_NOTEPAD_P_P_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.notepad_plus_plus
 PATH_TO_INTELLIJ_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.webstorm_pycharm_idea
@@ -15,7 +16,7 @@ buildAll: updateVersion buildCli copyCore buildPlugins buildWww
 
 updateVersion:
 	@echo 'Updating version...'
-	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) cli/cli.php $(PATH_TO_CODA_PLUGIN)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
+	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) cli/cli.php $(PATH_TO_CODA_PLUGIN_CORE)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
 
 buildCli:
 	@echo 'Building CLI...'
@@ -25,7 +26,7 @@ buildCli:
 copyCore:
 	@echo 'Copying CLI...'
 	@cp $(PATH_TO_CORE) www/$(PATH_TO_CORE)
-	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_PLUGIN)/Support\ Files/csscomb.php
+	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/lib/csscomb.php
 
 buildPlugins: buildNotepadPlugin buildIntellijPlugin
