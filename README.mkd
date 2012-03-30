@@ -5,9 +5,7 @@
 * Parsing CSS in the tags style tag, style attribute: CSScomb find a CSS-code to other languages and will sort it
 * Formatting style sheets does not change: Work as a singleline and multiline CSS
 * Separation of CSS properties for the group: Separate groups of empty string if you want
-
-Full support CSS2/CSS2.1/CSS3
-CSScomb ready for the advanced CSS-code
+* Full support CSS2/CSS2.1/CSS3: CSScomb ready for the advanced CSS-code
 
 The algorithm of CSScomb simulates web-technologist's actions upon working with CSS-code to the limit. Usually to re-order code you move lines over each other considering comments in the code, multilines records of property values, hacks and everything that could be found in the real file. CSScomb reproduces these actions for you. This means that the parser "thinks" as a person editing the text, not as a blind robot parsing CSS.
 
