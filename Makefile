@@ -4,7 +4,7 @@ BUILD_TIMESTAMP = $(shell basename `date "+%y%m%d%H%M"`)
 LAST_COMMIT_HASH = $(shell git log -1 --pretty=format:"%h")
 
 PATH_TO_CORE = src/csscomb.php
-PATH_TO_PLUGINS = plugins
+PATH_TO_PLUGINS = src/plugins
 PATH_TO_CODA_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.codaplugin
 PATH_TO_CODA_PLUGIN_CORE = $(PATH_TO_CODA_PLUGIN)/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68
 PATH_TO_TEXTMATE_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.tmbundle
