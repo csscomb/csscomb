@@ -23,7 +23,7 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
 http://csscomb.com/
 
 
-Download
+Download plugins
 --------
 
 http://github.com/miripiruni/CSScomb/downloads
