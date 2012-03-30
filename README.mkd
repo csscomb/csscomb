@@ -36,6 +36,34 @@ http://github.com/miripiruni/CSScomb/downloads
  * Notepad ++
  * Vim (https://github.com/miripiruni/CSScomb-for-Vim)
 
+CLI usage
+---
+
+Avaliable at /build/cli/
+
+
+```
+± % php csscomb.php                                                                                                                                                                                   !1325
+
+CSSComb 2.10 (build 66841b2-1203301135)                Command line tool for resort CSS code.
+
+SYNOPSIS
+    $ php csscomb.php -s <file with JSON array> -i <path to input css file> -o <path to result css file>
+
+DESCRIPTION
+    options:
+    -s, --sort-order    specify file with custom sort order. File must contain JSON data. For detail information run 'csscomb.php --help-sort-order'
+    -i, --input         must be directory name or file that needs to be sorted
+    -o, --output        sort result file. Use output when input is not a directory name, otherwise output param ignored. If output filename does not exist, the file is created. Otherwise, the existing file is overwritten.
+
+    --help, -help, -h, -? or no options will print this man.
+
+EXAMPLE
+    csscomb.php -s my-custom-sort-order.json -i css/style.css -o css/style-resorted.css
+
+EXAMPLE 2
+    csscomb.php -i some_directory_name
+```
 
 Twitter
 -------
