@@ -16,12 +16,13 @@ buildAll: updateVersion buildCli copyCore buildPlugins buildWww
 
 updateVersion:
 	@echo 'Updating version...'
-	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) cli/cli.php $(PATH_TO_CODA_PLUGIN_CORE)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
+	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) src/cli.php $(PATH_TO_CODA_PLUGIN_CORE)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
 
 buildCli:
 	@echo 'Building CLI...'
-	@cp $(PATH_TO_CORE) cli/csscomb.php
-	@sed '1d' < cli/cli.php >> cli/csscomb.php
+	@mkdir -p build/cli
+	@cp $(PATH_TO_CORE) build/cli/csscomb.php
+	@sed '1d' < src/cli.php >> build/cli/csscomb.php
 
 copyCore:
 	@echo 'Copying CLI...'
@@ -68,4 +69,4 @@ buildWww: useCsscomb
 
 useCsscomb:
 	@echo 'Using CSScomb for CSScomb web site...'
-	@php cli/csscomb.php -i www/static/css
+	@php build/cli/csscomb.php -i www/static/css
