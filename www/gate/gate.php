@@ -1,5 +1,5 @@
 <?php
-require_once'../lib/csscomb.php';
+require_once'../src/csscomb.php';
 
 if($_POST['code'] and $_POST['code'] != ''){
 

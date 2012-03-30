@@ -3,7 +3,7 @@ MINOR_VERSION = 10
 BUILD_TIMESTAMP = $(shell basename `date "+%y%m%d%H%M"`)
 LAST_COMMIT_HASH = $(shell git log -1 --pretty=format:"%h")
 
-PATH_TO_CORE = lib/csscomb.php
+PATH_TO_CORE = src/csscomb.php
 PATH_TO_PLUGINS = plugins
 PATH_TO_CODA_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.codaplugin
 PATH_TO_CODA_PLUGIN_CORE = $(PATH_TO_CODA_PLUGIN)/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68
@@ -25,9 +25,12 @@ buildCli:
 
 copyCore:
 	@echo 'Copying CLI...'
+	@mkdir -p www/src
+	@mkdir -p $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files
+	@mkdir -p $(PATH_TO_TEXTMATE_PLUGIN)/Support/src
 	@cp $(PATH_TO_CORE) www/$(PATH_TO_CORE)
 	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files/csscomb.php
-	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/lib/csscomb.php
+	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/src/csscomb.php
 
 buildPlugins: buildNotepadPlugin buildIntellijPlugin
 	@echo 'Making plugin archives...'
@@ -48,7 +51,10 @@ buildIntellijPlugin:
 	@sed '1d' < $(PATH_TO_INTELLIJ_PLUGIN)/call.php >> $(PATH_TO_INTELLIJ_PLUGIN)/csscomb.php
 
 buildWww: useCsscomb
+	# YUI Compressor required
+	# http://yuilibrary.com/download/yuicompressor/
 	@echo 'Minifying CSS & JS...'
+	@mkdir -p www/static/_css
 	@java -jar yuicompressor-2.4.7.jar www/static/css/style.css > www/static/_css/style.css
 	@java -jar yuicompressor-2.4.7.jar www/static/css/tests.css > www/static/_css/tests.css
 	@java -jar yuicompressor-2.4.7.jar www/static/js/online.js > www/static/_js/online.js
