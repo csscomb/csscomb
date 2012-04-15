@@ -16,7 +16,7 @@ class tool {
 function man(){
 ?>
 
-CSSComb 2.10 (build b86af6d-1203301127)                Command line tool for resort CSS code.
+CSSComb 2.10 (build 5b53b10-1204152043)                Command line tool for resort CSS code.
 
 SYNOPSIS
     $ php <?php echo $this->argv[0]; ?> -s <file with JSON array> -i <path to input css file> -o <path to result css file>
@@ -78,6 +78,7 @@ function tool($argc, $argv){
 
     if($this->argc == 1 || in_array($this->argv[1], array('--help', '-help', '-h', '-?'))) {
         $this->man();
+        exit(1);
     }
     else {
 
@@ -96,15 +97,22 @@ function tool($argc, $argv){
             }
             elseif($this->out != null){
                 echo "Sorting ".$this->in."...\n";
-                $result = $c->csscomb(file_get_contents($this->in));
-                file_put_contents($this->out, $result);
+                if (mime_content_type($this->in) === 'text/plain') {
+                    $result = $c->csscomb(file_get_contents($this->in));
+                    file_put_contents($this->out, $result);
+                } else {
+                    echo("Wrong input file mime type.");
+                    exit(1);
+                }
             }
             echo "Done.\n";
+            exit(0);
 
 
         } else {
             echo "No input file\n";
             $this->man();
+            exit(1);
         }
     }
 }

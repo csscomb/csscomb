@@ -1,7 +1,7 @@
 <?php
 /**
  * CSScomb
- * @version: 2.10 (build b86af6d-1203301127)
+ * @version: 2.10 (build 5b53b10-1204152043)
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  */
