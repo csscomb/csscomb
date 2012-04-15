@@ -33,7 +33,7 @@ Avaliable at /build/cli/
 
 
 ```
-± % php csscomb.php                                                                                                                                                                                   !1325
+% php csscomb.php
 
 CSSComb 2.10 (build 66841b2-1203301135)                Command line tool for resort CSS code.
 
