@@ -17,6 +17,7 @@ Download plugins
 
 http://github.com/miripiruni/CSScomb/downloads
 
+ * Sublime Text 2 plugin
  * TextMate plugin
  * Coda Plugin
  * IntelliJIDEA

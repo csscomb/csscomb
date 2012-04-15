@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Sort via CSScomb",
+        "command": "css_sorter"
+    }
+]

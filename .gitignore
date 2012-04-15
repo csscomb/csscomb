@@ -1,10 +1,9 @@
-.idea/
-*.iml
 www/src/csscomb.php
 www/static/_js/
 www/static/_css/
-plugins/csscomb.codaplugin/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68/Support\ Files/csscomb.php
-plugins/csscomb.tmbundle/Support/src/csscomb.php
-plugins/csscomb.notepad_plus_plus/csscomb.php
-plugins/csscomb.webstorm_pycharm_idea/csscomb.php
+src/plugins/csscomb.codaplugin/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68/Support\ Files/csscomb.php
+src/plugins/csscomb.tmbundle/Support/src/csscomb.php
+src/plugins/csscomb.notepad_plus_plus/csscomb.php
+src/plugins/csscomb.webstorm_pycharm_idea/csscomb.php
+src/plugins/csscomb.webstorm_pycharm_idea/csscomb.php
 yuicompressor*
