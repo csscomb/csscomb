@@ -31,7 +31,8 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                        "file": "${packages}/CSScomb/Default (OSX).sublime-keymap",
+                                        "file":
+                                        "${packages}/csscomb.sublime_text_2/Default (OSX).sublime-keymap",
                                         "platform": "OSX"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -39,7 +40,8 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                        "file": "${packages}/CSScomb/Default (Linux).sublime-keymap",
+                                        "file":
+                                        "${packages}/csscomb.sublime_text_2/Default (Linux).sublime-keymap",
                                         "platform": "Linux"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -47,7 +49,8 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                        "file": "${packages}/CSScomb/Default (Windows).sublime-keymap",
+                                        "file":
+                                        "${packages}/csscomb.sublime_text_2/Default (Windows).sublime-keymap",
                                         "platform": "Windows"
                                 },
                                 "caption": "Key Bindings – Default"
