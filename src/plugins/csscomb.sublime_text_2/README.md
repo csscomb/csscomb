@@ -81,5 +81,5 @@ header h1 {
 
 ## Мейнтейнеры
 
-CSScomb core: [miripiruni](mailto:mail@csscomb.ru)
-Sublime plugin: [i-akhmadullin](https://github.com/i-akhmadullin)
+* CSScomb core: [miripiruni](mailto:mail@csscomb.ru)
+* Sublime plugin: [i-akhmadullin](https://github.com/i-akhmadullin)
