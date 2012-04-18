@@ -5,7 +5,7 @@ $module = 'tests';
 require_once'../common/header.php';
 
         require_once 'cases.php';
-        require_once'../lib/csscomb.php';
+        require_once'../src/csscomb.php';
         $c = new csscomb();
 
         $test_count = $errors = $warnings = 0;
