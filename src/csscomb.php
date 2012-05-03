@@ -1084,7 +1084,7 @@ class csscomb{
             $this->code['edited'] = $matches[1].$this->code['edited'];
             //TODO: Не использовать parse_prop здесь, а делать вызов в csscomb. Пусть функции общаются между собой через csscomb
             $rules[0] = trim($this->parse_properties($this->code['edited']));
-            $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;
+            $this->code['resorted'] = implode($this->array_implode($rules));
         }
     }
 
