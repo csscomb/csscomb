@@ -406,7 +406,7 @@ class csscomb{
     "max-zoom",
     "min-zoom",
     "user-zoom",
-    "
+    "orientation"
 ]',
 
     $yandex_sort_order = '[
@@ -746,18 +746,13 @@ class csscomb{
      *
      */
     function set_sort_order($json_array = null) {
-        if ($json_array != null) {
+        $this->sort_order = json_decode($this->default_sort_order);
+
+        if ($json_array !== null) {
             $custom_sort_order = json_decode($json_array);
-            if (is_array($custom_sort_order) AND count($custom_sort_order)>0) {
+            if (is_array($custom_sort_order) AND count($custom_sort_order) > 0) {
                 $this->sort_order = $custom_sort_order;
             }
-            else {
-                $this->sort_order = json_decode($this->default_sort_order);
-            }
-
-        }
-        else {
-            $this->sort_order = json_decode($this->default_sort_order);
         }
 
         if ($json_array === 'yandex') {
