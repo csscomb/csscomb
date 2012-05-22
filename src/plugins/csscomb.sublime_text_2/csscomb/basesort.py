@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 import threading
-import sys,subprocess
+import sys,subprocess,os
 from os import path
 
 __file__ = path.normpath(path.abspath(__file__))
@@ -19,7 +19,13 @@ class BaseSort(threading.Thread):
         threading.Thread.__init__(self)
 
     def exec_request(self):
-        myprocess = subprocess.Popen(['php',csscomb_path,self.original], shell=False, stdout=subprocess.PIPE)
+        startupinfo = None
+        if os.name == 'nt':
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+        
+        myprocess = subprocess.Popen(['php', csscomb_path, self.original], shell=False, stdout=subprocess.PIPE, startupinfo=startupinfo)
         (sout,serr) = myprocess.communicate()
         myprocess.wait()
 
