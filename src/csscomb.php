@@ -851,7 +851,7 @@ class csscomb{
             $this->code['expressions'] = array();
             while(strpos($this->code['edited'], 'expression(')):
                 // вылавливаем expression
-                preg_match_all('#(.*)expression\((.*)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER);
+                preg_match_all('#(.*)expression\((.*?)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER);
                 $this->code['expressions'][] = $match[0][2]; // собираем значения expression(...)
                 $this->code['edited'] = str_replace(
                                             'expression('.$match[0][2].')',
