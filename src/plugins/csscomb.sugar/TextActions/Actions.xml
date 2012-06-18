@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<action-recipes>
+	
+	<action id="com.csscomb.plugin.espresso.csscomb">
+		<class>OCShellAction</class>
+		<syntax-context>css, css *</syntax-context>
+		<key-equivalent>control shift C</key-equivalent>
+		<setup>
+			<script>inline-csscomb.php</script>
+			
+			<input>selection</input>
+			<alternate>document</alternate>
+		</setup>
+	</action>
+	
+</action-recipes>
