@@ -9,7 +9,7 @@
 
 The algorithm of CSScomb simulates web-technologist's actions upon working with CSS-code to the limit. Usually to re-order code you move lines over each other considering comments in the code, multilines records of property values, hacks and everything that could be found in the real file. CSScomb reproduces these actions for you. This means that the parser "thinks" as a person editing the text, not as a blind robot parsing CSS.
 
-http://csscomb.com/
+[CSScomb.com](http://csscomb.com/)
 
 
 [Download plugins](http://github.com/miripiruni/CSScomb/downloads)
@@ -18,7 +18,7 @@ http://csscomb.com/
  * Sublime Text 2 plugin
  * TextMate plugin
  * Coda Plugin
- * [Espresso 2 plugin](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.sugar/README.markdown))
+ * [Espresso 2 plugin](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.sugar/README.markdown)
  * IntelliJIDEA
  * WebStorm
  * PyCharm plugin
