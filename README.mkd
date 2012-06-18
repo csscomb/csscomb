@@ -12,25 +12,23 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
 http://csscomb.com/
 
 
-Download plugins
+[Download plugins](http://github.com/miripiruni/CSScomb/downloads)
 --------
-
-http://github.com/miripiruni/CSScomb/downloads
 
  * Sublime Text 2 plugin
  * TextMate plugin
  * Coda Plugin
- * Espresso 2 plugin (requires [ShellActions.sugar](https://github.com/onecrayon/ShellActions-sugar))
+ * [Espresso 2 plugin](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.sugar/README.markdown))
  * IntelliJIDEA
  * WebStorm
  * PyCharm plugin
  * Notepad ++
- * Vim (https://github.com/miripiruni/CSScomb-for-Vim)
+ * [Vim](https://github.com/miripiruni/CSScomb-for-Vim)
 
 CLI usage
 ---
 
-Avaliable at /build/cli/
+Avaliable at [/build/cli/](https://github.com/miripiruni/CSScomb/tree/master/build/cli)
 
 
 ```
@@ -58,4 +56,4 @@ EXAMPLE 2
 
 Twitter
 -------
-http://twitter.com/csscomb/
+[@csscomb](http://twitter.com/csscomb/)
