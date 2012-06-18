@@ -11,6 +11,7 @@ PATH_TO_TEXTMATE_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.tmbundle
 PATH_TO_NOTEPAD_P_P_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.notepad_plus_plus
 PATH_TO_INTELLIJ_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.webstorm_pycharm_idea
 PATH_TO_SUBLIME_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.sublime_text_2
+PATH_TO_ESPRESSO_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.sugar
 
 buildAll: buildCli copyCore buildPlugins buildWww
 	@echo 'Successfully done.'
@@ -20,7 +21,7 @@ all: updateVersion buildCli copyCore buildPlugins buildWww
 
 updateVersion:
 	@echo 'Updating version...'
-	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) src/cli.php $(PATH_TO_CODA_PLUGIN_CORE)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand
+	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) src/cli.php $(PATH_TO_CODA_PLUGIN_CORE)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand $(PATH_TO_ESPRESSO_PLUGIN)/Scripts/inline-csscomb.php
 
 buildCli:
 	@echo 'Building CLI...'
@@ -33,10 +34,12 @@ copyCore:
 	@mkdir -p www/src
 	@mkdir -p $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files
 	@mkdir -p $(PATH_TO_TEXTMATE_PLUGIN)/Support/src
+	@mkdir -p $(PATH_TO_ESPRESSO_PLUGIN)/ScriptLibraries
 	@cp $(PATH_TO_CORE) www/$(PATH_TO_CORE)
 	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/src/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_SUBLIME_PLUGIN)/csscomb/libs/csscomb.php
+	@cp $(PATH_TO_CORE) $(PATH_TO_ESPRESSO_PLUGIN)/ScriptLibraries/csscomb.php
 
 buildPlugins: buildNotepadPlugin buildIntellijPlugin
 	@echo 'Making plugin archives...'
@@ -46,6 +49,7 @@ buildPlugins: buildNotepadPlugin buildIntellijPlugin
 	@zip -9 -y -r -q build/csscomb-for-sublime_text_2-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_SUBLIME_PLUGIN)
 	@zip -9 -y -r -q build/csscomb-for-notepad_plus_plus-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_NOTEPAD_P_P_PLUGIN)
 	@zip -9 -y -r -q build/csscomb-for-webstorm_pycharm_idea-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_INTELLIJ_PLUGIN)
+	@zip -9 -y -r -q build/csscomb-for-espresso2-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_ESPRESSO_PLUGIN)
 
 buildNotepadPlugin:
 	@echo 'Building plugin for Notepad++...'
