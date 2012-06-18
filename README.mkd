@@ -20,6 +20,7 @@ http://github.com/miripiruni/CSScomb/downloads
  * Sublime Text 2 plugin
  * TextMate plugin
  * Coda Plugin
+ * Espresso 2 plugin (requires [ShellActions.sugar](https://github.com/onecrayon/ShellActions-sugar))
  * IntelliJIDEA
  * WebStorm
  * PyCharm plugin
