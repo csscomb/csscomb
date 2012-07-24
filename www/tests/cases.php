@@ -375,8 +375,8 @@ $case['code'] = '.wrapper{
 
 $case['result'] = '.wrapper{
     position: relative;
-    height: 100%;
     min-height: 100%;
+    height: 100%;
     voice-family: "\"}\"";
     voice-family: inherit;
 	}
@@ -849,7 +849,7 @@ $case['descr'] = 'Комбинация многострочных и однос�
 $case['descr-en'] = 'Comments: The combination of multi-and single-line comments';
 $case['link'] = 'comments-the-combination-of-multi-and-singleline-comments';
 $case['code'] = 'div{
-    /* раз, два, три */
+    /* one, two, three, four */
     position:absolute;
     left:1px;
     /*
@@ -872,7 +872,7 @@ $case['code'] = 'div{
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5E39E), color-stop(42%,#FFEFB2), color-stop(75%,#FFF3C8), color-stop(100%,#FFF5CF));
         }';
 $case['result'] = 'div{
-    /* раз, два, три */
+    /* one, two, three, four */
     position:absolute;
     /* top:1px; */
     left:1px;
@@ -883,8 +883,8 @@ $case['result'] = 'div{
     }
 
     .test1{
-        /* border-color: #93875d #dfd199 #fff6d5; */
         /* border-width: 1px 1px 1px 0; */
+        /* border-color: #93875d #dfd199 #fff6d5; */
 
         background: #F5E39E;
         background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
@@ -1264,9 +1264,9 @@ $case['result'] = '/********** 404 Page **********/
 	height:1500px;
 	background:url(../images/presentation/planet_1500.jpg) top center no-repeat;
 	-webkit-animation-name: earthRotation;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
 	-webkit-animation-duration: 500s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes earthRotation {
