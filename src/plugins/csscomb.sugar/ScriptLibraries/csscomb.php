@@ -1029,7 +1029,11 @@ class csscomb{
             @ismx', $this->code['edited'], $matches);
 
             $code_without_end = $matches[1];
-            $end_of_code = $matches[2];
+            if($matches[2]) {
+                $end_of_code = $matches[2];
+            } else {
+                $end_of_code = '';
+            }
 
             /**
              * Разбиваем CSS-код на части по { или }
@@ -1074,7 +1078,7 @@ class csscomb{
             //TODO: вынести вызов parse_prop в csscomb(), сделать чтобы parse_rules возвращала результат своей работы в виде $rules
             foreach ($properties as $props) {
                 $r = $this->parse_properties($props);
-                $this->code['resorted'] = str_replace($props, $r, $this->code['resorted']);
+                $this->code['resorted'] = str_replace($props, $r, $this->code['resorted']).$end_of_code;
             }
 
         }

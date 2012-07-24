@@ -11,25 +11,31 @@ class csscomb{
 
     var $sort_order = Array(),
     $code = Array(
-        'original' => null, // оригинальный код, без изменений, то, что пришло на вход
-        'edited' => null,   // код, который может меняться в процессе выполнения алгоритма пересортировки
-        'resorted' => null,  // конечный, пересортированный CSS-код
+        // оригинальный код, без изменений, то, что пришло на вход
+        'original' => null,
+        // код, который может меняться в процессе выполнения алгоритма пересортировки
+        'edited' => null,
+        // конечный, пересортированный CSS-код
+        'resorted' => null,
         // TODO: избавиться от resorted
-        'expressions' => null,  // если найдены expression, то эта переменная станет массивом, ячейки которого будут содержать код каждого найденного expression
-        'datauri' => null,  // если найдены data uri, то эта переменная станет массивом...
-        'hacks' => null,  // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
-        'braces' => null, // если найдены комментарии содержащие { или } мешающие парсить, то эта переменная станет массивом.
-        'entities' => null // если найдены entities мешающие парсить, то эта переменная станет массивом.
+        // если найдены expression, то эта переменная станет массивом, ячейки которого
+        // будут содержать код каждого найденного expression
+        'expressions' => null,
+        // если найдены data uri, то эта переменная станет массивом...
+        'datauri' => null,
+        // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
+        'hacks' => null,
+        // если найдены комментарии содержащие { или } мешающие парсить,
+        // то эта переменная станет массивом.
+        'braces' => null,
+        // если найдены entities мешающие парсить, то эта переменная станет массивом.
+        'entities' => null
     ),
 
-    /*
-     * В переменной $mode лежит режим работы с CSS-кодом.
-     * Возможны следующие значения:
-     * css-file - только CSS-код
-     * style-attribute - найден атрибут style="..."
-     * properties - не найдено фигурных скобок, зато присутствуют точки с запятой и двоеточия.
-     *
-     */
+    // В переменной $mode лежит режим работы с CSS-кодом. Возможны следующие значения:
+    //   css-file - только CSS-код
+    //   style-attribute - найден атрибут style="..."
+    //   properties - не найдено фигурных скобок, зато присутствуют точки с запятой и двоеточия.
     $mode = 'properties',
 
 
@@ -41,14 +47,35 @@ class csscomb{
     "bottom",
     "left",
     "z-index",
-    "float",
-    "clear",
     "display",
     "visibility",
+    "-webkit-flex-direction",
+    "-moz-flex-direction",
+    "-ms-flex-direction",
+    "-o-flex-direction",
+    "flex-direction",
+    "-webkit-flex-order",
+    "-moz-flex-order",
+    "-ms-flex-order",
+    "-o-flex-order",
+    "flex-order",
+    "-webkit-flex-pack",
+    "-moz-flex-pack",
+    "-ms-flex-pack",
+    "-o-flex-pack",
+    "flex-pack",
+    "float",
+    "clear",
+    "-webkit-flex-align",
+    "-moz-flex-align",
+    "-ms-flex-align",
+    "-o-flex-align",
+    "flex-align",
     "overflow",
+    "-ms-overflow-x",
+    "-ms-overflow-y",
     "overflow-x",
     "overflow-y",
-    "overflow-style",
     "clip",
     "-webkit-box-sizing",
     "-moz-box-sizing",
@@ -63,49 +90,53 @@ class csscomb{
     "padding-right",
     "padding-bottom",
     "padding-left",
-    "width",
-    "height",
-    "max-width",
-    "max-height",
     "min-width",
     "min-height",
+    "max-width",
+    "max-height",
+    "width",
+    "height",
     "outline",
     "outline-width",
     "outline-style",
     "outline-color",
     "outline-offset",
     "border",
+    "border-spacing",
     "border-collapse",
-    "border-color",
-    "border-style",
     "border-width",
+    "border-style",
+    "border-color",
     "border-top",
+    "border-top-width",
+    "border-top-style",
+    "border-top-color",
     "border-right",
+    "border-right-width",
+    "border-right-style",
+    "border-right-color",
     "border-bottom",
+    "border-bottom-width",
+    "border-bottom-style",
+    "border-bottom-color",
     "border-left",
+    "border-left-width",
+    "border-left-style",
+    "border-left-color",
     "-webkit-border-radius",
-    "-khtml-border-radius",
     "-moz-border-radius",
     "border-radius",
     "-webkit-border-top-right-radius",
-    "-khtml-border-top-right-radius",
     "-moz-border-top-right-radius",
-    "-moz-border-radius-topright",
     "border-top-right-radius",
     "-webkit-border-bottom-right-radius",
-    "-khtml-border-bottom-right-radius",
     "-moz-border-bottom-right-radius",
-    "-moz-border-radius-bottomright",
     "border-bottom-right-radius",
     "-webkit-border-bottom-left-radius",
-    "-khtml-border-bottom-left-radius",
     "-moz-border-bottom-left-radius",
-    "-moz-border-radius-bottomleft",
     "border-bottom-left-radius",
     "-webkit-border-top-left-radius",
-    "-khtml-border-top-left-radius",
     "-moz-border-top-left-radius",
-    "-moz-border-radius-topleft",
     "border-top-left-radius",
     "-webkit-border-image",
     "-moz-border-image",
@@ -171,12 +202,16 @@ class csscomb{
     "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader",
     "background-color",
     "background-image",
-    "background-position",
-    "background-size",
-    "background-repeat",
     "background-attachment",
+    "background-position",
+    "-ms-background-position-x",
+    "-ms-background-position-y",
+    "background-position-x",
+    "background-position-y",
     "background-clip",
     "background-origin",
+    "background-size",
+    "background-repeat",
     "box-decoration-break",
     "-webkit-box-shadow",
     "-moz-box-shadow",
@@ -193,25 +228,39 @@ class csscomb{
     "content",
     "counter-increment",
     "counter-reset",
+    "-ms-writing-mode",
     "vertical-align",
     "text-align",
+    "-ms-text-align-last",
+    "text-align-last",
     "text-decoration",
     "text-emphasis",
+    "text-emphasis-position",
+    "text-emphasis-style",
+    "text-emphasis-color",
     "text-indent",
+    "-ms-text-justify",
     "text-justify",
     "text-outline",
     "text-transform",
     "text-wrap",
+    "-ms-text-overflow",
     "text-overflow",
     "text-overflow-ellipsis",
     "text-overflow-mode",
     "text-shadow",
     "white-space",
     "word-spacing",
+    "-ms-word-wrap",
     "word-wrap",
+    "-ms-word-break",
+    "word-break",
     "-moz-tab-size",
     "-o-tab-size",
     "tab-size",
+    "-webkit-hyphens",
+    "-moz-hyphens",
+    "hyphens",
     "letter-spacing",
     "font",
     "font-weight",
@@ -226,6 +275,10 @@ class csscomb{
     "opacity",
     "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha",
     "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
+    "-ms-interpolation-mode",
+    "-webkit-filter",
+    "-ms-filter",
+    "filter",
     "resize",
     "cursor",
     "nav-index",
@@ -235,64 +288,126 @@ class csscomb{
     "nav-left",
     "-webkit-transition",
     "-moz-transition",
+    "-ms-transition",
     "-o-transition",
     "transition",
     "-webkit-transition-delay",
     "-moz-transition-delay",
+    "-ms-transition-delay",
     "-o-transition-delay",
     "transition-delay",
     "-webkit-transition-timing-function",
     "-moz-transition-timing-function",
+    "-ms-transition-timing-function",
     "-o-transition-timing-function",
     "transition-timing-function",
     "-webkit-transition-duration",
     "-moz-transition-duration",
+    "-ms-transition-duration",
     "-o-transition-duration",
     "transition-duration",
     "-webkit-transition-property",
     "-moz-transition-property",
+    "-ms-transition-property",
     "-o-transition-property",
     "transition-property",
     "-webkit-transform",
     "-moz-transform",
+    "-ms-transform",
     "-o-transform",
     "transform",
     "-webkit-transform-origin",
     "-moz-transform-origin",
+    "-ms-transform-origin",
     "-o-transform-origin",
     "transform-origin",
+    "-webkit-animation",
+    "-moz-animation",
+    "-ms-animation",
+    "-o-animation",
+    "animation",
+    "-webkit-animation-name",
+    "-moz-animation-name",
+    "-ms-animation-name",
+    "-o-animation-name",
+    "animation-name",
+    "-webkit-animation-duration",
+    "-moz-animation-duration",
+    "-ms-animation-duration",
+    "-o-animation-duration",
+    "animation-duration",
+    "-webkit-animation-play-state",
+    "-moz-animation-play-state",
+    "-ms-animation-play-state",
+    "-o-animation-play-state",
+    "animation-play-state",
+    "-webkit-animation-timing-function",
+    "-moz-animation-timing-function",
+    "-ms-animation-timing-function",
+    "-o-animation-timing-function",
+    "animation-timing-function",
+    "-webkit-animation-delay",
+    "-moz-animation-delay",
+    "-ms-animation-delay",
+    "-o-animation-delay",
+    "animation-delay",
+    "-webkit-animation-iteration-count",
+    "-moz-animation-iteration-count",
+    "-ms-animation-iteration-count",
+    "-o-animation-iteration-count",
+    "animation-iteration-count",
+    "-webkit-animation-direction",
+    "-moz-animation-direction",
+    "-ms-animation-direction",
+    "-o-animation-direction",
+    "animation-direction",
     "unicode-bidi",
     "direction",
-    "break-after",
+    "-webkit-columns",
+    "-moz-columns",
+    "columns",
+    "-webkit-column-span",
+    "-moz-column-span",
+    "column-span",
+    "-webkit-column-width",
+    "-moz-column-width",
+    "column-width",
+    "-webkit-column-count",
+    "-moz-column-count",
+    "column-count",
+    "-webkit-column-fill",
+    "-moz-column-fill",
+    "column-fill",
+    "-webkit-column-gap",
+    "-moz-column-gap",
+    "column-gap",
+    "-webkit-column-rule",
+    "-moz-column-rule",
+    "column-rule",
+    "-webkit-column-rule-width",
+    "-moz-column-rule-width",
+    "column-rule-width",
+    "-webkit-column-rule-style",
+    "-moz-column-rule-style",
+    "column-rule-style",
+    "-webkit-column-rule-color",
+    "-moz-column-rule-color",
+    "column-rule-color",
     "break-before",
     "break-inside",
-    "columns",
-    "column-span",
-    "column-width",
-    "column-count",
-    "column-fill",
-    "column-gap",
-    "column-rule",
-    "column-rule-color",
-    "column-rule-style",
-    "column-rule-width",
+    "break-after",
     "page-break-before",
     "page-break-inside",
     "page-break-after",
     "orphans",
     "widows",
+    "-ms-zoom",
     "zoom",
     "max-zoom",
     "min-zoom",
     "user-zoom",
     "orientation"
 ]',
-
-
-
-
-
-
 
     $yandex_sort_order = '[
 [
@@ -601,38 +716,28 @@ class csscomb{
 ]';
 
     /**
-     * Функция конструктор
-     * @param css {string}
-     * @param echo {boolean}
-     * @custon_sort_order {string|JSON}
+     * @param string css
+     * @param boolean echo
+     * @param json custom_sort_order JSON expected
+     * @return string
      *
      * @TODO: https://github.com/miripiruni/CSScomb/issues/21
-     *
      */
-    function csscomb($css = '', $echo = false, $custom_sort_order = null){
-        if($echo===0 or $echo===false){
-            $this->output = false;
-        }
+    function csscomb($css = '', $debug = false, $custom_sort_order = null) {
+        $this->output = $debug ? true : false;
 
-        if($css != ''){
-
-            $this->code['original'] = $css;
-            $this->code['edited'] = $css;
-
+        if ($css && is_string($css)) {
+            $this->code['original'] = $this->code['edited'] = $css;
             $this->set_mode();
-            $this->set_sort_order($custom_sort_order); // 1 задаем порядок сортировки
-
-            $this->preprocess();        // 2 препроцессинг
-            $this->parse_rules();       // 3,4,5 парсим на части по скобкам
-            $this->postprocess();       // 6 постпроцессинг
-
+            $this->set_sort_order($custom_sort_order);
+            $this->preprocess();
+            $this->parse_rules();
+            $this->postprocess();
             return $this->end_of_process();
+        } else {
+            return false;
         }
     }
-
-
-
-
 
     /**
      * Функция сетит $this->sort_order
@@ -640,24 +745,19 @@ class csscomb{
      * @param json_array {string/JSON}
      *
      */
-    function set_sort_order($json_array = null){
-        if($json_array != null){
+    function set_sort_order($json_array = null) {
+        $this->sort_order = json_decode($this->default_sort_order);
+
+        if ($json_array !== null) {
             $custom_sort_order = json_decode($json_array);
-            if(is_array($custom_sort_order) AND count($custom_sort_order)>0){
+            if (is_array($custom_sort_order) AND count($custom_sort_order) > 0) {
                 $this->sort_order = $custom_sort_order;
             }
-            else {
-                $this->sort_order = json_decode($this->default_sort_order);
-            }
-
-        }
-        else {
-            $this->sort_order = json_decode($this->default_sort_order);
         }
 
-        if($json_array === 'yandex'){
+        if ($json_array === 'yandex') {
             $this->sort_order = json_decode($this->yandex_sort_order);
-            //switch(json_last_error()){
+            //switch(json_last_error()) {
                 //case JSON_ERROR_DEPTH:
                     //echo 'JSON parse error: Достигнута максимальная глубина стека';
                 //break;
@@ -682,16 +782,17 @@ class csscomb{
      * @TODO: а если и тег <style> и несколько style="..." в HTML?
      *        https://github.com/miripiruni/CSScomb/issues/9
      */
-    function set_mode(){
-        if(strpos($this->code['original'], '{')){ // если есть фигурные скобки
+    function set_mode() {
+        if (strpos($this->code['original'], '{')) { // если есть фигурные скобки
                 $this->mode = 'css-file';
         }
-        else{ // если нет фигурных скобок
-            if(strpos($this->code['original'], "style='") OR strpos($this->code['original'], 'style="')){ // если есть атрибут
+        else { // если нет фигурных скобок
+            // если есть атрибут
+            if (strpos($this->code['original'], "style='") OR strpos($this->code['original'], 'style="')) {
                 $this->mode = 'style-attribute';
             }
             // если есть двоеточия и точки с запятой то это набор свойств
-            else if(strpos($this->code['original'], ':') AND strpos($this->code['original'], ';')){
+            else if (strpos($this->code['original'], ':') AND strpos($this->code['original'], ';')) {
                 $this->mode = 'properties';
             }
         }
@@ -701,21 +802,21 @@ class csscomb{
     /**
      * @TODO: почему нигде не используется? Убрать?
      */
-    function get_sort_order($order_name = null){
+    function get_sort_order($order_name = null) {
         $order = '';
-        if($order_name !== null){
-            if($order_name == 'zen'){
+        if ($order_name !== null) {
+            if ($order_name == 'zen') {
                 $this->set_sort_order($this->default_sort_order);
-                foreach($this->sort_order as $k=>$prop){
+                foreach ($this->sort_order as $k => $prop) {
                     $order .= $prop."
 ";
                 }
             }
 
-            if($order_name == 'yandex'){
+            if ($order_name === 'yandex') {
                 $this->set_sort_order($this->yandex_sort_order);
-                foreach($this->sort_order as $group){
-                    foreach($group as $prop){
+                foreach ($this->sort_order as $group) {
+                    foreach ($group as $prop) {
                         $order .= $prop."
 ";
                     }
@@ -733,9 +834,9 @@ class csscomb{
 
 
 
-    function preprocess(){
+    function preprocess() {
         // 1. экранирование хаков, которые мешают парсить
-        if(strpos($this->code['edited'], '"\\"}\\""')){ // разбираемся со страшным хаком "\"}\""
+        if (strpos($this->code['edited'], '"\\"}\\""')) { // разбираемся со страшным хаком "\"}\""
             $i = 0;
             $this->code['hacks'] = array();
             while(strpos($this->code['edited'], '"\\"}\\""')):
@@ -745,34 +846,45 @@ class csscomb{
         }
 
         // 2. expressions
-        if(strpos($this->code['edited'], 'expression(')){ // разбираемся с expression если они присутствуют
+        if (strpos($this->code['edited'], 'expression(')) { // разбираемся с expression если они присутствуют
             $i = 0;
             $this->code['expressions'] = array();
             while(strpos($this->code['edited'], 'expression(')):
-                preg_match_all('#(.*)expression\((.*)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем expression
+                // вылавливаем expression
+                preg_match_all('#(.*)expression\((.*?)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER);
                 $this->code['expressions'][] = $match[0][2]; // собираем значения expression(...)
-                $this->code['edited'] = str_replace('expression('.$match[0][2].')', 'exp'.$i++.'__', $this->code['edited']);
+                $this->code['edited'] = str_replace(
+                                            'expression('.$match[0][2].')',
+                                            'exp'.$i++.'__',
+                                            $this->code['edited']);
             endwhile;
         }
 
         // 3. data uri
-        if(strpos($this->code['edited'], ';base64,')){
+        if (strpos($this->code['edited'], ';base64,')) {
             $i = 0;
             $this->code['datauri'] = array();
             while(strpos($this->code['edited'], ';base64,')):
-                preg_match_all('#(url\(["\']?data:.[^\)]*["\']?\))#ism', $this->code['edited'], $match, PREG_SET_ORDER); // вылавливаем data uri
+                // вылавливаем data uri
+                preg_match_all(
+                    '#(url\(["\']?data:.[^\)]*["\']?\))#ism',
+                    $this->code['edited'],
+                    $match,
+                    PREG_SET_ORDER);
                 $this->code['datauri'][] = $match[0][1]; // собираем значения
                 $this->code['edited'] = str_replace($match[0][1], 'datauri'.$i++.'__', $this->code['edited']);
             endwhile;
         }
 
         // 4. Всякое разное...
-        $this->code['edited'] = str_replace('{}','{ }', $this->code['edited']); // закрываем сложности парсинга {}
-        $this->code['edited'] = preg_replace('/(.*?[^\s])(\s*?})/','$1;$2', $this->code['edited']); // закрываем сложности с отсутствующей последней ; перед }
+        // закрываем сложности парсинга {}
+        $this->code['edited'] = str_replace('{}', '{ }', $this->code['edited']);
+        // закрываем сложности с отсутствующей последней ; перед }
+        $this->code['edited'] = preg_replace('/(.*?[^\s])(\s*?})/', '$1;$2', $this->code['edited']);
 
 
         // 5. Комментарии
-        if(preg_match_all('@
+        if (preg_match_all('@
             (
             \s*
             /\*
@@ -780,32 +892,32 @@ class csscomb{
             \*/
             (\s/\*\*/)?
             )
-            @ismx', $this->code['edited'], $test)){
+            @ismx', $this->code['edited'], $test)) {
 
-            // 1. Текстовый комментарий не содержащий свойств: всё, где нет ни :, ни ;, ни {|}, но есть какие-то буквы/цифры
-                // Ничего не делаем.
+            // 1. Текстовый комментарий не содержащий свойств: всё, где нет ни :, ни ;, ни {|},
+            // но есть какие-то буквы/цифры ничего не делаем.
 
             // 2. Одно свойство: есть : и ; но после ; ничего нет кроме \s.
-                // заменяем на commented__border: 1px solid red;
+            // заменяем на commented__border: 1px solid red;
 
             // 3. Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
-            if(preg_match_all('#
+            if (preg_match_all('#
                 (\s*)
                 /\*
                 (.*?[^\*/])
                 \*+/
                 (\ {0,1}/\*\*/)?
-                #ismx', $this->code['edited'], $comments)){
+                #ismx', $this->code['edited'], $comments)) {
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
 
-                foreach($comments[2] as $key=>$comment){
-                    if( // если комментарий содержит ; и :
+                foreach ($comments[2] as $key => $comment) {
+                    if ( // если комментарий содержит ; и :
                         strpos($comment, ':') !== FALSE AND
                         strpos($comment, ';') !== FALSE
 
-                    ){
+                    ) {
                         preg_match_all('#
                         (\s*)
                         (
@@ -815,20 +927,25 @@ class csscomb{
                         #ismx', $comment, $properties);
 
                         $new_comment = '';
-                        foreach($properties[2] as $property){
+                        foreach ($properties[2] as $property) {
                             $new_comment .= $comments[1][$key]."commented__".$property;
                         }
                         $new_comments[] = $new_comment;
                     }
-                    else{ // если нет : или ;, то считаем что это текстовый комментарий и копируем его в том виде, в каком он был.
+                    else {
+                        // если нет : или ;, то считаем что это текстовый комментарий
+                        // и копируем его в том виде, в каком он был.
                         $new_comments[] = $comments[0][$key];
                     }
 
 
                 }
 
-                foreach($old_comments as $key => $old_comment){
-                    $this->code['edited'] = str_replace($old_comments[$key], $new_comments[$key], $this->code['edited']);
+                foreach ($old_comments as $key => $old_comment) {
+                    $this->code['edited'] = str_replace(
+                                                $old_comments[$key],
+                                                $new_comments[$key],
+                                                $this->code['edited']);
                 }
             }
 
@@ -838,48 +955,51 @@ class csscomb{
                 // Ничего не делаем.
 
             // 6. Обрывки закомментированных деклараций: присутствует { или }
-            if(preg_match_all('#
+            if (preg_match_all('#
                     \s*?
                     /\*
                     (
                         .*?[^\*/]
                     )*?
                     \*+/
-                #ismx', $this->code['edited'], $comments)){
+                #ismx', $this->code['edited'], $comments)) {
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
 
-                foreach($comments[0] as $key=>$comment){
-                    if(strpos($comment, '}') !== FALSE OR strpos($comment, '{') !== FALSE){
+                foreach ($comments[0] as $key => $comment) {
+                    if (strpos($comment, '}') !== FALSE OR strpos($comment, '{') !== FALSE) {
                         $new_comment = '';
-                        if(strpos($comment, '}') !== FALSE){ $new_comment .= '}'; }
+                        if (strpos($comment, '}') !== FALSE) { $new_comment .= '}'; }
                         $new_comment .= "brace__".$key;
-                        if(strpos($comment, '{') !== FALSE){ $new_comment .= '{'; }
+                        if (strpos($comment, '{') !== FALSE) { $new_comment .= '{'; }
                         $new_comments[$key] = $new_comment;
                         $this->code['braces'][$key] = $comment;
                     }
                 }
 
-                foreach($new_comments as $key => $new_comment){
-                    if(strlen($new_comment) > 0){
-                        $this->code['edited'] = str_replace($old_comments[$key], $new_comment, $this->code['edited']);
+                foreach ($new_comments as $key => $new_comment) {
+                    if (strlen($new_comment) > 0) {
+                        $this->code['edited'] = str_replace(
+                                                    $old_comments[$key],
+                                                    $new_comment,
+                                                    $this->code['edited']);
                     }
                 }
             }
         }
 
         // 7. Entities
-        if(preg_match_all('#
+        if (preg_match_all('#
             \&
             \#?
             [\d\w]*?[^;]
             \;
-            #ismx', $this->code['edited'], $entities)){
+            #ismx', $this->code['edited'], $entities)) {
 
             $this->code['entities'] = array();
 
-            foreach($entities[0] as $key => $val){
+            foreach ($entities[0] as $key => $val) {
                 $this->code['entities'][$key] = $val;
                 $this->code['edited'] = str_replace($val, 'entity__'.$key, $this->code['edited']);
             }
@@ -893,9 +1013,9 @@ class csscomb{
      * Из $this->code['edited'] получает массив разбитый по }
      *
      */
-    function parse_rules(){
+    function parse_rules() {
 
-        if($this->mode == 'css-file'){
+        if ($this->mode === 'css-file') {
 
             // отделяем все, что после последней } если там что-то есть, конечно :)
             preg_match('@
@@ -909,7 +1029,11 @@ class csscomb{
             @ismx', $this->code['edited'], $matches);
 
             $code_without_end = $matches[1];
-            $end_of_code = $matches[2];
+            if($matches[2]) {
+                $end_of_code = $matches[2];
+            } else {
+                $end_of_code = '';
+            }
 
             /**
              * Разбиваем CSS-код на части по { или }
@@ -922,21 +1046,19 @@ class csscomb{
                 \s*?
                 [}{]
 
-
             @ismx', $code_without_end, $matches);
 
             $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
 
             //TODO: вынести вызов parse_prop в csscomb(), сделать чтобы parse_rules возвращала результат своей работы в виде $rules
-            foreach($rules as $key=>$val){
+            foreach ($rules as $key => $val) {
                 $rules[$key] = $this->parse_properties($val);  // 4 парсим и сортируем каждую часть
             }
 
             $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // 5 склеиваем части
         }
 
-
-        if($this->mode == 'style-attribute'){
+        if ($this->mode === 'style-attribute') {
 
             $this->code['resorted'] = $this->code['edited'];
 
@@ -949,27 +1071,24 @@ class csscomb{
                 (.*?)
                 ["\']
 
-
             @ismx', $this->code['edited'], $matches);
 
             $properties = $matches[1];
 
             //TODO: вынести вызов parse_prop в csscomb(), сделать чтобы parse_rules возвращала результат своей работы в виде $rules
-            foreach($properties as $props){
+            foreach ($properties as $props) {
                 $r = $this->parse_properties($props);
-                $this->code['resorted'] = str_replace($props, $r, $this->code['resorted']);
+                $this->code['resorted'] = str_replace($props, $r, $this->code['resorted']).$end_of_code;
             }
 
         }
 
-
-
-        if($this->mode == 'properties'){
-			preg_match('@\s*?.*?[^;\s];(\s)@ismx', $this->code['edited'], $matches);
+        if ($this->mode === 'properties') {
+            preg_match('@\s*?.*?[^;\s];(\s)@ismx', $this->code['edited'], $matches);
             $this->code['edited'] = $matches[1].$this->code['edited'];
             //TODO: Не использовать parse_prop здесь, а делать вызов в csscomb. Пусть функции общаются между собой через csscomb
             $rules[0] = trim($this->parse_properties($this->code['edited']));
-            $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;
+            $this->code['resorted'] = implode($this->array_implode($rules));
         }
     }
 
@@ -981,8 +1100,8 @@ class csscomb{
      * @param css {string}
      *
      */
-    function parse_properties($css = ''){
-        if($this->mode == 'css-file'){
+    function parse_properties($css = '') {
+        if ($this->mode === 'css-file') {
             // отделяем фигурную скобку
             $matches = null;
             preg_match('@
@@ -1011,16 +1130,16 @@ class csscomb{
                 )
             @ismx', $css, $all);
 
-            if(count($all[0]) > 0 and $all[0][0] != null and $all[0][0] == $css){ // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
+            if (count($all[0]) > 0 and $all[0][0] !== null and $all[0][0] === $css) { // Если в этом участке кода ничего нет кроме одиногоко /* ... */ и закрывающей }
                 $all[0][0] = '';
                 return $all[1][0].$all[2][0];
             }
 
-            if(sizeof($matches)>0 and strlen($matches[1]) > 0){ // если есть и свойства и скобка и хотя бы одно :
+            if (sizeof($matches) > 0 and strlen($matches[1]) > 0) { // если есть и свойства и скобка и хотя бы одно :
                 $properties = $matches[1];
                 $brace = $matches[2];
 
-                if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
+                if (is_array($this->sort_order[0])) { // Если порядок сортировки разбит на группы свойств
                     /**
                      * Если CSS-свойства уже были разделены на группы пустой 
                      * строкой, то нужно поудалять это разделение, чтобы сделать 
@@ -1048,11 +1167,11 @@ class csscomb{
 
                     @ismx', $properties, $matches);
 
-                if(
-                    count($matches)==5 and              // все распарсилось как надо
+                if (
+                    count($matches) === 5 and              // все распарсилось как надо
                     strlen($matches[1]) === 0 and       // комментарий действительно идет первым
                     strpos($matches[2], "\n") !== 0     // перед комментарием нет переноса строки, следовательно предпологаем, что он относится к скобке с селектором
-                ){
+                ) {
                     $first_spaces = $matches[2];
                     $first_comment = $matches[3];
                     $properties = $matches[4];
@@ -1089,7 +1208,7 @@ class csscomb{
             else $props = $css;
         }
 
-        if($this->mode == 'properties' OR $this->mode == 'style-attribute'){
+        if ($this->mode === 'properties' OR $this->mode === 'style-attribute') {
             preg_match_all('@
 
                     \s*
@@ -1109,11 +1228,11 @@ class csscomb{
 
             $props = $matches[0];
 
-            if(sizeof($props)>0){ // если есть и свойства и скобка и хотя бы одно :
+            if (sizeof($props) > 0) { // если есть и свойства и скобка и хотя бы одно :
                 $props = $this->resort_properties($props);
                 $props = implode($props);
             }
-            else{
+            else {
                 $props = $css;
             }
         }
@@ -1126,67 +1245,70 @@ class csscomb{
      * Функция выполняет сортировку свойств
      *
      */
-    function resort_properties($prop){
+    function resort_properties($prop) {
         $resorted = $undefined = array();
 
-        foreach($prop as $k=>$val){
+        foreach ($prop as $k => $val) {
             $index = null; // Дефолтное значение индекса порядка для свойства. Если свойство не знакомо, то index так и останется null.
             preg_match_all('@\s*?(.*?[^:]:).*@ism', $val, $matches, PREG_SET_ORDER);
             $property = trim($matches[0][1]);
 
-            if(is_array($this->sort_order[0])){ // Если порядок сортировки разбит на группы свойств
+            if (is_array($this->sort_order[0])) { // Если порядок сортировки разбит на группы свойств
 
-                foreach($this->sort_order as $pos=>$key){ // для каждой группы свойств
-                    foreach($this->sort_order[$pos] as $p=>$k){ // для каждого свойства
-                        if(
+                foreach ($this->sort_order as $pos => $key) { // для каждой группы свойств
+                    foreach ($this->sort_order[$pos] as $p => $k) { // для каждого свойства
+                        if (
                             /**
                              * Пробел в начале добавляется специально, чтобы избежать совпадений по вхождению
                              * одной строки в другую. Например: top не должно совпадать с border-top
                              */
-                            strpos(' '.trim($property),' '.$k.':')!==FALSE OR
-                            strpos(' '.trim($property),' commented__'.$k.':')!==FALSE
+                            strpos(' '.trim($property), ' '.$k.':') !== FALSE OR
+                            strpos(' '.trim($property), ' commented__'.$k.':') !== FALSE
 
-                        ){
+                        ) {
                             $through_number = $this->get_through_number($k); // определяем "сквозной" порядковый номер
-                            if($through_number!==false) $index = $through_number;
+                            if ($through_number !== false) $index = $through_number;
                         }
                     }
                 }
 
             }
-            else{
-                foreach($this->sort_order as $pos=>$key){
-                    if(
+            else {
+                foreach ($this->sort_order as $pos => $key) {
+                    if (
                         // пробел в начале добавляется специально.
-                        strpos(' '.trim($property), ' '.$key.':')!==FALSE OR
-                        strpos(' '.trim($property), ' commented__'.$key.':')!==FALSE
-                    ){
+                        strpos(' '.trim($property), ' '.$key.':') !== FALSE OR
+                        strpos(' '.trim($property), ' commented__'.$key.':') !== FALSE
+                    ) {
                         $index = $pos;
                     }
                 }
 
             }
 
-            if($index === null OR strpos($val, 'exp')){
+            if ($index === null OR strpos($val, 'exp')) {
                 $undefined[] = $val;
             }
-            else{
-                /*
-                   Добавляет к уже существующей записи с определенном порядковым номером еще одну запись с таким же порядковым номером
-                   либо создает новую запись если с таким порядковым номером ничего еще не встречалось
-                */
-                if(isset($resorted[$index])) $resorted[$index] .= $val;
-                else $resorted[$index] = $val;
+            else {
+                // Добавляет к уже существующей записи с определенном порядковым номером еще одну запись с таким же порядковым номером
+                // либо создает новую запись если с таким порядковым номером ничего еще не встречалось
+                if (isset($resorted[$index])) {
+                    $resorted[$index] .= $val;
+                }
+                else {
+                    $resorted[$index] = $val;
+                }
             }
         }
         ksort($resorted);
 
-        if(is_array($this->sort_order[0]) AND count($resorted)>0){ // Если свойства разделены на группы
-            $resorted = $this->separate_property_group($resorted);
-        }
-
-        if(is_array($this->sort_order[0]) AND count($undefined)>0){
-            $undefined[0] = "\n".$undefined[0];
+        if (is_array($this->sort_order[0])) {
+            if (count($resorted) > 0) { // Если свойства разделены на группы
+                $resorted = $this->separate_property_group($resorted);
+            }
+            if (count($undefined) > 0) {
+                $undefined[0] = "\n".$undefined[0];
+            }
         }
 
         $resorted = array_merge($resorted, $undefined); // добавляем в конец нераспознанное
@@ -1198,12 +1320,12 @@ class csscomb{
     /**
      * Склеивает многомерный массив в строку
      */
-    function array_implode($arrays, &$target = array()){
-        foreach ($arrays as $item){
-            if (is_array($item)){
+    function array_implode($arrays, &$target = array()) {
+        foreach ($arrays as $item) {
+            if (is_array($item)) {
                 $this->array_implode($item, $target);
             }
-            else{
+            else {
                 $target[] = $item;
             }
         }
@@ -1214,30 +1336,30 @@ class csscomb{
     /**
      * Постпроцесс, убираем все подстановки и возвращаем на место всё, что мешало сортировке
      */
-    function postprocess(){
+    function postprocess() {
         // 1. экранирование хаков с использованием ключевых символов например voice-family: "\"}\"";
-        if(is_array($this->code['hacks'])){ // если были обнаружены и вырезаны хаки
-            foreach($this->code['hacks'] as $key=>$val){
-                if(strpos($this->code['resorted'], 'hack'.$key.'__')) $this->code['resorted'] = str_replace('hack'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
+        if (is_array($this->code['hacks'])) { // если были обнаружены и вырезаны хаки
+            foreach ($this->code['hacks'] as $key => $val) {
+                if (strpos($this->code['resorted'], 'hack'.$key.'__')) $this->code['resorted'] = str_replace('hack'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
             }
         }
 
         // 2. expressions
-        if(is_array($this->code['expressions'])){ // если были обнаружены и вырезаны expression
-            foreach($this->code['expressions'] as $key=>$val){
-                if(strpos($this->code['resorted'], 'exp'.$key.'__')) $this->code['resorted'] = str_replace('exp'.$key.'__', 'expression('.$val.')', $this->code['resorted']); // заменяем значение expression обратно
+        if (is_array($this->code['expressions'])) { // если были обнаружены и вырезаны expression
+            foreach ($this->code['expressions'] as $key => $val) {
+                if (strpos($this->code['resorted'], 'exp'.$key.'__')) $this->code['resorted'] = str_replace('exp'.$key.'__', 'expression('.$val.')', $this->code['resorted']); // заменяем значение expression обратно
             }
         }
 
         // 3. datauri
-        if(is_array($this->code['datauri'])){ // если были обнаружены и вырезаны data uri
-            foreach($this->code['datauri'] as $key=>$val){
-                if(strpos($this->code['resorted'], 'datauri'.$key.'__')) $this->code['resorted'] = str_replace('datauri'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
+        if (is_array($this->code['datauri'])) { // если были обнаружены и вырезаны data uri
+            foreach ($this->code['datauri'] as $key => $val) {
+                if (strpos($this->code['resorted'], 'datauri'.$key.'__')) $this->code['resorted'] = str_replace('datauri'.$key.'__', $val, $this->code['resorted']); // заменяем значение expression обратно
             }
         }
 
         // 4. Удаляем искусственно созданные 'commented__'
-        while(strpos($this->code['resorted'], 'commented__') !== FALSE){
+        while(strpos($this->code['resorted'], 'commented__') !== FALSE) {
             $this->code['resorted'] = preg_replace(
                 '#
                     commented__
@@ -1252,12 +1374,12 @@ class csscomb{
         }
 
         // 5. Удаляем искусственно созданные 'brace__'
-        if(is_array($this->code['braces'])){ // если были обнаружены и вырезаны хаки
-            foreach($this->code['braces'] as $key => $val){
-                if(strpos($this->code['resorted'], 'brace__'.$key.'{') !== FALSE) {
+        if (is_array($this->code['braces'])) { // если были обнаружены и вырезаны хаки
+            foreach ($this->code['braces'] as $key => $val) {
+                if (strpos($this->code['resorted'], 'brace__'.$key.'{') !== FALSE) {
                     $this->code['resorted'] = str_replace('brace__'.$key.'{', $val, $this->code['resorted']);
                 }
-                if(strpos($this->code['resorted'], '}brace__'.$key) !== FALSE) {
+                if (strpos($this->code['resorted'], '}brace__'.$key) !== FALSE) {
                     $this->code['resorted'] = str_replace('}brace__'.$key, $val, $this->code['resorted']);
                 }
             }
@@ -1265,9 +1387,9 @@ class csscomb{
 
 
         // 7. Entities
-        if(is_array($this->code['entities'])){ // если были обнаружены и вырезаны entities
-            foreach($this->code['entities'] as $key => $val){
-                if(strpos($this->code['resorted'], 'entity__'.$key) !== FALSE) {
+        if (is_array($this->code['entities'])) { // если были обнаружены и вырезаны entities
+            foreach ($this->code['entities'] as $key => $val) {
+                if (strpos($this->code['resorted'], 'entity__'.$key) !== FALSE) {
                     $this->code['resorted'] = str_replace('entity__'.$key, $val, $this->code['resorted']);
                 }
             }
@@ -1277,8 +1399,9 @@ class csscomb{
 
 
 
-    function end_of_process(){
-        if($this->code['edited']!='' AND $this->output!==false){
+    function end_of_process() {
+        // TODO: WTF???
+        if ($this->code['edited'] !== '' AND $this->output !== false) {
             echo '<style>
     body{margin:0;}
     .diff{
@@ -1300,11 +1423,11 @@ class csscomb{
 </div>';
         }
 
-        if($this->output===false) return $this->code['resorted'];
+        if ($this->output === false) return $this->code['resorted'];
     }
 
 
-    function log($before, $after){
+    function log($before, $after) {
         echo '
         <style>pre{word-wrap: break-word;}</style>
         <div class="php"><pre class="php"><code>'.$before.'';
@@ -1320,11 +1443,11 @@ class csscomb{
      * @param  {string}
      * @return {bool|int}
      */
-    private function get_through_number($value){
+    private function get_through_number($value) {
         $i = 0;
-        foreach($this->sort_order as $property_group){
-            foreach($property_group as $key=>$val){
-                if($val==$value) return $i;
+        foreach ($this->sort_order as $property_group) {
+            foreach ($property_group as $key => $val) {
+                if ($val == $value) return $i;
                 else $i++;
             }
         }
@@ -1337,19 +1460,23 @@ class csscomb{
      * @param  {array}
      * @return {array}
      */
-    private function separate_property_group($properties){
-        if(is_array($this->sort_order[0])){ // Если в настройках нет разбиения на группы, то выходим входной массив без изменений
-            foreach($properties as $key=>$property){
+    private function separate_property_group($properties) {
+        if (is_array($this->sort_order[0])) { // Если в настройках нет разбиения на группы, то выходим входной массив без изменений
+            foreach ($properties as $key => $property) {
                 $array = explode(':', $property);
                 $prop_name[$key] = trim($array[0]);
             }
-            foreach($this->sort_order as $group_num=>$property_group){ // Перебираем группы свойств
+            foreach ($this->sort_order as $group_num => $property_group) { // Перебираем группы свойств
                 $intersect = array_intersect($prop_name, $property_group);
-                if(count($intersect)>0){
+                if (count($intersect) > 0) {
                     $num = array_keys($intersect);
                     $last_key = null;
-                    foreach($num as $n)	$last_key = $n;
-                    if($properties[$last_key] != end($properties)) $properties[$last_key] = $properties[$last_key]."\n";
+                    foreach ($num as $n) {
+                        $last_key = $n;
+                    }
+                    if ($properties[$last_key] !== end($properties)) {
+                        $properties[$last_key] = $properties[$last_key]."\n";
+                    }
                 }
             }
         }
