@@ -43,8 +43,8 @@ q:before, q:after{
 	content:none;
 }
 table{
-	border-collapse:collapse;
 	border-spacing:0;
+	border-collapse:collapse;
 }
 
 
@@ -365,9 +365,9 @@ textarea{
 textarea,
 .code{
 	-webkit-border-radius:3px;
-	-khtml-border-radius:3px;
 	-moz-border-radius:3px;
 	border-radius:3px;
+	-khtml-border-radius:3px;
 }
 
 
@@ -587,9 +587,9 @@ textarea,
 	margin-left:-200px;
 	width:360px;
 	-webkit-border-radius:6px;
-	-khtml-border-radius:6px;
 	-moz-border-radius:6px;
 	border-radius:6px;
+	-khtml-border-radius:6px;
 	}
 	.popup-header{
 		position:relative;
