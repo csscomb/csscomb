@@ -20,7 +20,7 @@ require_once'common/header.php';
                 <li><a href="/online/">CSScomb Online</a></li>
                 <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Sublime Text 2</a> (<?=$loc['sublime']?>)</li>
                 <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Textmate</a></li>
-                <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Coda</a></li>
+                <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Coda & Coda 2</a></li>
                 <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Espresso 2</a></li>
                 <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
                 <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Notepad++</a></li>

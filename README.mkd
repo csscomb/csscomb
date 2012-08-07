@@ -18,6 +18,7 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
  * Sublime Text 2 plugin
  * TextMate plugin
  * Coda Plugin
+ * Coda 2 Plugin
  * [Espresso 2 plugin](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.sugar/README.markdown)
  * IntelliJIDEA
  * WebStorm
