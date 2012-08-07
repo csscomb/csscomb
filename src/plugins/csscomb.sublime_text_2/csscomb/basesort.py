@@ -7,7 +7,7 @@ from os import path
 __file__ = path.normpath(path.abspath(__file__))
 __path__ = path.dirname(__file__)
 libs_path = path.join(__path__, 'libs')
-csscomb_path = path.join(libs_path,"call_string.php")
+csscomb_path = path.join(libs_path, 'call_string.php')
 
 class BaseSort(threading.Thread):
 

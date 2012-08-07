@@ -6,7 +6,6 @@ class BaseSorter(sublime_plugin.TextCommand):
 
     def __init__(self, view):
         self.view = view
-        # self.settings = sublime.load_settings("Minifier.sublime-settings")
 
     def run(self, edit):
 
@@ -17,7 +16,7 @@ class BaseSorter(sublime_plugin.TextCommand):
             selbody = self.view.substr(sel)
             selbody = selbody.encode('utf-8')
 
-            thread = BaseSort(sel,selbody)
+            thread = BaseSort(sel, selbody)
 
             threads.append(thread)
             thread.start()
@@ -64,15 +63,13 @@ class BaseSorter(sublime_plugin.TextCommand):
     def handle_result(self, edit, thread, selections, offset):
         sel = thread.sel
         original = thread.original
-        # print original
         result = thread.result
-        # print result
 
         if thread.error is True:
             sublime.error_message(result)
             return
         elif result is None:
-            sublime.error_message("There was an error sorting CSS.")
+            sublime.error_message('There was an error sorting CSS.')
             return
 
         return thread
