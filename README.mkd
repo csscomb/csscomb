@@ -20,11 +20,11 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
  * Coda Plugin
  * Coda 2 Plugin
  * [Espresso 2 plugin](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.sugar/README.markdown)
- * IntelliJIDEA
- * WebStorm
+ * IntelliJIDEA Plugin
+ * WebStorm Plugin
  * PyCharm plugin
- * Notepad ++
- * [Vim](https://github.com/miripiruni/CSScomb-for-Vim)
+ * Notepad ++ Plugin
+ * [Vim Plugin](https://github.com/miripiruni/CSScomb-for-Vim)
 
 CLI usage
 ---
@@ -35,7 +35,8 @@ Avaliable at [/build/cli/](https://github.com/miripiruni/CSScomb/tree/master/bui
 ```
 % php csscomb.php
 
-CSSComb 2.10 (build 66841b2-1203301135)                Command line tool for resort CSS code.
+CSSComb
+Command line tool for resort CSS code.
 
 SYNOPSIS
     $ php csscomb.php -s <file with JSON array> -i <path to input css file> -o <path to result css file>
