@@ -1,4 +1,8 @@
 <?php
+if($_SERVER['HTTP_REFERER'] !== 'http://csscomb.com/online/') {
+    die('Error 0');
+}
+
 require_once'../src/csscomb.php';
 
 if($_POST['code'] and $_POST['code'] != ''){
