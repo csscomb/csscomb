@@ -22,7 +22,7 @@ $loc['review-content'] = '<div>
     <em>Would you like to give feedback about CSScomb? Write on mail@csscomb.ru their impressions of use and do not forget
      include your name and website. All reviews will be posted on the site.</em>
 </div>
-    <cite>Vyacheslav Oliyanchuk, csscomb.ru</cite>';
+    <cite>Slava Oliyanchuk, CSScomb.com</cite>';
 
 $loc['presentation'] = 'Video';
 
@@ -54,12 +54,13 @@ $loc['index4'] = 'Formatting style sheets does not change';
 $loc['index44'] = 'Work as a singleline and multiline CSS';
 $loc['index5'] = 'Separation of CSS properties for the group';
 $loc['index55'] = 'Separate groups of empty string if you want';
-$loc['index6'] = 'Full support CSS2/CSS2.1/CSS3';
+$loc['index6'] = 'Full support CSS2/CSS2.1/CSS3 and even CSS4 :)';
 $loc['index66'] = 'CSScomb ready for the advanced CSS-code';
 $loc['index7'] = 'Basic Support <abbr title="The dynamic stylesheet language http://lesscss.org/">LESS</abbr>/<abbr title="Syntactically Awesome Stylesheets http://sass-lang.com/">SASS</abbr>';
 $loc['index77'] = 'Nested blocks, the calculations, variables, etc.';
 $loc['help-us'] = 'Help CSScomb, make friends with other code editors.';
 $loc['for'] = 'for';
+$loc['sublime'] = 'Also in Package Control';
 
 $loc['close'] = 'Close <kbd>(Esc)</kbd>';
 $loc['copy-result'] = 'Copy result';

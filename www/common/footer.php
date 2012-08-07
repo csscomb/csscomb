@@ -1,10 +1,10 @@
     </div>
     <footer class="page-footer">
 		<p>
-            <span>© 2009–<?=date('Y');?>, CSScomb.ru</span>
+            <span>© 2009–<?=date('Y');?>, CSScomb</span>
 			<a id="bug-report" href="https://github.com/miripiruni/CSScomb/issues?sort=created&direction=desc&state=open"><?=$lang=='ru'?'Баг-трекер':'Bug tracker'?></a>
 			<?=$lang=='ru'?'<a href="https://twitter.com/csscomb" target="_blank">Твиттер</a>':'<a href="https://twitter.com/csscomb" target="_blank">Follow me</a>'?>
-			<?=$lang=='ru'?'<a href="?lang=en">English</a>':'<a href="?lang=ru">По-русски</a>'?>
+			<?=$lang=='ru'?'<a href="http://csscomb.com">English</a>':'<a href="http://csscomb.ru">По-русски</a>'?>
 			<?if($module=='online'){
                 echo '<a id="toggleShortcutsSheet">'.($lang=='ru'?'Сочетания клавиш':'Shortcuts').'</a>';
             }?>
