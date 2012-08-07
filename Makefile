@@ -6,7 +6,9 @@ LAST_COMMIT_HASH = $(shell git log -1 --pretty=format:"%h")
 PATH_TO_CORE = src/csscomb.php
 PATH_TO_PLUGINS = src/plugins
 PATH_TO_CODA_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.codaplugin
+PATH_TO_CODA_2_PLUGIN = $(PATH_TO_PLUGINS)/csscomb_for_coda_2.codaplugin
 PATH_TO_CODA_PLUGIN_CORE = $(PATH_TO_CODA_PLUGIN)/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68
+PATH_TO_CODA_2_PLUGIN_CORE = $(PATH_TO_CODA_PLUGIN)/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68
 PATH_TO_TEXTMATE_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.tmbundle
 PATH_TO_NOTEPAD_P_P_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.notepad_plus_plus
 PATH_TO_INTELLIJ_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.webstorm_pycharm_idea
@@ -21,7 +23,7 @@ all: updateVersion buildCli copyCore buildPlugins buildWww
 
 updateVersion:
 	@echo 'Updating version...'
-	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) src/cli.php $(PATH_TO_CODA_PLUGIN_CORE)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand $(PATH_TO_ESPRESSO_PLUGIN)/Scripts/inline-csscomb.php
+	@sed -i '' 's/[0-9].[0-9]\{2\} (build [a-z0-9]\{7\}-[0-9]\{10\})/$(MAJOR_VERSION).$(MINOR_VERSION) \(build $(LAST_COMMIT_HASH)-$(BUILD_TIMESTAMP)\)/' $(PATH_TO_CORE) src/cli.php $(PATH_TO_CODA_2_PLUGIN_CORE)/csscomb.php $(PATH_TO_CODA_PLUGIN_CORE)/csscomb.php $(PATH_TO_TEXTMATE_PLUGIN)/Commands/CSScomb.tmCommand $(PATH_TO_ESPRESSO_PLUGIN)/Scripts/inline-csscomb.php
 
 buildCli:
 	@echo 'Building CLI...'
@@ -32,11 +34,15 @@ buildCli:
 copyCore:
 	@echo 'Copying CLI...'
 	@mkdir -p www/src
+	@echo 'Copying core to web app...'
+	@cp $(PATH_TO_CORE) www/$(PATH_TO_CORE)
+	@echo 'Copying core to plugins...'
 	@mkdir -p $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files
+	@mkdir -p $(PATH_TO_CODA_2_PLUGIN_CORE)/Support\ Files
 	@mkdir -p $(PATH_TO_TEXTMATE_PLUGIN)/Support/src
 	@mkdir -p $(PATH_TO_ESPRESSO_PLUGIN)/ScriptLibraries
-	@cp $(PATH_TO_CORE) www/$(PATH_TO_CORE)
 	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files/csscomb.php
+	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_2_PLUGIN_CORE)/Support\ Files/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/src/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_SUBLIME_PLUGIN)/csscomb/libs/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_ESPRESSO_PLUGIN)/ScriptLibraries/csscomb.php
@@ -44,12 +50,13 @@ copyCore:
 buildPlugins: buildNotepadPlugin buildIntellijPlugin
 	@echo 'Making plugin archives...'
 	@mkdir -p build
-	@zip -9 -y -r -q build/csscomb-for-coda-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_CODA_PLUGIN)
-	@zip -9 -y -r -q build/csscomb-for-textmate-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_TEXTMATE_PLUGIN)
-	@zip -9 -y -r -q build/csscomb-for-sublime_text_2-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_SUBLIME_PLUGIN)
-	@zip -9 -y -r -q build/csscomb-for-notepad_plus_plus-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_NOTEPAD_P_P_PLUGIN)
-	@zip -9 -y -r -q build/csscomb-for-webstorm_pycharm_idea-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_INTELLIJ_PLUGIN)
-	@zip -9 -y -r -q build/csscomb-for-espresso2-$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_ESPRESSO_PLUGIN)
+	@zip -9 -y -r -q build/csscomb_for_coda_$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_CODA_PLUGIN)
+	@zip -9 -y -r -q build/csscomb_for_coda-2_$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_CODA_2_PLUGIN)
+	@zip -9 -y -r -q build/csscomb_for_textmate_$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_TEXTMATE_PLUGIN)
+	@zip -9 -y -r -q build/csscomb_for_sublime-text-2_$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_SUBLIME_PLUGIN)
+	@zip -9 -y -r -q build/csscomb_for_notepad-plus-plus_$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_NOTEPAD_P_P_PLUGIN)
+	@zip -9 -y -r -q build/csscomb_for_webstorm-pycharm-idea_$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_INTELLIJ_PLUGIN)
+	@zip -9 -y -r -q build/csscomb_for_espresso-2_$(MAJOR_VERSION)-$(MINOR_VERSION) $(PATH_TO_ESPRESSO_PLUGIN)
 
 buildNotepadPlugin:
 	@echo 'Building plugin for Notepad++...'

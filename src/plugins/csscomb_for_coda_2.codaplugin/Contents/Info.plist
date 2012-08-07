@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BuildMachineOSBuild</key>
+	<string>11E53</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
@@ -19,7 +21,23 @@
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
 	<key>CodaPlugInMinimumAPIVersion</key>
-	<string>3</string>
+	<string>5</string>
+	<key>CodaPlugInSupportedAPIVersion</key>
+	<integer>6</integer>
+	<key>DTCompiler</key>
+	<string></string>
+	<key>DTPlatformBuild</key>
+	<string>4E2002</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>10K549</string>
+	<key>DTSDKName</key>
+	<string>macosx10.6</string>
+	<key>DTXcode</key>
+	<string>0432</string>
+	<key>DTXcodeBuild</key>
+	<string>4E2002</string>
 	<key>NSPrincipalClass</key>
 	<string>CodaScriptPlugIn</string>
 	<key>commands</key>
@@ -32,7 +50,7 @@
 			<key>keyEquivalent</key>
 			<string>$^c</string>
 			<key>keyEquivalentConflict</key>
-			<true/>
+			<false/>
 			<key>name</key>
 			<string>CSScomb</string>
 			<key>output</key>
