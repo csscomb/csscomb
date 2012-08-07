@@ -1084,10 +1084,8 @@ class csscomb{
         }
 
         if ($this->mode === 'properties') {
-            preg_match('@\s*?.*?[^;\s];(\s)@ismx', $this->code['edited'], $matches);
-            $this->code['edited'] = $matches[1].$this->code['edited'];
-            //TODO: Не использовать parse_prop здесь, а делать вызов в csscomb. Пусть функции общаются между собой через csscomb
-            $rules[0] = trim($this->parse_properties($this->code['edited']));
+            $this->code['edited'] = "\n".$this->code['edited'];
+            $rules[0] = $this->parse_properties($this->code['edited']);
             $this->code['resorted'] = implode($this->array_implode($rules));
         }
     }

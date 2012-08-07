@@ -12,21 +12,16 @@
 </head>
 <body>
 <?
-require_once '../lib/csscomb.php';
+require_once '../src/csscomb.php';
 
-$css = '
-    /* Direction nav styles (e.g. Next & Prev) */
-    .nivo-directionNav a {
-        position:absolute;
-        top:45%;
-        z-index:9;
-        cursor:pointer;
-        }';
+$css = '    color: red;
+    margin: 0px;
+    top:0;';
 
 //$css = '.test{
     //content: \'&#160\';
 //}';
-$c = new csscomb($css, true, 'yandex');
+$c = new csscomb($css, true);
 ?>
 </body>
 </html>
