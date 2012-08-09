@@ -39,11 +39,11 @@ copyCore:
 	@echo 'Copying core to plugins...'
 	@mkdir -p $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files
 	@mkdir -p $(PATH_TO_CODA_2_PLUGIN_CORE)/Support\ Files
-	@mkdir -p $(PATH_TO_TEXTMATE_PLUGIN)/Support/src
+	@mkdir -p $(PATH_TO_TEXTMATE_PLUGIN)/Support/lib
 	@mkdir -p $(PATH_TO_ESPRESSO_PLUGIN)/ScriptLibraries
 	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_2_PLUGIN_CORE)/Support\ Files/csscomb.php
-	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/src/csscomb.php
+	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/lib/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_SUBLIME_PLUGIN)/csscomb/libs/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_ESPRESSO_PLUGIN)/ScriptLibraries/csscomb.php
 
