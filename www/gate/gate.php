@@ -1,5 +1,10 @@
 <?php
-if($_SERVER['HTTP_REFERER'] !== 'http://csscomb.com/online/') {
+if(
+    ($_SERVER['HTTP_REFERER'] != 'http://csscomb.com/online/') AND
+    ($_SERVER['HTTP_REFERER'] != 'http://dev.csscomb.ru/online/') AND
+    ($_SERVER['HTTP_REFERER'] != 'http://dev.csscomb.com/online/') AND
+    ($_SERVER['HTTP_REFERER'] != 'http://csscomb.ru/online/')
+    ) {
     die('Error 0');
 }
 
