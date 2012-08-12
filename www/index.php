@@ -1,6 +1,6 @@
 <?
 $index = true;
-$title['en'] = $h1['en'] = 'Greatest tool for sorting CSS properties in specific order';
+$title['en'] = $h1['en'] = 'The greatest tool for sorting CSS properties in specific order';
 $title['ru'] = $h1['ru'] = 'Инструмент для сортировки CSS-свойств в нужном порядке';
 
 
