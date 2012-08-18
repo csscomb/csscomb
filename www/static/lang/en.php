@@ -6,7 +6,7 @@ $nav['downloads'] = 'Downloads';
 
 $loc['settings'] = 'Settings';
 $loc['settings-title'] = 'Sort order settings';
-$loc['settings-hide'] = '<i>&rarr;</i> <span>Hide</span> <kbd>Esc</kbd>';
+$loc['settings-hide'] = 'Hide';
 $loc['settings-comment'] = 'If desired, it\'s possible to divide properties into groups by adding an empty line. In that case the result of formatting will be the same.';
 $loc['settings-save'] = 'Save';
 $loc['resort'] = 'Resort';

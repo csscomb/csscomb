@@ -9,7 +9,7 @@ require_once'../common/header.php';
 			<a id="mode-edit" class="pseudo-link" href=""><?=$loc['edit-mode']?></a>
 			<a id="mode-diff" class="pseudo-link" href=""><?=$loc['diff-mode']?></a>
 		</div>
-		<div class="settings-link"><a href="#"><?=$loc['settings']?></a></div>
+		<div class="settings-link"><a class="pseudo-link"><?=$loc['settings']?></a></div>
 		<div class="code">
 			<table class="edit-mode">
 				<tr>
@@ -30,7 +30,11 @@ require_once'../common/header.php';
 		</div>
 		<div class="clear"></div>
         <div class="settings-bar">
-            <span class="hide"><?=$loc['settings-hide']?></span>
+            <span class="hide">
+                <i>&rarr;</i>
+                <span class="pseudo-link"><?=$loc['settings-hide']?></span>
+                <kbd>Esc</kbd>
+            </span>
             <h2><?=$loc['settings-title']?></h2>
             <?/*<p>
                 <span>Пресеты сортировок:</span>

@@ -73,6 +73,10 @@ a:hover,
     cursor:hand;
     }
 
+.pseudo-link {
+    border-bottom: 1px dotted;
+    }
+
 
 abbr {
     border-bottom:1px dotted silver;
@@ -549,6 +553,7 @@ textarea,
         padding:0 3px;
         width:98%;
         height:600px;
+        border:1px solid silver;
         resize:vertical;
         }
     .settings-bar .hide,
@@ -556,13 +561,6 @@ textarea,
         display:block;
         margin-bottom:10px;
         cursor:pointer;
-        }
-    .settings-bar .hide span {
-        border-bottom:1px solid;
-        color:green;
-        }
-    .settings-bar .hide:hover {
-        color:green;
         }
         .settings-bar .hide kbd {
             margin-left:10px;

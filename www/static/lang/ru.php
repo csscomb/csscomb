@@ -6,7 +6,7 @@ $nav['downloads'] = 'Скачать';
 
 $loc['settings'] = 'Настроить';
 $loc['settings-title'] = 'Настройки порядка сортировки';
-$loc['settings-hide'] = '<i>&rarr;</i> <span>Скрыть</span> <kbd>Esc</kbd>';
+$loc['settings-hide'] = 'Скрыть';
 $loc['settings-comment'] = 'Если хотите, разделите свойства на группы пустой строкой, тогда результат сортировки будет отформатирован так же.';
 $loc['settings-save'] = 'Сохранить';
 $loc['resort'] = 'Сортировать';
