@@ -76,7 +76,7 @@ the properties will be divided into groups with an empty line. In plugins you sh
 
 <h2>Plans</h2>
 <p>Improvement of the algorithm and rework the test cases that are failed.</p>
-<p>Introduction of CSScomb in the popular code redactors.</p>
+<p>Introduction of CSScomb in the popular code editors.</p>
 
 <h2>Gratitude</h2>
 <p>Александру Титула-Бойченко, Вадиму Макееву, Игорю Майданову, Олегу Васютинскому, Елизавете Пимошиной and everyone who helped in testing.</p>';
