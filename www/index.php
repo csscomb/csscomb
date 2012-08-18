@@ -31,8 +31,8 @@ require_once'common/header.php';
                 <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
                 <li><a href="http://github.com/miripiruni/CSScomb/downloads/">CSScomb <?=$loc['for']?> Notepad++</a></li>
                 <li><a href="https://github.com/miripiruni/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
-                <li><?=$loc['help-us']?></li>
             </ul>
+            <p><?=$loc['help-us']?></p>
         </div>
         <div class="feature">
             <h2><?=$loc['feature']?></h2>
