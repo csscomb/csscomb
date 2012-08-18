@@ -11,8 +11,14 @@ require_once'common/header.php';
 //echo '</pre>';
 ?>
         <div class="splash">
-            <a href="http://twitter.com/share" class="twitter-share-button" data-text="http://csscomb.ru: инструмент для сортировки CSS-свойств в нужном порядке" data-count="none" data-via="csscomb" data-related="miripiruni">Tweet</a>
-            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            <a
+                href="https://twitter.com/share"
+                class="twitter-share-button"
+                data-lang="<?=$lang?>"
+                data-related="CSScomb"
+                data-url="http://csscomb.<?=($lang === 'en' ? 'com' : 'ru')?>"
+                data-size="large"><?=$loc['tweet']?></a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </div>
         <div class="versions">
             <h2><?=$loc['versions']?></h2>

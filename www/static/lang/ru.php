@@ -14,6 +14,7 @@ $loc['copy-result-code'] = 'Скопировать результат';
 $loc['edit-mode'] = 'Редактировать';
 $loc['diff-mode'] = 'Сравнить';
 
+$loc['tweet'] = 'Твитнуть';
 $loc['versions'] = 'Версии';
 $loc['feature'] = 'Возможности';
 $loc['updates'] = 'Обновления';

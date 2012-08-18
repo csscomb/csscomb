@@ -14,6 +14,7 @@ $loc['copy-result-code'] = 'Copy result code';
 $loc['edit-mode'] = 'Edit';
 $loc['diff-mode'] = 'Diff';
 
+$loc['tweet'] = 'Tweet';
 $loc['versions'] = 'Versions';
 $loc['feature'] = 'Features';
 $loc['updates'] = 'Updates';
