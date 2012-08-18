@@ -72,19 +72,24 @@ require_once'common/header.php';
             <h2><?=$loc['updates']?></h2>
             <ul>
             <?
-                $ts = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=10"));
+                $tweets = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=10"));
                 $i = 0;
-                foreach($ts as $t){
-                    if($t->in_reply_to_user_id === NULL){
-                        $date = preg_replace('/(\w{3})\s(\w{3})\s(\d*)\s(\d\d(:\d\d){2})\s\+(?:\d{4})\s(\d{4})/','$3 $2 $6',$t->created_at);
-                            echo '
+
+                foreach ($tweets as $tweet) {
+                    if ($tweet->in_reply_to_user_id === NULL) {
+                        $date = preg_replace('/(\w{3})\s(\w{3})\s(\d*)\s(\d\d(:\d\d){2})\s\+(?:\d{4})\s(\d{4})/','$3 $2 $6',$tweet->created_at);
+
+                        $tweet->text = preg_replace('/http\:\/\/([\w.\/]+)/', '<a href="http://${1}">${1}</a>', $tweet->text);
+                        $tweet->text = preg_replace('/\@(\w+)/', '<a href="http://twitter.com/${1}">@${1}</a>', $tweet->text);
+
+                        echo '
                         <li>
-                            <time><a target="_blank" href="http://twitter.com/csscomb/statuses/'.$t->id_str.'">'.$date.'</a></time>
-                            <span>'.$t->text.'</span>
+                            <time><a target="_blank" href="http://twitter.com/csscomb/statuses/'.$tweet->id_str.'">'.$date.'</a></time>
+                            <span>'.$tweet->text.'</span>
                         </li>';
 
                         $i++;
-                        if($i>=2){
+                        if ($i >= 2) {
                             break;
                         }
                     }
