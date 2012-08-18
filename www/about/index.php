@@ -72,7 +72,7 @@ the properties will be divided into groups with an empty line. In plugins you sh
 </ul>
 
 <h2>How to support?</h2>
-<p>Make a plugin (if you don\'t have one) for your favorite redactor.</p>
+<p>Make a plugin (if you don\'t have one) for your favorite code editor.</p>
 
 <h2>Plans</h2>
 <p>Improvement of the algorithm and rework the test cases that are failed.</p>
