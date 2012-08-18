@@ -148,10 +148,10 @@ require_once'../common/header.php';
             <?=$tests_list?>
             <div class="clear"></div>
         </div>
-        <script type="text/javascript" src="../static/highlight/highlight.pack.js"></script>
+        <script type="text/javascript" src="../static/_js/highlight.pack.js"></script>
         <script type="text/javascript" src="../static/_js/tests.js"></script>
         <script type="text/javascript">
-            hljs.tabReplace = '    ';
+            hljs.tabReplace = '  ';
             hljs.initHighlightingOnLoad();
         </script>
 <?require_once'../common/footer.php'?>
