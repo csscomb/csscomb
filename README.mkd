@@ -12,6 +12,12 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
 [CSScomb.com](http://csscomb.com/)
 
 
+The Requirements
+------------
+
+* [PHP](http://windows.php.net/download/)
+
+
 [Download plugins](http://github.com/miripiruni/CSScomb/downloads)
 --------
 
