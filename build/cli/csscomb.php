@@ -7,6 +7,7 @@
  */
  
 error_reporting(E_ALL);
+    
 class csscomb{
 
     var $sort_order = Array(),
@@ -15,9 +16,9 @@ class csscomb{
         'original' => null,
         // код, который может меняться в процессе выполнения алгоритма пересортировки
         'edited' => null,
+        // TODO: избавиться от resorted
         // конечный, пересортированный CSS-код
         'resorted' => null,
-        // TODO: избавиться от resorted
         // если найдены expression, то эта переменная станет массивом, ячейки которого
         // будут содержать код каждого найденного expression
         'expressions' => null,
@@ -38,686 +39,684 @@ class csscomb{
     //   properties - не найдено фигурных скобок, зато присутствуют точки с запятой и двоеточия.
     $mode = 'properties',
 
-
-    $default_sort_order = '
-[
-    "position",
-    "top",
-    "right",
-    "bottom",
-    "left",
-    "z-index",
-    "display",
-    "visibility",
-    "-webkit-flex-direction",
-    "-moz-flex-direction",
-    "-ms-flex-direction",
-    "-o-flex-direction",
-    "flex-direction",
-    "-webkit-flex-order",
-    "-moz-flex-order",
-    "-ms-flex-order",
-    "-o-flex-order",
-    "flex-order",
-    "-webkit-flex-pack",
-    "-moz-flex-pack",
-    "-ms-flex-pack",
-    "-o-flex-pack",
-    "flex-pack",
-    "float",
-    "clear",
-    "-webkit-flex-align",
-    "-moz-flex-align",
-    "-ms-flex-align",
-    "-o-flex-align",
-    "flex-align",
-    "overflow",
-    "-ms-overflow-x",
-    "-ms-overflow-y",
-    "overflow-x",
-    "overflow-y",
-    "clip",
-    "-webkit-box-sizing",
-    "-moz-box-sizing",
-    "box-sizing",
-    "margin",
-    "margin-top",
-    "margin-right",
-    "margin-bottom",
-    "margin-left",
-    "padding",
-    "padding-top",
-    "padding-right",
-    "padding-bottom",
-    "padding-left",
-    "min-width",
-    "min-height",
-    "max-width",
-    "max-height",
-    "width",
-    "height",
-    "outline",
-    "outline-width",
-    "outline-style",
-    "outline-color",
-    "outline-offset",
-    "border",
-    "border-spacing",
-    "border-collapse",
-    "border-width",
-    "border-style",
-    "border-color",
-    "border-top",
-    "border-top-width",
-    "border-top-style",
-    "border-top-color",
-    "border-right",
-    "border-right-width",
-    "border-right-style",
-    "border-right-color",
-    "border-bottom",
-    "border-bottom-width",
-    "border-bottom-style",
-    "border-bottom-color",
-    "border-left",
-    "border-left-width",
-    "border-left-style",
-    "border-left-color",
-    "-webkit-border-radius",
-    "-moz-border-radius",
-    "border-radius",
-    "-webkit-border-top-right-radius",
-    "-moz-border-top-right-radius",
-    "border-top-right-radius",
-    "-webkit-border-bottom-right-radius",
-    "-moz-border-bottom-right-radius",
-    "border-bottom-right-radius",
-    "-webkit-border-bottom-left-radius",
-    "-moz-border-bottom-left-radius",
-    "border-bottom-left-radius",
-    "-webkit-border-top-left-radius",
-    "-moz-border-top-left-radius",
-    "border-top-left-radius",
-    "-webkit-border-image",
-    "-moz-border-image",
-    "-o-border-image",
-    "border-image",
-    "-webkit-border-image-source",
-    "-moz-border-image-source",
-    "-o-border-image-source",
-    "border-image-source",
-    "-webkit-border-image-slice",
-    "-moz-border-image-slice",
-    "-o-border-image-slice",
-    "border-image-slice",
-    "-webkit-border-image-width",
-    "-moz-border-image-width",
-    "-o-border-image-width",
-    "border-image-width",
-    "-webkit-border-image-outset",
-    "-moz-border-image-outset",
-    "-o-border-image-outset",
-    "border-image-outset",
-    "-webkit-border-image-repeat",
-    "-moz-border-image-repeat",
-    "-o-border-image-repeat",
-    "border-image-repeat",
-    "-webkit-border-top-image",
-    "-moz-border-top-image",
-    "-o-border-top-image",
-    "border-top-image",
-    "-webkit-border-right-image",
-    "-moz-border-right-image",
-    "-o-border-right-image",
-    "border-right-image",
-    "-webkit-border-bottom-image",
-    "-moz-border-bottom-image",
-    "-o-border-bottom-image",
-    "border-bottom-image",
-    "-webkit-border-left-image",
-    "-moz-border-left-image",
-    "-o-border-left-image",
-    "border-left-image",
-    "-webkit-border-corner-image",
-    "-moz-border-corner-image",
-    "-o-border-corner-image",
-    "border-corner-image",
-    "-webkit-border-top-left-image",
-    "-moz-border-top-left-image",
-    "-o-border-top-left-image",
-    "border-top-left-image",
-    "-webkit-border-top-right-image",
-    "-moz-border-top-right-image",
-    "-o-border-top-right-image",
-    "border-top-right-image",
-    "-webkit-border-bottom-right-image",
-    "-moz-border-bottom-right-image",
-    "-o-border-bottom-right-image",
-    "border-bottom-right-image",
-    "-webkit-border-bottom-left-image",
-    "-moz-border-bottom-left-image",
-    "-o-border-bottom-left-image",
-    "border-bottom-left-image",
-    "background",
-    "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader",
-    "background-color",
-    "background-image",
-    "background-attachment",
-    "background-position",
-    "-ms-background-position-x",
-    "-ms-background-position-y",
-    "background-position-x",
-    "background-position-y",
-    "background-clip",
-    "background-origin",
-    "background-size",
-    "background-repeat",
-    "box-decoration-break",
-    "-webkit-box-shadow",
-    "-moz-box-shadow",
-    "box-shadow",
-    "color",
-    "table-layout",
-    "caption-side",
-    "empty-cells",
-    "list-style",
-    "list-style-position",
-    "list-style-type",
-    "list-style-image",
-    "quotes",
-    "content",
-    "counter-increment",
-    "counter-reset",
-    "-ms-writing-mode",
-    "vertical-align",
-    "text-align",
-    "-ms-text-align-last",
-    "text-align-last",
-    "text-decoration",
-    "text-emphasis",
-    "text-emphasis-position",
-    "text-emphasis-style",
-    "text-emphasis-color",
-    "text-indent",
-    "-ms-text-justify",
-    "text-justify",
-    "text-outline",
-    "text-transform",
-    "text-wrap",
-    "-ms-text-overflow",
-    "text-overflow",
-    "text-overflow-ellipsis",
-    "text-overflow-mode",
-    "text-shadow",
-    "white-space",
-    "word-spacing",
-    "-ms-word-wrap",
-    "word-wrap",
-    "-ms-word-break",
-    "word-break",
-    "-moz-tab-size",
-    "-o-tab-size",
-    "tab-size",
-    "-webkit-hyphens",
-    "-moz-hyphens",
-    "hyphens",
-    "letter-spacing",
-    "font",
-    "font-weight",
-    "font-style",
-    "font-variant",
-    "font-size-adjust",
-    "font-stretch",
-    "font-size",
-    "font-family",
-    "src",
-    "line-height",
-    "opacity",
-    "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha",
-    "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
-    "-ms-interpolation-mode",
-    "-webkit-filter",
-    "-ms-filter",
-    "filter",
-    "resize",
-    "cursor",
-    "nav-index",
-    "nav-up",
-    "nav-right",
-    "nav-down",
-    "nav-left",
-    "-webkit-transition",
-    "-moz-transition",
-    "-ms-transition",
-    "-o-transition",
-    "transition",
-    "-webkit-transition-delay",
-    "-moz-transition-delay",
-    "-ms-transition-delay",
-    "-o-transition-delay",
-    "transition-delay",
-    "-webkit-transition-timing-function",
-    "-moz-transition-timing-function",
-    "-ms-transition-timing-function",
-    "-o-transition-timing-function",
-    "transition-timing-function",
-    "-webkit-transition-duration",
-    "-moz-transition-duration",
-    "-ms-transition-duration",
-    "-o-transition-duration",
-    "transition-duration",
-    "-webkit-transition-property",
-    "-moz-transition-property",
-    "-ms-transition-property",
-    "-o-transition-property",
-    "transition-property",
-    "-webkit-transform",
-    "-moz-transform",
-    "-ms-transform",
-    "-o-transform",
-    "transform",
-    "-webkit-transform-origin",
-    "-moz-transform-origin",
-    "-ms-transform-origin",
-    "-o-transform-origin",
-    "transform-origin",
-    "-webkit-animation",
-    "-moz-animation",
-    "-ms-animation",
-    "-o-animation",
-    "animation",
-    "-webkit-animation-name",
-    "-moz-animation-name",
-    "-ms-animation-name",
-    "-o-animation-name",
-    "animation-name",
-    "-webkit-animation-duration",
-    "-moz-animation-duration",
-    "-ms-animation-duration",
-    "-o-animation-duration",
-    "animation-duration",
-    "-webkit-animation-play-state",
-    "-moz-animation-play-state",
-    "-ms-animation-play-state",
-    "-o-animation-play-state",
-    "animation-play-state",
-    "-webkit-animation-timing-function",
-    "-moz-animation-timing-function",
-    "-ms-animation-timing-function",
-    "-o-animation-timing-function",
-    "animation-timing-function",
-    "-webkit-animation-delay",
-    "-moz-animation-delay",
-    "-ms-animation-delay",
-    "-o-animation-delay",
-    "animation-delay",
-    "-webkit-animation-iteration-count",
-    "-moz-animation-iteration-count",
-    "-ms-animation-iteration-count",
-    "-o-animation-iteration-count",
-    "animation-iteration-count",
-    "-webkit-animation-direction",
-    "-moz-animation-direction",
-    "-ms-animation-direction",
-    "-o-animation-direction",
-    "animation-direction",
-    "unicode-bidi",
-    "direction",
-    "-webkit-columns",
-    "-moz-columns",
-    "columns",
-    "-webkit-column-span",
-    "-moz-column-span",
-    "column-span",
-    "-webkit-column-width",
-    "-moz-column-width",
-    "column-width",
-    "-webkit-column-count",
-    "-moz-column-count",
-    "column-count",
-    "-webkit-column-fill",
-    "-moz-column-fill",
-    "column-fill",
-    "-webkit-column-gap",
-    "-moz-column-gap",
-    "column-gap",
-    "-webkit-column-rule",
-    "-moz-column-rule",
-    "column-rule",
-    "-webkit-column-rule-width",
-    "-moz-column-rule-width",
-    "column-rule-width",
-    "-webkit-column-rule-style",
-    "-moz-column-rule-style",
-    "column-rule-style",
-    "-webkit-column-rule-color",
-    "-moz-column-rule-color",
-    "column-rule-color",
-    "break-before",
-    "break-inside",
-    "break-after",
-    "page-break-before",
-    "page-break-inside",
-    "page-break-after",
-    "orphans",
-    "widows",
-    "-ms-zoom",
-    "zoom",
-    "max-zoom",
-    "min-zoom",
-    "user-zoom",
-    "orientation"
-]',
+    $default_sort_order = '[
+        "position",
+        "top",
+        "right",
+        "bottom",
+        "left",
+        "z-index",
+        "display",
+        "visibility",
+        "-webkit-flex-direction",
+        "-moz-flex-direction",
+        "-ms-flex-direction",
+        "-o-flex-direction",
+        "flex-direction",
+        "-webkit-flex-order",
+        "-moz-flex-order",
+        "-ms-flex-order",
+        "-o-flex-order",
+        "flex-order",
+        "-webkit-flex-pack",
+        "-moz-flex-pack",
+        "-ms-flex-pack",
+        "-o-flex-pack",
+        "flex-pack",
+        "float",
+        "clear",
+        "-webkit-flex-align",
+        "-moz-flex-align",
+        "-ms-flex-align",
+        "-o-flex-align",
+        "flex-align",
+        "overflow",
+        "-ms-overflow-x",
+        "-ms-overflow-y",
+        "overflow-x",
+        "overflow-y",
+        "clip",
+        "-webkit-box-sizing",
+        "-moz-box-sizing",
+        "box-sizing",
+        "margin",
+        "margin-top",
+        "margin-right",
+        "margin-bottom",
+        "margin-left",
+        "padding",
+        "padding-top",
+        "padding-right",
+        "padding-bottom",
+        "padding-left",
+        "min-width",
+        "min-height",
+        "max-width",
+        "max-height",
+        "width",
+        "height",
+        "outline",
+        "outline-width",
+        "outline-style",
+        "outline-color",
+        "outline-offset",
+        "border",
+        "border-spacing",
+        "border-collapse",
+        "border-width",
+        "border-style",
+        "border-color",
+        "border-top",
+        "border-top-width",
+        "border-top-style",
+        "border-top-color",
+        "border-right",
+        "border-right-width",
+        "border-right-style",
+        "border-right-color",
+        "border-bottom",
+        "border-bottom-width",
+        "border-bottom-style",
+        "border-bottom-color",
+        "border-left",
+        "border-left-width",
+        "border-left-style",
+        "border-left-color",
+        "-webkit-border-radius",
+        "-moz-border-radius",
+        "border-radius",
+        "-webkit-border-top-right-radius",
+        "-moz-border-top-right-radius",
+        "border-top-right-radius",
+        "-webkit-border-bottom-right-radius",
+        "-moz-border-bottom-right-radius",
+        "border-bottom-right-radius",
+        "-webkit-border-bottom-left-radius",
+        "-moz-border-bottom-left-radius",
+        "border-bottom-left-radius",
+        "-webkit-border-top-left-radius",
+        "-moz-border-top-left-radius",
+        "border-top-left-radius",
+        "-webkit-border-image",
+        "-moz-border-image",
+        "-o-border-image",
+        "border-image",
+        "-webkit-border-image-source",
+        "-moz-border-image-source",
+        "-o-border-image-source",
+        "border-image-source",
+        "-webkit-border-image-slice",
+        "-moz-border-image-slice",
+        "-o-border-image-slice",
+        "border-image-slice",
+        "-webkit-border-image-width",
+        "-moz-border-image-width",
+        "-o-border-image-width",
+        "border-image-width",
+        "-webkit-border-image-outset",
+        "-moz-border-image-outset",
+        "-o-border-image-outset",
+        "border-image-outset",
+        "-webkit-border-image-repeat",
+        "-moz-border-image-repeat",
+        "-o-border-image-repeat",
+        "border-image-repeat",
+        "-webkit-border-top-image",
+        "-moz-border-top-image",
+        "-o-border-top-image",
+        "border-top-image",
+        "-webkit-border-right-image",
+        "-moz-border-right-image",
+        "-o-border-right-image",
+        "border-right-image",
+        "-webkit-border-bottom-image",
+        "-moz-border-bottom-image",
+        "-o-border-bottom-image",
+        "border-bottom-image",
+        "-webkit-border-left-image",
+        "-moz-border-left-image",
+        "-o-border-left-image",
+        "border-left-image",
+        "-webkit-border-corner-image",
+        "-moz-border-corner-image",
+        "-o-border-corner-image",
+        "border-corner-image",
+        "-webkit-border-top-left-image",
+        "-moz-border-top-left-image",
+        "-o-border-top-left-image",
+        "border-top-left-image",
+        "-webkit-border-top-right-image",
+        "-moz-border-top-right-image",
+        "-o-border-top-right-image",
+        "border-top-right-image",
+        "-webkit-border-bottom-right-image",
+        "-moz-border-bottom-right-image",
+        "-o-border-bottom-right-image",
+        "border-bottom-right-image",
+        "-webkit-border-bottom-left-image",
+        "-moz-border-bottom-left-image",
+        "-o-border-bottom-left-image",
+        "border-bottom-left-image",
+        "background",
+        "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader",
+        "background-color",
+        "background-image",
+        "background-attachment",
+        "background-position",
+        "-ms-background-position-x",
+        "-ms-background-position-y",
+        "background-position-x",
+        "background-position-y",
+        "background-clip",
+        "background-origin",
+        "background-size",
+        "background-repeat",
+        "box-decoration-break",
+        "-webkit-box-shadow",
+        "-moz-box-shadow",
+        "box-shadow",
+        "color",
+        "table-layout",
+        "caption-side",
+        "empty-cells",
+        "list-style",
+        "list-style-position",
+        "list-style-type",
+        "list-style-image",
+        "quotes",
+        "content",
+        "counter-increment",
+        "counter-reset",
+        "-ms-writing-mode",
+        "vertical-align",
+        "text-align",
+        "-ms-text-align-last",
+        "text-align-last",
+        "text-decoration",
+        "text-emphasis",
+        "text-emphasis-position",
+        "text-emphasis-style",
+        "text-emphasis-color",
+        "text-indent",
+        "-ms-text-justify",
+        "text-justify",
+        "text-outline",
+        "text-transform",
+        "text-wrap",
+        "-ms-text-overflow",
+        "text-overflow",
+        "text-overflow-ellipsis",
+        "text-overflow-mode",
+        "text-shadow",
+        "white-space",
+        "word-spacing",
+        "-ms-word-wrap",
+        "word-wrap",
+        "-ms-word-break",
+        "word-break",
+        "-moz-tab-size",
+        "-o-tab-size",
+        "tab-size",
+        "-webkit-hyphens",
+        "-moz-hyphens",
+        "hyphens",
+        "letter-spacing",
+        "font",
+        "font-weight",
+        "font-style",
+        "font-variant",
+        "font-size-adjust",
+        "font-stretch",
+        "font-size",
+        "font-family",
+        "src",
+        "line-height",
+        "opacity",
+        "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha",
+        "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
+        "-ms-interpolation-mode",
+        "-webkit-filter",
+        "-ms-filter",
+        "filter",
+        "resize",
+        "cursor",
+        "nav-index",
+        "nav-up",
+        "nav-right",
+        "nav-down",
+        "nav-left",
+        "-webkit-transition",
+        "-moz-transition",
+        "-ms-transition",
+        "-o-transition",
+        "transition",
+        "-webkit-transition-delay",
+        "-moz-transition-delay",
+        "-ms-transition-delay",
+        "-o-transition-delay",
+        "transition-delay",
+        "-webkit-transition-timing-function",
+        "-moz-transition-timing-function",
+        "-ms-transition-timing-function",
+        "-o-transition-timing-function",
+        "transition-timing-function",
+        "-webkit-transition-duration",
+        "-moz-transition-duration",
+        "-ms-transition-duration",
+        "-o-transition-duration",
+        "transition-duration",
+        "-webkit-transition-property",
+        "-moz-transition-property",
+        "-ms-transition-property",
+        "-o-transition-property",
+        "transition-property",
+        "-webkit-transform",
+        "-moz-transform",
+        "-ms-transform",
+        "-o-transform",
+        "transform",
+        "-webkit-transform-origin",
+        "-moz-transform-origin",
+        "-ms-transform-origin",
+        "-o-transform-origin",
+        "transform-origin",
+        "-webkit-animation",
+        "-moz-animation",
+        "-ms-animation",
+        "-o-animation",
+        "animation",
+        "-webkit-animation-name",
+        "-moz-animation-name",
+        "-ms-animation-name",
+        "-o-animation-name",
+        "animation-name",
+        "-webkit-animation-duration",
+        "-moz-animation-duration",
+        "-ms-animation-duration",
+        "-o-animation-duration",
+        "animation-duration",
+        "-webkit-animation-play-state",
+        "-moz-animation-play-state",
+        "-ms-animation-play-state",
+        "-o-animation-play-state",
+        "animation-play-state",
+        "-webkit-animation-timing-function",
+        "-moz-animation-timing-function",
+        "-ms-animation-timing-function",
+        "-o-animation-timing-function",
+        "animation-timing-function",
+        "-webkit-animation-delay",
+        "-moz-animation-delay",
+        "-ms-animation-delay",
+        "-o-animation-delay",
+        "animation-delay",
+        "-webkit-animation-iteration-count",
+        "-moz-animation-iteration-count",
+        "-ms-animation-iteration-count",
+        "-o-animation-iteration-count",
+        "animation-iteration-count",
+        "-webkit-animation-direction",
+        "-moz-animation-direction",
+        "-ms-animation-direction",
+        "-o-animation-direction",
+        "animation-direction",
+        "unicode-bidi",
+        "direction",
+        "-webkit-columns",
+        "-moz-columns",
+        "columns",
+        "-webkit-column-span",
+        "-moz-column-span",
+        "column-span",
+        "-webkit-column-width",
+        "-moz-column-width",
+        "column-width",
+        "-webkit-column-count",
+        "-moz-column-count",
+        "column-count",
+        "-webkit-column-fill",
+        "-moz-column-fill",
+        "column-fill",
+        "-webkit-column-gap",
+        "-moz-column-gap",
+        "column-gap",
+        "-webkit-column-rule",
+        "-moz-column-rule",
+        "column-rule",
+        "-webkit-column-rule-width",
+        "-moz-column-rule-width",
+        "column-rule-width",
+        "-webkit-column-rule-style",
+        "-moz-column-rule-style",
+        "column-rule-style",
+        "-webkit-column-rule-color",
+        "-moz-column-rule-color",
+        "column-rule-color",
+        "break-before",
+        "break-inside",
+        "break-after",
+        "page-break-before",
+        "page-break-inside",
+        "page-break-after",
+        "orphans",
+        "widows",
+        "-ms-zoom",
+        "zoom",
+        "max-zoom",
+        "min-zoom",
+        "user-zoom",
+        "orientation"
+    ]',
 
     $yandex_sort_order = '[
-[
-    "position",
-    "z-index",
-    "top",
-    "right",
-    "bottom",
-    "left"
-],
-[
-    "display",
-    "visibility",
-    "float",
-    "clear",
-    "overflow",
-    "overflow-x",
-    "overflow-y",
-    "-ms-overflow-x",
-    "-ms-overflow-y",
-    "clip",
-    "zoom",
-    "flex-direction",
-    "flex-order",
-    "flex-pack",
-    "flex-align"
-],
-[
-    "-webkit-box-sizing",
-    "-moz-box-sizing",
-    "box-sizing",
-    "width",
-    "min-width",
-    "max-width",
-    "height",
-    "min-height",
-    "max-height",
-    "margin",
-    "margin-top",
-    "margin-right",
-    "margin-bottom",
-    "margin-left",
-    "padding",
-    "padding-top",
-    "padding-right",
-    "padding-bottom",
-    "padding-left"
-],
-[
-    "table-layout",
-    "empty-cells",
-    "caption-side",
-    "border-spacing",
-    "border-collapse",
-    "list-style",
-    "list-style-position",
-    "list-style-type",
-    "list-style-image"
-],
-[
-    "content",
-    "quotes",
-    "counter-reset",
-    "counter-increment",
-    "resize",
-    "cursor",
-    "nav-index",
-    "nav-up",
-    "nav-right",
-    "nav-down",
-    "nav-left",
-    "-webkit-transition",
-    "-moz-transition",
-    "-ms-transition",
-    "-o-transition",
-    "transition",
-    "-webkit-transition-delay",
-    "-moz-transition-delay",
-    "-ms-transition-delay",
-    "-o-transition-delay",
-    "transition-delay",
-    "-webkit-transition-timing-function",
-    "-moz-transition-timing-function",
-    "-ms-transition-timing-function",
-    "-o-transition-timing-function",
-    "transition-timing-function",
-    "-webkit-transition-duration",
-    "-moz-transition-duration",
-    "-ms-transition-duration",
-    "-o-transition-duration",
-    "transition-duration",
-    "-webkit-transition-property",
-    "-moz-transition-property",
-    "-ms-transition-property",
-    "-o-transition-property",
-    "transition-property",
-    "-webkit-transform",
-    "-moz-transform",
-    "-ms-transform",
-    "-o-transform",
-    "transform",
-    "-webkit-transform-origin",
-    "-moz-transform-origin",
-    "-ms-transform-origin",
-    "-o-transform-origin",
-    "transform-origin",
-    "-webkit-animation",
-    "-moz-animation",
-    "-ms-animation",
-    "-o-animation",
-    "animation",
-    "-webkit-animation-name",
-    "-moz-animation-name",
-    "-ms-animation-name",
-    "-o-animation-name",
-    "animation-name",
-    "-webkit-animation-duration",
-    "-moz-animation-duration",
-    "-ms-animation-duration",
-    "-o-animation-duration",
-    "animation-duration",
-    "-webkit-animation-play-state",
-    "-moz-animation-play-state",
-    "-ms-animation-play-state",
-    "-o-animation-play-state",
-    "animation-play-state",
-    "-webkit-animation-timing-function",
-    "-moz-animation-timing-function",
-    "-ms-animation-timing-function",
-    "-o-animation-timing-function",
-    "animation-timing-function",
-    "-webkit-animation-delay",
-    "-moz-animation-delay",
-    "-ms-animation-delay",
-    "-o-animation-delay",
-    "animation-delay",
-    "-webkit-animation-iteration-count",
-    "-moz-animation-iteration-count",
-    "-ms-animation-iteration-count",
-    "-o-animation-iteration-count",
-    "animation-iteration-count",
-    "-webkit-animation-iteration-count",
-    "-moz-animation-iteration-count",
-    "-ms-animation-iteration-count",
-    "-o-animation-iteration-count",
-    "animation-iteration-count",
-    "-webkit-animation-direction",
-    "-moz-animation-direction",
-    "-ms-animation-direction",
-    "-o-animation-direction",
-    "animation-direction",
-    "text-align",
-    "text-align-last",
-    "-ms-text-align-last",
-    "text-align-last",
-    "vertical-align",
-    "white-space",
-    "text-decoration",
-    "text-emphasis",
-    "text-emphasis-color",
-    "text-emphasis-style",
-    "text-emphasis-position",
-    "text-indent",
-    "-ms-text-justify",
-    "text-justify",
-    "text-transform",
-    "letter-spacing",
-    "word-spacing",
-    "-ms-writing-mode",
-    "text-outline",
-    "text-transform",
-    "text-wrap",
-    "text-overflow",
-    "-ms-text-overflow",
-    "text-overflow-ellipsis",
-    "text-overflow-mode",
-    "-ms-word-wrap",
-    "word-wrap",
-    "word-break",
-    "-ms-word-break",
-    "-moz-tab-size",
-    "-o-tab-size",
-    "tab-size",
-    "-webkit-hyphens",
-    "-moz-hyphens",
-    "hyphens"
-],
-[
-    "opacity",
-    "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
-    "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha",
-    "-ms-interpolation-mode",
-    "color",
-    "border",
-    "border-collapse",
-    "border-width",
-    "border-style",
-    "border-color",
-    "border-top",
-    "border-top-width",
-    "border-top-style",
-    "border-top-color",
-    "border-right",
-    "border-right-width",
-    "border-right-style",
-    "border-right-color",
-    "border-bottom",
-    "border-bottom-width",
-    "border-bottom-style",
-    "border-bottom-color",
-    "border-left",
-    "border-left-width",
-    "border-left-style",
-    "border-left-color",
-    "-webkit-border-radius",
-    "-moz-border-radius",
-    "border-radius",
-    "-webkit-border-top-right-radius",
-    "-moz-border-top-right-radius",
-    "border-top-right-radius",
-    "-webkit-border-bottom-right-radius",
-    "-moz-border-bottom-right-radius",
-    "border-bottom-right-radius",
-    "-webkit-border-bottom-left-radius",
-    "-moz-border-bottom-left-radius",
-    "border-bottom-left-radius",
-    "-webkit-border-top-left-radius",
-    "-moz-border-top-left-radius",
-    "border-top-left-radius",
-    "-webkit-border-image",
-    "-moz-border-image",
-    "-o-border-image",
-    "border-image",
-    "-webkit-border-image-source",
-    "-moz-border-image-source",
-    "-o-border-image-source",
-    "border-image-source",
-    "-webkit-border-image-slice",
-    "-moz-border-image-slice",
-    "-o-border-image-slice",
-    "border-image-slice",
-    "-webkit-border-image-width",
-    "-moz-border-image-width",
-    "-o-border-image-width",
-    "border-image-width",
-    "-webkit-border-image-outset",
-    "-moz-border-image-outset",
-    "-o-border-image-outset",
-    "border-image-outset",
-    "-webkit-border-image-repeat",
-    "-moz-border-image-repeat",
-    "-o-border-image-repeat",
-    "border-image-repeat",
-    "outline",
-    "outline-width",
-    "outline-style",
-    "outline-color",
-    "outline-offset",
-    "background",
-    "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader",
-    "background-color",
-    "background-image",
-    "background-repeat",
-    "background-attachment",
-    "background-position",
-    "background-position-x",
-    "-ms-background-position-x",
-    "background-position-y",
-    "-ms-background-position-y",
-    "background-clip",
-    "background-origin",
-    "background-size",
-    "box-decoration-break",
-    "-webkit-box-shadow",
-    "-moz-box-shadow",
-    "box-shadow",
-    "-webkit-box-shadow",
-    "-moz-box-shadow",
-    "box-shadow",
-    "-webkit-box-shadow",
-    "-moz-box-shadow",
-    "box-shadow",
-    "-webkit-box-shadow",
-    "-moz-box-shadow",
-    "box-shadow",
-    "filter:progid:DXImageTransform.Microsoft.gradient",
-    "-ms-filter:\'progid:DXImageTransform.Microsoft.gradient",
-    "text-shadow"
-],
-[
-    "font",
-    "font-family",
-    "font-size",
-    "font-weight",
-    "font-style",
-    "font-variant",
-    "font-size-adjust",
-    "font-stretch",
-    "font-effect",
-    "font-emphasize",
-    "font-emphasize-position",
-    "font-emphasize-style",
-    "font-smooth",
-    "line-height"
-]
-]';
+        [
+            "position",
+            "z-index",
+            "top",
+            "right",
+            "bottom",
+            "left"
+        ],
+        [
+            "display",
+            "visibility",
+            "float",
+            "clear",
+            "overflow",
+            "overflow-x",
+            "overflow-y",
+            "-ms-overflow-x",
+            "-ms-overflow-y",
+            "clip",
+            "zoom",
+            "flex-direction",
+            "flex-order",
+            "flex-pack",
+            "flex-align"
+        ],
+        [
+            "-webkit-box-sizing",
+            "-moz-box-sizing",
+            "box-sizing",
+            "width",
+            "min-width",
+            "max-width",
+            "height",
+            "min-height",
+            "max-height",
+            "margin",
+            "margin-top",
+            "margin-right",
+            "margin-bottom",
+            "margin-left",
+            "padding",
+            "padding-top",
+            "padding-right",
+            "padding-bottom",
+            "padding-left"
+        ],
+        [
+            "table-layout",
+            "empty-cells",
+            "caption-side",
+            "border-spacing",
+            "border-collapse",
+            "list-style",
+            "list-style-position",
+            "list-style-type",
+            "list-style-image"
+        ],
+        [
+            "content",
+            "quotes",
+            "counter-reset",
+            "counter-increment",
+            "resize",
+            "cursor",
+            "nav-index",
+            "nav-up",
+            "nav-right",
+            "nav-down",
+            "nav-left",
+            "-webkit-transition",
+            "-moz-transition",
+            "-ms-transition",
+            "-o-transition",
+            "transition",
+            "-webkit-transition-delay",
+            "-moz-transition-delay",
+            "-ms-transition-delay",
+            "-o-transition-delay",
+            "transition-delay",
+            "-webkit-transition-timing-function",
+            "-moz-transition-timing-function",
+            "-ms-transition-timing-function",
+            "-o-transition-timing-function",
+            "transition-timing-function",
+            "-webkit-transition-duration",
+            "-moz-transition-duration",
+            "-ms-transition-duration",
+            "-o-transition-duration",
+            "transition-duration",
+            "-webkit-transition-property",
+            "-moz-transition-property",
+            "-ms-transition-property",
+            "-o-transition-property",
+            "transition-property",
+            "-webkit-transform",
+            "-moz-transform",
+            "-ms-transform",
+            "-o-transform",
+            "transform",
+            "-webkit-transform-origin",
+            "-moz-transform-origin",
+            "-ms-transform-origin",
+            "-o-transform-origin",
+            "transform-origin",
+            "-webkit-animation",
+            "-moz-animation",
+            "-ms-animation",
+            "-o-animation",
+            "animation",
+            "-webkit-animation-name",
+            "-moz-animation-name",
+            "-ms-animation-name",
+            "-o-animation-name",
+            "animation-name",
+            "-webkit-animation-duration",
+            "-moz-animation-duration",
+            "-ms-animation-duration",
+            "-o-animation-duration",
+            "animation-duration",
+            "-webkit-animation-play-state",
+            "-moz-animation-play-state",
+            "-ms-animation-play-state",
+            "-o-animation-play-state",
+            "animation-play-state",
+            "-webkit-animation-timing-function",
+            "-moz-animation-timing-function",
+            "-ms-animation-timing-function",
+            "-o-animation-timing-function",
+            "animation-timing-function",
+            "-webkit-animation-delay",
+            "-moz-animation-delay",
+            "-ms-animation-delay",
+            "-o-animation-delay",
+            "animation-delay",
+            "-webkit-animation-iteration-count",
+            "-moz-animation-iteration-count",
+            "-ms-animation-iteration-count",
+            "-o-animation-iteration-count",
+            "animation-iteration-count",
+            "-webkit-animation-iteration-count",
+            "-moz-animation-iteration-count",
+            "-ms-animation-iteration-count",
+            "-o-animation-iteration-count",
+            "animation-iteration-count",
+            "-webkit-animation-direction",
+            "-moz-animation-direction",
+            "-ms-animation-direction",
+            "-o-animation-direction",
+            "animation-direction",
+            "text-align",
+            "text-align-last",
+            "-ms-text-align-last",
+            "text-align-last",
+            "vertical-align",
+            "white-space",
+            "text-decoration",
+            "text-emphasis",
+            "text-emphasis-color",
+            "text-emphasis-style",
+            "text-emphasis-position",
+            "text-indent",
+            "-ms-text-justify",
+            "text-justify",
+            "text-transform",
+            "letter-spacing",
+            "word-spacing",
+            "-ms-writing-mode",
+            "text-outline",
+            "text-transform",
+            "text-wrap",
+            "text-overflow",
+            "-ms-text-overflow",
+            "text-overflow-ellipsis",
+            "text-overflow-mode",
+            "-ms-word-wrap",
+            "word-wrap",
+            "word-break",
+            "-ms-word-break",
+            "-moz-tab-size",
+            "-o-tab-size",
+            "tab-size",
+            "-webkit-hyphens",
+            "-moz-hyphens",
+            "hyphens"
+        ],
+        [
+            "opacity",
+            "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
+            "-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha",
+            "-ms-interpolation-mode",
+            "color",
+            "border",
+            "border-collapse",
+            "border-width",
+            "border-style",
+            "border-color",
+            "border-top",
+            "border-top-width",
+            "border-top-style",
+            "border-top-color",
+            "border-right",
+            "border-right-width",
+            "border-right-style",
+            "border-right-color",
+            "border-bottom",
+            "border-bottom-width",
+            "border-bottom-style",
+            "border-bottom-color",
+            "border-left",
+            "border-left-width",
+            "border-left-style",
+            "border-left-color",
+            "-webkit-border-radius",
+            "-moz-border-radius",
+            "border-radius",
+            "-webkit-border-top-right-radius",
+            "-moz-border-top-right-radius",
+            "border-top-right-radius",
+            "-webkit-border-bottom-right-radius",
+            "-moz-border-bottom-right-radius",
+            "border-bottom-right-radius",
+            "-webkit-border-bottom-left-radius",
+            "-moz-border-bottom-left-radius",
+            "border-bottom-left-radius",
+            "-webkit-border-top-left-radius",
+            "-moz-border-top-left-radius",
+            "border-top-left-radius",
+            "-webkit-border-image",
+            "-moz-border-image",
+            "-o-border-image",
+            "border-image",
+            "-webkit-border-image-source",
+            "-moz-border-image-source",
+            "-o-border-image-source",
+            "border-image-source",
+            "-webkit-border-image-slice",
+            "-moz-border-image-slice",
+            "-o-border-image-slice",
+            "border-image-slice",
+            "-webkit-border-image-width",
+            "-moz-border-image-width",
+            "-o-border-image-width",
+            "border-image-width",
+            "-webkit-border-image-outset",
+            "-moz-border-image-outset",
+            "-o-border-image-outset",
+            "border-image-outset",
+            "-webkit-border-image-repeat",
+            "-moz-border-image-repeat",
+            "-o-border-image-repeat",
+            "border-image-repeat",
+            "outline",
+            "outline-width",
+            "outline-style",
+            "outline-color",
+            "outline-offset",
+            "background",
+            "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader",
+            "background-color",
+            "background-image",
+            "background-repeat",
+            "background-attachment",
+            "background-position",
+            "background-position-x",
+            "-ms-background-position-x",
+            "background-position-y",
+            "-ms-background-position-y",
+            "background-clip",
+            "background-origin",
+            "background-size",
+            "box-decoration-break",
+            "-webkit-box-shadow",
+            "-moz-box-shadow",
+            "box-shadow",
+            "-webkit-box-shadow",
+            "-moz-box-shadow",
+            "box-shadow",
+            "-webkit-box-shadow",
+            "-moz-box-shadow",
+            "box-shadow",
+            "-webkit-box-shadow",
+            "-moz-box-shadow",
+            "box-shadow",
+            "filter:progid:DXImageTransform.Microsoft.gradient",
+            "-ms-filter:\'progid:DXImageTransform.Microsoft.gradient",
+            "text-shadow"
+        ],
+        [
+            "font",
+            "font-family",
+            "font-size",
+            "font-weight",
+            "font-style",
+            "font-variant",
+            "font-size-adjust",
+            "font-stretch",
+            "font-effect",
+            "font-emphasize",
+            "font-emphasize-position",
+            "font-emphasize-style",
+            "font-smooth",
+            "line-height"
+        ]
+    ]';
 
     /**
      * @param string css
-     * @param boolean echo
+     * @param boolean debug
      * @param json custom_sort_order JSON expected
      * @return string
      *
@@ -739,8 +738,9 @@ class csscomb{
         }
     }
 
+
     /**
-     * Функция сетит $this->sort_order
+     * Функция устанавливает $this->sort_order
      *
      * @param json_array {string/JSON}
      *
@@ -775,16 +775,15 @@ class csscomb{
     }
 
 
-
     /**
-     * Функция сетит $this->mode
+     * Функция устанавливает $this->mode
      *
      * @TODO: а если и тег <style> и несколько style="..." в HTML?
      *        https://github.com/miripiruni/CSScomb/issues/9
      */
     function set_mode() {
         if (strpos($this->code['original'], '{')) { // если есть фигурные скобки
-                $this->mode = 'css-file';
+            $this->mode = 'css-file';
         }
         else { // если нет фигурных скобок
             // если есть атрибут
@@ -831,9 +830,6 @@ class csscomb{
     }
 
 
-
-
-
     function preprocess() {
         // 1. экранирование хаков, которые мешают парсить
         if (strpos($this->code['edited'], '"\\"}\\""')) { // разбираемся со страшным хаком "\"}\""
@@ -851,7 +847,7 @@ class csscomb{
             $this->code['expressions'] = array();
             while(strpos($this->code['edited'], 'expression(')):
                 // вылавливаем expression
-                preg_match_all('#(.*)expression\((.*?)\)#ism', $this->code['edited'], $match, PREG_SET_ORDER);
+                preg_match_all('@(.*)expression\((.*?)\)@ism', $this->code['edited'], $match, PREG_SET_ORDER);
                 $this->code['expressions'][] = $match[0][2]; // собираем значения expression(...)
                 $this->code['edited'] = str_replace(
                                             'expression('.$match[0][2].')',
@@ -867,7 +863,7 @@ class csscomb{
             while(strpos($this->code['edited'], ';base64,')):
                 // вылавливаем data uri
                 preg_match_all(
-                    '#(url\(["\']?data:.[^\)]*["\']?\))#ism',
+                    '@(url\(["\']?data:.[^\)]*["\']?\))@ism',
                     $this->code['edited'],
                     $match,
                     PREG_SET_ORDER);
@@ -876,14 +872,17 @@ class csscomb{
             endwhile;
         }
 
-        // 4. Всякое разное...
-        // закрываем сложности парсинга {}
+        // 4. Закрываем сложности парсинга {}
         $this->code['edited'] = str_replace('{}', '{ }', $this->code['edited']);
-        // закрываем сложности с отсутствующей последней ; перед }
-        $this->code['edited'] = preg_replace('/(.*?[^\s])(\s*?})/', '$1;$2', $this->code['edited']);
 
+        // 5. Закрываем сложности с отсутствующей последней ; перед }
+        $this->code['edited'] = preg_replace('@(.*?[^\s;\{\}\/\*])(\s*?})@', '$1;$2', $this->code['edited']);
+        // Убираем ; у последнего инлайнового комментария
+        $this->code['edited'] = preg_replace('@(.*?//.*?);(\s*?})@', '$1$2', $this->code['edited']);
+        // Убираем ; у интерполированных переменных
+        $this->code['edited'] = preg_replace('@(#\{\$.*?)[;](\s*?\})@', '$1$2', $this->code['edited']);
 
-        // 5. Комментарии
+        // 6. Комментарии
         if (preg_match_all('@
             (
             \s*
@@ -894,20 +893,14 @@ class csscomb{
             )
             @ismx', $this->code['edited'], $test)) {
 
-            // 1. Текстовый комментарий не содержащий свойств: всё, где нет ни :, ни ;, ни {|},
-            // но есть какие-то буквы/цифры ничего не делаем.
-
-            // 2. Одно свойство: есть : и ; но после ; ничего нет кроме \s.
-            // заменяем на commented__border: 1px solid red;
-
-            // 3. Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
-            if (preg_match_all('#
+            // 6.1. Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
+            if (preg_match_all('@
                 (\s*)
                 /\*
                 (.*?[^\*/])
                 \*+/
                 (\ {0,1}/\*\*/)?
-                #ismx', $this->code['edited'], $comments)) {
+                @ismx', $this->code['edited'], $comments)) {
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
@@ -918,13 +911,13 @@ class csscomb{
                         strpos($comment, ';') !== FALSE
 
                     ) {
-                        preg_match_all('#
+                        preg_match_all('@
                         (\s*)
                         (
                             .+?[^;]
                             ;
                         )
-                        #ismx', $comment, $properties);
+                        @ismx', $comment, $properties);
 
                         $new_comment = '';
                         foreach ($properties[2] as $property) {
@@ -949,20 +942,15 @@ class csscomb{
                 }
             }
 
-            // 4. Текст и свойства вперемешку
-
-            // 5. Пустой комментарий: если сделать трим то ничего не останется
-                // Ничего не делаем.
-
-            // 6. Обрывки закомментированных деклараций: присутствует { или }
-            if (preg_match_all('#
-                    \s*?
-                    /\*
-                    (
-                        .*?[^\*/]
-                    )*?
-                    \*+/
-                #ismx', $this->code['edited'], $comments)) {
+            // 6.2. Обрывки закомментированных деклараций: присутствует { или }
+            if (preg_match_all('@
+                \s*?
+                /\*
+                (
+                    .*?[^\*/]
+                )*?
+                \*+/
+                @ismx', $this->code['edited'], $comments)) {
 
                 $new_comments = Array();
                 $old_comments = $comments[0];
@@ -990,12 +978,12 @@ class csscomb{
         }
 
         // 7. Entities
-        if (preg_match_all('#
+        if (preg_match_all('@
             \&
             \#?
             [\d\w]*?[^;]
             \;
-            #ismx', $this->code['edited'], $entities)) {
+            @ismx', $this->code['edited'], $entities)) {
 
             $this->code['entities'] = array();
 
@@ -1009,69 +997,50 @@ class csscomb{
 
 
     /**
+     *
      * Зависит от $this->mode
      * Из $this->code['edited'] получает массив разбитый по }
      *
      */
     function parse_rules() {
-
         if ($this->mode === 'css-file') {
 
-            // отделяем все, что после последней } если там что-то есть, конечно :)
+            // Отделяем всё после последней }
+            // Например, @import и комментарии
             preg_match('@
-
                 (
                     .*[^}]
                     }
                 )
                 (.*)
-
-            @ismx', $this->code['edited'], $matches);
+                @ismx', $this->code['edited'], $matches);
 
             $code_without_end = $matches[1];
+
+            // Если что-то нашлось, выносим в отдельную строку
+            $end_of_code = '';
             if($matches[2]) {
                 $end_of_code = $matches[2];
-            } else {
-                $end_of_code = '';
             }
 
-            /**
-             * Разбиваем CSS-код на части по { или }
-             * Это позволяет поддерживать LESS CSS, @media, @-webkit-keyframes и любые другие конструкции
-             * использующие вложенные фигурные скобки
-             */
-            preg_match_all('@
-
-                .*?[^}{]  # находим код между соседними скобками {|}
-                \s*?
-                [}{]
-
-            @ismx', $code_without_end, $matches);
-
-            $rules = $matches[0]; // CSS-код разрезанный по фигурным скобкам
-
-            //TODO: вынести вызов parse_prop в csscomb(), сделать чтобы parse_rules возвращала результат своей работы в виде $rules
-            foreach ($rules as $key => $val) {
-                $rules[$key] = $this->parse_properties($val);  // 4 парсим и сортируем каждую часть
-            }
-
-            $this->code['resorted'] = implode($this->array_implode($rules)).$end_of_code;            // 5 склеиваем части
+            // Обрабатываем всё до последней }
+            $code_without_end = $this->parse_root($code_without_end);
+            // Склеиваем обратно
+            $this->code['resorted'] = $code_without_end.$end_of_code;
         }
 
+        // TODO: Написать тесты для этой части и переписать код
         if ($this->mode === 'style-attribute') {
 
             $this->code['resorted'] = $this->code['edited'];
 
             preg_match_all('@
-
                 .*?[^"\']
-
                 style=
                 ["\']
                 (.*?)
                 ["\']
-
-            @ismx', $this->code['edited'], $matches);
+                @ismx', $this->code['edited'], $matches);
 
             $properties = $matches[1];
 
@@ -1080,21 +1049,122 @@ class csscomb{
                 $r = $this->parse_properties($props);
                 $this->code['resorted'] = str_replace($props, $r, $this->code['resorted']).$end_of_code;
             }
-
         }
 
         if ($this->mode === 'properties') {
             $this->code['edited'] = "\n".$this->code['edited'];
-            $rules[0] = $this->parse_properties($this->code['edited']);
-            $this->code['resorted'] = implode($this->array_implode($rules));
+            $this->code['resorted'] = $this->parse_child($this->code['edited']);
+            $this->code['resorted'] = substr($this->code['resorted'], 1);
         }
+    }
+
+    /**
+     * Ищем парные {} первого уровня
+     *
+     */
+    function parse_root($css = '') {
+        preg_match_all('@
+            \{(((?>[^\{\}]+)|(?R))*)\}
+        @ismx', $css, $matches);
+
+      // Парсим содержимое каждой пары {}
+      foreach ($matches[1] as &$value) {
+        $old_value = $value;
+        $value = $this->parse_child($value);
+        $css = str_replace($old_value, $value, $css);
+      }
+      return $css;
+    }
+
+    /**
+     * Разбиваем код на группы:
+     *   - вложенные {}
+     *   - переменные ($tomato, @tomato)
+     *   - включения (@import, @include, @extend)
+     *   - простые свойства (color: white;)
+     * TODO: добавить поддержку сложных свойств (border: {...})
+     *
+     */
+    function parse_child($value = '') {
+      // 1. Ищем «детей» (вложенные селекторы)
+      preg_match_all('@
+        [^\};]*?[\s]*?\{((([^\{\}]+)|(?R))*)\}
+        @ismx', $value, $nested);
+
+      // Убираем из выборки интерполированные переменные
+      foreach ($nested[0] as $nested_key => $nested_value) {
+        if (strpos($nested_value, '#{$')) {
+          unset($nested[0][$nested_key]);
+        }
+      }
+
+      // Сохраняем всех «детей» в строку для последующей замены
+      // TODO: убрать, если без этого можно обойтись
+      $nested_string = implode('', $nested[0]);
+
+      // Удаляем «детей» из общей строки
+      // TODO: возможно, вынести отдельной функцией, т.к. часто повторяется
+      foreach ($nested[0] as &$nest) {
+        $value = str_replace($nest, '', $value);  
+      }
+
+      // Рекурсия, ahoj!
+      // Сортируем содержимое «детей»
+      foreach ($nested[1] as &$child) {
+        $old_child = $child;
+        $new_child = $this->parse_child($child);
+        $nested_string = str_replace($old_child, $new_child, $nested_string);
+      }
+
+      // Остались без «детей»
+
+      // 2. Выносим переменные в отдельный массив $vars
+      preg_match_all('@
+        (\s*/\*[^\*/]*?\*/)?
+        (\s*//.*?)?
+        \s*(\$|\@)[^;\}]+?:[^;]+?;\n{0,1}
+        @ismx', $value, $vars);
+      // Удаляем их из общей строки
+      foreach ($vars[0] as $var) {
+        $value = str_replace($var, '', $value);
+      }
+
+      // 3. Выносим импорты в отдельный массив $imports
+      preg_match_all('@
+        [\{\};]+?(\s*\@[^;]+?;)
+        @ismx', $value, $imports);
+      // Удаляем их из общей строки
+      foreach ($imports[1] as $import) {
+        $value = str_replace($import, '', $value);
+      }
+
+      // 4. Выносим простые свойства в массив $properties
+      preg_match_all('@
+        \s*[^;]+?:[^;]+?;
+        (\s*/\*.*?[^\*/]\*/)?
+        (\s{0,1}/\*\*/)?
+        @ismx', $value, $properties);
+      // Удаляем их из общей строки
+      foreach ($properties[0] as &$property) {
+        $value = str_replace($property, '', $value);  
+      }
+      // Сортируем свойства
+      $props = $properties[0];
+      $props = $this->resort_properties($props);
+
+      // 5. Если осталось ещё что-то, оставляем «как есть»
+      
+      // 6. Склеиваем всё обратно в следующем порядке:
+      //   переменные, включения, простые свойства, вложенные {}
+      $value = implode('', $vars[0]).implode('', $imports[0]).implode('', $props).$nested_string.$value;
+      return $value;
     }
 
 
     /**
      * Сильно зависит от $this->mode
      *
-     * парсит CSS-декларации из строки
+     * Парсит CSS-декларации из строки
      * @param css {string}
      *
      */
@@ -1299,7 +1369,6 @@ class csscomb{
             }
         }
         ksort($resorted);
-
         if (is_array($this->sort_order[0])) {
             if (count($resorted) > 0) { // Если свойства разделены на группы
                 $resorted = $this->separate_property_group($resorted);
@@ -1459,8 +1528,9 @@ class csscomb{
      * @return {array}
      */
     private function separate_property_group($properties) {
-        if (is_array($this->sort_order[0])) { // Если в настройках нет разбиения на группы, то выходим входной массив без изменений
-            foreach ($properties as $key => $property) {
+        if (is_array($this->sort_order[0])) { // Если в настройках нет разбиения на группы, то выводим входной массив без изменений
+            foreach ($properties as $key => &$property) {
+                $property = preg_replace('@\n\s*?(\n\s*?)@ismx', '$1', $property);
                 $array = explode(':', $property);
                 $prop_name[$key] = trim($array[0]);
             }
