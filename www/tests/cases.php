@@ -386,6 +386,25 @@ $case['result'] = '.wrapper{
 $group['cases'][] = $case;
 
 
+
+
+$case['descr'] = 'Пробелы перед двоеточием';
+$case['descr-en'] = 'Space in front of colon';
+$case['link'] = 'space-in-front-of-colon';
+$case['code'] = '.myclass {
+    color    : tomato;
+    top      : 0;
+    position : absolute;
+}';
+
+$case['result'] = '.myclass {
+    position : absolute;
+    top      : 0;
+    color    : tomato;
+}';
+$group['cases'][] = $case;
+
+
 $case_groups[] = $group;
 $group = Array();
 
