@@ -1711,291 +1711,565 @@ $group['group-name'] = 'SASS';
 $group['group-name-en'] = 'SASS';
 
 
+$case['descr'] = 'Nested rules';
+$case['descr-en'] = 'Nested rules';
+$case['link'] = 'sass-nested-rules';
+$case['code'] = '.nani {
+  width: 97%;
+  position: fixed;
 
+  p, div {
+    line-height: 1;
+    font-size: 2em;
+    a { font-weight: bold; }
+  }
 
+  pre { font-size: 3em; margin: 20px }
+}';
+$case['result'] = '.nani {
+  position: fixed;
+  width: 97%;
 
-/*
- *************************************************
- *                   SASS                        *
- *      http://sass-lang.com/tutorial.html       *
- *************************************************
- */
+  p, div {
+    font-size: 2em;
+    line-height: 1;
+    a { font-weight: bold; }
+  }
 
-
-$case['descr'] = 'SASS nesting';
-$case['descr-en'] = 'SASS nesting';
-$case['link'] = 'sass-nesting';
-$case['code'] = '#navbar {
-    height: 23px;
-    width: 80%;
-    top:0;
-    ul {
-        list-style-type: none;
-        position:relative;
-        }
-    li {
-        padding:0 10px;
-        float: left;
-        a {
-            font-weight: bold;
-            background-color:#333;
-            }
-        }
-    }';
-$case['result'] = '#navbar {
-    top:0;
-    width: 80%;
-    height: 23px;
-    ul {
-        position:relative;
-        list-style-type: none;
-        }
-    li {
-        float: left;
-        padding:0 10px;
-        a {
-            background-color:#333;
-            font-weight: bold;
-            }
-        }
-    }';
+  pre { margin: 20px; font-size: 3em; }
+}';
 $group['cases'][] = $case;
 
 
-
-
-
-$case['descr'] = 'SASS nesting. Вариант 2';
-$case['descr-en'] = 'SASS nesting. Option 2';
-$case['link'] = 'sass-nesting-2';
-$case['code'] = '.fakeshadow {
-  border: {
-    style: solid;
-    left: {
-      width: 4px;
-      color: #888;
-    }
-    right: {
-      width: 2px;
-      color: #ccc;
-    }
-  }';
-$case['result'] = '.fakeshadow {
-  border: {
-    style: solid;
-    left: {
-      width: 4px;
-      color: #888;
-    }
-    right: {
-      width: 2px;
-      color: #ccc;
-    }
-  }';
-$group['cases'][] = $case;
-
-
-
-
-
-
-$case['descr'] = 'SASS nesting parent references';
-$case['descr-en'] = 'SASS nesting parent references';
-$case['link'] = 'sass-nesting-parent-references';
+$case['descr'] = 'Referencing parent selectors: &';
+$case['descr-en'] = 'Referencing parent selectors: &';
+$case['link'] = 'sass-referencing-parent-selectors';
 $case['code'] = 'a {
-    color: #ce4dd6;
-    position: relative;
-    &:hover {
-        color: #ffb3ff;
-        position: relative;
-        }
-    &:visited {
-        color: #c458cb;
-        position: relative;
-        }
-    }';
+  font-weight: bold;
+  border-style: solid;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    margin: 0;
+    }
+  body.firefox & { font-weight: normal; text-shadow: none }
+}
+
+.nani {
+  color: black;
+  a {
+    font-size: 20px;
+    font-weight: bold;
+    &.hover { color: red; }
+  }
+}';
 $case['result'] = 'a {
-    position: relative;
-    color: #ce4dd6;
-    &:hover {
-        position: relative;
-        color: #ffb3ff;
-        }
-    &:visited {
-        position: relative;
-        color: #c458cb;
-        }
-    }';
+  border-style: solid;
+  text-decoration: none;
+  font-weight: bold;
+  &:hover {
+    margin: 0;
+    text-decoration: underline;
+    }
+  body.firefox & { text-shadow: none; font-weight: normal; }
+}
+
+.nani {
+  color: black;
+  a {
+    font-weight: bold;
+    font-size: 20px;
+    &.hover { color: red; }
+  }
+}';
 $group['cases'][] = $case;
 
 
+$case['descr'] = 'Nested properties';
+$case['descr-en'] = 'Nested properties';
+$case['link'] = 'sass-nested-properties';
+$case['code'] = '.nani {
+  opacity: 1;
+  top: 0;
+  font: {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}
+
+.foo {
+  opacity: 1;
+  left: -10px;
+  font: 2px/3px {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}';
+$case['result'] = '.nani {
+  top: 0;
+  opacity: 1;
+  font: {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}
+
+.foo {
+  left: -10px;
+  opacity: 1;
+  font: 2px/3px {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}';
+$group['cases'][] = $case;
 
 
-
-$case['descr'] = 'SASS переменные';
-$case['descr-en'] = 'SASS variables';
+$case['descr'] = 'Variables: $';
+$case['descr-en'] = 'Variables: $';
 $case['link'] = 'sass-variables';
-$case['code'] = '$main-color: #ce4dd6;
-$style: solid;
+$case['code'] = '$red: #f33;
+$font-size: 14px;
 
-#navbar {
-    border-bottom: {
-        color: $main-color;
-        style: $style;
-        }
-    }
+.nani {
+  color: $red;
+  padding: 10px;
+  line-height: $font-size * 2;
+  margin: 0;
+}';
+$case['result'] = '$red: #f33;
+$font-size: 14px;
 
-a {
-    color: $main-color;
-    &:hover {
-        border-bottom: $style 1px;
-        }
-    }';
-$case['result'] = '$main-color: #ce4dd6;
-$style: solid;
-
-#navbar {
-    border-bottom: {
-        color: $main-color;
-        style: $style;
-        }
-    }
-
-a {
-    color: $main-color;
-    &:hover {
-        border-bottom: $style 1px;
-        }
-    }';
+.nani {
+  margin: 0;
+  padding: 10px;
+  color: $red;
+  line-height: $font-size * 2;
+}';
 $group['cases'][] = $case;
 
 
+$case['descr'] = 'Interpolation: #{}';
+$case['descr-en'] = 'Interpolation: #{}';
+$case['link'] = 'sass-interpolation';
+$case['code'] = '$name: foo;
+$attr: border;
+top: 0;
+position: fixed;
+p.#{$name} {
+  padding: 10px;
+  #{$attr}-color: blue;
+  margin: 0;
+}
 
+p {
+  $font-size: 12px;
+  $line-height: 30px;
+  font: #{$font-size}/#{$line-height};
+  top: 0;
+}';
+$case['result'] = '$name: foo;
+$attr: border;
+position: fixed;
+top: 0;
+p.#{$name} {
+  margin: 0;
+  padding: 10px;
+  #{$attr}-color: blue;
+}
 
-
-
-$case['descr'] = 'SASS операции и функции';
-$case['descr-en'] = 'SASS operations and functions';
-$case['link'] = 'sass-operations-and-functions';
-$case['code'] = '#navbar {
-    $navbar-width: 800px;
-    $items: 5;
-    $navbar-color: #ce4dd6;
-
-    border-bottom: 2px solid $navbar-color;
-    width: $navbar-width;
-
-    li {
-        width: $navbar-width/$items - 10px;
-        float: left;
-
-        background-color: lighten($navbar-color, 20%);
-        &:hover {
-            background-color: lighten($navbar-color, 10%);
-            position: relative;
-            }
-        }
-    }';
-$case['result'] = '#navbar {
-    $navbar-width: 800px;
-    $items: 5;
-    $navbar-color: #ce4dd6;
-
-    width: $navbar-width;
-    border-bottom: 2px solid $navbar-color;
-
-    li {
-        float: left;
-        width: $navbar-width/$items - 10px;
-
-        background-color: lighten($navbar-color, 20%);
-        &:hover {
-            position: relative;
-            background-color: lighten($navbar-color, 10%);
-            }
-        }
-    }';
+p {
+  $font-size: 12px;
+  $line-height: 30px;
+  top: 0;
+  font: #{$font-size}/#{$line-height};
+}';
 $group['cases'][] = $case;
 
 
-
-
-
-
-$case['descr'] = 'SASS mixins';
-$case['descr-en'] = 'SASS mixins';
-$case['link'] = 'sass-mixins';
-$case['code'] = '@mixin rounded-top {
-    $side: top;
-    $radius: 10px;
-
-    -webkit-border-#{$side}-radius: $radius;
-    -moz-border-radius-#{$side}: $radius;
-    border-#{$side}-radius: $radius;
-    }
-
-#navbar li {
-    @include rounded-top;
-    }
-
-#footer {
-    @include rounded-top;
-    }';
-$case['result'] = '@mixin rounded-top {
-    $side: top;
-    $radius: 10px;
-
-    -webkit-border-#{$side}-radius: $radius;
-    -moz-border-radius-#{$side}: $radius;
-    border-#{$side}-radius: $radius;
-    }
-
-#navbar li {
-    @include rounded-top;
-    }
-
-#footer {
-    @include rounded-top;
-    }';
+$case['descr'] = 'Variables defaults: !default';
+$case['descr-en'] = 'Variables defaults: !default';
+$case['link'] = 'sass-variable-defaults';
+$case['code'] = '.nani {
+  $content: "First content";
+  line-height: 1;
+  $content: "Second content?" !default;
+  color: tomato;
+  $new_content: "First time reference" !default;
+  }';
+$case['result'] = '.nani {
+  $content: "First content";
+  $content: "Second content?" !default;
+  $new_content: "First time reference" !default;
+  color: tomato;
+  line-height: 1;
+  }';
 $group['cases'][] = $case;
 
 
-
-
-
-
-$case['descr'] = 'SASS @import';
-$case['descr-en'] = 'SASS @import';
+$case['descr'] = '@-rules and directives: @import';
+$case['descr-en'] = '@-rules and directives: @import';
 $case['link'] = 'sass-import';
-$case['code'] = '@mixin rounded($side, $radius: 10px) {
-    -webkit-border-#{$side}-radius: $radius;
-    -moz-border-radius-#{$side}: $radius;
-    border-#{$side}-radius: $radius;
-    }
+$case['code'] = '@import "foo.css";
+@import "foo" screen;
+@import "http://foo.com/bar";
+@import url(foo);
+$family: unquote("Droid+Sans");
 
-@import "rounded";
+.nani {
+  color: tomato;
+  @import url("http://fonts.googleapis.com/css?family=\#{$family}");
+}';
+$case['result'] = '@import "foo.css";
+@import "foo" screen;
+@import "http://foo.com/bar";
+@import url(foo);
+$family: unquote("Droid+Sans");
 
-#navbar li {@include rounded(top);}
-#footer {@include rounded(top, 5px);}
-#sidebar {@include rounded(left, 8px);}';
-$case['result'] = '@mixin rounded($side, $radius: 10px) {
-    -webkit-border-#{$side}-radius: $radius;
-    -moz-border-radius-#{$side}: $radius;
-    border-#{$side}-radius: $radius;
-    }
-
-@import "rounded";
-
-#navbar li {@include rounded(top);}
-#footer {@include rounded(top, 5px);}
-#sidebar {@include rounded(left, 8px);}';
+.nani {
+  @import url("http://fonts.googleapis.com/css?family=\#{$family}");
+  color: tomato;
+}';
 $group['cases'][] = $case;
 
 
+$case['descr'] = '@-rules and directives: @media';
+$case['descr-en'] = '@-rules and directives: @media';
+$case['link'] = 'sass-media';
+$case['code'] = '.sidebar {
+  width: 300px;
+  @media screen and (orientation: landscape) {
+    width: 500px;
+    float: right;
+    $color: tomato;
+    color: $color;
+  }
+}
+
+$media: screen;
+$feature: -webkit-min-device-pixel-ratio;
+$value: 1.5;
+
+@media #{$media} and ($feature: $value) {
+  .sidebar {
+    width: 500px;
+    float: right;
+    $color: tomato;
+    color: $color;
+  }
+}';
+$case['result'] = '.sidebar {
+  width: 300px;
+  @media screen and (orientation: landscape) {
+    $color: tomato;
+    float: right;
+    width: 500px;
+    color: $color;
+  }
+}
+
+$media: screen;
+$feature: -webkit-min-device-pixel-ratio;
+$value: 1.5;
+
+@media #{$media} and ($feature: $value) {
+  .sidebar {
+    $color: tomato;
+    float: right;
+    width: 500px;
+    color: $color;
+  }
+}';
+$group['cases'][] = $case;
 
 
+$case['descr'] = '@-rules and directives: @extend';
+$case['descr-en'] = '@-rules and directives: @extend';
+$case['link'] = 'sass-extend';
+$case['code'] = '.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.attention {
+  font-size: 3em;
+  margin: 0;
+  background-color: #ff0;
+}
+.seriousError {
+  @extend .error;
+  color: tomato;
+  @extend .attention;
+  border-width: 3px;
+}
+#context a%extreme {
+  border-bottom-color: blue;
+  font-weight: bold;
+  color: blue;
+  font-size: 2em;
+}
+.notice {
+  @extend %extreme;
+}';
+$case['result'] = '.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.attention {
+  margin: 0;
+  background-color: #ff0;
+  font-size: 3em;
+}
+.seriousError {
+  @extend .error;
+  @extend .attention;
+  border-width: 3px;
+  color: tomato;
+}
+#context a%extreme {
+  border-bottom-color: blue;
+  color: blue;
+  font-weight: bold;
+  font-size: 2em;
+}
+.notice {
+  @extend %extreme;
+}';
+$group['cases'][] = $case;
 
 
+$case['descr'] = '@-rules and directives: @warn';
+$case['descr-en'] = '@-rules and directives: @warn';
+$case['link'] = 'sass-warn';
+$case['code'] = '@mixin adjust-location($x, $y) {
+  @if unitless($x) {
+    @warn "Assuming #{$x} to be in pixels";
+    $x: 1px * $x;
+  }
+  @if unitless($y) {
+    @warn "Assuming #{$y} to be in pixels";
+    $y: 1px * $y;
+  }
+  margin: 0;
+  left: $x;
+  top: $y;
+  position: relative;
+}';
+$case['result'] = '@mixin adjust-location($x, $y) {
+  @if unitless($x) {
+    @warn "Assuming #{$x} to be in pixels";
+    $x: 1px * $x;
+  }
+  @if unitless($y) {
+    @warn "Assuming #{$y} to be in pixels";
+    $y: 1px * $y;
+  }
+  position: relative;
+  top: $y;
+  left: $x;
+  margin: 0;
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Control directives: @if';
+$case['descr-en'] = 'Control directives: @if';
+$case['link'] = 'sass-if';
+$case['code'] = '$type: monster;
+p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == matador {
+    color: red;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}';
+$case['result'] = '$type: monster;
+p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == matador {
+    color: red;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Control directives: @for';
+$case['descr-en'] = 'Control directives: @for';
+$case['link'] = 'sass-for';
+$case['code'] = '.nani {
+  @for $i from 1 through 3 {
+    .item-#{$i} { width: 2em * $i; }
+  }
+}';
+$case['result'] = '.nani {
+  @for $i from 1 through 3 {
+    .item-#{$i} { width: 2em * $i; }
+  }
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Control directives: @each';
+$case['descr-en'] = 'Control directives: @each';
+$case['link'] = 'sass-each';
+$case['code'] = '.nani {
+  @each $animal in puma, sea-slug, egret, salamander {
+    .#{$animal}-icon {
+      background-image: url("/images/#{$animal}.png");
+    }
+  }
+}';
+$case['result'] = '.nani {
+  @each $animal in puma, sea-slug, egret, salamander {
+    .#{$animal}-icon {
+      background-image: url("/images/#{$animal}.png");
+    }
+  }
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Control directives: @while';
+$case['descr-en'] = 'Control directives: @while';
+$case['link'] = 'sass-while';
+$case['code'] = '.nani {
+  $i: 6;
+  @while $i > 0 {
+    .item-#{$i} { width: 2em * $i; }
+    $i: $i - 2;
+  }
+}';
+$case['result'] = '.nani {
+  $i: 6;
+  @while $i > 0 {
+    .item-#{$i} { width: 2em * $i; }
+    $i: $i - 2;
+  }
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Mixin directives';
+$case['descr-en'] = 'Mixin directives';
+$case['link'] = 'sass-mixins';
+$case['code'] = '@mixin clearfix {
+  display: inline-block;
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  * html & { height: 1px }
+}
+
+.page-title {
+  @include large-text;
+  padding: 4px;
+  margin-top: 10px;
+}';
+$case['result'] = '@mixin clearfix {
+  display: inline-block;
+  &:after {
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: ".";
+  }
+  * html & { height: 1px }
+}
+
+.page-title {
+  @include large-text;
+  margin-top: 10px;
+  padding: 4px;
+}';
+$group['cases'][] = $case;
+
+$case['descr'] = 'Variable arguments';
+$case['descr-en'] = 'Variable arguments';
+$case['link'] = 'sass-variable-arguments';
+$case['code'] = '@mixin box-shadow($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+.shadows {
+  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}';
+$case['result'] = '@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  -moz-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+.shadows {
+  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Passing content blocks to a mixin';
+$case['descr-en'] = 'Passing content blocks to a mixin';
+$case['link'] = 'sass-content-blocks';
+$case['code'] = '@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}';
+$case['result'] = '@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Function directives';
+$case['descr-en'] = 'Function directives';
+$case['link'] = 'sass-functions';
+$case['code'] = '.nani {
+  $grid-width: 40px;
+  $gutter-width: 10px;
+
+  @function grid-width($n) {
+    @return $n * $grid-width + ($n - 1) * $gutter-width;
+  }
+}';
+$case['result'] = '.nani {
+  $grid-width: 40px;
+  $gutter-width: 10px;
+
+  @function grid-width($n) {
+    @return $n * $grid-width + ($n - 1) * $gutter-width;
+  }
+}';
+$group['cases'][] = $case;
 
 
 $case_groups[] = $group;
