@@ -878,7 +878,8 @@ class csscomb{
         // 5. Закрываем сложности с отсутствующей последней ; перед }
         $this->code['edited'] = preg_replace('@(.*?[^\s;\{\}\/\*])(\s*?})@', '$1;$2', $this->code['edited']);
         // Убираем ; у последнего инлайнового комментария
-        $this->code['edited'] = preg_replace('@(.*?//.*?);(\s*?})@', '$1$2', $this->code['edited']);
+        // Инлайновый комментарий может идти только после фигурной скобки или ;
+        $this->code['edited'] = preg_replace('@([;\{\}]+\s*?//.*?);(\s*?})@', '$1$2', $this->code['edited']);
         // Убираем ; у интерполированных переменных
         $this->code['edited'] = preg_replace('@(#\{\$.*?)[;](\s*?\})@', '$1$2', $this->code['edited']);
 
@@ -1105,7 +1106,7 @@ class csscomb{
       // Удаляем «детей» из общей строки
       // TODO: возможно, вынести отдельной функцией, т.к. часто повторяется
       foreach ($nested[0] as &$nest) {
-        $value = str_replace($nest, '', $value);  
+        $value = str_replace($nest, '', $value);
       }
 
       // Рекурсия, ahoj!
@@ -1122,7 +1123,7 @@ class csscomb{
       preg_match_all('@
         (\s*/\*[^\*/]*?\*/)?
         (\s*//.*?)?
-        \s*(\$|\@)[^;\}]+?:[^;]+?;\n{0,1}
+        \s*(\$|\@)[^;\}]+?:[^;]+?;
         @ismx', $value, $vars);
       // Удаляем их из общей строки
       foreach ($vars[0] as $var) {
@@ -1130,11 +1131,22 @@ class csscomb{
       }
 
       // 3. Выносим импорты в отдельный массив $imports
+      // TODO: объединить в одно выражение
+
+      // Включения, следующие сразу за {
       preg_match_all('@
-        [\{\};]+?(\s*\@[^;]+?;)
+        ^\s*\@[^;]+?[;]
+        @isx', $value, $first_imports);
+      foreach ($first_imports[0] as &$first_import) {
+        $value = str_replace($first_import, '', $value);
+      }
+
+      // Все остальные
+      preg_match_all('@
+        [;\{\}]+(\s*\@[^;]+?[;])
         @ismx', $value, $imports);
       // Удаляем их из общей строки
-      foreach ($imports[1] as $import) {
+      foreach ($imports[1] as &$import) {
         $value = str_replace($import, '', $value);
       }
 
@@ -1156,7 +1168,7 @@ class csscomb{
       
       // 6. Склеиваем всё обратно в следующем порядке:
       //   переменные, включения, простые свойства, вложенные {}
-      $value = implode('', $vars[0]).implode('', $imports[0]).implode('', $props).$nested_string.$value;
+      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $props).$nested_string.$value;
       return $value;
     }
 

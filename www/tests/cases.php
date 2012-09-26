@@ -1542,9 +1542,9 @@ $case['result'] = 'div{
     @base: 5%;
     @filler: @base * 2;
     @other: @base + @filler;
-
     height: 100% / 2 + @filler;
     background-color: @base-color + #111;
+
     color: #888 / 4;
     }';
 $group['cases'][] = $case;
@@ -1858,9 +1858,9 @@ $case['descr-en'] = 'Interpolation: #{}';
 $case['link'] = 'sass-interpolation';
 $case['code'] = '$name: foo;
 $attr: border;
-top: 0;
-position: fixed;
 p.#{$name} {
+  top: 0;
+  position: fixed;
   padding: 10px;
   #{$attr}-color: blue;
   margin: 0;
@@ -1874,9 +1874,9 @@ p {
 }';
 $case['result'] = '$name: foo;
 $attr: border;
-position: fixed;
-top: 0;
 p.#{$name} {
+  position: fixed;
+  top: 0;
   margin: 0;
   padding: 10px;
   #{$attr}-color: blue;
@@ -2046,11 +2046,11 @@ $case['descr-en'] = '@-rules and directives: @warn';
 $case['link'] = 'sass-warn';
 $case['code'] = '@mixin adjust-location($x, $y) {
   @if unitless($x) {
-    @warn "Assuming #{$x} to be in pixels";
+    @warn "Assuming $x to be in pixels";
     $x: 1px * $x;
   }
   @if unitless($y) {
-    @warn "Assuming #{$y} to be in pixels";
+    @warn "Assuming $y to be in pixels";
     $y: 1px * $y;
   }
   margin: 0;
@@ -2059,18 +2059,18 @@ $case['code'] = '@mixin adjust-location($x, $y) {
   position: relative;
 }';
 $case['result'] = '@mixin adjust-location($x, $y) {
-  @if unitless($x) {
-    @warn "Assuming #{$x} to be in pixels";
-    $x: 1px * $x;
-  }
-  @if unitless($y) {
-    @warn "Assuming #{$y} to be in pixels";
-    $y: 1px * $y;
-  }
   position: relative;
   top: $y;
   left: $x;
   margin: 0;
+  @if unitless($x) {
+    $x: 1px * $x;
+    @warn "Assuming $x to be in pixels";
+  }
+  @if unitless($y) {
+    $y: 1px * $y;
+    @warn "Assuming $y to be in pixels";
+  }
 }';
 $group['cases'][] = $case;
 
@@ -2147,15 +2147,15 @@ $case['link'] = 'sass-while';
 $case['code'] = '.nani {
   $i: 6;
   @while $i > 0 {
-    .item-#{$i} { width: 2em * $i; }
+    .item { width: 2em * $i; position: fixed; }
     $i: $i - 2;
   }
 }';
 $case['result'] = '.nani {
   $i: 6;
   @while $i > 0 {
-    .item-#{$i} { width: 2em * $i; }
     $i: $i - 2;
+    .item { position: fixed; width: 2em * $i; }
   }
 }';
 $group['cases'][] = $case;
@@ -2190,7 +2190,7 @@ $case['result'] = '@mixin clearfix {
     height: 0;
     content: ".";
   }
-  * html & { height: 1px }
+  * html & { height: 1px; }
 }
 
 .page-title {
