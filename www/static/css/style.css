@@ -468,42 +468,40 @@ textarea,
 .index .versions,
 .index .feature,
 .index .updates,
-.index .reviews,
 .index .video {
     float:left;
     }
 
 
 .index .updates,
-.index .reviews,
 .index .video {
     margin-top:30px;
     width:280px;
     }
-.index .reviews {
-    margin-right:25px;
-    margin-left:25px;
-    }
-    .index .reviews cite {
-        display:block;
-        margin-top:5px;
-        text-align:right;
-        font-size:.75em;
-        }
 
-.index .updates ul {
-    margin-left:0;
-    list-style:none;
+.updates {
+    margin-right:25px;
+    min-width:585px;
+    width:585px;
     }
-    .index .updates ul li {
-        margin-left:0;
+    .updates time a {
+        color: silver;
+        text-decoration: none;
         }
-        .index .updates ul li time {
-            display:block;
-            margin-top:3px;
-            color:gray;
-            font-size:10px;
+    .updates ul {
+        margin-left:0;
+        list-style:none;
+        font-size:12px;
+        }
+        .updates ul li {
+            margin-left:0;
             }
+            .updates ul li time {
+                display:block;
+                margin-top:3px;
+                color:gray;
+                font-size:10px;
+                }
 
 
 .index .page ul li {

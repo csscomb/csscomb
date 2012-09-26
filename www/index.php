@@ -1,14 +1,9 @@
 <?
 $index = true;
-$title['en'] = $h1['en'] = 'The greatest tool for sorting CSS properties in specific order';
+$title['en'] = $h1['en'] = 'The Greatest tool for sorting CSS properties in specific order';
 $title['ru'] = $h1['ru'] = 'Инструмент для сортировки CSS-свойств в нужном порядке';
 
-
 require_once'common/header.php';
-//$ts = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=3"));
-//echo '<pre>';
-//var_dump($ts);
-//echo '</pre>';
 ?>
         <div class="splash">
             <a
@@ -61,10 +56,6 @@ require_once'common/header.php';
                     <strong><?=$loc['index6']?></strong>
                     <span><?=$loc['index66']?></span>
                 </li>
-                <?/*<li>
-                    <strong><?=$loc['index7']?></strong>
-                    <span><?=$loc['index77']?></span>
-                </li>*/?>
             </ul>
         </div>
 
@@ -72,7 +63,7 @@ require_once'common/header.php';
             <h2><?=$loc['updates']?></h2>
             <ul>
             <?
-                $tweets = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=10"));
+                $tweets = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=30"));
                 $i = 0;
 
                 foreach ($tweets as $tweet) {
@@ -89,7 +80,7 @@ require_once'common/header.php';
                         </li>';
 
                         $i++;
-                        if ($i >= 2) {
+                        if ($i >= 4) {
                             break;
                         }
                     }
@@ -97,13 +88,6 @@ require_once'common/header.php';
             ?>
             </ul>
         </div>
-
-
-        <div class="reviews">
-            <h2><?=$loc['review']?></h2>
-            <?=$loc['review-content']?>
-        </div>
-
 
         <div class="video">
             <h2><?=$loc['presentation']?></h2>
