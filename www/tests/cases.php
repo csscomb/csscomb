@@ -3951,9 +3951,9 @@ $case_groups[] = $group;
 $group = Array();
 
 
-$group['group-id'] = 'envirement';
+$group['group-id'] = 'environment';
 $group['group-name'] = 'Окружение';
-$group['group-name-en'] = 'Envirement';
+$group['group-name-en'] = 'Environment';
 
 
 
@@ -3962,7 +3962,7 @@ $group['group-name-en'] = 'Envirement';
 /* Тестрование окружения */
 $case['descr'] = 'Просто свойства';
 $case['descr-en'] = 'Properties';
-$case['link'] = 'envirement-properties';
+$case['link'] = 'environment-properties';
 $case['code'] = 'color:red;
 position:relative;
 background:url(sprite.png);
@@ -3984,7 +3984,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'HTML содержащий аттрибут style';
 $case['descr-en'] = 'Style attribute';
-$case['link'] = 'envirement-style-attribute';
+$case['link'] = 'environment-style-attribute';
 $case['code'] = '<p style="padding-left:0;padding-top:0;margin-right:0;margin-top:0;">bla-bla-bla</p>';
 $case['result'] = '<p style="margin-top:0;margin-right:0;padding-top:0;padding-left:0;">bla-bla-bla</p>';
 $group['cases'][] = $case;
@@ -3992,7 +3992,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'HTML содержащий несколько аттрибутов style';
 $case['descr-en'] = 'Few style attributes';
-$case['link'] = 'envirement-few-style-attributes';
+$case['link'] = 'environment-few-style-attributes';
 $case['code'] = '<p style="padding-left:0;padding-top:0;margin-right:0;margin-top:0;">bla-bla-bla</p>
 <p style="padding-left:1px;padding-top:2px;margin-right:3px;margin-top:4px;">bla-bla-bla</p>';
 $case['result'] = '<p style="margin-top:0;margin-right:0;padding-top:0;padding-left:0;">bla-bla-bla</p>
@@ -4005,7 +4005,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'HTML содержащий тег style';
 $case['descr-en'] = 'Style tag';
-$case['link'] = 'envirement-style-tag';
+$case['link'] = 'environment-style-tag';
 $case['code'] = '<!doctype html>
 <html>
 <head>
@@ -4055,7 +4055,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'HTML содержащий несколько тегов style';
 $case['descr-en'] = 'Few style tags';
-$case['link'] = 'envirement-few-style-tag';
+$case['link'] = 'environment-few-style-tag';
 $case['code'] = '<!doctype html>
 <html>
 <head>
