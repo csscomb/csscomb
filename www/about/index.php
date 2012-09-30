@@ -29,6 +29,7 @@ if($lang=='ru'){
         <ul>
             <li>В TextMate: <code>/Applications/TextMate.app/Contents/SharedSupport/Bundles/CSS.tmbundle/Support/lib/csscomb.php</code></li>
             <li>В Coda: <code>/Users/%YOUR_USER_NAME%/Library/Application Support/Coda/Plug-ins/CSScomb.codaplugin/Contents/Resources/csscomb.php</code></li>
+            <li>В Sublime Text 2: <code>/Users/%YOUR_USER_NAME%/Library/Application Support/Sublime Text 2/Packages/CSScomb/csscomb/libs/csscomb.php</code></li>
         </ul>
 
 		<h2>Как помочь проекту?</h2>
@@ -67,8 +68,9 @@ formatting will be the same.</p>
 the properties will be divided into groups with an empty line. In plugins you should pick open file
 <code>csscomb.php</code></p>
 <ul>
-    <li>At TextMate: <code>/Applications/TextMate.app/Contents/SharedSupport/Bundles/CSS.tmbundle/Support/lib/csscomb.php</code></li>
-    <li>At Coda: <code>/Users/%YOUR_USER_NAME%/Library/Application Support/Coda/Plug-ins/CSScomb.codaplugin/Contents/Resources/csscomb.php</code></li>
+    <li>In TextMate: <code>/Applications/TextMate.app/Contents/SharedSupport/Bundles/CSS.tmbundle/Support/lib/csscomb.php</code></li>
+    <li>In Coda: <code>/Users/%YOUR_USER_NAME%/Library/Application Support/Coda/Plug-ins/CSScomb.codaplugin/Contents/Resources/csscomb.php</code></li>
+    <li>In Sublime Text 2: <code>/Users/%YOUR_USER_NAME%/Library/Application Support/Sublime Text 2/Packages/CSScomb/csscomb/libs/csscomb.php</code></li>
 </ul>
 
 <h2>How to support?</h2>
