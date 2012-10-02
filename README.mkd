@@ -15,7 +15,7 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
 The Requirements
 ------------
 
-* [PHP](http://windows.php.net/download/)
+* [PHP](http://windows.php.net/download/) ([Make sure](https://github.com/miripiruni/CSScomb/tree/master/src/plugins/csscomb.notepad_plus_plus#required) that the path to the PHP is in an environment variable)
 
 
 [Download plugins](http://github.com/miripiruni/CSScomb/downloads)
