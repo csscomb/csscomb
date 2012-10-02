@@ -12,10 +12,10 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
 [CSScomb.com](http://csscomb.com/)
 
 
-The Requirements
-------------
+## The Requirements
 
-* [PHP](http://windows.php.net/download/). Make sure that the path to the PHP is in an environment variable ([How to for Windows](https://github.com/miripiruni/CSScomb/tree/master/src/plugins/csscomb.notepad_plus_plus#required))
+CSScomb is written in pure PHP, without any external libraries or dependencies.
+See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements)
 
 
 [Download plugins](http://github.com/miripiruni/CSScomb/downloads)
