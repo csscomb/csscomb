@@ -21,7 +21,7 @@ The Requirements
 [Download plugins](http://github.com/miripiruni/CSScomb/downloads)
 --------
 
- * Sublime Text 2 plugin
+ * Sublime Text 2 plugin avaliable in Package Control as 'CSScomb'
  * TextMate plugin
  * Coda Plugin
  * Coda 2 Plugin
