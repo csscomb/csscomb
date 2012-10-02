@@ -44,10 +44,8 @@ More details at [CSScomb.com](http://csscomb.com): tests, online-version, info, 
 
 ## The Requirements
 
-1. OS X, Linux or Windows.
-2. [Sublime Text 2](http://www.sublimetext.com/2).
-3. [PHP](http://windows.php.net/download/) (on OS X already installed). [How to for Windows](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.notepad_plus_plus/README.mkd#required).
-
+CSScomb is written in pure PHP, without any external libraries or dependencies.
+See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements)
 
 ## How to Install
 
