@@ -1,3 +1,91 @@
+# CSScomb for Sublime Text 2
+
+Tool for sorting CSS properties in specific order [CSScomb](http://csscomb.com).
+
+Example:
+
+<table>
+    <tr>
+        <td>
+            Before CSScomb:
+
+<pre>
+header h1 {
+    display:inline-block;
+    color:#333;
+    background:#eee;
+    margin:0 20px;
+    position:relative;
+    }</pre>
+        </td>
+        <td>
+            After CSScomb:
+
+<pre>
+header h1 {
+    position:relative;
+    display:inline-block;
+    margin:0 20px;
+    background:#eee;
+    color:#333;
+    }</pre>
+        </td>
+    </tr>
+</table>
+
+More details at [CSScomb.com](http://csscomb.com): tests, online-version, about page.
+
+
+## The Requirements
+
+1. OS X, Linux or Windows
+
+2. [Sublime Text 2](http://www.sublimetext.com/2).
+
+3. [PHP](http://windows.php.net/download/) (on OS X already installed). [How to for Windows](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.notepad_plus_plus/README.mkd).
+
+## How to Install
+
+There is two ways: 
+
+* install via package control, see package 'CSScomb'. More about [package control](http://wbond.net/sublime_packages/package_control/installation)
+
+* manual install
+
+  1. Download [CSScomb for Sublime Text 2](https://github.com/miripiruni/csscomb/downloads/).
+
+  2. Unzip it. There is directory `csscomb.sublime_text_2`
+
+  3. In Sublime Text 2: `Preferences` → `Browse Packages...` then you'll see directory `../Sublime Text 2/Packages`.
+
+  4. Copy `csscomb.sublime_text_2` directory into `../Sublime Text 2/Packages`.
+
+  5. Restart Sublime Text 2.
+
+
+## Usage
+
+* Shortcut: `ctrl + shift + c`
+
+* Or in menu: `Tools` → `Sort via CSScomb`
+
+* Or in context menu: `Sort via CSScomb`
+
+
+## Issues & bugs
+
+[CSScomb for Sublime Text 2 tracker](https://github.com/miripiruni/CSSComb/issues)
+
+
+## Maintainers
+
+* CSScomb core: [miripiruni](https://github.com/miripiruni)
+* Sublime plugin: [i-akhmadullin](https://github.com/i-akhmadullin)
+
+
+---
+
+
 # CSScomb для Sublime Text 2
 
 Плагин сортирует в заданном порядке CSS-свойства в рамках каждого блока правил
