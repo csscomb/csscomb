@@ -1,6 +1,6 @@
 # CSScomb for Sublime Text 2
 
-Tool for sorting CSS properties in specific order [CSScomb](http://csscomb.com).
+Tool for sorting CSS properties in specific order.
 
 Example:
 
@@ -11,10 +11,13 @@ Example:
 
 <pre>
 header h1 {
+    top:-10px;
+    margin-top:0;
     display:inline-block;
     color:#333;
+    margin-bottom:20px;
     background:#eee;
-    margin:0 20px;
+    margin-left:20px;
     position:relative;
     }</pre>
         </td>
@@ -24,8 +27,11 @@ header h1 {
 <pre>
 header h1 {
     position:relative;
+    top:-10px;
     display:inline-block;
-    margin:0 20px;
+    margin-top:0;
+    margin-bottom:20px;
+    margin-left:20px;
     background:#eee;
     color:#333;
     }</pre>
