@@ -1,27 +1,13 @@
 # CSScomb для Notepad++
 
-## Требуется установить
+Плагин [NppExec](http://sourceforge.net/projects/npp-plugins/files/NppExec/) для Notepad++
 
-1. Плагин [NppExec](http://sourceforge.net/projects/npp-plugins/files/NppExec/) для Notepad++
 
-2. PHP-интерпретатор версии 5.3.6 или выше
+## Требования
 
-Скачать с официального сайта [php.net](http://windows.php.net/download/)
+CSScomb написан на чистом PHP, без использования каких-либо библиотек и зависимостей.
+Пожалуйста, убедитесь, что у вас установлени PHP и он присутствует в переменной окружения $PATH. Подробнее в [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements)
 
-Добавить путь до папки куда вы установили PHP в переменную окружения Path. Для этого надо кликнуть правой кнопкой мыши вызвать
-контекстное меню на иконке Мой компьютер. Выбрать пукт Свойства.
-
-![Properties](https://github.com/miripiruni/CSScomb/raw/master/src/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-1.jpg "Properties")
-
-Во вкладке Advanced кликнуть на кнопку Environment Variables.
-
-![Environment Variables](https://github.com/miripiruni/CSScomb/raw/master/src/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-2.jpg "Environment Variables")
-
-И в поле System Variables убедится, что в переменной Path присутствует путь до PHP.
-
-![Path](https://github.com/miripiruni/CSScomb/raw/master/src/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-3.jpg "Path")
-
-После наличия PHP-интерпретатора и плагина NppExec можно переходить к установке CSScomb.
 
 ## Установка CSScomb для Notepad++
 
@@ -54,31 +40,19 @@ http://twitter.com/csscomb
 http://github.com/miripiruni/CSScomb/
 
 
-
+---
 
 
 
 # CSScomb for Notepad++
 
-## Required
+[NppExec plugin](http://sourceforge.net/projects/npp-plugins/files/NppExec/) for Notepad++
 
-1. [NppExec plugin](http://sourceforge.net/projects/npp-plugins/files/NppExec/) for Notepad++
 
-2. PHP 5.3.6 or high
+## The Requirements
 
-Download from [php.net](http://windows.php.net/download/)
-
-Make sure that the path to the PHP is in an environment variable. To do this, open the context menu on icon "My Computer" and choose "Properties"
-
-![Properties](https://github.com/miripiruni/CSScomb/raw/master/src/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-1.jpg "Properties")
-
-In Advanced tab click to "Environment Variables" button.
-
-![Environment Variables](https://github.com/miripiruni/CSScomb/raw/master/src/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-2.jpg "Environment Variables")
-
-In field "System Variables" you need to make sure that in Path variable is present path to PHP.
-
-![Path](https://github.com/miripiruni/CSScomb/raw/master/src/plugins/csscomb.notepad_plus_plus/csscomb-for-notepad-3.jpg "Path")
+CSScomb is written in pure PHP, without any external libraries or dependencies.
+See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements).
 
 
 ## How To Install CSScomb for Notepad++
@@ -99,9 +73,11 @@ In field "System Variables" you need to make sure that in Path variable is prese
 
 * Go to Plugins → NppExec → Advanced Options, choose in "Associated script" our CSScomb script, click "Add/Modify", check "Place to the Macros menu". Now CSScomb item has in Macros menu.
 
+
 ## Acknowledgments
 
 Thanks to [Nikita Khatimtsov](https://twitter.com/#!/nikitammf) for taking initiative in the integration CSScomb for Notepad++.
+
 
 ## Feedback
 
