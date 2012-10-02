@@ -15,7 +15,7 @@ The algorithm of CSScomb simulates web-technologist's actions upon working with 
 ## The Requirements
 
 CSScomb is written in pure PHP, without any external libraries or dependencies.
-See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements)
+See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements).
 
 
 [Download plugins](http://github.com/miripiruni/CSScomb/downloads)
