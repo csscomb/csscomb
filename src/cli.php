@@ -97,7 +97,7 @@ function tool($argc, $argv){
             }
             elseif($this->out != null){
                 echo "Sorting ".$this->in."...\n";
-                if (mime_content_type($this->in) === 'text/plain') {
+                if (preg_match('/^text/', mime_content_type($this->in))) {
                     $result = $c->csscomb(file_get_contents($this->in));
                     file_put_contents($this->out, $result);
                 } else {
