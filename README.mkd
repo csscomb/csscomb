@@ -25,7 +25,7 @@ See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements).
  * TextMate plugin
  * Coda Plugin
  * Coda 2 Plugin
- * [Espresso 2 plugin](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.sugar/README.markdown)
+ * Espresso 2 plugin ([How to install](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.sugar/README.markdown))
  * IntelliJIDEA Plugin
  * WebStorm Plugin
  * PyCharm plugin
