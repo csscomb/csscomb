@@ -3,7 +3,7 @@
 	
 	<action id="com.csscomb.plugin.espresso.csscomb">
 		<class>OCShellAction</class>
-		<syntax-context>css, css *</syntax-context>
+		<syntax-context>css, less, sass, scss, css *</syntax-context>
 		<key-equivalent>control shift C</key-equivalent>
 		<setup>
 			<script>inline-csscomb.php</script>
