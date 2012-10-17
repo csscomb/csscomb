@@ -161,7 +161,7 @@ nav {
         nav ul li b {
             background:#c57733;
             background:-moz-linear-gradient(0% 100% 90deg, #c57733, #a1612a);
-            background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#c57733), to(#a1612a));
+            background:-webkit-gradient(linear, 0 0, 0 100%, from(#c57733), to(#a1612a));
             color:#eee;
             text-decoration:none;
             text-shadow:0 1px 1px #666;
@@ -415,7 +415,7 @@ textarea,
     border-radius:50px;
     background:#eee;
     background:-moz-linear-gradient(0% 100% 90deg, #ccc, #eee);
-    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ccc));
+    background:-webkit-gradient(linear, 0 0, 0 100%, from(#eee), to(#ccc));
     color:#594A42;
     text-align:center;
     text-transform:uppercase;
@@ -429,7 +429,7 @@ textarea,
     border-bottom:1px solid #999;
     background:#ddd;
     background:-moz-linear-gradient(0% 100% 90deg, #bbb, #ddd);
-    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#bbb));
+    background:-webkit-gradient(linear, 0 0, 0 100%, from(#ddd), to(#bbb));
     text-shadow:0 1px 0 #ddd;
     cursor:pointer;
     }
@@ -449,7 +449,7 @@ textarea,
     border-bottom:1px solid #bbb;
     background:#eee;
     background:-moz-linear-gradient(0% 100% 90deg, #ccc, #eee);
-    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ccc));
+    background:-webkit-gradient(linear, 0 0, 0 100%, from(#eee), to(#ccc));
     color:#999;
     text-shadow:0 1px 0 #fff;
     cursor:default;
