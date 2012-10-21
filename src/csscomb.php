@@ -1151,7 +1151,7 @@ class csscomb{
 
       // Включения, следующие сразу за {
       preg_match_all('@
-        ^\s*\@[^;]+?[;]
+        (^\s*\@[^;]+?[;])|(^\s*\.[^;:]+?[;])
         @isx', $value, $first_imports);
       foreach ($first_imports[0] as &$first_import) {
         $value = str_replace($first_import, '', $value);
@@ -1159,10 +1159,13 @@ class csscomb{
 
       // Все остальные
       preg_match_all('@
-        [;\{\}]+(\s*\@[^;]+?[;])
+        (?<=[;}\n])(\s*\@[^;]+?[;])|(?<=[;}\n])(\s*\.[^;:]+?[;])
         @ismx', $value, $imports);
       // Удаляем их из общей строки
       foreach ($imports[1] as &$import) {
+        $value = str_replace($import, '', $value);
+      }
+      foreach ($imports[2] as &$import) {
         $value = str_replace($import, '', $value);
       }
 
@@ -1184,7 +1187,7 @@ class csscomb{
       
       // 6. Склеиваем всё обратно в следующем порядке:
       //   переменные, включения, простые свойства, вложенные {}
-      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $props).$nested_string.$value;
+      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $imports[2]).implode('', $props).$nested_string.$value;
       return $value;
     }
 

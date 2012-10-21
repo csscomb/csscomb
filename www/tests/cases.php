@@ -1481,12 +1481,12 @@ $case['result'] = '.bordered {
     border-bottom: solid 2px black;
     }
 #menu a {
-    color: #111;
     .bordered;
+    color: #111;
     }
 .post a {
-    color: red;
     .bordered;
+    color: red;
     }';
 $group['cases'][] = $case;
 
@@ -2061,6 +2061,8 @@ $case['code'] = '.error {
   font-size: 2em;
 }
 .notice {
+  color: tomato;
+  @include inline-block;
   @extend %extreme;
 }';
 $case['result'] = '.error {
@@ -2085,7 +2087,9 @@ $case['result'] = '.error {
   font-size: 2em;
 }
 .notice {
+  @include inline-block;
   @extend %extreme;
+  color: tomato;
 }';
 $group['cases'][] = $case;
 

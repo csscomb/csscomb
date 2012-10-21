@@ -14,12 +14,22 @@
 <?
 require_once '../src/csscomb.php';
 
-$css = '.nani {
-  @each $animal in puma, sea-slug, egret, salamander {
-    .#{$animal}-icon {
-      background-image: url("/images/#{$animal}.png");
+$css = '.bordered {
+    border-top: dotted 1px black;
+    border-bottom: solid 2px black;
     }
-  }
+#menu a {.nani;
+    color: #111;
+    .bordered;
+    }
+.post a {
+    color: red;
+    .bordered;
+    }
+.notice {
+  color: tomato;
+  @include inline-block;
+  @extend %extreme;
 }';
 
 //$css = '.test{
