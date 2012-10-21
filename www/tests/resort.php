@@ -14,9 +14,13 @@
 <?
 require_once '../src/csscomb.php';
 
-$css = '    color: red;
-    margin: 0px;
-    top:0;';
+$css = '.nani {
+  @each $animal in puma, sea-slug, egret, salamander {
+    .#{$animal}-icon {
+      background-image: url("/images/#{$animal}.png");
+    }
+  }
+}';
 
 //$css = '.test{
     //content: \'&#160\';

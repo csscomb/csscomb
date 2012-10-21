@@ -1436,8 +1436,8 @@ $group['group-name-en'] = 'LESS';
  *************************************************
  */
 
-$case['descr'] = 'LESS переменнные';
-$case['descr-en'] = 'LESS variables';
+$case['descr'] = 'Variables';
+$case['descr-en'] = 'Variables';
 $case['link'] = 'less-variables';
 $case['code'] = '@nice-blue: #5B83AD;
 @light-blue: @nice-blue + #111;
@@ -1461,8 +1461,8 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'LESS Mixins';
-$case['descr-en'] = 'LESS Mixins';
+$case['descr'] = 'Mixins';
+$case['descr-en'] = 'Mixins';
 $case['link'] = 'less-mixins';
 $case['code'] = '.bordered {
     border-top: dotted 1px black;
@@ -1492,8 +1492,8 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'LESS вложенные правила';
-$case['descr-en'] = 'LESS nested rules';
+$case['descr'] = 'Вложенные правила';
+$case['descr-en'] = 'Nested rules';
 $case['link'] = 'less-nested-rules';
 $case['code'] = '#header {
     color: black;
@@ -1526,8 +1526,8 @@ $case['result'] = '#header {
 $group['cases'][] = $case;
 
 
-$case['descr'] = 'LESS operations';
-$case['descr-en'] = 'LESS operations';
+$case['descr'] = 'Operations';
+$case['descr-en'] = 'Operations';
 $case['link'] = 'less-operations';
 $case['code'] = 'div{
     @base: 5%;
@@ -1552,8 +1552,8 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'LESS namespaces & accessors';
-$case['descr-en'] = 'LESS namespaces & accessors';
+$case['descr'] = 'Namespaces & accessors';
+$case['descr-en'] = 'Namespaces & accessors';
 $case['link'] = 'less-namespaces-and-accessors';
 $case['code'] = '#bundle {
     .button {
@@ -1617,8 +1617,8 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'LESS scope';
-$case['descr-en'] = 'LESS scope';
+$case['descr'] = 'Scope';
+$case['descr-en'] = 'Scope';
 $case['link'] = 'less-scope';
 $case['code'] = '@var: red;
 
@@ -1639,8 +1639,8 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'LESS комментарии';
-$case['descr-en'] = 'LESS comments';
+$case['descr'] = 'Комментарии';
+$case['descr-en'] = 'Comments';
 $case['link'] = 'less-comments';
 $case['code'] = 'p {
     /* One hell of a comment */
@@ -1661,8 +1661,8 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'LESS комментарии. Вариант 2';
-$case['descr-en'] = 'LESS comments. Option 2';
+$case['descr'] = 'Комментарии. Вариант 2';
+$case['descr-en'] = 'Comments. Option 2';
 $case['link'] = 'less-comments-option-2';
 $case['code'] = 'p {
     @var: red; /* One hell of a comment */
@@ -1676,9 +1676,9 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'LESS и псевдоклассы';
-$case['descr-en'] = 'LESS vs pseudo-classes';
-$case['link'] = 'less-less-vspseudo-classes';
+$case['descr'] = 'Псевдоклассы';
+$case['descr-en'] = 'Pseudo-classes';
+$case['link'] = 'less-pseudo-classes';
 $case['code'] = 'a{
     color:red;
     a:hover{
@@ -1691,6 +1691,55 @@ $case['result'] = 'a{
         text-decoration:underline;
     }
 }';
+$group['cases'][] = $case;
+
+
+
+$case['descr'] = 'String interpolation';
+$case['descr-en'] = 'String interpolation';
+$case['link'] = 'less-string-interpolation';
+$case['code'] = 'a{
+    color:red;
+    a:hover{
+        @base-url: "http://assets.fnord.com";
+        background-image: url("@{base-url}/images/bg.png");
+    }
+}
+
+.content-top {
+      height:60px;
+      border-top:1px solid @greyBorder;
+      padding-left: 20px;
+      background:url("@{imagesPath}content-top-bg.png");
+
+      h1 {
+        font-size: 16px;
+        margin:0;
+        color: @gray;
+        line-height: @contentTopHeight;
+      }
+    }';
+$case['result'] = 'a{
+    color:red;
+    a:hover{
+        @base-url: "http://assets.fnord.com";
+        background-image: url("@{base-url}/images/bg.png");
+    }
+}
+
+.content-top {
+      padding-left: 20px;
+      height:60px;
+      border-top:1px solid @greyBorder;
+      background:url("@{imagesPath}content-top-bg.png");
+
+      h1 {
+        margin:0;
+        color: @gray;
+        font-size: 16px;
+        line-height: @contentTopHeight;
+      }
+    }';
 $group['cases'][] = $case;
 
 

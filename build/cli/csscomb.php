@@ -24,6 +24,8 @@ class csscomb{
         'expressions' => null,
         // если найдены data uri, то эта переменная станет массивом...
         'datauri' => null,
+        // если найдены интерполированные переменные, то эта переменная станет массивом
+        'interpolations' => null,
         // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
         'hacks' => null,
         // если найдены комментарии содержащие { или } мешающие парсить,
@@ -230,6 +232,8 @@ class csscomb{
         "-ms-writing-mode",
         "vertical-align",
         "text-align",
+        "-webkit-text-align-last",
+        "-moz-text-align-last",
         "-ms-text-align-last",
         "text-align-last",
         "text-decoration",
@@ -360,6 +364,7 @@ class csscomb{
         "-ms-animation-direction",
         "-o-animation-direction",
         "animation-direction",
+        "pointer-event",
         "unicode-bidi",
         "direction",
         "-webkit-columns",
@@ -559,7 +564,8 @@ class csscomb{
             "-o-animation-direction",
             "animation-direction",
             "text-align",
-            "text-align-last",
+            "-webkit-text-align-last",
+            "-moz-text-align-last",
             "-ms-text-align-last",
             "text-align-last",
             "vertical-align",
@@ -592,7 +598,8 @@ class csscomb{
             "tab-size",
             "-webkit-hyphens",
             "-moz-hyphens",
-            "hyphens"
+            "hyphens",
+            "pointer-event"
         ],
         [
             "opacity",
@@ -872,18 +879,27 @@ class csscomb{
             endwhile;
         }
 
-        // 4. Закрываем сложности парсинга {}
+        // 4. Interpolated variables
+        preg_match_all('@(\#|\@){.*?}@ismx', $this->code['edited'], $this->code['interpolations']);
+        foreach ($this->code['interpolations'][0] as $key => $value) {
+            $pos = strpos($this->code['edited'], $value);
+            if ($pos !== false) {
+                $this->code['edited'] = substr_replace($this->code['edited'],"interpolation".$key.'__',$pos,strlen($value));
+            }    
+        }
+
+        // 5. Закрываем сложности парсинга {}
         $this->code['edited'] = str_replace('{}', '{ }', $this->code['edited']);
 
-        // 5. Закрываем сложности с отсутствующей последней ; перед }
+        // 6. Закрываем сложности с отсутствующей последней ; перед }
         $this->code['edited'] = preg_replace('@(.*?[^\s;\{\}\/\*])(\s*?})@', '$1;$2', $this->code['edited']);
         // Убираем ; у последнего инлайнового комментария
         // Инлайновый комментарий может идти только после фигурной скобки или ;
         $this->code['edited'] = preg_replace('@([;\{\}]+\s*?//.*?);(\s*?})@', '$1$2', $this->code['edited']);
         // Убираем ; у интерполированных переменных
-        $this->code['edited'] = preg_replace('@(#\{\$.*?)[;](\s*?\})@', '$1$2', $this->code['edited']);
+        $this->code['edited'] = preg_replace('/((#\{\$|\@\{).*?)[;](\s*?\})/', '$1$3', $this->code['edited']);
 
-        // 6. Комментарии
+        // 7. Комментарии
         if (preg_match_all('@
             (
             \s*
@@ -894,7 +910,7 @@ class csscomb{
             )
             @ismx', $this->code['edited'], $test)) {
 
-            // 6.1. Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
+            // 7.1. Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
             if (preg_match_all('@
                 (\s*)
                 /\*
@@ -943,7 +959,7 @@ class csscomb{
                 }
             }
 
-            // 6.2. Обрывки закомментированных деклараций: присутствует { или }
+            // 7.2. Обрывки закомментированных деклараций: присутствует { или }
             if (preg_match_all('@
                 \s*?
                 /\*
@@ -978,7 +994,7 @@ class csscomb{
             }
         }
 
-        // 7. Entities
+        // 8. Entities
         if (preg_match_all('@
             \&
             \#?
@@ -1089,25 +1105,25 @@ class csscomb{
     function parse_child($value = '') {
       // 1. Ищем «детей» (вложенные селекторы)
       preg_match_all('@
-        [^\};]*?[\s]*?\{((([^\{\}]+)|(?R))*)\}
-        @ismx', $value, $nested);
-
-      // Убираем из выборки интерполированные переменные
-      foreach ($nested[0] as $nested_key => $nested_value) {
-        if (strpos($nested_value, '#{$')) {
-          unset($nested[0][$nested_key]);
+        [^};]*?
+        {
+            (
+                (
+                    ([^\{\}]+)|(?R)
+                )*
+            )
         }
-      }
-
-      // Сохраняем всех «детей» в строку для последующей замены
-      // TODO: убрать, если без этого можно обойтись
-      $nested_string = implode('', $nested[0]);
+        @ismx', $value, $nested);
 
       // Удаляем «детей» из общей строки
       // TODO: возможно, вынести отдельной функцией, т.к. часто повторяется
       foreach ($nested[0] as &$nest) {
         $value = str_replace($nest, '', $value);
       }
+
+      // Сохраняем всех «детей» в строку для последующей замены
+      // TODO: убрать, если без этого можно обойтись
+      $nested_string = implode('', $nested[0]);
 
       // Рекурсия, ahoj!
       // Сортируем содержимое «детей»
@@ -1438,7 +1454,13 @@ class csscomb{
             }
         }
 
-        // 4. Удаляем искусственно созданные 'commented__'
+        // 4. Interpolated variables
+        preg_match_all('#interpolation(\d)__#ismx', $this->code['resorted'], $new_vars);
+        foreach ($new_vars[1] as $key => $value) {
+            $this->code['resorted'] = str_replace($new_vars[0][$key], $this->code['interpolations'][0][$key], $this->code['resorted']);    
+        }
+
+        // 5. Удаляем искусственно созданные 'commented__'
         while(strpos($this->code['resorted'], 'commented__') !== FALSE) {
             $this->code['resorted'] = preg_replace(
                 '#
@@ -1453,7 +1475,7 @@ class csscomb{
             );
         }
 
-        // 5. Удаляем искусственно созданные 'brace__'
+        // 6. Удаляем искусственно созданные 'brace__'
         if (is_array($this->code['braces'])) { // если были обнаружены и вырезаны хаки
             foreach ($this->code['braces'] as $key => $val) {
                 if (strpos($this->code['resorted'], 'brace__'.$key.'{') !== FALSE) {
@@ -1664,7 +1686,7 @@ function tool($argc, $argv){
             }
             elseif($this->out != null){
                 echo "Sorting ".$this->in."...\n";
-                if (mime_content_type($this->in) === 'text/plain') {
+                if (preg_match('/^text/', mime_content_type($this->in))) {
                     $result = $c->csscomb(file_get_contents($this->in));
                     file_put_contents($this->out, $result);
                 } else {
