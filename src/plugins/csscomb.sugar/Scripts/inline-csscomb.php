@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * CSScomb 2.11 (build ddf856e-1210211450)
+ * CSScomb 2.11 (build 92c53a7-1210211627)
  * http://CSScomb.com
  * http://twitter.com/CSScomb
  */

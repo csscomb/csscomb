@@ -1,7 +1,7 @@
 <?php
 /**
  * CSScomb
- * @version: 2.11 (build ddf856e-1210211450)
+ * @version: 2.11 (build 92c53a7-1210211627)
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  */
@@ -1159,7 +1159,7 @@ class csscomb{
 
       // Все остальные
       preg_match_all('@
-        (?<=[;}\n])(\s*\@[^;]+?[;])|(?<=[;}\n])(\s*\.[^;:]+?[;])
+        (?<=[;}])(\s*\@[^;]+?[;])|(?<=[;}])(\s*\.[^;:]+?[;])
         @ismx', $value, $imports);
       // Удаляем их из общей строки
       foreach ($imports[1] as &$import) {
@@ -1608,7 +1608,7 @@ class tool {
 function man(){
 ?>
 
-CSSComb 2.11 (build ddf856e-1210211450)                Command line tool for resort CSS code.
+CSSComb 2.11 (build 92c53a7-1210211627)                Command line tool for resort CSS code.
 
 SYNOPSIS
     $ php <?php echo $this->argv[0]; ?> -s <file with JSON array> -i <path to input css file> -o <path to result css file>

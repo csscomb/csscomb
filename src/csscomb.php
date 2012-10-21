@@ -1,7 +1,7 @@
 <?php
 /**
  * CSScomb
- * @version: 2.11 (build ddf856e-1210211450)
+ * @version: 2.11 (build 92c53a7-1210211627)
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  */
@@ -1159,7 +1159,7 @@ class csscomb{
 
       // Все остальные
       preg_match_all('@
-        (?<=[;}\n])(\s*\@[^;]+?[;])|(?<=[;}\n])(\s*\.[^;:]+?[;])
+        (?<=[;}])(\s*\@[^;]+?[;])|(?<=[;}])(\s*\.[^;:]+?[;])
         @ismx', $value, $imports);
       // Удаляем их из общей строки
       foreach ($imports[1] as &$import) {
