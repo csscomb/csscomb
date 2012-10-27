@@ -364,7 +364,7 @@ class csscomb{
         "-ms-animation-direction",
         "-o-animation-direction",
         "animation-direction",
-        "pointer-event",
+        "pointer-events",
         "unicode-bidi",
         "direction",
         "-webkit-columns",
@@ -599,7 +599,7 @@ class csscomb{
             "-webkit-hyphens",
             "-moz-hyphens",
             "hyphens",
-            "pointer-event"
+            "pointer-events"
         ],
         [
             "opacity",
