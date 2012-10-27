@@ -1,7 +1,7 @@
 <?php
 /**
  * CSScomb
- * @version: 2.11 (build 92c53a7-1210211627)
+ * @version: 2.11 (build 4d71dea-1210271349)
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  */
@@ -1608,7 +1608,7 @@ class tool {
 function man(){
 ?>
 
-CSSComb 2.11 (build 92c53a7-1210211627)                Command line tool for resort CSS code.
+CSSComb 2.11 (build 4d71dea-1210271349)                Command line tool for resort CSS code.
 
 SYNOPSIS
     $ php <?php echo $this->argv[0]; ?> -s <file with JSON array> -i <path to input css file> -o <path to result css file>
