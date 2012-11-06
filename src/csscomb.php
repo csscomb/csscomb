@@ -1,13 +1,17 @@
 <?php
 /**
  * CSScomb
- * @version: 2.11 (build 4d71dea-1210271349)
- * @author: Vyacheslav Oliyanchuk (miripiruni)
- * @web: http://csscomb.com/
+ *
+ * Tool for sorting CSS properties in specific order
+ *
+ * @version 2.11 (build 4d71dea-1210271349)
+ * @author Vyacheslav Oliyanchuk (miripiruni) <mail@csscomb.com>
+ * @license MIT
+ * @web http://csscomb.com/
  */
- 
+
 error_reporting(E_ALL);
-    
+
 class csscomb{
 
     var $sort_order = Array(),
@@ -723,11 +727,25 @@ class csscomb{
 
     /**
      * @param string css
-     * @param boolean debug
-     * @param json custom_sort_order JSON expected
-     * @return string
+     * @param boolean debug, OPTIONAL
+     * @param json custom_sort_order JSON expected, OPTIONAL
+     * @return string|false
      *
      * @TODO: https://github.com/miripiruni/CSScomb/issues/21
+     *
+     * Example:
+     *
+     * <code>
+     *     require_once 'PATH_TO_CSScomb/csscomb.php';
+     *
+     *     $c = new csscomb();
+     *     $result_code = $c->csscomb(
+     *         'div {margin-top:0; color: red; display: inline;}',
+     *         false,
+     *         $MY_JSON_SORT_ORDER
+     *     );
+     * </code>
+     *
      */
     function csscomb($css = '', $debug = false, $custom_sort_order = null) {
         $this->output = $debug ? true : false;
