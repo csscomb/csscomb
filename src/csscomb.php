@@ -4,7 +4,7 @@
  *
  * Tool for sorting CSS properties in specific order
  *
- * @version 2.11 (build 4d71dea-1210271349)
+ * @version 2.11 (build c6abf31-1211171628)
  * @author Vyacheslav Oliyanchuk (miripiruni) <mail@csscomb.com>
  * @license MIT
  * @web http://csscomb.com/
@@ -1121,6 +1121,7 @@ class csscomb{
      *
      */
     function parse_child($value = '') {
+      $block_imports = array();
       // 1. Ищем «детей» (вложенные селекторы)
       preg_match_all('@
         [^};]*?
@@ -1133,10 +1134,18 @@ class csscomb{
         }
         @ismx', $value, $nested);
 
-      // Удаляем «детей» из общей строки
       // TODO: возможно, вынести отдельной функцией, т.к. часто повторяется
-      foreach ($nested[0] as &$nest) {
+      foreach ($nested[0] as $key => &$nest) {
         $value = str_replace($nest, '', $value);
+        if(strpos(trim($nest), '@include') === 0) {
+            $value = str_replace($nest, '', $value);
+            $old_nest = $nested[1][$key];
+            $new_nest = $this->parse_child($nested[1][$key]);
+            $nest = str_replace($old_nest, $new_nest, $nest);
+            $block_imports[] = $nest;
+            unset($nested[0][$key]);
+            unset($nested[1][$key]);
+        }
       }
 
       // Сохраняем всех «детей» в строку для последующей замены
@@ -1205,7 +1214,7 @@ class csscomb{
       
       // 6. Склеиваем всё обратно в следующем порядке:
       //   переменные, включения, простые свойства, вложенные {}
-      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $imports[2]).implode('', $props).$nested_string.$value;
+      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $imports[2]).implode('', $block_imports).implode('', $props).$nested_string.$value;
       return $value;
     }
 

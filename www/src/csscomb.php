@@ -1,13 +1,17 @@
 <?php
 /**
  * CSScomb
- * @version: 2.11 (build 4d71dea-1210271349)
- * @author: Vyacheslav Oliyanchuk (miripiruni)
- * @web: http://csscomb.com/
+ *
+ * Tool for sorting CSS properties in specific order
+ *
+ * @version 2.11 (build c6abf31-1211171628)
+ * @author Vyacheslav Oliyanchuk (miripiruni) <mail@csscomb.com>
+ * @license MIT
+ * @web http://csscomb.com/
  */
- 
+
 error_reporting(E_ALL);
-    
+
 class csscomb{
 
     var $sort_order = Array(),
@@ -127,18 +131,18 @@ class csscomb{
         "-webkit-border-radius",
         "-moz-border-radius",
         "border-radius",
+        "-webkit-border-top-left-radius",
+        "-moz-border-radius-topleft",
+        "border-top-left-radius",
         "-webkit-border-top-right-radius",
-        "-moz-border-top-right-radius",
+        "-moz-border-radius-topright",
         "border-top-right-radius",
         "-webkit-border-bottom-right-radius",
-        "-moz-border-bottom-right-radius",
+        "-moz-border-radius-bottomright",
         "border-bottom-right-radius",
         "-webkit-border-bottom-left-radius",
-        "-moz-border-bottom-left-radius",
+        "-moz-border-radius-bottomleft",
         "border-bottom-left-radius",
-        "-webkit-border-top-left-radius",
-        "-moz-border-top-left-radius",
-        "border-top-left-radius",
         "-webkit-border-image",
         "-moz-border-image",
         "-o-border-image",
@@ -631,18 +635,18 @@ class csscomb{
             "-webkit-border-radius",
             "-moz-border-radius",
             "border-radius",
+            "-webkit-border-top-left-radius",
+            "-moz-border-radius-topleft",
+            "border-top-left-radius",
             "-webkit-border-top-right-radius",
-            "-moz-border-top-right-radius",
+            "-moz-border-radius-topright",
             "border-top-right-radius",
             "-webkit-border-bottom-right-radius",
-            "-moz-border-bottom-right-radius",
+            "-moz-border-radius-bottomright",
             "border-bottom-right-radius",
             "-webkit-border-bottom-left-radius",
-            "-moz-border-bottom-left-radius",
+            "-moz-border-radius-bottomleft",
             "border-bottom-left-radius",
-            "-webkit-border-top-left-radius",
-            "-moz-border-top-left-radius",
-            "border-top-left-radius",
             "-webkit-border-image",
             "-moz-border-image",
             "-o-border-image",
@@ -723,11 +727,25 @@ class csscomb{
 
     /**
      * @param string css
-     * @param boolean debug
-     * @param json custom_sort_order JSON expected
-     * @return string
+     * @param boolean debug, OPTIONAL
+     * @param json custom_sort_order JSON expected, OPTIONAL
+     * @return string|false
      *
      * @TODO: https://github.com/miripiruni/CSScomb/issues/21
+     *
+     * Example:
+     *
+     * <code>
+     *     require_once 'PATH_TO_CSScomb/csscomb.php';
+     *
+     *     $c = new csscomb();
+     *     $result_code = $c->csscomb(
+     *         'div {margin-top:0; color: red; display: inline;}',
+     *         false,
+     *         $MY_JSON_SORT_ORDER
+     *     );
+     * </code>
+     *
      */
     function csscomb($css = '', $debug = false, $custom_sort_order = null) {
         $this->output = $debug ? true : false;
@@ -1103,6 +1121,7 @@ class csscomb{
      *
      */
     function parse_child($value = '') {
+      $block_imports = array();
       // 1. Ищем «детей» (вложенные селекторы)
       preg_match_all('@
         [^};]*?
@@ -1115,10 +1134,18 @@ class csscomb{
         }
         @ismx', $value, $nested);
 
-      // Удаляем «детей» из общей строки
       // TODO: возможно, вынести отдельной функцией, т.к. часто повторяется
-      foreach ($nested[0] as &$nest) {
+      foreach ($nested[0] as $key => &$nest) {
         $value = str_replace($nest, '', $value);
+        if(strpos(trim($nest), '@include') === 0) {
+            $value = str_replace($nest, '', $value);
+            $old_nest = $nested[1][$key];
+            $new_nest = $this->parse_child($nested[1][$key]);
+            $nest = str_replace($old_nest, $new_nest, $nest);
+            $block_imports[] = $nest;
+            unset($nested[0][$key]);
+            unset($nested[1][$key]);
+        }
       }
 
       // Сохраняем всех «детей» в строку для последующей замены
@@ -1187,7 +1214,7 @@ class csscomb{
       
       // 6. Склеиваем всё обратно в следующем порядке:
       //   переменные, включения, простые свойства, вложенные {}
-      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $imports[2]).implode('', $props).$nested_string.$value;
+      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $imports[2]).implode('', $block_imports).implode('', $props).$nested_string.$value;
       return $value;
     }
 

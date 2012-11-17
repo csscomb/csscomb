@@ -2064,6 +2064,7 @@ $case['code'] = '.error {
   color: tomato;
   @include inline-block;
   @extend %extreme;
+  @extend .attention;
 }';
 $case['result'] = '.error {
   border: 1px #f00;
@@ -2089,6 +2090,7 @@ $case['result'] = '.error {
 .notice {
   @include inline-block;
   @extend %extreme;
+  @extend .attention;
   color: tomato;
 }';
 $group['cases'][] = $case;
@@ -2230,8 +2232,8 @@ $case['code'] = '@mixin clearfix {
 }
 
 .page-title {
-  @include large-text;
   padding: 4px;
+  @include large-text;
   margin-top: 10px;
 }';
 $case['result'] = '@mixin clearfix {
@@ -2252,6 +2254,79 @@ $case['result'] = '@mixin clearfix {
   padding: 4px;
 }';
 $group['cases'][] = $case;
+
+$case['descr'] = 'Passing content blocks to a mixin';
+$case['descr-en'] = 'Passing content blocks to a mixin';
+$case['link'] = 'sass-content-blocks-mixins';
+$case['code'] = '@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+
+.foo {
+    border: none;
+    @include apply-to-ie6-only {
+      #logo {
+        background-image: url(/logo.gif);
+        padding: 0;
+      }
+      .nani {
+        color: tomato;
+        position: fixed;
+        top: 0;
+      }
+    }
+    text-align: center;
+}
+
+@mixin colors($color: blue) {
+    background-color: $color;
+    @content;
+    margin: 10px;
+    border-color: $color;
+}
+.colors {
+    @include colors { color: $color; }
+    $color: tomato;
+    font-weight: 400;
+}';
+$case['result'] = '@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+
+.foo {
+    @include apply-to-ie6-only {
+      #logo {
+        padding: 0;
+        background-image: url(/logo.gif);
+      }
+      .nani {
+        position: fixed;
+        top: 0;
+        color: tomato;
+      }
+    }
+    border: none;
+    text-align: center;
+}
+
+@mixin colors($color: blue) {
+    @content;
+    margin: 10px;
+    border-color: $color;
+    background-color: $color;
+}
+.colors {
+    $color: tomato;
+    @include colors { color: $color; }
+    font-weight: 400;
+}';
+$group['cases'][] = $case;
+
+
 
 $case['descr'] = 'Variable arguments';
 $case['descr-en'] = 'Variable arguments';
