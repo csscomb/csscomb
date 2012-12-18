@@ -1,0 +1,15 @@
+{
+    "name": "miripiruni/csscomb",
+    "description": "The greatest tool for sorting CSS properties in specific order.",
+    "homepage": "http://csscomb.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Slava Oliyanchuk",
+            "homepage": "http://miripiruni.org"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/csscomb.php"]
+    }
+}
