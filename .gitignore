@@ -10,3 +10,4 @@ src/plugins/csscomb.webstorm_pycharm_idea/csscomb.php
 src/plugins/csscomb_for_coda_2.codaplugin/Contents/Resources/55543892-82DE-4679-9ADE-11CA109E2C68/Support\ Files/csscomb.php
 yuicompressor*
 build/*.zip
+vendor
