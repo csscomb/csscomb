@@ -1714,15 +1714,21 @@ function tool($argc, $argv){
                     file_put_contents($file, $result);
                 }
             }
-            elseif($this->out != null){
+            elseif(is_file($this->in) && preg_match('/^text/', mime_content_type($this->in))){
                 echo "Sorting ".$this->in."...\n";
-                if (preg_match('/^text/', mime_content_type($this->in))) {
-                    $result = $c->csscomb(file_get_contents($this->in));
-                    file_put_contents($this->out, $result);
-                } else {
-                    echo("Wrong input file mime type.");
-                    exit(1);
+                $result = $c->csscomb(file_get_contents($this->in));
+                if($this->out == null){
+                    $this->out = $this->in;
                 }
+                file_put_contents($this->out, $result);
+            }
+            elseif(!preg_match('/^text/', mime_content_type($this->in))){
+                echo("Wrong input file mime type.");
+                exit(1);
+            }
+            else{
+                echo("Error with input file.");
+                exit(1);
             }
             echo "Done.\n";
             exit(0);
