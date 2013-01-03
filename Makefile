@@ -55,7 +55,10 @@ buildPlugins: buildNotepadPlugin buildIntellijPlugin
 	@zip -9 -y -r -q build/csscomb_for_textmate_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_TEXTMATE_PLUGIN)
 	@zip -9 -y -r -q build/csscomb_for_sublime-text-2_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_SUBLIME_PLUGIN)
 	@zip -9 -y -r -q build/csscomb_for_notepad-plus-plus_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_NOTEPAD_P_P_PLUGIN)
+	@# Fix Issue #161: Remove call.php from IntelliJ plugin zip
+	@mv $(PATH_TO_INTELLIJ_PLUGIN)/call.php $(PATH_TO_PLUGINS)/call.php
 	@zip -9 -y -r -q build/csscomb_for_webstorm-pycharm-idea_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_INTELLIJ_PLUGIN)
+	@mv $(PATH_TO_PLUGINS)/call.php $(PATH_TO_INTELLIJ_PLUGIN)/call.php
 	@zip -9 -y -r -q build/csscomb_for_espresso-2_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_ESPRESSO_PLUGIN)
 
 buildNotepadPlugin:
