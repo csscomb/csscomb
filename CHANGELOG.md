@@ -4,6 +4,7 @@ CSScomb changelog
 04.01.2013, Version 2.12
 ------------------------
 
+- Add Changelog
 - #165: Move downloads from github to csscomb.com/downloads
 - #147: Add Chocolat mixin (plugin) to csscomb.com
 - CLI: -i allows a single file to run and output by default in overwrite mode.
@@ -16,7 +17,6 @@ CSScomb changelog
 - Fix issue #117: Move LESS mixins to top
 - Fix issue #127: String interpolation bug
 - Espresso plugin: Added LESS, SASS & SCSS syntax context
-- Added link "how to install espresso plugin"
 - Fix issue #116: Wrong input file mime type
 - Fix issue #110: Add pointer-events to sort order list
 - Fix issue #114: Add text-align-last in sort order list
@@ -25,10 +25,7 @@ CSScomb changelog
 - Add SASS tests
 - Fix issue #98: Sort properties with space in front of colon
 - Add basic LESS and SASS support, fix #65
-- About page: redactor -> code editor
 - Issue #89: Update highlight.js and use only CSS package
-- About page: redactors -> code editors
-- Index page: help us is not a list item
 - Issue #88: Improve Updates block in CSScomb.com
 - Issue #87: Update twitter button
 - Issue #86: Remove bold from test case name; Code style fix
