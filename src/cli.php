@@ -16,7 +16,7 @@ class tool {
 function man(){
 ?>
 
-CSSComb 2.11 (build c6abf31-1211171628)                Command line tool for resort CSS code.
+CSSComb 2.12 (build e784736-1301040046)                Command line tool for resort CSS code.
 
 SYNOPSIS
     $ php <?php echo $this->argv[0]; ?> -s <file with JSON array> -i <path to input css file> -o <path to result css file>

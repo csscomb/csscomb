@@ -1,5 +1,5 @@
 MAJOR_VERSION = 2
-MINOR_VERSION = 11
+MINOR_VERSION = 12
 BUILD_TIMESTAMP = $(shell basename `date "+%y%m%d%H%M"`)
 LAST_COMMIT_HASH = $(shell git log -1 --pretty=format:"%h")
 
