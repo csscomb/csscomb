@@ -18,7 +18,7 @@ CSScomb is written in pure PHP, without any external libraries or dependencies.
 See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements).
 
 
-[Download plugins](http://github.com/miripiruni/CSScomb/downloads)
+[Download plugins](http://csscom.com/#downloads)
 --------
 
  * Sublime Text 2 plugin avaliable in Package Control as 'CSScomb'
@@ -30,6 +30,7 @@ See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements).
  * WebStorm Plugin
  * PyCharm plugin
  * Notepad ++ Plugin
+ * [https://github.com/drudge/csscomb.chocmixin](Chocolat Mixin)
  * [Vim Plugin](https://github.com/miripiruni/CSScomb-for-Vim)
 
 CLI usage
