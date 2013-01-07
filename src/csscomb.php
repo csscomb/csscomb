@@ -1438,7 +1438,11 @@ class csscomb{
             if (count($resorted) > 0) { // Если свойства разделены на группы
                 $resorted = $this->separate_property_group($resorted);
             }
-            if (count($undefined) > 0) {
+            if (
+                count($undefined) > 0 AND
+                // проверяем, что $undefined[0] не начинается с пустой строки
+                substr_count(substr($undefined[0], 0, 2), "\n\n") === 0
+            ) {
                 $undefined[0] = "\n".$undefined[0];
             }
         }
