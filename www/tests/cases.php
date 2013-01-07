@@ -834,7 +834,7 @@ $case['code'] = 'h1{
   }';
 $case['result'] = 'h1{
   padding: 7px;
-  /* border: 2px dashed #800000; */
+  /*border: 2px dashed #800000;*/
   background: #faf0e6;
   color: #a0522d;
   }';
@@ -853,9 +853,9 @@ $case['code'] = 'h1 {
   }';
 $case['result'] = 'h1 {
   padding: 7px;
-  /* border: 2px dashed #800000; */
+  /*border: 2px dashed #800000;*/
   background: #faf0e6;
-  /* color: #a0522d; */
+  /*color: #a0522d;*/
   }';
 $group['cases'][] = $case;
 
@@ -875,7 +875,7 @@ $case['code'] = 'div{
     z-index:1;
     margin-top:10px;
     */
-    /* top:1px; */
+    /*top:1px;*/
     padding:0;
     /*font-size:12px;*/
     }
@@ -893,17 +893,17 @@ $case['code'] = 'div{
 $case['result'] = 'div{
     /* one, two, three, four */
     position:absolute;
-    /* top:1px; */
+    /*top:1px;*/
     left:1px;
-    /* z-index:1; */
-    /* margin-top:10px; */
+    /*z-index:1;*/
+    /*margin-top:10px;*/
     padding:0;
-    /* font-size:12px; */
+    /*font-size:12px;*/
     }
 
     .test1{
-        /* border-width: 1px 1px 1px 0; */
-        /* border-color: #93875d #dfd199 #fff6d5; */
+        /*border-width: 1px 1px 1px 0;*/
+        /*border-color: #93875d #dfd199 #fff6d5;*/
 
         background: #F5E39E;
         background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
@@ -974,8 +974,8 @@ $case['code'] = '.badges {
   padding: 10px;*/
 }';
 $case['result'] = '.badges {
-  /* margin: 0 10px 10px 10px; */
-  /* padding: 10px; */
+  /*margin: 0 10px 10px 10px;*/
+  /*padding: 10px;*/
 }';
 $group['cases'][] = $case;
 
@@ -984,7 +984,7 @@ $case['descr'] = 'Внутри фигурных скобок селектора:
 $case['descr-en'] = 'Comments: All commented out and no a line break';
 $case['link'] = 'comments-all-commented-out-and-no-a-line-break';
 $case['code'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
-$case['result'] = '.badges {/* margin: 0 10px 10px 10px; *//* padding: 10px; */}';
+$case['result'] = '.badges {/*margin: 0 10px 10px 10px;*//*padding: 10px;*/}';
 $group['cases'][] = $case;
 
 
@@ -1033,8 +1033,8 @@ $case['result'] = '/* test comment 3 */
     }
 
 /*.about{*/
-   /* float:left; */
-   /* width:50%; */
+   /*float:left;*/
+   /*width:50%;*/
    /*}*/
 
 /* Multi stars comment **/

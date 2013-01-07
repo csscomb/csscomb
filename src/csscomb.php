@@ -1506,7 +1506,7 @@ class csscomb{
                     .*?[^;]
                     ;)
                 #ismx',
-                '/* $1 */',
+                '/*$1*/',
                 $this->code['resorted']
             );
         }
