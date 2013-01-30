@@ -1,6 +1,6 @@
 <?
 $title['en'] = $h1['en'] = 'Online sorting';
-$title['ru'] = $h1['ru'] = 'Онлайн сортировка';
+$title['ru'] = $h1['ru'] = 'Онлайн-сортировка';
 $module = 'online';
 
 require_once'../common/header.php';
