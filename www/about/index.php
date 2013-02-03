@@ -13,6 +13,10 @@ if($lang=='ru'){
 		   что может встретиться в реальном файле. CSScomb воспроизводит такие действия за вас.
 		   Это означает, что парсер по своей природе «думает» как человек редактирующий текст, а не как слепой робот, разбирающий CSS по косточкам.</p>
 
+		<p>Вот пример того, как неопрятный код может быть причесан с помощью CSScomb:</p>
+		<p><img src="/static/i/comb-your-code.png" alt="Comb your code"></p>
+		<p><em>Слева неотсортированный код. Справа код, отсортированный CSScomb.</em></p>
+
 		<h2>Что умеет CSScomb?</h2>
 		<ul>
 			<li>Сортирует CSS-свойства в&nbsp;рамках селекторов в&nbsp;соответствии с&nbsp;настройками.</li>
@@ -49,6 +53,10 @@ else{
 <p>The algorithm of CSScomb simulates web-technologist\'s actions upon working with CSS-code to the limit. Usually to re-order code you move
 lines over each other considering comments in the code, multilines records of property values, hacks and everything that could be found
 in the real file. CSScomb reproduces these actions for you. This means that the parser "thinks" as a person editing the text, not as a blind robot parsing CSS.</p>
+
+<p>Here’s an example of how disarranged code can be fixed by CSScomb:</p>
+<p><img src="/static/i/comb-your-code.png" alt="Comb your code"></p>
+<p><em>On the left, unsorted code. On the right, code after using CSScomb.</em></p>
 
 <h2>What can CSScomb do?</h2>
 <ul>
