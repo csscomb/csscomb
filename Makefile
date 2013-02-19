@@ -12,7 +12,6 @@ PATH_TO_CODA_2_PLUGIN_CORE = $(PATH_TO_CODA_2_PLUGIN)/Contents/Resources/5554389
 PATH_TO_TEXTMATE_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.tmbundle
 PATH_TO_NOTEPAD_P_P_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.notepad_plus_plus
 PATH_TO_INTELLIJ_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.webstorm_pycharm_idea
-PATH_TO_SUBLIME_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.sublime_text_2
 PATH_TO_ESPRESSO_PLUGIN = $(PATH_TO_PLUGINS)/csscomb.sugar
 
 buildAll: buildCli copyCore buildPlugins buildWww
@@ -44,7 +43,6 @@ copyCore:
 	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_PLUGIN_CORE)/Support\ Files/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_CODA_2_PLUGIN_CORE)/Support\ Files/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_TEXTMATE_PLUGIN)/Support/lib/csscomb.php
-	@cp $(PATH_TO_CORE) $(PATH_TO_SUBLIME_PLUGIN)/csscomb/libs/csscomb.php
 	@cp $(PATH_TO_CORE) $(PATH_TO_ESPRESSO_PLUGIN)/ScriptLibraries/csscomb.php
 
 buildPlugins: buildNotepadPlugin buildIntellijPlugin
@@ -53,7 +51,6 @@ buildPlugins: buildNotepadPlugin buildIntellijPlugin
 	@zip -9 -y -r -q build/csscomb_for_coda_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_CODA_PLUGIN)
 	@zip -9 -y -r -q build/csscomb_for_coda-2_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_CODA_2_PLUGIN)
 	@zip -9 -y -r -q build/csscomb_for_textmate_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_TEXTMATE_PLUGIN)
-	@zip -9 -y -r -q build/csscomb_for_sublime-text-2_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_SUBLIME_PLUGIN)
 	@zip -9 -y -r -q build/csscomb_for_notepad-plus-plus_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) $(PATH_TO_NOTEPAD_P_P_PLUGIN)
 	@# Fix Issue #161: Remove call.php from IntelliJ plugin zip
 	@mv $(PATH_TO_INTELLIJ_PLUGIN)/call.php $(PATH_TO_PLUGINS)/call.php
