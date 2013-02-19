@@ -61,7 +61,7 @@ $loc['index7'] = 'Basic Support <abbr title="The dynamic stylesheet language htt
 $loc['index77'] = 'Nested blocks, the calculations, variables, etc.';
 $loc['help-us'] = 'Help CSScomb, make friends with other code editors.';
 $loc['for'] = 'for';
-$loc['sublime'] = 'Also in Package Control';
+$loc['sublime'] = 'avaliable in Package Control';
 
 $loc['close'] = 'Close <kbd>(Esc)</kbd>';
 $loc['copy-result'] = 'Copy result';

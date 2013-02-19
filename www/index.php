@@ -19,7 +19,7 @@ require_once'common/header.php';
             <h2><?=$loc['versions']?></h2>
             <ul>
                 <li><a href="/online/">CSScomb Online</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_sublime-text-2_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Sublime Text 2</a> (<?=$loc['sublime']?>)</li>
+                <li>CSScomb <?=$loc['for']?> Sublime Text 2</a> <?=$loc['sublime']?></li>
                 <li><a href="http://csscomb.com/download/csscomb_for_textmate_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
                 <li><a href="http://csscomb.com/download/csscomb_for_coda-2_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Coda 2</a></li>
                 <li><a href="http://csscomb.com/download/csscomb_for_coda_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Coda</a></li>

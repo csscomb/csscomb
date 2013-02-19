@@ -61,7 +61,7 @@ $loc['index7'] = 'Базовая поддержка <abbr title="The dynamic sty
 $loc['index77'] = 'Вложенные блоки, вычисления, переменные и т.д.';
 $loc['help-us'] = 'Помоги CSScomb, подружи его с другими редакторами кода.';
 $loc['for'] = 'для';
-$loc['sublime'] = 'И в Package Control';
+$loc['sublime'] = 'в Package Control';
 
 $loc['close'] = 'Закрыть <kbd>(Esc)</kbd>';
 $loc['copy-result'] = 'Скопировать результат';
