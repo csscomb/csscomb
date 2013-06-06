@@ -1492,6 +1492,26 @@ $group['cases'][] = $case;
 
 
 
+$case['descr'] = 'Mixins 2';
+$case['descr-en'] = 'Mixins 2';
+$case['link'] = 'less-mixins-2';
+$case['code'] = '.test {
+    .test1();
+    .test2();
+    color: tomato;
+    top: 0;
+}';
+$case['result'] = '.test {
+    .test1();
+    .test2();
+    top: 0;
+    color: tomato;
+}';
+$group['cases'][] = $case;
+
+
+
+
 $case['descr'] = 'Вложенные правила';
 $case['descr-en'] = 'Nested rules';
 $case['link'] = 'less-nested-rules';
