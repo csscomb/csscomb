@@ -1755,14 +1755,14 @@ $case_groups[] = $group;
 $group = Array();
 
 
-$group['group-id'] = 'sass';
-$group['group-name'] = 'SASS';
-$group['group-name-en'] = 'SASS';
+$group['group-id'] = 'scss';
+$group['group-name'] = 'SCSS';
+$group['group-name-en'] = 'SCSS';
 
 
 $case['descr'] = 'Nested rules';
 $case['descr-en'] = 'Nested rules';
-$case['link'] = 'sass-nested-rules';
+$case['link'] = 'scss-nested-rules';
 $case['code'] = '.nani {
   width: 97%;
   position: fixed;
@@ -1792,7 +1792,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Referencing parent selectors: &';
 $case['descr-en'] = 'Referencing parent selectors: &';
-$case['link'] = 'sass-referencing-parent-selectors';
+$case['link'] = 'scss-referencing-parent-selectors';
 $case['code'] = 'a {
   font-weight: bold;
   border-style: solid;
@@ -1836,7 +1836,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Nested properties';
 $case['descr-en'] = 'Nested properties';
-$case['link'] = 'sass-nested-properties';
+$case['link'] = 'scss-nested-properties';
 $case['code'] = '.nani {
   opacity: 1;
   top: 0;
@@ -1880,7 +1880,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Variables: $';
 $case['descr-en'] = 'Variables: $';
-$case['link'] = 'sass-variables';
+$case['link'] = 'scss-variables';
 $case['code'] = '$red: #f33;
 $font-size: 14px;
 
@@ -1904,7 +1904,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Interpolation: #{}';
 $case['descr-en'] = 'Interpolation: #{}';
-$case['link'] = 'sass-interpolation';
+$case['link'] = 'scss-interpolation';
 $case['code'] = '$name: foo;
 $attr: border;
 p.#{$name} {
@@ -1942,7 +1942,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Variables defaults: !default';
 $case['descr-en'] = 'Variables defaults: !default';
-$case['link'] = 'sass-variable-defaults';
+$case['link'] = 'scss-variable-defaults';
 $case['code'] = '.nani {
   $content: "First content";
   line-height: 1;
@@ -1962,7 +1962,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = '@-rules and directives: @import';
 $case['descr-en'] = '@-rules and directives: @import';
-$case['link'] = 'sass-import';
+$case['link'] = 'scss-import';
 $case['code'] = '@import "foo.css";
 @import "foo" screen;
 @import "http://foo.com/bar";
@@ -1988,7 +1988,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = '@-rules and directives: @media';
 $case['descr-en'] = '@-rules and directives: @media';
-$case['link'] = 'sass-media';
+$case['link'] = 'scss-media';
 $case['code'] = '.sidebar {
   width: 300px;
   @media screen and (orientation: landscape) {
@@ -2038,7 +2038,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = '@-rules and directives: @extend';
 $case['descr-en'] = '@-rules and directives: @extend';
-$case['link'] = 'sass-extend';
+$case['link'] = 'scss-extend';
 $case['code'] = '.error {
   border: 1px #f00;
   background-color: #fdd;
@@ -2098,7 +2098,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = '@-rules and directives: @warn';
 $case['descr-en'] = '@-rules and directives: @warn';
-$case['link'] = 'sass-warn';
+$case['link'] = 'scss-warn';
 $case['code'] = '@mixin adjust-location($x, $y) {
   @if unitless($x) {
     @warn "Assuming $x to be in pixels";
@@ -2132,7 +2132,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Control directives: @if';
 $case['descr-en'] = 'Control directives: @if';
-$case['link'] = 'sass-if';
+$case['link'] = 'scss-if';
 $case['code'] = '$type: monster;
 p {
   @if $type == ocean {
@@ -2162,7 +2162,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Control directives: @for';
 $case['descr-en'] = 'Control directives: @for';
-$case['link'] = 'sass-for';
+$case['link'] = 'scss-for';
 $case['code'] = '.nani {
   @for $i from 1 through 3 {
     .item-#{$i} { width: 2em * $i; }
@@ -2178,7 +2178,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Control directives: @each';
 $case['descr-en'] = 'Control directives: @each';
-$case['link'] = 'sass-each';
+$case['link'] = 'scss-each';
 $case['code'] = '.nani {
   @each $animal in puma, sea-slug, egret, salamander {
     .#{$animal}-icon {
@@ -2198,7 +2198,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Control directives: @while';
 $case['descr-en'] = 'Control directives: @while';
-$case['link'] = 'sass-while';
+$case['link'] = 'scss-while';
 $case['code'] = '.nani {
   $i: 6;
   @while $i > 0 {
@@ -2218,7 +2218,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Mixin directives';
 $case['descr-en'] = 'Mixin directives';
-$case['link'] = 'sass-mixins';
+$case['link'] = 'scss-mixins';
 $case['code'] = '@mixin clearfix {
   display: inline-block;
   &:after {
@@ -2257,7 +2257,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Passing content blocks to a mixin';
 $case['descr-en'] = 'Passing content blocks to a mixin';
-$case['link'] = 'sass-content-blocks-mixins';
+$case['link'] = 'scss-content-blocks-mixins';
 $case['code'] = '@mixin apply-to-ie6-only {
   * html {
     @content;
@@ -2330,7 +2330,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Variable arguments';
 $case['descr-en'] = 'Variable arguments';
-$case['link'] = 'sass-variable-arguments';
+$case['link'] = 'scss-variable-arguments';
 $case['code'] = '@mixin box-shadow($shadows...) {
   -moz-box-shadow: $shadows;
   -webkit-box-shadow: $shadows;
@@ -2354,7 +2354,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Passing content blocks to a mixin';
 $case['descr-en'] = 'Passing content blocks to a mixin';
-$case['link'] = 'sass-content-blocks';
+$case['link'] = 'scss-content-blocks';
 $case['code'] = '@mixin apply-to-ie6-only {
   * html {
     @content;
@@ -2380,7 +2380,7 @@ $group['cases'][] = $case;
 
 $case['descr'] = 'Function directives';
 $case['descr-en'] = 'Function directives';
-$case['link'] = 'sass-functions';
+$case['link'] = 'scss-functions';
 $case['code'] = '.nani {
   $grid-width: 40px;
   $gutter-width: 10px;
