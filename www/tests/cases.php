@@ -4134,6 +4134,15 @@ text-indent:-1234px;';
 $group['cases'][] = $case;
 
 
+
+$case['descr'] = 'Properties: single line';
+$case['descr-en'] = 'Properties: single line';
+$case['link'] = 'properties-single-line';
+$case['code'] = 'color:#999;font-size:.9em;border-top:1px solid #ddd;width:150px;';
+$case['result'] = 'width:150px;border-top:1px solid #ddd;color:#999;font-size:.9em;';
+$group['cases'][] = $case;
+
+
 $case['descr'] = 'HTML содержащий аттрибут style';
 $case['descr-en'] = 'Style attribute';
 $case['link'] = 'environment-style-attribute';
