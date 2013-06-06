@@ -1186,15 +1186,15 @@ class csscomb{
       preg_match_all('@
         (^\s*\@[^;]+?[;])|(^\s*\.[^;:]+?[;])
         @isx', $value, $first_imports);
-      foreach ($first_imports[0] as &$first_import) {
-        $value = str_replace($first_import, '', $value);
-      }
 
       // Все остальные
       preg_match_all('@
         (?<=[;}])(\s*\@[^;]+?[;])|(?<=[;}])(\s*\.[^;:]+?[;])
         @ismx', $value, $imports);
       // Удаляем их из общей строки
+      foreach ($first_imports[0] as &$first_import) {
+        $value = str_replace($first_import, '', $value);
+      }
       foreach ($imports[1] as &$import) {
         $value = str_replace($import, '', $value);
       }

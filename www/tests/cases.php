@@ -1986,6 +1986,30 @@ $family: unquote("Droid+Sans");
 $group['cases'][] = $case;
 
 
+$case['descr'] = '@-rules and directives: @include';
+$case['descr-en'] = '@-rules and directives: @include';
+$case['link'] = 'scss-include';
+$case['code'] = '.btn {
+  @include border-radius($baseBorderRadius);
+  @include box-shadow($btnShadows);
+  @include nani($panda);
+  a {
+    text-decoration: none;
+    top: 0;
+  }
+}';
+$case['result'] = '.btn {
+  @include border-radius($baseBorderRadius);
+  @include box-shadow($btnShadows);
+  @include nani($panda);
+  a {
+    top: 0;
+    text-decoration: none;
+  }
+}';
+$group['cases'][] = $case;
+
+
 $case['descr'] = '@-rules and directives: @media';
 $case['descr-en'] = '@-rules and directives: @media';
 $case['link'] = 'scss-media';
