@@ -692,6 +692,8 @@ class csscomb{
             "-ms-background-position-x",
             "background-position-y",
             "-ms-background-position-y",
+            "-webkit-background-clip",
+            "-moz-background-clip",
             "background-clip",
             "background-origin",
             "-webkit-background-size",
