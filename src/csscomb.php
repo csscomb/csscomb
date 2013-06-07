@@ -1100,7 +1100,7 @@ class csscomb{
                 $this->code['resorted'] = substr($this->code['resorted'], 1);
             }
             // Remove all new lines if css initially didn't have any
-            if (substr_count($this->code['edited'], "\n") == 1) {
+            if (substr_count($this->code['edited'], "\n") === 1) {
                 $this->code['resorted'] = str_replace("\n", '', $this->code['resorted']);
             }
         }
