@@ -913,7 +913,7 @@ class csscomb{
             $pos = strpos($this->code['edited'], $value);
             if ($pos !== false) {
                 $this->code['edited'] = substr_replace($this->code['edited'],"interpolation".$key.'__',$pos,strlen($value));
-            }    
+            }
         }
 
         // 5. Закрываем сложности парсинга {}

@@ -331,7 +331,7 @@ table + h2 {
         textarea {
             color:#533D3A;
             white-space:-moz-pre-wrap; /* Firefox 1.0-2.0 */
-            /* white-space:pre-wrap; *//* current browsers, bug of formatting: do not set in normal! */
+            /*white-space:pre-wrap;*//* current browsers, bug of formatting: do not set in normal! */
             white-space:pre-wrap;
             word-wrap:break-word;      /* IE 5.5-7 */
             }
