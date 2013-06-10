@@ -1,4 +1,4 @@
-# Tool for sorting CSS properties in specific order
+# Tool for sorting CSS properties
 
 * Sorting CSS properties: The order of properties in the help of professionals
 * Setting the order of CSS properties: Use the order to which you are accustomed to
