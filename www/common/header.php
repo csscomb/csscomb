@@ -10,7 +10,7 @@ require_once 'lang.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/static/_css/csscomb.css">
     <script src="/static/_js/csscomb.js"></script>
-    <link rel="stylesheet" title="Default" href="../static/highlight/styles/default.css">
+    <link rel="stylesheet" title="Default" href="/static/highlight/styles/default.css">
 </head>
 <body class="<?=$index?'index':$module?>">
 <div class="page-wrap">
