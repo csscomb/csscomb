@@ -1,7 +1,7 @@
 CSScomb changelog
 ================
 
-## 2.13 (xx.06.2013)
+## 2.13 (12.06.2013)
 
 - **Sorting:**
     - Support prefixed `background-clip` properties (issue [#186](https://github.com/csscomb/CSScomb/issues/186))
