@@ -2,7 +2,7 @@
 <?php
 /**
  * CSScomb
- * @version: 2.12 (build e784736-1301040046)
+ * @version: 2.13 (build bb516f2-1306162139)
  * @author: Vyacheslav Oliyanchuk (miripiruni)
  * @web: http://csscomb.com/
  */
