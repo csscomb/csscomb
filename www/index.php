@@ -20,12 +20,12 @@ require_once'common/header.php';
             <ul>
                 <li><a href="/online/">CSScomb Online</a></li>
                 <li>CSScomb <?=$loc['for']?> Sublime Text 2</a> <?=$loc['sublime']?></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_textmate_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_coda-2_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Coda 2</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_coda_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Coda</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_espresso-2_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Espresso 2</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_webstorm-pycharm-idea_2-12-1301040046.zip">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_notepad-plus-plus_2-12-1301040046.zip">CSScomb <?=$loc['for']?> Notepad++</a></li>
+                <li><a href="http://csscomb.com/download/csscomb_for_textmate_2-13-1306162139.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
+                <li><a href="http://csscomb.com/download/csscomb_for_coda-2_2-13-1306162139.zip">CSScomb <?=$loc['for']?> Coda 2</a></li>
+                <li><a href="http://csscomb.com/download/csscomb_for_coda_2-13-1306162139.zip">CSScomb <?=$loc['for']?> Coda</a></li>
+                <li><a href="http://csscomb.com/download/csscomb_for_espresso-2_2-13-1306162139.zip">CSScomb <?=$loc['for']?> Espresso 2</a></li>
+                <li><a href="http://csscomb.com/download/csscomb_for_webstorm-pycharm-idea_2-13-1306162139.zip">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
+                <li><a href="http://csscomb.com/download/csscomb_for_notepad-plus-plus_2-13-1306162139.zip">CSScomb <?=$loc['for']?> Notepad++</a></li>
                 <li><a href="https://github.com/miripiruni/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
                 <li><a href="https://github.com/drudge/csscomb.chocmixin">CSScomb <?=$loc['for']?> Chocolat</a></li>
             </ul>
