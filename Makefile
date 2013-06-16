@@ -87,3 +87,7 @@ buildWww: useCsscomb
 useCsscomb:
 	@echo 'Using CSScomb for CSScomb web site...'
 	@php build/cli/csscomb.php -i www/static/css
+
+clean:
+	@echo 'Removing all from build/...'
+	@rm -fr build/*
