@@ -21,7 +21,6 @@ require_once 'lang.php';
                 <li><?=strpos($_SERVER['PHP_SELF'], '/about/')===0?'<b>'.$nav['about'].'</b>':'<a href="/about/">'.$nav['about'].'</a>'?></li>
                 <li><?=strpos($_SERVER['PHP_SELF'], '/online/')===0?'<b>'.$nav['online'].'</b>':'<a href="/online/">'.$nav['online'].'</a>'?></li>
                 <li><?=strpos($_SERVER['PHP_SELF'], '/tests/')===0?'<b>'.$nav['tests'].'</b>':'<a href="/tests/">'.$nav['tests'].'</a>'?></li>
-                <li><?=strpos($_SERVER['PHP_SELF'], '/downloads/')===0?'<b>'.$nav['downloads'].'</b>':'<a href="http://github.com/miripiruni/CSScomb/downloads/">'.$nav['downloads'].'</a>'?></li>
             </ul>
         </nav>
     </header>
