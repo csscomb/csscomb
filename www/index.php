@@ -28,7 +28,7 @@ require_once'common/header.php';
                 <li><a href="http://csscomb.com/download/csscomb_for_notepad-plus-plus_2-13-1306162150.zip">CSScomb <?=$loc['for']?> Notepad++</a></li>
                 <li><a href="https://github.com/miripiruni/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
                 <li><a href="https://github.com/drudge/csscomb.chocmixin">CSScomb <?=$loc['for']?> Chocolat</a></li>
-                <li><a href="https://csscomb.com/download/csscomb-cli_2-13-1306171125.zip">CSScomb CLI version</a></li>
+                <li><a href="http://csscomb.com/download/csscomb-cli_2-13-1306171125.zip">CSScomb CLI version</a></li>
             </ul>
             <p><?=$loc['help-us']?></p>
         </div>
