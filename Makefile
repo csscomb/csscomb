@@ -29,6 +29,7 @@ buildCli:
 	@mkdir -p build/cli
 	@cp $(PATH_TO_CORE) build/cli/csscomb.php
 	@sed '1d' < src/cli.php >> build/cli/csscomb.php
+	@zip -9 -y -r -q build/csscomb-cli_$(MAJOR_VERSION)-$(MINOR_VERSION)-$(BUILD_TIMESTAMP) build/cli/csscomb.php
 
 copyCore:
 	@echo 'Copying CLI...'
