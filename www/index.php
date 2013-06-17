@@ -65,7 +65,7 @@ require_once'common/header.php';
         <div class="updates">
             <h2><?=$loc['updates']?></h2>
             <ul>
-            <?
+            <?/*
                 $tweets = json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/csscomb.json?include_rts=true&count=30"));
                 $i = 0;
 
@@ -87,8 +87,13 @@ require_once'common/header.php';
                             break;
                         }
                     }
-                }
+                }*/
             ?>
+                <li>2.13 is out, with some fixes for SASS/LESS users. Update your plugins and read <a href="https://github.com/csscomb/CSScomb/blob/master/CHANGELOG.md#213-12062013">changelog</a>.</li>
+                <li>We moved to <a href="https://github.com/csscomb/">https://github.com/csscomb/</a></li>
+                <li>Somebody interested in use Eclipse or Aptana plugin? <a href="https://t.co/ApqlMkn0">https://github.com/csscomb/CSScomb/issues/34</a></li>
+                <li>CSScomb <a href="https://github.com/drudge/csscomb.chocmixin">mixin for Chocolat</a>. Many thanks to <a href="https://github.com/drudge">Nicholas Penree</a>!</li>
+                <li>Our article on <a href="http://coding.smashingmagazine.com/2012/10/02/csscomb-tool-sort-css-properties/">Smashing Magazine</a> is out!</li>
             </ul>
         </div>
 
