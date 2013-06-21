@@ -834,8 +834,8 @@ $case['code'] = 'h1{
   }';
 $case['result'] = 'h1{
   padding: 7px;
-  /*border: 2px dashed #800000;*/
   background: #faf0e6;
+  /*border: 2px dashed #800000;*/
   color: #a0522d;
   }';
 $group['cases'][] = $case;
@@ -852,10 +852,10 @@ $case['code'] = 'h1 {
   padding: 7px;
   }';
 $case['result'] = 'h1 {
+  /*border: 2px dashed #800000;
+  color: #a0522d;*/
   padding: 7px;
-  /*border: 2px dashed #800000;*/
   background: #faf0e6;
-  /*color: #a0522d;*/
   }';
 $group['cases'][] = $case;
 
@@ -893,21 +893,23 @@ $case['code'] = 'div{
 $case['result'] = 'div{
     /* one, two, three, four */
     position:absolute;
-    /*top:1px;*/
     left:1px;
-    /*z-index:1;*/
-    /*margin-top:10px;*/
+    /*
+    z-index:1;
+    margin-top:10px;
+    */
+    /*top:1px;*/
     padding:0;
     /*font-size:12px;*/
     }
 
     .test1{
-        /*border-width: 1px 1px 1px 0;*/
-        /*border-color: #93875d #dfd199 #fff6d5;*/
 
         background: #F5E39E;
         background: -moz-linear-gradient(top, #F5E39E 0%, #FFEFB2 42%, #FFF3C8 75%, #FFF5CF 100%);
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5E39E), color-stop(42%,#FFEFB2), color-stop(75%,#FFF3C8), color-stop(100%,#FFF5CF));
+        /*border-width: 1px 1px 1px 0;*/
+        /*border-color: #93875d #dfd199 #fff6d5;*/
 
         color: #7a7254;
         }';
@@ -974,8 +976,8 @@ $case['code'] = '.badges {
   padding: 10px;*/
 }';
 $case['result'] = '.badges {
-  /*margin: 0 10px 10px 10px;*/
-  /*padding: 10px;*/
+  /*margin: 0 10px 10px 10px;
+  padding: 10px;*/
 }';
 $group['cases'][] = $case;
 
@@ -984,7 +986,7 @@ $case['descr'] = 'Внутри фигурных скобок селектора:
 $case['descr-en'] = 'Comments: All commented out and no a line break';
 $case['link'] = 'comments-all-commented-out-and-no-a-line-break';
 $case['code'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
-$case['result'] = '.badges {/*margin: 0 10px 10px 10px;*//*padding: 10px;*/}';
+$case['result'] = '.badges {/*margin: 0 10px 10px 10px;padding: 10px;*/}';
 $group['cases'][] = $case;
 
 
@@ -1033,8 +1035,8 @@ $case['result'] = '/* test comment 3 */
     }
 
 /*.about{*/
-   /*float:left;*/
    /*width:50%;*/
+   /*float:left;*/
    /*}*/
 
 /* Multi stars comment **/
@@ -1047,13 +1049,321 @@ top: 1px;
 top: 1px;
 }';
 $group['cases'][] = $case;
-/*.about{*/
-   /*width:50%;*/
-   /*float:left;*/
-   /*}*/
 
 
 
+
+
+$case['descr'] = 'No name 1';
+$case['descr-en'] = 'No name 1';
+$case['link'] = 'no-name-1';
+$case['code'] = '.style {
+    color: red/*{comment}*/;
+}';
+
+$case['result'] = '.style {
+    color: red/*{comment}*/;
+}';
+
+$group['cases'][] = $case;
+
+
+
+
+
+$case['descr'] = 'No name 2';
+$case['descr-en'] = 'No name 2';
+$case['link'] = 'no-name-2';
+$case['code'] = '.style
+{
+    cursor: pointer;
+}
+
+/*
+.c-style1
+{
+    content: "";
+
+    position: absolute;
+}
+
+.c-style3
+{
+    margin: 0;
+}
+*/';
+
+$case['result'] = '.style
+{
+    cursor: pointer;
+}
+
+/*
+.c-style1
+{
+    content: "";
+
+    position: absolute;
+}
+
+.c-style3
+{
+    margin: 0;
+}
+*/';
+
+$group['cases'][] = $case;
+
+
+
+
+$case['descr'] = 'No name 3';
+$case['descr-en'] = 'No name 3';
+$case['link'] = 'no-name-3';
+$case['code'] = '/**/
+
+    #wishlist {display:none;}
+    #related .slider li { margin:0 28px 0 0; width:184px;}
+    #related .slider {margin-left:32px;}
+    #related .slider li img {border:solid 2px #a3b9b7; height: 180px;width: 180px;}
+
+    /* Quantity Buttons */';
+
+$case['result'] = '/**/
+
+    #wishlist {display:none;}
+    #related .slider li { margin:0 28px 0 0; width:184px;}
+    #related .slider {margin-left:32px;}
+    #related .slider li img {width: 180px; height: 180px;border:solid 2px #a3b9b7;}
+
+    /* Quantity Buttons */';
+
+$group['cases'][] = $case;
+
+
+
+
+
+$case['descr'] = 'No name 4';
+$case['descr-en'] = 'No name 4';
+$case['link'] = 'no-name-4';
+$case['code'] = "/** sprite: ic_photo-page; sprite-image: url('/res/i/sprt/ic_photo-page.png?${md5}'); */
+
+/* Tab navigation
+* -------------------------------------------------- */
+.tab-nav {
+    width: 100%;
+    display: table; /* will be displayed as block in ie6-7 */
+
+    border-bottom: #C6D8DC solid 1px;
+    }
+/** a: b; ); */";
+
+$case['result'] = "/** sprite: ic_photo-page; sprite-image: url('/res/i/sprt/ic_photo-page.png?${md5}'); */
+
+/* Tab navigation
+* -------------------------------------------------- */
+.tab-nav {
+    display: table; /* will be displayed as block in ie6-7 */
+    width: 100%;
+
+    border-bottom: #C6D8DC solid 1px;
+    }
+/** a: b; ); */";
+
+$group['cases'][] = $case;
+
+
+
+
+
+
+$case['descr'] = 'No name 5';
+$case['descr-en'] = 'No name 5';
+$case['link'] = 'no-name-5';
+$case['code'] = '/*!
+ * Bootstrap v2.3.2
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+// Core variables and mixins
+@import "variables"; // Modify this for custom colors, font-sizes, etc
+@import "mixins";
+
+// CSS Reset
+@import "reset";
+
+// Grid system and page structure
+@import "scaffolding";
+@import "grid";
+@import "layouts";
+
+// Base CSS
+@import "type";
+@import "code";
+@import "forms";
+@import "tables";
+
+// Components: common
+@import "sprites";
+@import "dropdowns";
+@import "wells";
+@import "component-animations";
+@import "close";
+
+// Components: Buttons & Alerts
+@import "buttons";
+@import "button-groups";
+@import "alerts"; // Note: alerts share common CSS with buttons and thus have styles in buttons
+
+// Components: Nav
+@import "navs";
+@import "navbar";
+@import "breadcrumbs";
+@import "pagination";
+@import "pager";
+
+// Components: Popovers
+@import "modals";
+@import "tooltip";
+@import "popovers";
+
+// Components: Misc
+@import "thumbnails";
+@import "media";
+@import "labels-badges";
+@import "progress-bars";
+@import "accordion";
+@import "carousel";
+@import "hero-unit";
+
+// Utility classes
+@import "utilities"; // Has to be last to override when necessary';
+
+$case['result'] = '/*!
+ * Bootstrap v2.3.2
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+// Core variables and mixins
+@import "variables"; // Modify this for custom colors, font-sizes, etc
+@import "mixins";
+
+// CSS Reset
+@import "reset";
+
+// Grid system and page structure
+@import "scaffolding";
+@import "grid";
+@import "layouts";
+
+// Base CSS
+@import "type";
+@import "code";
+@import "forms";
+@import "tables";
+
+// Components: common
+@import "sprites";
+@import "dropdowns";
+@import "wells";
+@import "component-animations";
+@import "close";
+
+// Components: Buttons & Alerts
+@import "buttons";
+@import "button-groups";
+@import "alerts"; // Note: alerts share common CSS with buttons and thus have styles in buttons
+
+// Components: Nav
+@import "navs";
+@import "navbar";
+@import "breadcrumbs";
+@import "pagination";
+@import "pager";
+
+// Components: Popovers
+@import "modals";
+@import "tooltip";
+@import "popovers";
+
+// Components: Misc
+@import "thumbnails";
+@import "media";
+@import "labels-badges";
+@import "progress-bars";
+@import "accordion";
+@import "carousel";
+@import "hero-unit";
+
+// Utility classes
+@import "utilities"; // Has to be last to override when necessary';
+
+
+$group['cases'][] = $case;
+
+
+
+
+$case['descr'] = 'No name 6';
+$case['descr-en'] = 'No name 6';
+$case['link'] = 'no-name-6';
+$case['code'] = '.block {
+    top: 0; //top
+    width: 20px; //width
+    display: block; //display
+    -moz-border-radius: 3px;
+    height: 20px; //height
+    padding-top: 10px; //padding-top
+    right: 0; //right
+    position: absolute; //position
+    background: #fff; //bg
+    overflow: hidden; //overflow
+    color: #fff; //color
+    margin-right: 10px; //margin-rigth
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 10px; //margin-left
+    border: 1px solid #000; //border-1px
+    font-size: 10px; //font-size
+    text-decoration: underline; //text-decoretion
+    margin-bottom: 10px; //margin-bottom
+    margin-top: 10px; //margin-top
+}';
+
+$case['result'] = '.block {
+    position: absolute; //position
+    top: 0; //top
+    right: 0; //right
+    display: block; //display
+    overflow: hidden; //overflow
+    margin-top: 10px; //margin-top
+    margin-right: 10px; //margin-rigth
+    margin-bottom: 10px; //margin-bottom
+    margin-left: 10px; //margin-left
+    padding-top: 10px; //padding-top
+    width: 20px; //width
+    height: 20px; //height
+    border: 1px solid #000; //border-1px
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #fff; //bg
+    color: #fff; //color
+    text-decoration: underline; //text-decoretion
+    font-size: 10px; //font-size
+}';
+$group['cases'][] = $case;
 
 
 
