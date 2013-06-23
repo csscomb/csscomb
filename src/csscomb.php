@@ -30,6 +30,9 @@ class csscomb{
         'datauri' => null,
         // если найдены интерполированные переменные, то эта переменная станет массивом
         'interpolations' => null,
+        // Игнорируем комментарии
+        'comments' => null,
+        'inlinecomments' => null,
         // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
         'hacks' => null,
         // если найдены комментарии содержащие { или } мешающие парсить,
@@ -916,6 +919,24 @@ class csscomb{
             }
         }
 
+        // X. Temporally remove comments
+        // Comments
+        preg_match_all('@
+            ([\n\r]\s*/\*.*?\*/)+
+            |
+            (^\s*/\*.*?\*/)+
+            @ismx', $this->code['edited'], $this->code['comments'], PREG_SET_ORDER);
+        foreach ($this->code['comments'] as $key => $value) {
+            $this->code['edited'] = str_replace($value[0], 'comment'.$key.'__', $this->code['edited']);
+        }
+        // Inline comments
+        preg_match_all('@
+            [^\S\n\r]*/\*.*?\*/([^\n\S\r]*/\*.*?\*/)*
+            @ismx', $this->code['edited'], $this->code['inlinecomments'], PREG_SET_ORDER);
+        foreach ($this->code['inlinecomments'] as $key => $value) {
+            $this->code['edited'] = str_replace($value[0], 'inlinecomment'.$key.'__', $this->code['edited']);
+        }
+
         // 5. Закрываем сложности парсинга {}
         $this->code['edited'] = str_replace('{}', '{ }', $this->code['edited']);
 
@@ -926,101 +947,9 @@ class csscomb{
         $this->code['edited'] = preg_replace('@([;\{\}]+\s*?//.*?);(\s*?})@', '$1$2', $this->code['edited']);
         // Убираем ; у интерполированных переменных
         $this->code['edited'] = preg_replace('/((#\{\$|\@\{).*?)[;](\s*?\})/', '$1$3', $this->code['edited']);
+        // Убираем ; у комментариев
+        $this->code['edited'] = preg_replace('/(comment\d*__)[;](\s*?\})/', '$1$2', $this->code['edited']);
 
-        // 7. Комментарии
-        if (preg_match_all('@
-            (
-            \s*
-            /\*
-            .*?[^\*/]
-            \*/
-            (\s/\*\*/)?
-            )
-            @ismx', $this->code['edited'], $test)) {
-
-            // 7.1. Закомментировано одно или несколько свойств: повторяющийся паттерн *:*; \s*?
-            if (preg_match_all('@
-                (\s*)
-                /\*
-                (.*?[^\*/])
-                \*+/
-                (\ {0,1}/\*\*/)?
-                @ismx', $this->code['edited'], $comments)) {
-
-                $new_comments = Array();
-                $old_comments = $comments[0];
-
-                foreach ($comments[2] as $key => $comment) {
-                    if ( // если комментарий содержит ; и :
-                        strpos($comment, ':') !== FALSE AND
-                        strpos($comment, ';') !== FALSE
-
-                    ) {
-                        preg_match_all('@
-                        (\s*)
-                        (
-                            .+?[^;]
-                            ;
-                        )
-                        @ismx', $comment, $properties);
-
-                        $new_comment = '';
-                        foreach ($properties[2] as $property) {
-                            $new_comment .= $comments[1][$key]."commented__".$property;
-                        }
-                        $new_comments[] = $new_comment;
-                    }
-                    else {
-                        // если нет : или ;, то считаем что это текстовый комментарий
-                        // и копируем его в том виде, в каком он был.
-                        $new_comments[] = $comments[0][$key];
-                    }
-
-
-                }
-
-                foreach ($old_comments as $key => $old_comment) {
-                    $this->code['edited'] = str_replace(
-                                                $old_comments[$key],
-                                                $new_comments[$key],
-                                                $this->code['edited']);
-                }
-            }
-
-            // 7.2. Обрывки закомментированных деклараций: присутствует { или }
-            if (preg_match_all('@
-                \s*?
-                /\*
-                (
-                    .*?[^\*/]
-                )*?
-                \*+/
-                @ismx', $this->code['edited'], $comments)) {
-
-                $new_comments = Array();
-                $old_comments = $comments[0];
-
-                foreach ($comments[0] as $key => $comment) {
-                    if (strpos($comment, '}') !== FALSE OR strpos($comment, '{') !== FALSE) {
-                        $new_comment = '';
-                        if (strpos($comment, '}') !== FALSE) { $new_comment .= '}'; }
-                        $new_comment .= "brace__".$key;
-                        if (strpos($comment, '{') !== FALSE) { $new_comment .= '{'; }
-                        $new_comments[$key] = $new_comment;
-                        $this->code['braces'][$key] = $comment;
-                    }
-                }
-
-                foreach ($new_comments as $key => $new_comment) {
-                    if (strlen($new_comment) > 0) {
-                        $this->code['edited'] = str_replace(
-                                                    $old_comments[$key],
-                                                    $new_comment,
-                                                    $this->code['edited']);
-                    }
-                }
-            }
-        }
 
         // 8. Entities
         if (preg_match_all('@
@@ -1181,9 +1110,9 @@ class csscomb{
 
       // 2. Выносим переменные в отдельный массив $vars
       preg_match_all('@
-        (\s*/\*[^\*/]*?\*/)?
-        (\s*//.*?)?
+        (comment\d*__)?
         \s*(\$|\@)[^;\}]+?:[^;]+?;
+        (inlinecomment\d*__)?
         @ismx', $value, $vars);
       // Удаляем их из общей строки
       foreach ($vars[0] as $var) {
@@ -1200,24 +1129,25 @@ class csscomb{
 
       // Все остальные
       preg_match_all('@
-        (?<=[;}])(\s*\@[^;]+?[;])|(?<=[;}])(\s*\.[^;:]+?[;])
+          (?<=inlinecomment\d__|[;}])
+          ((comment\d*__)?\s*\@[^;]+?[;](inlinecomment\d*__)?)
+          |
+          (?<=inlinecomment\d__|[;}])
+          ((comment\d*__)?\s*\.[^;:]+?[;](inlinecomment\d*__)?)
         @ismx', $value, $imports);
       // Удаляем их из общей строки
       foreach ($first_imports[0] as &$first_import) {
         $value = str_replace($first_import, '', $value);
       }
-      foreach ($imports[1] as &$import) {
-        $value = str_replace($import, '', $value);
-      }
-      foreach ($imports[2] as &$import) {
+      foreach ($imports[0] as &$import) {
         $value = str_replace($import, '', $value);
       }
 
       // 4. Выносим простые свойства в массив $properties
       preg_match_all('@
+        (comment\d*__)?
         \s*[^;]+?:[^;]+?;
-        (\s*/\*.*?[^\*/]\*/)?
-        (\s{0,1}/\*\*/)?
+        (inlinecomment\d*__)?
         @ismx', $value, $properties);
       // Удаляем их из общей строки
       foreach ($properties[0] as &$property) {
@@ -1227,11 +1157,9 @@ class csscomb{
       $props = $properties[0];
       $props = $this->resort_properties($props);
 
-      // 5. Если осталось ещё что-то, оставляем «как есть»
-
       // 6. Склеиваем всё обратно в следующем порядке:
       //   переменные, включения, простые свойства, вложенные {}
-      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[1]).implode('', $imports[2]).implode('', $block_imports).implode('', $props).$nested_string.$value;
+      $value = implode('', $vars[0]).implode('', $first_imports[0]).implode('', $imports[0]).implode('', $block_imports).implode('', $props).$nested_string.$value;
       return $value;
     }
 
@@ -1252,7 +1180,6 @@ class csscomb{
                 ^
                 (.*?)
                 (
-                    #(\s*/\*.*\*/;)*?
                     \s*?
                     }
                 )
@@ -1303,8 +1230,7 @@ class csscomb{
 
                     ^
                     (.*?)
-                    (\s*?)
-                    (/\* .* \*/)
+                    (inlinecomment\d*__)
                     (.*)
                     $
 
@@ -1312,8 +1238,7 @@ class csscomb{
 
                 if (
                     count($matches) === 5 and              // все распарсилось как надо
-                    strlen($matches[1]) === 0 and       // комментарий действительно идет первым
-                    strpos($matches[2], "\n") !== 0     // перед комментарием нет переноса строки, следовательно предпологаем, что он относится к скобке с селектором
+                    strlen($matches[1]) === 0             // комментарий действительно идет первым
                 ) {
                     $first_spaces = $matches[2];
                     $first_comment = $matches[3];
@@ -1330,10 +1255,7 @@ class csscomb{
                         .[^;]*
                         ;
                         (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
-                            \s*
-                            /\*
-                            .*?[^\*/]
-                            \*/
+                            inlinecomment\d*__
                         )
                         ?
                         (\s{0,1}/\*\*/)?
@@ -1361,8 +1283,7 @@ class csscomb{
                         .[^;]*          # все что угодно, но не ;
                         ;
                         (               # На этой же строке (после ;) может быть комментарий. Он тоже пригодится.
-                            \s*
-                            /\* .* \*/
+                            inlinecomment\d*__
                         )
                         *?
                     )
@@ -1406,9 +1327,7 @@ class csscomb{
                              * Пробел в начале добавляется специально, чтобы избежать совпадений по вхождению
                              * одной строки в другую. Например: top не должно совпадать с border-top
                              */
-                            strpos(' '.trim($property), ' '.$k.':') !== FALSE OR
-                            strpos(' '.trim($property), ' commented__'.$k.':') !== FALSE
-
+                            strpos(' '.trim($property), ' '.$k.':') !== FALSE
                         ) {
                             $through_number = $this->get_through_number($k); // определяем "сквозной" порядковый номер
                             if ($through_number !== false) $index = $through_number;
@@ -1421,8 +1340,7 @@ class csscomb{
                 foreach ($this->sort_order as $pos => $key) {
                     if (
                         // пробел в начале добавляется специально.
-                        strpos(' '.trim($property), ' '.$key.':') !== FALSE OR
-                        strpos(' '.trim($property), ' commented__'.$key.':') !== FALSE
+                        strpos(' '.trim($property), ' '.$key.':') !== FALSE
                     ) {
                         $index = $pos;
                     }
@@ -1508,22 +1426,21 @@ class csscomb{
         // 4. Interpolated variables
         preg_match_all('#interpolation(\d)__#ismx', $this->code['resorted'], $new_vars);
         foreach ($new_vars[1] as $key => $value) {
-            $this->code['resorted'] = str_replace($new_vars[0][$key], $this->code['interpolations'][0][$key], $this->code['resorted']);    
+            $this->code['resorted'] = str_replace($new_vars[0][$key], $this->code['interpolations'][0][$key], $this->code['resorted']);
         }
 
-        // 5. Удаляем искусственно созданные 'commented__'
-        while(strpos($this->code['resorted'], 'commented__') !== FALSE) {
-            $this->code['resorted'] = preg_replace(
-                '#
-                    commented__
-                    (.*?[^:]
-                    :
-                    .*?[^;]
-                    ;)
-                #ismx',
-                '/*$1*/',
-                $this->code['resorted']
-            );
+        // Comments
+        if (is_array($this->code['inlinecomments'])) { // если были обнаружены и вырезаны data uri
+            foreach ($this->code['inlinecomments'] as $key => $val) {
+                if (strpos($this->code['resorted'], 'inlinecomment'.$key.'__')) $this->code['resorted'] = str_replace('inlinecomment'.$key.'__', $val[0], $this->code['resorted']); // заменяем значение expression обратно
+            }
+        }
+        if (is_array($this->code['comments'])) { // если были обнаружены и вырезаны data uri
+            foreach ($this->code['comments'] as $key => $val) {
+                if (strpos($this->code['resorted'], 'comment'.$key.'__') > -1) {
+                    $this->code['resorted'] = str_replace('comment'.$key.'__', $val[0], $this->code['resorted']); // заменяем значение expression обратно
+                }
+            }
         }
 
         // 6. Удаляем искусственно созданные 'brace__'
