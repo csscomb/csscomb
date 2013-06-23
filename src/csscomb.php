@@ -911,12 +911,9 @@ class csscomb{
         }
 
         // 4. Interpolated variables
-        preg_match_all('@(\#|\@){.*?}@ismx', $this->code['edited'], $this->code['interpolations']);
-        foreach ($this->code['interpolations'][0] as $key => $value) {
-            $pos = strpos($this->code['edited'], $value);
-            if ($pos !== false) {
-                $this->code['edited'] = substr_replace($this->code['edited'],"interpolation".$key.'__',$pos,strlen($value));
-            }
+        preg_match_all('@(\#|\@){.*?}@ismx', $this->code['edited'], $this->code['interpolations'], PREG_SET_ORDER);
+        foreach ($this->code['interpolations'] as $key => $value) {
+            $this->code['edited'] = str_replace($value[0], 'interpolation'.$key.'__', $this->code['edited']);
         }
 
         // X. Temporally remove comments
@@ -925,6 +922,10 @@ class csscomb{
             ([\n\r]\s*/\*.*?\*/)+
             |
             (^\s*/\*.*?\*/)+
+            |
+            ([\n\r]\s*//[^\n\r]*)+
+            |
+            (^\s*//[^\n\r]*)+
             @ismx', $this->code['edited'], $this->code['comments'], PREG_SET_ORDER);
         foreach ($this->code['comments'] as $key => $value) {
             $this->code['edited'] = str_replace($value[0], 'comment'.$key.'__', $this->code['edited']);
@@ -932,6 +933,8 @@ class csscomb{
         // Inline comments
         preg_match_all('@
             [^\S\n\r]*/\*.*?\*/([^\n\S\r]*/\*.*?\*/)*
+            |
+            (?<!:)[^\S\n\r]*//[^\n\r]*
             @ismx', $this->code['edited'], $this->code['inlinecomments'], PREG_SET_ORDER);
         foreach ($this->code['inlinecomments'] as $key => $value) {
             $this->code['edited'] = str_replace($value[0], 'inlinecomment'.$key.'__', $this->code['edited']);
@@ -1422,15 +1425,16 @@ class csscomb{
         }
 
         // 4. Interpolated variables
-        preg_match_all('#interpolation(\d)__#ismx', $this->code['resorted'], $new_vars);
-        foreach ($new_vars[1] as $key => $value) {
-            $this->code['resorted'] = str_replace($new_vars[0][$key], $this->code['interpolations'][0][$key], $this->code['resorted']);
+        if (is_array($this->code['interpolations'])) { // если были обнаружены и вырезаны data uri
+            foreach ($this->code['interpolations'] as $key => $val) {
+                $this->code['resorted'] = str_replace('interpolation'.$key.'__', $val[0], $this->code['resorted']); // заменяем значение expression обратно
+            }
         }
 
         // Comments
         if (is_array($this->code['inlinecomments'])) { // если были обнаружены и вырезаны data uri
             foreach ($this->code['inlinecomments'] as $key => $val) {
-                if (strpos($this->code['resorted'], 'inlinecomment'.$key.'__')) $this->code['resorted'] = str_replace('inlinecomment'.$key.'__', $val[0], $this->code['resorted']); // заменяем значение expression обратно
+                $this->code['resorted'] = str_replace('inlinecomment'.$key.'__', $val[0], $this->code['resorted']); // заменяем значение expression обратно
             }
         }
         if (is_array($this->code['comments'])) { // если были обнаружены и вырезаны data uri
