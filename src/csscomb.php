@@ -941,14 +941,12 @@ class csscomb{
         $this->code['edited'] = str_replace('{}', '{ }', $this->code['edited']);
 
         // 6. Закрываем сложности с отсутствующей последней ; перед }
-        $this->code['edited'] = preg_replace('@(.*?[^\s;\{\}\/\*])(\s*?})@', '$1;$2', $this->code['edited']);
+        $this->code['edited'] = preg_replace('@(.*?[^\s;\{\}\/\*_])(\s*?})@', '$1;$2', $this->code['edited']);
         // Убираем ; у последнего инлайнового комментария
         // Инлайновый комментарий может идти только после фигурной скобки или ;
         $this->code['edited'] = preg_replace('@([;\{\}]+\s*?//.*?);(\s*?})@', '$1$2', $this->code['edited']);
         // Убираем ; у интерполированных переменных
         $this->code['edited'] = preg_replace('/((#\{\$|\@\{).*?)[;](\s*?\})/', '$1$3', $this->code['edited']);
-        // Убираем ; у комментариев
-        $this->code['edited'] = preg_replace('/(comment\d*__)[;](\s*?\})/', '$1$2', $this->code['edited']);
 
 
         // 8. Entities
