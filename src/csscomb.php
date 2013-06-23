@@ -1111,9 +1111,9 @@ class csscomb{
 
       // 2. Выносим переменные в отдельный массив $vars
       preg_match_all('@
-        (comment\d*__)?
+        (comment\d*__)*
         \s*(\$|\@)[^;\}]+?:[^;]+?;
-        (inlinecomment\d*__)?
+        (inlinecomment\d*__)*
         @ismx', $value, $vars);
       // Удаляем их из общей строки
       foreach ($vars[0] as $var) {
@@ -1125,7 +1125,9 @@ class csscomb{
 
       // Включения, следующие сразу за {
       preg_match_all('@
-        (^\s*\@[^;]+?[;])|(^\s*\.[^;:]+?[;])
+          (^\s*(comment\d*__)*\s*\@[^;]+?[;](inlinecomment\d*__)*)
+          |
+          (^\s*(comment\d*__)*\s*\.[^;:]+?[;](inlinecomment\d*__)*)
         @isx', $value, $first_imports);
 
       // Все остальные
