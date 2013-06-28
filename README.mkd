@@ -36,7 +36,7 @@ See details at [wiki](https://github.com/miripiruni/CSScomb/wiki/Requirements).
 CLI usage
 ---
 
-Avaliable at [/build/cli/](https://github.com/miripiruni/CSScomb/tree/master/build/cli)
+Avaliable at [csscomb.com](http://csscomb.com)
 
 
 ```
