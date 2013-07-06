@@ -33,6 +33,7 @@ class csscomb{
         // Игнорируем комментарии
         'comments' => null,
         'inlinecomments' => null,
+        'magicComments' => null,
         // если найдены CSS-хаки мешающие парсить, то эта переменная станет массивом...
         'hacks' => null,
         // если найдены комментарии содержащие { или } мешающие парсить,
@@ -917,6 +918,16 @@ class csscomb{
         }
 
         // X. Temporally remove comments
+        // Magic comment
+        preg_match_all('@
+            (\s*\/\*\s*csscomb:\s*false\s*\*\/.*?\/\*\s*csscomb:\s*true\s*\*\/)
+            |
+            (\s*\/\/\s*csscomb:\s*false[\n\r].*?\/\/\s*csscomb:\s*true[^\n\S\r]*)
+            @ismx', $this->code['edited'],
+            $this->code['magicComments'], PREG_SET_ORDER);
+        foreach ($this->code['magicComments'] as $key => $value) {
+            $this->code['edited'] = str_replace($value[0], "\nmagic: comment".$key.'__;', $this->code['edited']);
+        }
         // Comments
         preg_match_all('@
             ([\n\r]\s*/\*.*?\*/)+
@@ -1432,6 +1443,13 @@ class csscomb{
                 $this->code['resorted'] = str_replace('interpolation'.$key.'__', $val[0], $this->code['resorted']); // заменяем значение expression обратно
             }
         }
+        // Magic comments
+        if (is_array($this->code['magicComments'])) {
+            foreach ($this->code['magicComments'] as $key => $val) {
+                $this->code['resorted'] = str_replace("\nmagic: comment".$key.'__;', $val[0], $this->code['resorted']);
+            }
+        }
+
 
         // Comments
         if (is_array($this->code['inlinecomments'])) { // если были обнаружены и вырезаны data uri
@@ -1446,6 +1464,7 @@ class csscomb{
                 }
             }
         }
+
 
         // 6. Удаляем искусственно созданные 'brace__'
         if (is_array($this->code['braces'])) { // если были обнаружены и вырезаны хаки

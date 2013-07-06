@@ -2780,6 +2780,196 @@ $case_groups[] = $group;
 $group = Array();
 
 
+$group['group-id'] = 'avoid-sorting';
+$group['group-name'] = 'Avoid sorting';
+$group['group-name-en'] = 'Avoid sorting';
+
+$case['descr'] = 'Avoid sorting: properties';
+$case['descr-en'] = 'Avoid sorting: properties';
+$case['link'] = 'avoid-sorting-properties';
+$case['code'] = '.panda {
+    color: tomato;
+    /* csscomb: false */
+    font-size: 2em;
+    left: 0;
+    /*    csscomb: true*/
+    top: 0;
+}';
+
+$case['result'] = '.panda {
+    top: 0;
+    color: tomato;
+    /* csscomb: false */
+    font-size: 2em;
+    left: 0;
+    /*    csscomb: true*/
+}';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Avoid sorting: includes';
+$case['descr-en'] = 'Avoid sorting: includes';
+$case['link'] = 'avoid-sorting-includes';
+$case['code'] = '.panda {
+    /* csscomb: false */
+    background: tomato;
+    @include linear-gradient();
+    /* csscomb: true */
+    top: 0;
+    position: absolute;
+}';
+
+$case['result'] = '.panda {
+    position: absolute;
+    top: 0;
+    /* csscomb: false */
+    background: tomato;
+    @include linear-gradient();
+    /* csscomb: true */
+}';
+$group['cases'][] = $case;
+
+
+
+$case['descr'] = 'Avoid sorting: rules';
+$case['descr-en'] = 'Avoid sorting: rules';
+$case['link'] = 'avoid-sorting-rules';
+$case['code'] = '.panda {
+    color: tomato;
+    top: 0;
+    background: #fff;
+    /* csscomb: false */
+    .nani {
+        color: salmon;
+        left: 0;
+    }
+    .foo {
+        color: navajowhite;
+        bottom: 0;
+    }
+    /* csscomb: true */
+    .bar {
+        color: bisque;
+        right: 0;
+    }
+}';
+
+$case['result'] = '.panda {
+    top: 0;
+    background: #fff;
+    color: tomato;
+    /* csscomb: false */
+    .nani {
+        color: salmon;
+        left: 0;
+    }
+    .foo {
+        color: navajowhite;
+        bottom: 0;
+    }
+    /* csscomb: true */
+    .bar {
+        right: 0;
+        color: bisque;
+    }
+}';
+$group['cases'][] = $case;
+
+
+
+$case['descr'] = 'Avoid sorting: comments outside';
+$case['descr-en'] = 'Avoid sorting: comments outside';
+$case['link'] = 'avoid-sorting-comments-outside';
+$case['code'] = '.panda {
+    /* color */
+    color: tomato;
+    top: 0; // top
+    /* csscomb: false */
+    background: #fff;
+    position: absolute;
+    /* csscomb: true */
+    left: 0;
+    /* font-size */
+    font-size: 12px;
+    border-width: 1px; // border
+}';
+
+$case['result'] = '.panda {
+    top: 0; // top
+    left: 0;
+    border-width: 1px; // border
+    /* color */
+    color: tomato;
+    /* font-size */
+    font-size: 12px;
+    /* csscomb: false */
+    background: #fff;
+    position: absolute;
+    /* csscomb: true */
+}';
+$group['cases'][] = $case;
+
+
+
+
+$case['descr'] = 'Avoid sorting: comments inside';
+$case['descr-en'] = 'Avoid sorting: comments inside';
+$case['link'] = 'avoid-sorting-comments-inside';
+$case['code'] = '.panda {
+    color: tomato;
+    position: fixed;
+    /* csscomb: false */
+    border: 1px solid tomato; // border
+    /* font-size */
+    font-size: 12px;
+    /* csscomb: true */
+    top: 0;
+}';
+
+$case['result'] = '.panda {
+    position: fixed;
+    top: 0;
+    color: tomato;
+    /* csscomb: false */
+    border: 1px solid tomato; // border
+    /* font-size */
+    font-size: 12px;
+    /* csscomb: true */
+}';
+$group['cases'][] = $case;
+
+
+
+$case['descr'] = 'Avoid sorting: // comment';
+$case['descr-en'] = 'Avoid sorting: // comment';
+$case['link'] = 'avoid-sorting-double-slash-comment';
+$case['code'] = '.panda {
+    color: salmon;
+    top: 0;
+    // csscomb: false
+    background: beige;
+    font-size: 12px;
+    // csscomb: true
+    position: absolute;
+}';
+
+$case['result'] = '.panda {
+    position: absolute;
+    top: 0;
+    color: salmon;
+    // csscomb: false
+    background: beige;
+    font-size: 12px;
+    // csscomb: true
+}';
+$group['cases'][] = $case;
+
+
+
+
+$case_groups[] = $group;
+$group = Array();
+
 $group['group-id'] = 'real-files';
 $group['group-name'] = 'Примеры файлов';
 $group['group-name-en'] = 'Real files';
