@@ -1054,9 +1054,9 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'No name 1';
-$case['descr-en'] = 'No name 1';
-$case['link'] = 'no-name-1';
+$case['descr'] = 'Comments: between property value and ;';
+$case['descr-en'] = 'Comments: between property value and ;';
+$case['link'] = 'comments-between-property-value-and-semicolon';
 $case['code'] = '.style {
     color: red/*{comment}*/;
 }';
@@ -1071,9 +1071,9 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'No name 2';
-$case['descr-en'] = 'No name 2';
-$case['link'] = 'no-name-2';
+$case['descr'] = 'Comments: commented rules';
+$case['descr-en'] = 'Comments: commented rules';
+$case['link'] = 'comments-commented-rules';
 $case['code'] = '.style
 {
     cursor: pointer;
@@ -1117,9 +1117,9 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'No name 3';
-$case['descr-en'] = 'No name 3';
-$case['link'] = 'no-name-3';
+$case['descr'] = 'Comments: /**/ before rule';
+$case['descr-en'] = 'Comments: /**/ before rule';
+$case['link'] = 'comments-double-before-rule';
 $case['code'] = '/**/
 
     #wishlist {display:none;}
@@ -1144,9 +1144,9 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'No name 4';
-$case['descr-en'] = 'No name 4';
-$case['link'] = 'no-name-4';
+$case['descr'] = 'Comments: Smart Sprites';
+$case['descr-en'] = 'Comments: Smart Sprites';
+$case['link'] = 'comments-smart-sprites';
 $case['code'] = "/** sprite: ic_photo-page; sprite-image: url('/res/i/sprt/ic_photo-page.png?${md5}'); */
 
 /* Tab navigation
@@ -1178,9 +1178,9 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'No name 5';
-$case['descr-en'] = 'No name 5';
-$case['link'] = 'no-name-5';
+$case['descr'] = 'Comments: Bootstrap';
+$case['descr-en'] = 'Comments: Bootstrap';
+$case['link'] = 'comments-bootstrap';
 $case['code'] = '/*!
  * Bootstrap v2.3.2
  *
@@ -1315,9 +1315,9 @@ $group['cases'][] = $case;
 
 
 
-$case['descr'] = 'No name 6';
-$case['descr-en'] = 'No name 6';
-$case['link'] = 'no-name-6';
+$case['descr'] = 'Comments: // (case 1)';
+$case['descr-en'] = 'Comments: // (case 1)';
+$case['link'] = 'comments-double-slash';
 $case['code'] = '.block {
     top: 0; //top
     width: 20px; //width
@@ -1363,6 +1363,28 @@ $case['result'] = '.block {
     text-decoration: underline; //text-decoretion
     font-size: 10px; //font-size
 }';
+$group['cases'][] = $case;
+
+
+$case['descr'] = 'Comments: // (case 2)';
+$case['descr-en'] = 'Comments: // (case 2)';
+$case['link'] = 'comments-double-slash-2';
+$case['code'] = '.style {
+    color: tomato;
+    // ololo
+    // nani
+    // panda
+    top: 0;
+}';
+
+$case['result'] = '.style {
+    // ololo
+    // nani
+    // panda
+    top: 0;
+    color: tomato;
+}';
+
 $group['cases'][] = $case;
 
 
