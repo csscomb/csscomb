@@ -20,15 +20,15 @@ require_once'common/header.php';
             <ul>
                 <li><a href="/online/">CSScomb Online</a></li>
                 <li>CSScomb <?=$loc['for']?> Sublime Text 2</a> <?=$loc['sublime']?></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_textmate_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_coda-2_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Coda 2</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_coda_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Coda</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_espresso-2_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Espresso 2</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_webstorm-pycharm-idea_2-14-1307080853.zip">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
-                <li><a href="http://csscomb.com/download/csscomb_for_notepad-plus-plus_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Notepad++</a></li>
-                <li><a href="https://github.com/miripiruni/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2392/csscomb_for_textmate_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Textmate</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2389/csscomb_for_coda-2_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Coda 2</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2388/csscomb_for_coda_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Coda</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2390/csscomb_for_espresso-2_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Espresso 2</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2394/csscomb_for_webstorm-pycharm-idea_2-14-1307080853.zip">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2391/csscomb_for_notepad-plus-plus_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Notepad++</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
                 <li><a href="https://github.com/drudge/csscomb.chocmixin">CSScomb <?=$loc['for']?> Chocolat</a></li>
-                <li><a href="http://csscomb.com/download/csscomb-cli_2-14-13007080853.zip">CSScomb CLI version</a></li>
+                <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2393/csscomb-cli_2-14-1307080853.zip">CSScomb CLI version</a></li>
             </ul>
             <p><?=$loc['help-us']?></p>
         </div>
