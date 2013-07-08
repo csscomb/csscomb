@@ -4,7 +4,7 @@
  *
  * Tool for sorting CSS properties in specific order
  *
- * @version 2.13 (build bb516f2-1306162139)
+ * @version 2.14 (build 57f634a-1307080853)
  * @author Vyacheslav Oliyanchuk (miripiruni) <mail@csscomb.com>
  * @license MIT
  * @web http://csscomb.com/
