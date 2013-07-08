@@ -27,7 +27,7 @@ require_once'common/header.php';
                 <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2394/csscomb_for_webstorm-pycharm-idea_2-14-1307080853.zip">CSScomb <?=$loc['for']?> IntelliJIDEA/WebStorm/PyCharm</a></li>
                 <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2391/csscomb_for_notepad-plus-plus_2-14-1307080853.zip">CSScomb <?=$loc['for']?> Notepad++</a></li>
                 <li><a href="https://github.com/csscomb/CSScomb-for-Vim/">CSScomb <?=$loc['for']?> Vim</a></li>
-                <li><a href="https://github.com/drudge/csscomb.chocmixin">CSScomb <?=$loc['for']?> Chocolat</a></li>
+                <li><a href="https://github.com/csscomb/csscomb.chocmixin">CSScomb <?=$loc['for']?> Chocolat</a></li>
                 <li><a href="https://github.com/csscomb/CSScomb/releases/2.14/2393/csscomb-cli_2-14-1307080853.zip">CSScomb CLI version</a></li>
             </ul>
             <p><?=$loc['help-us']?></p>
