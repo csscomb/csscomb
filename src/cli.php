@@ -23,7 +23,7 @@ SYNOPSIS
 
 DESCRIPTION
     options:
-    -s, --sort-order    specify file with custom sort order. File must contain JSON data. For detail information run '<?php echo $this->argv[0]; ?> --help-sort-order'
+    -s, --sort-order    specify file with custom sort order. File must contain JSON data.
     -i, --input         must be directory name or file that needs to be sorted
     -o, --output        sort result file. Use output when input is not a directory name, otherwise output param ignored. If output filename does not exist, the file is created. Otherwise, the existing file is overwritten.
 
@@ -44,36 +44,31 @@ SEE ALSO
 /**
  * init
  */
-function init($argc, $argv){
-
+function init($argc, $argv) {
     $this->argc = $argc;
     $this->argv = $argv;
 
-    //echo "argc: \n".$this->argc."\n\n";
-    //echo "argv: \n"; var_dump($this->argv); echo "\n\n";
-
-
     for ($i = 0; $i < $this->argc; $i++) {
         switch ($this->argv[$i]) {
-        case '-s':
-            $this->sort = $this->argv[$i+1];
-            //echo "sort order from: ".$this->sort."\n";
-            break;
-        case '-i':
-            $this->in = $this->argv[$i+1];
-            //echo "input file: ".$this->in."\n";
-            break;
-        case '-o':
-            $this->out = $this->argv[$i+1];
-            //echo "output file: ".$this->out."\n";
-            break;
+            case '-s':
+                $this->sort = $this->argv[$i+1];
+                echo "sort order from: ".$this->sort."\n";
+                break;
+
+            case '-i':
+                $this->in = $this->argv[$i+1];
+                break;
+
+            case '-o':
+                $this->out = $this->argv[$i+1];
+                break;
         }
     }
 }
 
 
 
-function tool($argc, $argv){
+function tool($argc, $argv) {
     $this->init($argc, $argv);
 
     if($this->argc == 1 || in_array($this->argv[1], array('--help', '-help', '-h', '-?'))) {
@@ -84,20 +79,25 @@ function tool($argc, $argv){
 
         if($this->in != null) {
 
-            $c = new csscomb('', false, 'yandex');
+            if ($this->sort) {
+                $sort = file_get_contents($this->sort);
+            } else {
+                $sort = 'yandex';
+            }
+            $c = new csscomb('', false, $sort);
 
             if(is_dir($this->in)) {
                 $files = $this->getArrayOfCssFilenames($this->in);
 
                 foreach($files as $file) {
                     echo "Sorting ".$file."...\n";
-                    $result = $c->csscomb(file_get_contents($file));
+                    $result = $c->csscomb(file_get_contents($file), false, $sort);
                     file_put_contents($file, $result);
                 }
             }
             elseif(is_file($this->in) && preg_match('/^text/', mime_content_type($this->in))){
                 echo "Sorting ".$this->in."...\n";
-                $result = $c->csscomb(file_get_contents($this->in));
+                $result = $c->csscomb(file_get_contents($this->in), false, $sort);
                 if($this->out == null){
                     $this->out = $this->in;
                 }
