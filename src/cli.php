@@ -82,7 +82,7 @@ function tool($argc, $argv) {
             if ($this->sort) {
                 $sort = file_get_contents($this->sort);
             } else {
-                $sort = 'yandex';
+                $sort = 'zen';
             }
             $c = new csscomb('', false, $sort);
 
