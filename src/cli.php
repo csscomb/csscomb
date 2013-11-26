@@ -91,6 +91,7 @@ function tool($argc, $argv) {
                 if (function_exists('finfo_open')) {
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mime_type = finfo_file($finfo, $this->in);
+                    finfo_close($finfo);
                 }
                 else {
                     $mime_type = mime_content_type($this->in);
