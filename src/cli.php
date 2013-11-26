@@ -85,7 +85,18 @@ function tool($argc, $argv) {
                 $sort = 'zen';
             }
             $c = new csscomb('', false, $sort);
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+            $mime_type = '';
+            if (is_file($this->in)) {
+                if (function_exists('finfo_open')) {
+                    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                    $mime_type = finfo_file($finfo, $this->in);
+                }
+                else {
+                    $mime_type = mime_content_type($this->in);
+                }
+
+            }
 
             if(is_dir($this->in)) {
                 $files = $this->getArrayOfCssFilenames($this->in);
@@ -96,7 +107,7 @@ function tool($argc, $argv) {
                     file_put_contents($file, $result);
                 }
             }
-            elseif(is_file($this->in) && preg_match('/^text/', finfo_file($finfo, $this->in))){
+            elseif(is_file($this->in) && preg_match('/^text/', $mime_type)){
                 echo "Sorting ".$this->in."...\n";
                 $result = $c->csscomb(file_get_contents($this->in), false, $sort);
                 if($this->out == null){
@@ -104,7 +115,7 @@ function tool($argc, $argv) {
                 }
                 file_put_contents($this->out, $result);
             }
-            elseif(!preg_match('/^text/', finfo_file($finfo, $this->in))){
+            elseif(!preg_match('/^text/', $mime_type)){
                 echo("Wrong input file mime type.");
                 exit(1);
             }
