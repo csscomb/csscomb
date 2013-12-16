@@ -1,4 +1,4 @@
-**DEPRECATED**
+## DEPRECATED
 
 This version of CSScomb is no longer supported, guys.    
 We have a new [super cool Node.js version](http://github.com/csscomb/csscomb.js)
